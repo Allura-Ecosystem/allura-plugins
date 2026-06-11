@@ -1,0 +1,17 @@
+{
+  "generated_at": "20260611T110512Z",
+  "scope": "pre-migration",
+  "runtime_configuration_changed": false,
+  "hashes": {
+    "claude_settings": "df1a8388f7b673f1caf19625401af7be42d0a6ef09c93f01df66295b228106d0",
+    "claude_marketplaces": "d9f0abd685b128763d89f3804fd4f5bd34457487dc283bee132dfe69c1248991",
+    "codex_config": "e03220cd093e318f20d2632d046e1adfb80d2421703326de6bcf99c539666b92",
+    "codex_local_plugins": "2d3d24b9f33956203cc643c6bf74a67dfebef0fd36e486254071452f7254a045"
+  },
+  "evidence": {
+    "claude_plugin_list": "raw/claude-plugin-list.json",
+    "codex_plugin_list": "raw/codex-plugin-list.json",
+    "manifest_paths": "raw/manifest-paths.txt",
+    "candidate_packages": "raw/candidate-packages.json"
+  }
+}

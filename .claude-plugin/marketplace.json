@@ -1,0 +1,10 @@
+{
+  "name": "allura-ecosystem",
+  "owner": {
+    "name": "Allura-Ecosystem"
+  },
+  "metadata": {
+    "description": "Validated Allura ecosystem plugins for Claude."
+  },
+  "plugins": []
+}
