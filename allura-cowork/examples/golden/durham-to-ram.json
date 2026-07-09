@@ -1,0 +1,36 @@
+{
+  "from_runtime": "Claude",
+  "to_runtime": "Codex",
+  "goal": "Turn a Durham brand packet into a RAM implementation task.",
+  "context_searched": {
+    "status": "searched",
+    "group_id": "allura-system",
+    "queries": ["Durham RAM brand packet implementation routing"],
+    "memory_ids": ["example-memory-durham-to-ram"]
+  },
+  "project_overlay": "Durham",
+  "files": {
+    "read": ["brand/packet.md"],
+    "changed": []
+  },
+  "decisions": [
+    "Durham owns brand canon and final brand-sensitive approval.",
+    "RAM owns implementation."
+  ],
+  "open_risks": [
+    "Screenshots or rendered evidence are required before brand-sensitive close."
+  ],
+  "validation": {
+    "status": "not_run",
+    "commands": [],
+    "notes": "RAM must implement and produce rendered evidence."
+  },
+  "next_action": "Codex/RAM implements the packet and returns screenshots or rendered checks.",
+  "memory_status": {
+    "status": "written",
+    "memory_id": "example-memory-durham-to-ram"
+  },
+  "approval_needed": {
+    "required": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "from_runtime": "Codex",
+  "to_runtime": "OpenClaw",
+  "goal": "Handle a request that crosses an approval boundary.",
+  "context_searched": {
+    "status": "searched",
+    "group_id": "allura-system",
+    "queries": ["approval boundaries runtime config cron semantic promotion"],
+    "memory_ids": ["example-memory-approval-required"]
+  },
+  "project_overlay": "TALON",
+  "files": {
+    "read": ["config/example.json"],
+    "changed": []
+  },
+  "decisions": [
+    "Runtime, config, cron, production, semantic promotion, Notion sync, and Done/Approved mutations require approval.",
+    "This packet is a proposal, not executed work."
+  ],
+  "open_risks": [
+    "Executing without approval would mutate governance state."
+  ],
+  "validation": {
+    "status": "not_run",
+    "commands": [],
+    "notes": "Blocked pending approval."
+  },
+  "next_action": "Ask the authorized owner to approve or reject the mutation.",
+  "memory_status": {
+    "status": "not_written",
+    "reason": "No mutation executed; write proposal receipt only if requested."
+  },
+  "approval_needed": {
+    "required": true,
+    "reason": "Requested action crosses runtime/config/governance mutation boundary."
+  }
+}

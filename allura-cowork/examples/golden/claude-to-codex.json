@@ -1,0 +1,36 @@
+{
+  "from_runtime": "Claude",
+  "to_runtime": "Codex",
+  "goal": "Implement a documented plan in the repository and run validation.",
+  "context_searched": {
+    "status": "searched",
+    "group_id": "allura-system",
+    "queries": ["cowork plugin implementation blockers decisions"],
+    "memory_ids": ["example-memory-claude-to-codex"]
+  },
+  "project_overlay": "Team RAM",
+  "files": {
+    "read": ["docs/plan.md"],
+    "changed": []
+  },
+  "decisions": [
+    "Claude produced the implementation plan only.",
+    "Codex owns repository edits and validation."
+  ],
+  "open_risks": [
+    "Validation commands may reveal repo-specific failures."
+  ],
+  "validation": {
+    "status": "not_run",
+    "commands": [],
+    "notes": "Validation is the next Codex action."
+  },
+  "next_action": "Codex implements the plan and reports validation results.",
+  "memory_status": {
+    "status": "written",
+    "memory_id": "example-memory-claude-to-codex"
+  },
+  "approval_needed": {
+    "required": false
+  }
+}

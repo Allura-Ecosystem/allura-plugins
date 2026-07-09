@@ -1,0 +1,36 @@
+{
+  "from_runtime": "Codex",
+  "to_runtime": "None",
+  "goal": "Continue a task when Allura Brain is unavailable.",
+  "context_searched": {
+    "status": "unavailable",
+    "group_id": "allura-system",
+    "queries": ["prior decisions for current task"],
+    "reason": "Allura Brain returned database unavailable."
+  },
+  "project_overlay": "Unknown",
+  "files": {
+    "read": [],
+    "changed": []
+  },
+  "decisions": [
+    "Do not claim memory was searched.",
+    "Proceed only with local file receipts or ask for approval if risk is high."
+  ],
+  "open_risks": [
+    "Prior decisions may be missing because memory search failed."
+  ],
+  "validation": {
+    "status": "partial",
+    "commands": [],
+    "notes": "Memory unavailable; local validation still required before Done."
+  },
+  "next_action": "Use local files for receipts and retry memory writeback later.",
+  "memory_status": {
+    "status": "unavailable",
+    "reason": "Database unavailable."
+  },
+  "approval_needed": {
+    "required": false
+  }
+}

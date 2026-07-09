@@ -1,0 +1,35 @@
+{
+  "name": "team-ram-payload",
+  "version": "0.1.0",
+  "description": "Team RAM operating skills for governed Payload CMS projects.",
+  "author": {
+    "name": "Ronin Local"
+  },
+  "license": "UNLICENSED",
+  "keywords": [
+    "payload",
+    "team-ram",
+    "allura",
+    "nextjs",
+    "governance"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Team RAM Payload",
+    "shortDescription": "Run governed Team RAM loops for Payload CMS work.",
+    "longDescription": "Portable Payload CMS playbooks for Team RAM routing, Allura memory gates, documentation-first change control, debug-first fixes, route smoke evidence, and session closeout.",
+    "developerName": "Ronin Local",
+    "category": "Coding",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Review"
+    ],
+    "brandColor": "#0A4F4F",
+    "defaultPrompt": [
+      "Start a Team RAM Payload session.",
+      "Debug this Payload route with evidence.",
+      "Close out this Payload change with proof."
+    ]
+  }
+}

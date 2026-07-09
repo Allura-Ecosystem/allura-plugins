@@ -1,0 +1,36 @@
+{
+  "from_runtime": "Codex",
+  "to_runtime": "None",
+  "goal": "Report work that has not been validated yet.",
+  "context_searched": {
+    "status": "searched",
+    "group_id": "allura-system",
+    "queries": ["validation requirements before done"],
+    "memory_ids": ["example-memory-tests-not-run"]
+  },
+  "project_overlay": "Team RAM",
+  "files": {
+    "read": ["src/example.ts"],
+    "changed": ["src/example.ts"]
+  },
+  "decisions": [
+    "Do not call the task Done.",
+    "Label validation as not run."
+  ],
+  "open_risks": [
+    "The patch may fail tests or runtime checks."
+  ],
+  "validation": {
+    "status": "not_run",
+    "commands": ["bun test"],
+    "notes": "Command identified but not executed."
+  },
+  "next_action": "Run validation or report BLOCKED.",
+  "memory_status": {
+    "status": "not_written",
+    "reason": "Outcome is not validated yet."
+  },
+  "approval_needed": {
+    "required": false
+  }
+}

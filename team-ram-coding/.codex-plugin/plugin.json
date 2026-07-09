@@ -1,0 +1,33 @@
+{
+  "name": "team-ram-coding",
+  "version": "0.1.0+codex.20260530050504",
+  "description": "A Team RAM coding plugin for Allura-governed Brooks, Jobs, Scout, and Woz workflows.",
+  "author": {
+    "name": "Ronin Local"
+  },
+  "keywords": [
+    "allura",
+    "team-ram",
+    "brooks",
+    "coding"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Team Ram Coding",
+    "shortDescription": "Run Team RAM coding sessions with Allura guardrails.",
+    "longDescription": "Team Ram Coding packages the repo's Brooks-led Team RAM agents, the Allura goal and command flow, and the supporting skills needed for governed coding work in Codex.",
+    "developerName": "Ronin Local",
+    "category": "Coding",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Review"
+    ],
+    "brandColor": "#0F766E",
+    "defaultPrompt": [
+      "Start a Team RAM coding session.",
+      "Open the Brooks goal flow.",
+      "Load the agent and command surface."
+    ]
+  }
+}
