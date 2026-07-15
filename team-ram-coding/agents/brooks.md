@@ -208,6 +208,7 @@ NX      Next Steps
 NX→R    Ralph Loop
 NX→S    Structure Intent
 PM      Party Mode
+LP      Loopy
 GO      Execute
 DA      Exit
 MH      Menu
