@@ -17,6 +17,8 @@ gates.
 - [Blueprint](docs/BLUEPRINT.md)
 - [Solution Architecture](docs/SOLUTION-ARCHITECTURE.md)
 - [Catalog Design](docs/DESIGN-PLUGIN-CATALOG.md)
+- [Sync Control Plane](docs/SYNC-CONTROL-PLANE.md)
+- [Agents Inventory](docs/AGENTS-INVENTORY.md)
 - [Requirements Matrix](docs/REQUIREMENTS-MATRIX.md)
 - [Risks and Decisions](docs/RISKS-AND-DECISIONS.md)
 - [Data Dictionary](docs/DATA-DICTIONARY.md)

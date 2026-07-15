@@ -1,0 +1,69 @@
+name: CI — Allura Plugins
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-plugins:
+    name: Validate plugin structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check plugin directories have required files
+        run: |
+          set -e
+          errors=0
+          for d in plugins/*/; do
+            [ ! -d "$d" ] && continue
+            name=$(basename "$d")
+            # Check for plugin.json or SKILL.md
+            if [ ! -f "$d/plugin.json" ] && [ ! -f "$d/SKILL.md" ]; then
+              echo "❌ $name: missing plugin.json or SKILL.md"
+              errors=$((errors + 1))
+            fi
+          done 2>/dev/null
+          count=$(ls -d plugins/*/ 2>/dev/null | wc -l)
+          echo "Checked $count plugin directories"
+          [ $errors -eq 0 ] && echo "✅ All plugins valid" || { echo "❌ $errors errors"; exit 1; }
+
+      - name: Validate JSON files parse
+        run: |
+          set -e
+          errors=0
+          for f in $(find . -name "plugin.json" -not -path "*/node_modules/*"); do
+            python3 -m json.tool "$f" > /dev/null 2>&1 || { echo "❌ Invalid JSON: $f"; errors=$((errors + 1)); }
+          done
+          echo "Validated $(find . -name 'plugin.json' -not -path '*/node_modules/*' | wc -l) plugin.json files"
+          [ $errors -eq 0 ] && echo "✅ All JSON valid" || { echo "❌ $errors errors"; exit 1; }
+
+  validate-docs:
+    name: Validate documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check README exists
+        run: |
+          [ -f "README.md" ] && echo "✅ README.md exists" || { echo "❌ Missing README.md"; exit 1; }
+
+      - name: Check PROGRESS.md exists
+        run: |
+          [ -f "PROGRESS.md" ] && echo "✅ PROGRESS.md exists" || { echo "❌ Missing PROGRESS.md"; exit 1; }
+
+  no-secrets:
+    name: No secrets in repo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check no credentials committed
+        run: |
+          set -e
+          if grep -rE "sk-ant-|sk-proj-|ntn_[a-zA-Z0-9]{10,}|ANTHROPIC_API_KEY=['\"]?[a-zA-Z0-9]" . --include="*.json" --include="*.md" --include="*.ts" -l 2>/dev/null; then
+            echo "❌ Possible API keys found"
+            exit 1
+          fi
+          echo "✅ No credentials detected"

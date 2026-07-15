@@ -27,6 +27,9 @@
 
 ## Initial Candidate Inventory
 
+The first governed sync pass should begin with the agents roster in `docs/AGENTS-INVENTORY.md` before extending the same control plane to skills and commands.
+
+
 | Capability | Claude | Codex | Classification |
 |---|---|---|---|
 | `allura-cowork` | Plugin | Plugin | Portable |
