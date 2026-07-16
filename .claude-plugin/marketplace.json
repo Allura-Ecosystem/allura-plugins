@@ -6,5 +6,34 @@
   "metadata": {
     "description": "Validated Allura ecosystem plugins for Claude."
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "allura-cowork",
+      "source": "./allura-cowork",
+      "description": "Shared Claude Code and Codex cowork protocol for Allura-governed collaboration, runtime honesty, validation, and handoff",
+      "version": "0.1.0",
+      "category": "Coordination"
+    },
+    {
+      "name": "team-durham",
+      "source": "./team-durham",
+      "description": "Team Durham brand production team for Claude Code and Codex: agents, skills, commands, governance, and persona research.",
+      "version": "0.1.0",
+      "category": "Design"
+    },
+    {
+      "name": "team-ram-coding",
+      "source": "./team-ram-coding",
+      "description": "A Team RAM coding plugin for Allura-governed Brooks, Jobs, Scout, and Woz workflows.",
+      "version": "0.1.0+codex.20260530050504",
+      "category": "Coding"
+    },
+    {
+      "name": "team-ram-harness",
+      "source": "../Agent-Harnesses/Allura-TeamRam",
+      "description": "Team RAM OpenCode Harness — self-evolving multi-agent orchestration with 10 specialists, SONA learning, coherence monitoring, and HITL governance.",
+      "version": "0.4.2",
+      "category": "Coding"
+    }
+  ]
 }

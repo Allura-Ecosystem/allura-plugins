@@ -1,0 +1,55 @@
+{
+  "name": "team-durham",
+  "version": "0.1.0",
+  "description": "Team Durham brand production team for Claude Code and Codex: agents, skills, commands, governance, and persona research.",
+  "author": {
+    "name": "Team Durham"
+  },
+  "license": "MIT",
+  "skills": "./skills/",
+  "agents": [
+    "./agents/brand-orchestrator.md",
+    "./agents/brand-strategist.md",
+    "./agents/brand-kit-builder.md",
+    "./agents/copywriter.md",
+    "./agents/visual-director.md",
+    "./agents/qa-reviewer.md",
+    "./agents/reality-checker.md",
+    "./agents/evidence-collector.md",
+    "./agents/data-analyst.md",
+    "./agents/agentic-trust-architect.md",
+    "./agents/workflow-architect.md",
+    "./agents/openagent.md"
+  ],
+  "commands": [
+    "./commands/start-session.md",
+    "./commands/orchestrate.md",
+    "./commands/analyst.md",
+    "./commands/party.md",
+    "./commands/dashboard.md",
+    "./commands/scribe.md",
+    "./commands/sync-governance.md",
+    "./commands/quick-commands.md",
+    "./commands/brand-auto.md"
+  ],
+  "interface": {
+    "displayName": "Team Durham",
+    "shortDescription": "A multi-agent brand production team for Claude Code and Codex.",
+    "longDescription": "Team Durham packages a complete design-team harness for brand production: Kotler, Aaker, Glaser, Ogilvy, Rand, Munari, Tufte, operations agents, shared skills, orchestration commands, governance rules, and persona research. Use it to take client briefs through strategy, naming, visual direction, brand kit assembly, QA, memory, and delivery. Now with brand-loop auto-mode for bounded autonomous brand work.",
+    "developerName": "Team Durham",
+    "category": "Design",
+    "capabilities": [
+      "Brand Strategy",
+      "Design Production",
+      "Agent Routing",
+      "Governance",
+      "Memory"
+    ],
+    "defaultPrompt": [
+      "Activate Kotler for a new brand brief.",
+      "Run Team Durham status for this client.",
+      "Create a brand kit from locked strategy.",
+      "Run brand-auto to audit brand consistency on a page."
+    ]
+  }
+}
