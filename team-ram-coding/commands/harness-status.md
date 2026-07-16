@@ -1,3 +1,7 @@
+---
+description: "Show harness health, loaded servers, and available skills."
+---
+
 # /harness-status
 
 Show the harness health, loaded servers, and available skills.

@@ -1,3 +1,7 @@
+---
+description: "Execute a skill by routing it to a specialist agent executor."
+---
+
 # /skill-load
 
 Execute a skill by routing it to a specialist agent executor.

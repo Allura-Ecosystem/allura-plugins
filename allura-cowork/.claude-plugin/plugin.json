@@ -16,7 +16,12 @@
   ],
   "skills": "./skills/",
   "agents": "./agents/",
-  "commands": "./commands/",
+  "commands": [
+    "./commands/cowork-start.md",
+    "./commands/cowork-handoff.md",
+    "./commands/cowork-validate.md",
+    "./commands/cowork-close.md"
+  ],
   "hooks": "./hooks/hooks.json",
   "interface": {
     "displayName": "Allura Cowork",

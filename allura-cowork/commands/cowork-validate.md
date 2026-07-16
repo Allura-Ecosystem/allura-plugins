@@ -1,3 +1,7 @@
+---
+description: "Validate a cowork claim before close — check memory, evidence, and approval boundaries."
+---
+
 # cowork-validate
 
 Validate a cowork claim before close.

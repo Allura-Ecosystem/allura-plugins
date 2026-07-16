@@ -1,3 +1,7 @@
+---
+description: "Start a governed Claude/Codex cowork session."
+---
+
 # cowork-start
 
 Start a governed Claude/Codex cowork session.

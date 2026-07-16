@@ -1,3 +1,7 @@
+---
+description: "Load an approved MCP server and activate its tools."
+---
+
 # /mcp-load
 
 Load an approved MCP server and activate its tools.

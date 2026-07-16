@@ -1,3 +1,7 @@
+---
+description: "Discover available MCP servers in the catalog."
+---
+
 # /mcp-discover
 
 Discover available MCP servers in the catalog.

@@ -1,3 +1,7 @@
+---
+description: "Propose a skill and see which specialist agent handles it."
+---
+
 # /skill-propose
 
 Propose a skill and see which specialist agent handles it.

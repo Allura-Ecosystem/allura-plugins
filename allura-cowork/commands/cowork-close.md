@@ -1,3 +1,7 @@
+---
+description: "Close a governed cowork task with receipts and remaining risk."
+---
+
 # cowork-close
 
 Close a governed cowork task.

@@ -1,3 +1,7 @@
+---
+description: "Create, improve, or evaluate an OpenCode skill using the iterative skill-creator workflow."
+---
+
 # /skill-create
 
 Create, improve, or evaluate an OpenCode skill using the iterative skill-creator workflow.

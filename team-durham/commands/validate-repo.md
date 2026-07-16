@@ -1,3 +1,7 @@
+---
+description: "Validate repository consistency across agents, skills, rules, contracts, and deliverables."
+---
+
 # Validate Repository
 
 Comprehensive validation command that checks the entire Brand Maker repository for consistency between agent definitions, skills, rules, contracts, templates, and deliverables.

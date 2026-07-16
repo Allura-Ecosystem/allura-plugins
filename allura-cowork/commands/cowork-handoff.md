@@ -1,3 +1,7 @@
+---
+description: "Create a governed handoff packet between Claude and Codex."
+---
+
 # cowork-handoff
 
 Create a governed handoff packet between Claude and Codex.

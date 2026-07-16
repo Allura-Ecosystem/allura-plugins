@@ -1,3 +1,7 @@
+---
+description: "Promote a memory trace using the 3-agent curator team."
+---
+
 # /curator-team-promote
 
 Promote a memory trace using the 3-agent curator team.

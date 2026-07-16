@@ -1,3 +1,7 @@
+---
+description: "Request approval for a pending MCP server."
+---
+
 # /mcp-approve
 
 Request approval for a pending MCP server.

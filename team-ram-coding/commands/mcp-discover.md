@@ -1,3 +1,7 @@
+---
+description: "Discover available MCP servers in the Allura registry."
+---
+
 # /mcp-discover
 
 Discover available MCP servers in the Allura registry.

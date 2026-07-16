@@ -1,3 +1,7 @@
+---
+description: "Search Allura Brain for insights, patterns, and prior decisions."
+---
+
 # /scout — Brain Search Command
 
 ## Usage
