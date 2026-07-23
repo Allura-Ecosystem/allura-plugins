@@ -1,0 +1,382 @@
+# Allura Model Registry — the single source of truth for agent→model mapping
+#
+# Referenced by all runtimes (Claude, OpenCode, Codex, Hermes, OpenClaw).
+# Synced by models-update-all.sh. Evaluated by models-eval.sh.
+# Monitored by models-performance.sh.
+#
+# Pattern: one registry file at a well-known location (arxiv 2508.03095).
+# Centralized management, not scattered per-agent YAML (Solace Agent Mesh).
+# Per-agent override > global default (OpenClaw). Fallback chains for
+# resilience (OpenClaw, RouteLLM). Aliases per runtime (OpenClaw models.json).
+# CLASSIC eval framework (Aisera). Three-level assessment (AWS/Amazon).
+# Canary before promotion (industry standard). Cost-aware routing (RouteLLM).
+#
+# Last updated: 2026-07-16
+# Author: Brooks (Chief Architect)
+
+# ─── Model Definitions ─────────────────────────────────────────────
+# Each model has: provider, tier, context_window, cost_per_1m_tokens,
+# latency_profile, runtime availability, and per-runtime aliases.
+# Cost is USD per 1M tokens. latency_profile: low (<2s), medium (2-5s), high (>5s).
+models:
+  claude-opus-4-8:
+    provider: anthropic
+    tier: ultrabrain
+    context_window: 200000
+    cost_per_1m_input: 15.00
+    cost_per_1m_output: 75.00
+    latency_profile: high
+    available_in: [claude, opencode, openclaw]
+    aliases:
+      claude: opus
+      opencode: anthropic/claude-opus-4-8
+      openclaw: anthropic/claude-opus-4-8
+    status: active
+
+  claude-sonnet-4:
+    provider: anthropic
+    tier: builder
+    context_window: 200000
+    cost_per_1m_input: 3.00
+    cost_per_1m_output: 15.00
+    latency_profile: medium
+    available_in: [claude, opencode, openclaw]
+    aliases:
+      claude: sonnet
+      opencode: anthropic/claude-sonnet-4
+      openclaw: anthropic/claude-sonnet-4
+    status: active
+
+  claude-haiku-4-5:
+    provider: anthropic
+    tier: recon
+    context_window: 200000
+    cost_per_1m_input: 0.80
+    cost_per_1m_output: 4.00
+    latency_profile: low
+    available_in: [claude, opencode, openclaw]
+    aliases:
+      claude: haiku
+      opencode: anthropic/claude-haiku-4-5
+      openclaw: anthropic/claude-haiku-4-5
+    status: active
+
+  ollama-glm-5-2:
+    provider: ollama
+    tier: ultrabrain
+    context_window: 128000
+    cost_per_1m_input: 0.00
+    cost_per_1m_output: 0.00
+    latency_profile: medium
+    available_in: [opencode]
+    aliases:
+      opencode: ollama/glm-5.2:cloud
+    status: active
+
+  ollama-qwen3-coder:
+    provider: ollama
+    tier: builder
+    context_window: 128000
+    cost_per_1m_input: 0.00
+    cost_per_1m_output: 0.00
+    latency_profile: low
+    available_in: [opencode]
+    aliases:
+      opencode: ollama/qwen3-coder-next:cloud
+    status: active
+
+  ollama-nemotron-3-super:
+    provider: ollama
+    tier: recon
+    context_window: 128000
+    cost_per_1m_input: 0.00
+    cost_per_1m_output: 0.00
+    latency_profile: low
+    available_in: [opencode]
+    aliases:
+      opencode: ollama/nemotron-3-super:cloud
+    status: active
+
+  minimax-m3:
+    provider: minimax
+    tier: builder
+    context_window: 200000
+    cost_per_1m_input: 0.70
+    cost_per_1m_output: 2.80
+    latency_profile: medium
+    available_in: [codex]
+    aliases:
+      codex: minimax-m3
+    status: active
+
+# ─── Agent Assignments ──────────────────────────────────────────────
+# Each agent maps to: primary model, fallback chain, eval fixture, category.
+# Per-agent override takes precedence over runtime_defaults (OpenClaw pattern).
+# Fallbacks tried in order if primary is unavailable (resilience).
+agents:
+  # ── Team RAM (11 agents) ──
+  brooks:
+    role: architect
+    primary: claude-opus-4-8
+    fallbacks: [ollama-glm-5-2]
+    eval_fixture: allura-plugins/evals/fixtures/brooks.md
+    category: ultrabrain
+    plugin: team-ram-harness
+
+  jobs:
+    role: intent-gate
+    primary: claude-sonnet-4
+    fallbacks: [ollama-glm-5-2]
+    eval_fixture: allura-plugins/evals/fixtures/jobs.md
+    category: intent
+    plugin: team-ram-harness
+
+  woz:
+    role: builder
+    primary: claude-sonnet-4
+    fallbacks: [ollama-qwen3-coder]
+    eval_fixture: allura-plugins/evals/fixtures/woz.md
+    category: builder
+    plugin: team-ram-harness
+
+  scout:
+    role: recon
+    primary: claude-haiku-4-5
+    fallbacks: [ollama-nemotron-3-super]
+    eval_fixture: allura-plugins/evals/fixtures/scout.md
+    category: recon
+    plugin: team-ram-harness
+
+  pike:
+    role: interface-review
+    primary: claude-haiku-4-5
+    fallbacks: [ollama-nemotron-3-super]
+    eval_fixture: allura-plugins/evals/fixtures/pike.md
+    category: review
+    plugin: team-ram-harness
+
+  fowler:
+    role: refactor-gate
+    primary: claude-sonnet-4
+    fallbacks: [ollama-qwen3-coder]
+    eval_fixture: allura-plugins/evals/fixtures/fowler.md
+    category: quality
+    plugin: team-ram-harness
+
+  bellard:
+    role: diagnostics
+    primary: claude-sonnet-4
+    fallbacks: [ollama-qwen3-coder]
+    eval_fixture: allura-plugins/evals/fixtures/bellard.md
+    category: diagnostics
+    plugin: team-ram-harness
+
+  carmack:
+    role: performance
+    primary: claude-sonnet-4
+    fallbacks: [ollama-qwen3-coder]
+    eval_fixture: allura-plugins/evals/fixtures/carmack.md
+    category: performance
+    plugin: team-ram-harness
+
+  knuth:
+    role: data-architect
+    primary: claude-sonnet-4
+    fallbacks: [ollama-qwen3-coder]
+    eval_fixture: allura-plugins/evals/fixtures/knuth.md
+    category: data
+    plugin: team-ram-harness
+
+  hightower:
+    role: devops
+    primary: claude-sonnet-4
+    fallbacks: [ollama-qwen3-coder]
+    eval_fixture: allura-plugins/evals/fixtures/hightower.md
+    category: infrastructure
+    plugin: team-ram-harness
+
+  bahari:
+    role: integration
+    primary: claude-haiku-4-5
+    fallbacks: [ollama-nemotron-3-super]
+    eval_fixture: allura-plugins/evals/fixtures/bahari.md
+    category: recon
+    plugin: team-ram-harness
+
+  # ── Team Durham (13 agents) ──
+  brand-orchestrator:
+    role: brand-strategy
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/brand-orchestrator.md
+    category: ultrabrain
+    plugin: team-durham
+
+  brand-strategist:
+    role: strategy
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/brand-strategist.md
+    category: ultrabrain
+    plugin: team-durham
+
+  brand-kit-builder:
+    role: identity-builder
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/brand-kit-builder.md
+    category: ultrabrain
+    plugin: team-durham
+
+  visual-director:
+    role: visual-direction
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/visual-director.md
+    category: ultrabrain
+    plugin: team-durham
+
+  copywriter:
+    role: copy
+    primary: claude-sonnet-4
+    fallbacks: [claude-haiku-4-5]
+    eval_fixture: allura-plugins/evals/fixtures/copywriter.md
+    category: builder
+    plugin: team-durham
+
+  qa-reviewer:
+    role: qa-gate
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/qa-reviewer.md
+    category: ultrabrain
+    plugin: team-durham
+
+  reality-checker:
+    role: evidence-verification
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/reality-checker.md
+    category: ultrabrain
+    plugin: team-durham
+
+  evidence-collector:
+    role: evidence-capture
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/evidence-collector.md
+    category: ultrabrain
+    plugin: team-durham
+
+  data-analyst:
+    role: research
+    primary: claude-sonnet-4
+    fallbacks: [claude-haiku-4-5]
+    eval_fixture: allura-plugins/evals/fixtures/data-analyst.md
+    category: builder
+    plugin: team-durham
+
+  agentic-trust-architect:
+    role: trust-architecture
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/agentic-trust-architect.md
+    category: ultrabrain
+    plugin: team-durham
+
+  workflow-architect:
+    role: workflow-design
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/workflow-architect.md
+    category: ultrabrain
+    plugin: team-durham
+
+  scout-recon:
+    role: recon
+    primary: claude-haiku-4-5
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/scout-recon.md
+    category: recon
+    plugin: team-durham
+
+  openagent:
+    role: fallback
+    primary: claude-opus-4-8
+    fallbacks: [claude-sonnet-4]
+    eval_fixture: allura-plugins/evals/fixtures/openagent.md
+    category: ultrabrain
+    plugin: team-durham
+
+  # ── Allura Cowork (1 agent) ──
+  cowork-orchestrator:
+    role: coordination
+    primary: claude-sonnet-4
+    fallbacks: [claude-haiku-4-5]
+    eval_fixture: allura-plugins/evals/fixtures/cowork-orchestrator.md
+    category: builder
+    plugin: allura-cowork
+
+# ─── Runtime Defaults ───────────────────────────────────────────────
+# What each runtime uses if an agent has no explicit assignment.
+# Per-agent override (above) takes precedence over these defaults.
+runtime_defaults:
+  claude:
+    primary: claude-sonnet-4
+    fallbacks: [claude-haiku-4-5]
+  opencode:
+    primary: ollama-glm-5-2
+    fallbacks: [ollama-qwen3-coder]
+  codex:
+    primary: inherit  # uses codex config.toml model (minimax-m3)
+    fallbacks: []
+  hermes:
+    primary: auto  # uses hermes provider routing
+    fallbacks: []
+  openclaw:
+    primary: claude-sonnet-4
+    fallbacks: [claude-haiku-4-5]
+
+# ─── Eval Policy ────────────────────────────────────────────────────
+# CLASSIC framework (Aisera): Cost, Latency, Accuracy, Stability, Security, Intelligence.
+# Three-level assessment (AWS/Amazon): end-to-end, trajectory, component.
+eval:
+  cadence: weekly
+  fixtures_dir: allura-plugins/evals/fixtures/
+  results_dir: allura-plugins/evals/results/
+  metrics:
+    - cost          # token_count × model price
+    - latency       # time-to-first-token + end-to-end
+    - accuracy      # task completion success rate
+    - stability     # consistency across N runs
+    - security      # Allura governance gate pass rate (POL-001–006)
+    - intelligence   # LLM-as-judge on reasoning quality
+  pass_threshold: 0.85   # 85% to pass
+  ship_threshold: 0.90    # 90% to ship without caveats
+  canary_days: 7          # new models run in eval for 7 days before production
+  comparison_baseline: last  # compare to previous run
+
+# ─── Model Lifecycle ───────────────────────────────────────────────
+# Deprecation watch, migration path, canary period, rollback triggers.
+lifecycle:
+  deprecation_warning_days: 90
+  migration_path: "deprecation → canary → promotion → rollback"
+  rollback_on:
+    - eval_fail
+    - latency_regression_gt_20pct
+    - cost_regression_gt_15pct
+    - security_gate_fail
+  new_model_canary:
+    duration_days: 7
+    agents: [scout, woz]  # canary on low-risk agents first
+    promote_on: [eval_pass, no_regression]
+
+# ─── Cost-Aware Routing (future) ────────────────────────────────────
+# RouteLLM/vLLM Semantic Router pattern: a small classifier model routes
+# each turn to the best agent model. Cuts costs ~48% (RouteLLM benchmark).
+# Not implemented yet — Phase 5 experiment after static registry is stable.
+semantic_routing:
+  enabled: false
+  classifier_model: claude-haiku-4-5
+  route_on: [complexity, task_type, context_length]
+  fallback_to: static  # if classifier unavailable, use static assignment

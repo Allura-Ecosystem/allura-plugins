@@ -1,0 +1,45 @@
+{
+  "agent": "woz",
+  "model": "claude-sonnet-4",
+  "plugin": "team-ram-harness",
+  "fixture": "/media/ronin704/Games/Projects/Allura-ecosystem/allura-plugins/evals/fixtures/woz.md",
+  "timestamp": "20260723-053711",
+  "metrics": {
+    "cost": {
+      "cost_per_1m_input": 3.0,
+      "cost_per_1m_output": 15.0,
+      "estimated_input_tokens": 0,
+      "estimated_output_tokens": 0,
+      "estimated_cost_usd": 0
+    },
+    "latency": {
+      "ttft_ms": 0,
+      "e2e_ms": 0,
+      "profile": "unknown"
+    },
+    "accuracy": {
+      "task_completed": false,
+      "validation_gate_passed": false,
+      "score": 0.0
+    },
+    "stability": {
+      "runs": 0,
+      "success_rate": 0.0,
+      "variance": 0.0
+    },
+    "security": {
+      "governance_gates_passed": 0,
+      "governance_gates_total": 6,
+      "violations": []
+    },
+    "intelligence": {
+      "llm_judge_score": 0.0,
+      "reasoning_quality": "unknown"
+    }
+  },
+  "overall_score": 0.0,
+  "pass_threshold": 0.85,
+  "ship_threshold": 0.9,
+  "status": "fixture-recorded",
+  "note": "Placeholder result. Real eval requires agent invocation + Brain trace analysis."
+}
