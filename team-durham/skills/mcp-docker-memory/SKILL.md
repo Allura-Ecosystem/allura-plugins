@@ -100,7 +100,7 @@ MCP_DOCKER_execute_sql({
 
 | Need | Use | Why |
 |------|-----|-----|
-| Knowledge graph CRUD | `neo4j-memory` | Entity/relation/observation operations |
+| Knowledge graph CRUD | `allura-brain_memory_*` | Entity/relation/observation operations |
 | Brand Truth / promoted facts | `neo4j-memory` | Structured memory entities |
 
 ### Promotion Criteria (ALL must be true)

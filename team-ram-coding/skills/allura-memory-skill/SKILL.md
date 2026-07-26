@@ -250,7 +250,7 @@ matches = await allura-brain_memory_search({
   min_score: 0.8
 });
 
-// Export canonical-only (Neo4j)
+// Export canonical-only (semantic graph)
 all_memories = await allura-brain_memory_export({
   group_id: "allura-system",
   canonical_only: true,
@@ -269,7 +269,7 @@ all_memories = await allura-brain_memory_export({
 
 - `src/mcp/memory-server.ts` — MCP entry point
 - `src/integrations/postgres.client.ts` — EPISODIC layer
-- `src/integrations/neo4j.client.ts` — SEMANTIC layer
+- `src/integrations/semantic-graph.client.ts` — SEMANTIC layer
 - `src/curator/` — HITL promotion pipeline
 
 (End of file - total 212 lines)
