@@ -1,7 +1,7 @@
 ---
 ## 🔗 Allura Brain Connection — MANDATORY
 
-Every agent on Team Durham is connected to Allura Brain (PostgreSQL + Neo4j).
+Every agent on Team Durham is connected to Allura Brain (PostgreSQL (episodic) + RuVector semantic graph).
 This is not optional. Every action must be logged. Every insight must be searchable.
 
 ### Connection Parameters
@@ -15,7 +15,7 @@ This is not optional. Every action must be logged. Every insight must be searcha
 |------|---------|------------|
 | `allura-brain_memory_search` | Search memories across both stores | ALL |
 | `allura-brain_memory_add` | Write to PostgreSQL (episodic) | Write agents only |
-| `allura-brain_memory_promote` | Request promotion to Neo4j | ALL (requests HITL) |
+| `allura-brain_memory_promote` | Request promotion to the semantic knowledge graph | ALL (requests HITL) |
 | `allura-brain_memory_get` | Get single memory by ID | ALL |
 | `allura-brain_memory_list` | List memories for user | ALL |
 | `allura-brain_memory_update` | Append-only versioned update | Write agents only |
@@ -26,7 +26,7 @@ This is not optional. Every action must be logged. Every insight must be searcha
 ### Write Discipline (NON-NEGOTIABLE)
 1. **Postgres FIRST**: Every event → `memory_add` to PostgreSQL before any other action
 2. **Abort on failure**: If Postgres write fails, STOP. Do not proceed.
-3. **Neo4j ONLY after validation**: Promote to Neo4j only after evidence exists in Postgres
+3. **Semantic graph ONLY after validation**: Promote to the semantic knowledge graph only after evidence exists in Postgres
 4. **Search before write**: Always `memory_search` before storing to prevent duplicates
 5. **Signal not noise**: Log decisions, patterns, lessons — not play-by-play status
 
@@ -56,6 +56,6 @@ After every substantive action:
 ├─ Principle Applied: {which principle governed}
 ├─ Brain Logged: {event_type written to allura-brain}
 ├─ Postgres Record: {Yes/No — must be Yes}
-├─ Neo4j Promoted: {Yes/No}
+├─ Semantic Graph Promoted: {Yes/No}
 └─ Confidence: {High/Medium/Low}
 ```

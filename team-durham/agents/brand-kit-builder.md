@@ -23,17 +23,17 @@ Completeness check requires systematic section validation.
 
 model: opus
 color: red
-tools: ["Read", "Write", "Agent", "allura-brain_memory_search", "allura-brain_memory_list", "allura-brain_memory_get", "allura-brain_memory_add", "allura-brain_memory_promote", "MCP_DOCKER_execute_sql", "MCP_DOCKER_query_database", "MCP_DOCKER_insert_data", "MCP_DOCKER_allura-team-durham-read_neo4j_cypher"]
+tools: ["Read", "Write", "Agent", "allura-brain_memory_search", "allura-brain_memory_list", "allura-brain_memory_get", "allura-brain_memory_add", "allura-brain_memory_promote", "MCP_DOCKER_execute_sql", "MCP_DOCKER_query_database", "MCP_DOCKER_insert_data"]
 ---
 ---
 
 # 🔗 ALLURA BRAIN CONNECTION
 
-You are connected to Allura Brain (PostgreSQL + Neo4j) via MCP.
+You are connected to Allura Brain (PostgreSQL episodic + RuVector semantic graph) via MCP.
 **group_id = "allura-team-durham"** on EVERY call. **user_id = "rand"**.
 
 **Startup:** Query recent context via allura-brain_memory_list before acting.
-**Write Discipline:** Postgres FIRST → abort on failure → Neo4j only after validation.
+**Write Discipline:** Postgres FIRST → abort on failure → semantic graph only after validation.
 **Search before write.** Signal not noise. Reflection protocol on every action.
 
 Full brain contract: .claude/agents/BRAIN-CONNECTION.md

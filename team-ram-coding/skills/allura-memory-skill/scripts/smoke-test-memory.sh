@@ -8,13 +8,20 @@ echo "=== Allura Brain Smoke Test ==="
 
 # Test PostgreSQL
 echo "Testing PostgreSQL..."
-PG_COUNT=$(docker exec knowledge-postgres psql -U ronin4life -d memory -t -c "SELECT count(*) FROM allura_memories;" 2>/dev/null | tr -d ' ')
+PG_COUNT=$(docker exec knowledge-postgres psql -U ronin4life -d memory -t -c "SELECT count(*) FROM allura_memories;" 2>/dev/null | tr -d ' ' || echo "unavailable")
 echo "  PG memories: $PG_COUNT"
 
-# Test Neo4j
-echo "Testing Neo4j..."
-NEO4J_COUNT=$(docker exec knowledge-neo4j cypher-shell -u neo4j -p 'REDACTED' "MATCH (m:Memory) RETURN count(m)" 2>/dev/null | tail -2 | head -1 | tr -d ' ')
-echo "  Neo4j Memory nodes: $NEO4J_COUNT"
+# Test semantic graph
+# Probed through the governed gateway, not a database driver. No credential lives
+# in this file — the previous version embedded one in plaintext and, under `set -e`,
+# aborted the script here so every check below never ran.
+echo "Testing semantic graph..."
+GATEWAY="${ALLURA_GATEWAY_URL:-http://localhost:5888}"
+if curl -fsS --max-time 5 "${GATEWAY}/health" 2>/dev/null | grep -qi "ok\|ready\|healthy\|degraded"; then
+  echo "  ✅ semantic graph gateway responding (${GATEWAY})"
+else
+  echo "  ⚠️  semantic graph gateway not responding (${GATEWAY})"
+fi
 
 # Test Ollama
 echo "Testing Ollama..."

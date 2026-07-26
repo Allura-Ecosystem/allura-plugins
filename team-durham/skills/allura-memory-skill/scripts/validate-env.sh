@@ -11,6 +11,10 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Counters. These MUST use X=$((X + 1)), never ((X++)).
+# ((X++)) is post-increment: when X is 0 it evaluates to 0, which bash reports as
+# exit status 1. Under `set -euo pipefail` that aborts the script on the very first
+# PASS — this file silently never ran past check one until 2026-07-26.
 PASS=0
 WARN=0
 FAIL=0
@@ -20,18 +24,18 @@ FAIL=0
 check_docker_running() {
     if ! command -v docker &>/dev/null; then
         echo -e "${RED}FAIL${NC} Docker is not installed or not in PATH"
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         return 1
     fi
 
     if ! docker info &>/dev/null; then
         echo -e "${RED}FAIL${NC} Docker daemon is not running"
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         return 1
     fi
 
     echo -e "${GREEN}PASS${NC} Docker daemon is running"
-    ((PASS++))
+    PASS=$((PASS + 1))
     return 0
 }
 
@@ -41,12 +45,12 @@ check_postgres_container() {
 
     if [[ -z "$pg_container" ]]; then
         echo -e "${RED}FAIL${NC} No PostgreSQL container running"
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         return 1
     fi
 
     echo -e "${GREEN}PASS${NC} PostgreSQL container: ${pg_container}"
-    ((PASS++))
+    PASS=$((PASS + 1))
     return 0
 }
 
@@ -61,47 +65,33 @@ check_postgres_connection() {
 
     if docker exec "$pg_container" pg_isready -U "${POSTGRES_USER:-ronin4life}" -d "${POSTGRES_DB:-memory}" &>/dev/null; then
         echo -e "${GREEN}PASS${NC} PostgreSQL accepts connections (db: ${POSTGRES_DB:-memory})"
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
         echo -e "${RED}FAIL${NC} PostgreSQL not accepting connections"
-        ((FAIL++))
+        FAIL=$((FAIL + 1))
         return 1
     fi
     return 0
 }
 
-check_neo4j_container() {
-    local neo4j_container
-    neo4j_container=$(docker ps --filter "name=neo4j" --format "{{.Names}}" | head -1)
+check_semantic_graph() {
+    # The semantic graph is reached through the governed gateway, never directly.
+    # A direct container or driver check here would be the affordance this sweep removed.
+    local gateway="${ALLURA_GATEWAY_URL:-http://localhost:5888}"
 
-    if [[ -z "$neo4j_container" ]]; then
-        echo -e "${RED}FAIL${NC} No Neo4j container running"
-        ((FAIL++))
-        return 1
-    fi
-
-    echo -e "${GREEN}PASS${NC} Neo4j container: ${neo4j_container}"
-    ((PASS++))
-    return 0
-}
-
-check_neo4j_connection() {
-    local neo4j_container
-    neo4j_container=$(docker ps --filter "name=neo4j" --format "{{.Names}}" | head -1)
-
-    if [[ -z "$neo4j_container" ]]; then
-        echo -e "${YELLOW}SKIP${NC} Neo4j connection check (no container)"
+    if ! command -v curl &>/dev/null; then
+        echo -e "${YELLOW}WARN${NC} curl unavailable — cannot probe semantic graph gateway"
+        WARN=$((WARN + 1))
         return 0
     fi
 
-    local neo4j_password="${NEO4J_PASSWORD:-test}"
-
-    if docker exec "$neo4j_container" cypher-shell -u neo4j -p "$neo4j_password" "RETURN 1" &>/dev/null; then
-        echo -e "${GREEN}PASS${NC} Neo4j accepts connections"
-        ((PASS++))
+    if curl -fsS --max-time 5 "${gateway}/health" &>/dev/null; then
+        echo -e "${GREEN}PASS${NC} Semantic graph gateway responding (${gateway})"
+        PASS=$((PASS + 1))
     else
-        echo -e "${YELLOW}WARN${NC} Neo4j connection failed (may need password check)"
-        ((WARN++))
+        echo -e "${YELLOW}WARN${NC} Semantic graph gateway not responding at ${gateway}"
+        echo "       Retrieval will fall back to episodic Postgres only."
+        WARN=$((WARN + 1))
     fi
     return 0
 }
@@ -112,12 +102,12 @@ check_mcp_memory_container() {
 
     if [[ -z "$mcp_container" ]]; then
         echo -e "${YELLOW}WARN${NC} No Allura MCP container running (may use MCP Docker gateway instead)"
-        ((WARN++))
+        WARN=$((WARN + 1))
         return 0
     fi
 
     echo -e "${GREEN}PASS${NC} Allura MCP container: ${mcp_container}"
-    ((PASS++))
+    PASS=$((PASS + 1))
     return 0
 }
 
@@ -130,10 +120,10 @@ check_orphan_containers() {
         docker ps -a --filter "name=allura" --filter "status=exited" --format "{{.Names}} ({{.Status}})" | while read -r line; do
             echo "       → $line"
         done
-        ((WARN++))
+        WARN=$((WARN + 1))
     else
         echo -e "${GREEN}PASS${NC} No orphan Allura containers"
-        ((PASS++))
+        PASS=$((PASS + 1))
     fi
     return 0
 }
@@ -152,10 +142,10 @@ check_events_table() {
 
     if [[ "$table_exists" == "t" ]]; then
         echo -e "${GREEN}PASS${NC} Events table exists in PostgreSQL"
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
         echo -e "${YELLOW}WARN${NC} Events table not found in PostgreSQL (may need migration)"
-        ((WARN++))
+        WARN=$((WARN + 1))
     fi
     return 0
 }
@@ -175,10 +165,10 @@ check_group_id_constraint() {
 
     if echo "$result" | grep -qi "check constraint\|violates"; then
         echo -e "${GREEN}PASS${NC} Group ID CHECK constraint is active (rejects invalid patterns)"
-        ((PASS++))
+        PASS=$((PASS + 1))
     else
         echo -e "${YELLOW}WARN${NC} Group ID CHECK constraint may not be active"
-        ((WARN++))
+        WARN=$((WARN + 1))
 
         # Clean up test row if it was inserted
         docker exec "$pg_container" psql -U "${POSTGRES_USER:-ronin4life}" -d "${POSTGRES_DB:-memory}" -c "DELETE FROM events WHERE event_type = 'VALIDATION_TEST'" &>/dev/null || true
@@ -203,8 +193,7 @@ echo "Layer 2: Database Connectivity"
 echo "──────────────────────────────"
 check_postgres_container
 check_postgres_connection
-check_neo4j_container
-check_neo4j_connection
+check_semantic_graph
 echo ""
 
 echo "Layer 3: Schema & Integrity"

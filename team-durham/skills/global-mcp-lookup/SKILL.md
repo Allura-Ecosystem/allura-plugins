@@ -28,7 +28,7 @@ Every agent, skill, and command should consult this registry (and its companion 
 | # | Server | Runtime | Connection | Primary Tools | Status | Skill |
 |---|--------|---------|------------|---------------|--------|-------|
 | 1 | **MCP Docker Gateway** | `local` (Docker) | `docker mcp gateway run` | `MCP_DOCKER_query_database`, `MCP_DOCKER_execute_sql`, `MCP_DOCKER_insert_data`, `MCP_DOCKER_notion-*`, `MCP_DOCKER_search_memories`, `MCP_DOCKER_create_entities`, `MCP_DOCKER_mcp-*` | ✅ Active | `mcp-docker` |
-| 2 | **Allura Brain** | Native (Brain MCP) | `allura-brain_*` tools (PostgreSQL + Neo4j backend) | `allura-brain_memory_search`, `allura-brain_memory_add`, `allura-brain_memory_promote`, `allura-brain_memory_get`, `allura-brain_memory_list`, `allura-brain_memory_delete`, `allura-brain_memory_update`, `allura-brain_memory_restore`, `allura-brain_memory_export` | ⚠️ Degraded (SASL bug) | `allura-memory-skill` |
+| 2 | **Allura Brain** | Native (Brain MCP) | `allura-brain_*` tools (PostgreSQL (episodic) + RuVector semantic graph backend) | `allura-brain_memory_search`, `allura-brain_memory_add`, `allura-brain_memory_promote`, `allura-brain_memory_get`, `allura-brain_memory_list`, `allura-brain_memory_delete`, `allura-brain_memory_update`, `allura-brain_memory_restore`, `allura-brain_memory_export` | ⚠️ Degraded (SASL bug) | `allura-memory-skill` |
 | 3 | **Penpot** | `remote` (HTTP/SSE) | `http://localhost:4401/mcp` | `mcp__penpot__execute_code`, `mcp__penpot__export_shape`, `mcp__penpot__import_image`, `mcp__penpot__penpot_api_info` | ✅ Active (requires running server) | `penpot-uiux-design` |
 | 4 | **Context7** | `api` (HTTP) | `https://context7.com/api/v2` (curl-based) | `MCP_DOCKER_resolve-library-id`, `MCP_DOCKER_get-library-docs` (Docker MCP) + direct `curl` API | ✅ Active | `context7` |
 | 5 | **Figma** | `custom` (OAuth) | Figma API via MCP plugin | `mcp__figma__use_figma`, `mcp__figma__get_screenshot` | ✅ Active | `figma-use` |
@@ -109,7 +109,7 @@ Allura Brain has two access pathways:
    - Fall back to MCP Docker pathway when unavailable
 
 2. **Fallback (MCP Docker):** `MCP_DOCKER_execute_sql` + `MCP_DOCKER_search_memories`
-   - These connect to the same PostgreSQL and Neo4j backends
+   - These connect to the same PostgreSQL (episodic) and semantic graph backends
    - Use when `allura-brain_*` tools are unavailable
 
 ### Notion Setup
@@ -206,6 +206,5 @@ That file is the **machine-readable** source of truth. This SKILL.md is the **hu
 | Allura Brain tools failing | SASL bug on native MCP | Use `MCP_DOCKER_*` fallback tools |
 | Context7 returning 403 | Rate limit reached | Wait or use `MCP_DOCKER_get-library-docs` |
 | `MCP_DOCKER_*` tools missing | Is Docker MCP Gateway running? | Run `docker mcp gateway run` or restart session |
-| Neo4j connection refused | Is Neo4j container running? | `docker ps \| grep neo4j` |
 | PostgreSQL connection refused | Is PG container running? | `docker ps \| grep postgres` |
 | Permission denied on tool | Check `.claude/settings.local.json` allowlist | Add `mcp__server__tool` to permissions |

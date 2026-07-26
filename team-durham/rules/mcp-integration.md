@@ -36,8 +36,8 @@ The registry maps every capability to its runtime type (`local`, `remote`, `api`
 | `MCP_DOCKER_execute_sql` | Raw SQL reads | All agents (read-only) |
 | `MCP_DOCKER_query_database` | NL SQL reads | All agents (read-only) |
 | `MCP_DOCKER_insert_data` | Append events | Kotler, Aaker, Glaser, Rand |
-| `MCP_DOCKER_allura-team-durham-read_neo4j_cypher` | Graph reads | All agents (read-only) |
-| `MCP_DOCKER_allura-team-durham-write_neo4j_cypher` | Graph writes | Kotler only |
+| Governed retrieval via Allura Brain memory tools | Semantic graph reads | All agents (read-only) |
+| Governed promotion via Allura Brain memory tools | Semantic graph writes | Kotler only |
 
 ### Notion (MCP Docker — programmatic API)
 | Tool | Use | Permission |
@@ -100,6 +100,6 @@ The registry maps every capability to its runtime type (`local`, `remote`, `api`
 ## Non-Overload Rules
 
 1. PostgreSQL: high-volume event logs (every session)
-2. Neo4j: promoted memory only (DDRs, patterns)
-3. Max one Neo4j write per completed task
+2. Semantic knowledge graph: promoted memory only (DDRs, patterns)
+3. Max one semantic graph write per completed task
 4. Always search first — never create duplicates

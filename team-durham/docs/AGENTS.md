@@ -4,7 +4,7 @@ This file provides guidance to Codex (Codex.ai/code) when working with code in t
 
 ## What This Is
 
-Brand Maker is a multi-agent brand production system ("Team Durham") that takes a client brief through an 8-phase pipeline to produce complete brand identity deliverables. It runs on the Allura Brain infrastructure (PostgreSQL + Neo4j + MCP Docker).
+Brand Maker is a multi-agent brand production system ("Team Durham") that takes a client brief through an 8-phase pipeline to produce complete brand identity deliverables. It runs on the Allura Brain infrastructure (PostgreSQL (episodic) + RuVector semantic graph + MCP Docker).
 
 ## Commands
 
@@ -69,7 +69,7 @@ Vision-critical agents get multimodal models; text-only agents use `glm-5.1`. Se
 
 ### Infrastructure
 
-Docker Compose runs: WordPress + MySQL + phpMyAdmin + Allura UX Board (Next.js on port 3101 prod / 3102 dev). The Allura Brain layer uses PostgreSQL (episodic memory), Neo4j (semantic graph), and MCP Docker (toolkit).
+Docker Compose runs: WordPress + MySQL + phpMyAdmin + Allura UX Board (Next.js on port 3101 prod / 3102 dev). The Allura Brain layer uses PostgreSQL (episodic memory), the RuVector semantic graph, and MCP Docker (toolkit).
 
 ## Project Layout
 

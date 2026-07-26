@@ -78,6 +78,6 @@ Specialists may execute only after Kotler or an explicit command routes them. `o
 
 - Agents execute within constraints
 - All events logged to PostgreSQL (append-only)
-- Agent decisions tracked in Neo4j (SUPERSEDES versioning)
+- Agent decisions tracked in the semantic knowledge graph (SUPERSEDES versioning)
 - group_id: `allura-team-durham`
 - Kotler is the default entrypoint; Allura memory is the default context layer

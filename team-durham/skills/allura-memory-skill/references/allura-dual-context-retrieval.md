@@ -215,7 +215,7 @@ memory_search({ query: "ember-fold pipeline status phase", group_id: "allura-tea
 |-------------|---------------|-----------------|
 | Loading all memories | Context window pollution, slow, irrelevant noise | Scope by project and query intent |
 | Ignoring deprecated status | Acting on stale truth, causing incorrect behavior | Always check `deprecated` and `SUPERSEDES` chain |
-| Only loading PostgreSQL | Missing validated insights, re-deriving known patterns | Search Neo4j first for canonical knowledge |
-| Only loading Neo4j | Missing recent events, blind to current state | Hybrid search across both stores |
+| Only loading PostgreSQL | Missing validated insights, re-deriving known patterns | Search the semantic graph first for canonical knowledge |
+| Only loading the semantic graph | Missing recent events, blind to current state | Hybrid search across both layers |
 | Caching search results across sessions | Stale context, missed updates | Always search fresh at session start |
 | Returning full objects instead of summaries | Token waste, lower signal-to-noise | Return concise relevant context |

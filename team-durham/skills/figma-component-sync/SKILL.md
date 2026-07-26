@@ -23,7 +23,7 @@ Figma ← → Brain (Bidirectional)
    └─────────────┘
         ↓
    ┌─────────────┐
-   │   Brain     │  ← PostgreSQL + Neo4j
+   │   Brain     │  ← PostgreSQL (episodic) + RuVector semantic graph
    └─────────────┘
 ```
 

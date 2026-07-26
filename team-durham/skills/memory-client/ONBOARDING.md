@@ -2,7 +2,7 @@
 
 ## Status: ✅ Brain Always Online
 
-PostgreSQL and Neo4j are connected. Use direct Brain logging only — no local file fallback.
+PostgreSQL (episodic) and the RuVector semantic graph are connected. Use direct Brain logging only — no local file fallback.
 
 ---
 

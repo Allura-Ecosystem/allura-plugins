@@ -1,6 +1,6 @@
 ---
 name: allura-memory-skill
-description: "Governance layer for Allura Brain memory operations. Use when working with persistent memory — storing, retrieving, promoting, superseding, deprecating, or revoking memories. Triggers on: 'store memory', 'search memory', 'promote to insight', 'supersede memory', 'revoke memory', 'memory governance', 'memory hygiene', 'duplicate detection', 'raw trace vs insight', 'neo4j', 'knowledge graph'. Teaches agents how to use the memory system with manners — raw trace vs curated insight, promotion policy, evidence-first writes, dual-context retrieval, and safe conflict handling. Two-layer architecture: MCP server = runtime packaging, this skill = agent behavior contract."
+description: "Governance layer for Allura Brain memory operations. Use when working with persistent memory — storing, retrieving, promoting, superseding, deprecating, or revoking memories. Triggers on: 'store memory', 'search memory', 'promote to insight', 'supersede memory', 'revoke memory', 'memory governance', 'memory hygiene', 'duplicate detection', 'raw trace vs insight', 'semantic graph', 'knowledge graph'. Teaches agents how to use the memory system with manners — raw trace vs curated insight, promotion policy, evidence-first writes, dual-context retrieval, and safe conflict handling. Two-layer architecture: MCP server = runtime packaging, this skill = agent behavior contract."
 allowed-tools:
   - MCP_DOCKER_search_memories
   - MCP_DOCKER_create_entities
@@ -59,8 +59,8 @@ It sits between the agent's intent and the memory system, enforcing discipline.
 ├───────────────────────────────────────────────────────────┤
 │  RUNTIME LAYER (MCP Docker)                                │
 │  Server packaging — Docker container, env vars, transport  │
-│  neo4j-memory → Neo4j :7687                                │
-│  database-server → PostgreSQL :5432                        │
+│  database-server → PostgreSQL :5432 (episodic)             │
+│  RuVector semantic graph → via governed Brain API          │
 └───────────────────────────────────────────────────────────┘
 ```
 
@@ -103,7 +103,7 @@ Use this skill when:
 - The agent needs to promote, supersede, deprecate, or revoke a memory
 - The agent is unsure whether to write, update, or supersede a fact
 - The agent found conflicting memories and needs resolution logic
-- A memory system built on Allura Brain (PostgreSQL + Neo4j) needs setup or troubleshooting
+- A memory system built on Allura Brain — PostgreSQL (episodic) + RuVector semantic graph — needs setup or troubleshooting
 
 ---
 
@@ -118,7 +118,7 @@ Treat memory as three distinct layers:
 - **Discipline:** Append-only. Never update or delete trace rows.
 - **Status:** Raw. Not truth. Not actionable until promoted.
 
-### Layer 2: Curated Insight (Neo4j)
+### Layer 2: Curated Insight (RuVector semantic graph)
 
 - **What:** Promoted decisions, patterns, ADRs, brand truth, entity facts
 - **Store:** Only after passing promotion policy (see `references/allura-promotion-policy.md`)
@@ -128,7 +128,7 @@ Treat memory as three distinct layers:
 ### Layer 3: Retrieval Context (Hybrid)
 
 - **What:** The smallest useful context window for the current task
-- **Source:** Both PostgreSQL trace and Neo4j insight, ranked by relevance
+- **Source:** Both PostgreSQL trace and semantic graph insight, ranked by relevance
 - **Discipline:** Prefer project-local first, add global only when it improves reasoning
 
 ```
@@ -140,7 +140,7 @@ Treat memory as three distinct layers:
 │  (scoped to      │  (cross-project patterns,     │
 │   group_id)       │   conventions, ADRs)          │
 ├──────────────────┴──────────────────────────────┤
-│            CURATED INSIGHT (Neo4j)               │
+│         CURATED INSIGHT (Semantic Graph)         │
 │  Promoted, versioned, evidence-backed             │
 ├──────────────────────────────────────────────────┤
 │             RAW TRACE (PostgreSQL)                │
@@ -159,11 +159,11 @@ When a user asks for memory-related work, follow this sequence:
 | Intent | Action | Layer |
 |--------|--------|-------|
 | Log what happened | Store raw trace | PostgreSQL |
-| Remember a decision | Store trace, consider promotion | PostgreSQL → Neo4j |
+| Remember a decision | Store trace, consider promotion | PostgreSQL → semantic graph |
 | Retrieve context | Search both layers | Hybrid |
-| Make a fact durable | Promote to insight | Neo4j |
-| Update a fact | Supersede, never overwrite | Neo4j |
-| Remove a fact | Soft-delete or deprecate | PostgreSQL / Neo4j |
+| Make a fact durable | Promote to insight | Semantic graph |
+| Update a fact | Supersede, never overwrite | Semantic graph |
+| Remove a fact | Soft-delete or deprecate | PostgreSQL / semantic graph |
 | Recover a mistake | Restore within 30-day window | PostgreSQL |
 | Check what's known | Summarize current state | Hybrid |
 
@@ -179,7 +179,7 @@ memory_search({
   limit: 5
 })
 
-// Check Neo4j specifically for promoted insights
+// Check the semantic graph specifically for promoted insights
 MCP_DOCKER_search_memories({ query: "brand architecture" })
 ```
 
@@ -200,11 +200,11 @@ Every memory must have a type before storage:
 |------|-------|-------------|---------|
 | `raw_event` | PostgreSQL | Session event, observation | "Agent kotler invoked for ember-fold" |
 | `outcome` | PostgreSQL | Task result | "Brand kit assembled for ember-fold" |
-| `insight` | Neo4j (promoted) | Reusable pattern or lesson | "Use monorepo layout for multi-client projects" |
-| `adr` | Neo4j (promoted) | Architecture Decision Record | "ADR-007: Use MCP Docker as single runtime" |
-| `entity_fact` | Neo4j (promoted) | Fact about an entity | "Brand ember-fold uses Hero archetype" |
-| `decision` | Neo4j (promoted) | Strategic decision with rationale | "Decided: polling > queue for embedding backfill" |
-| `relationship` | Neo4j (promoted) | Link between entities | "Brand ember-fold PRODUCED_BY ember-fold project" |
+| `insight` | Semantic graph (promoted) | Reusable pattern or lesson | "Use monorepo layout for multi-client projects" |
+| `adr` | Semantic graph (promoted) | Architecture Decision Record | "ADR-007: Use MCP Docker as single runtime" |
+| `entity_fact` | Semantic graph (promoted) | Fact about an entity | "Brand ember-fold uses Hero archetype" |
+| `decision` | Semantic graph (promoted) | Strategic decision with rationale | "Decided: polling > queue for embedding backfill" |
+| `relationship` | Semantic graph (promoted) | Link between entities | "Brand ember-fold PRODUCED_BY ember-fold project" |
 
 ### 4. Apply write discipline
 
@@ -238,7 +238,7 @@ memory_add({
 })
 ```
 
-#### Insights (Neo4j)
+#### Insights (semantic graph)
 
 Insights are expensive and permanent. Apply strict discipline:
 
@@ -315,7 +315,6 @@ Quick checklist:
 |---------|-------|
 | Tools not available | Is `alluramemory-mcp` container running? `docker ps` |
 | Empty search results | Verify `group_id` is `allura-team-durham` |
-| Auth errors in Neo4j | Check for orphan containers connecting without credentials |
 | `memory_add` fails | `group_id` pattern must match `^allura-[a-z0-9-]+$` |
 | Promotion stuck | Normal — requires human approval via `curator:approve` |
 | Duplicate insights | Did you search before creating? |
@@ -327,7 +326,7 @@ Quick checklist:
 
 Not every agent can write everywhere. Respect these boundaries:
 
-| Agent | PostgreSQL Write | Neo4j Write | Promotion |
+| Agent | PostgreSQL Write | Semantic Graph Write | Promotion |
 |-------|-------------------|-------------|-----------|
 | Kotler | ✅ | ✅ (SUPERSEDES only) | ✅ Request |
 | Aaker | ✅ | ❌ | ✅ Request |
@@ -340,7 +339,7 @@ Not every agent can write everywhere. Respect these boundaries:
 
 **Key rules:**
 - Munari and Scout are **read-only** — they flag issues but never fix directly
-- Only Kotler can write to Neo4j, and only via SUPERSEDES (never in-place edit)
+- Only Kotler can write to the semantic graph, and only via SUPERSEDES (never in-place edit)
 - Any agent can *request* promotion, but approval requires HITL
 
 ---
@@ -349,7 +348,7 @@ Not every agent can write everywhere. Respect these boundaries:
 
 These are non-negotiable. Violating them causes data corruption or CHECK constraint failures.
 
-1. **Do not confuse raw logs with validated knowledge.** PostgreSQL trace ≠ Neo4j insight.
+1. **Do not confuse raw logs with validated knowledge.** PostgreSQL trace ≠ semantic graph insight.
 2. **Do not mutate canonical insights in place.** Create new version nodes with `SUPERSEDES`.
 3. **Do not promote memories without evidence or policy support.** See `references/allura-promotion-policy.md`.
 4. **Do not create duplicate insight nodes when a superseding relationship is more appropriate.** Search first.
@@ -390,7 +389,7 @@ memory_list_deleted({
 })
 ```
 
-### Deprecate a Neo4j insight (without deleting history)
+### Deprecate a semantic graph insight (without deleting history)
 
 ```javascript
 // Create a deprecation marker, not a delete
@@ -411,7 +410,7 @@ Read these for deep-dive knowledge:
 | `references/allura-memory-model.md` | Node types, relationships, status semantics, schema |
 | `references/allura-promotion-policy.md` | Promotion criteria, outcomes, HITL gate, rejection handling |
 | `references/allura-dual-context-retrieval.md` | Project-local vs. global, ranking, context window discipline |
-| `references/allura-troubleshooting.md` | MCP layer, Neo4j layer, PostgreSQL layer, memory logic layer |
+| `references/allura-troubleshooting.md` | MCP layer, PostgreSQL layer, memory logic layer, data integrity layer |
 
 ## Recommended scripts
 

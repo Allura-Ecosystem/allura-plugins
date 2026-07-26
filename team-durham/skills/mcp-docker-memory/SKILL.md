@@ -1,6 +1,6 @@
 ---
 name: mcp-docker-memory
-description: Use this skill when interacting with the Allura Brain memory system via MCP Docker. Trigger when the user mentions PostgreSQL events, Neo4j graph, Allura Brain, memory system, logging events, or storing brand truth. This skill provides the canonical tool names and query patterns.
+description: Use this skill when interacting with the Allura Brain memory system via MCP Docker. Trigger when the user mentions PostgreSQL events, the semantic knowledge graph, Allura Brain, memory system, logging events, or storing brand truth. This skill provides the canonical tool names and query patterns.
 ---
 
 # MCP Docker Memory System Skill
@@ -38,15 +38,7 @@ description: Use this skill when interacting with the Allura Brain memory system
 | List tables | `MCP_DOCKER_list_tables` |
 | Describe table | `MCP_DOCKER_describe_table` |
 
-### Neo4j Cypher (via `neo4j-cypher`)
-
-| Operation | Tool Name |
-|-----------|-----------|
-| Read Cypher | `MCP_DOCKER_allura-team-durham-read_neo4j_cypher` |
-| Write Cypher | `MCP_DOCKER_allura-team-durham-write_neo4j_cypher` |
-| Get schema | `MCP_DOCKER_allura-team-durham-get_neo4j_schema` |
-
-### Neo4j Memory Graph (via `neo4j-memory`)
+### Semantic Knowledge Graph (via `neo4j-memory`)
 
 | Operation | Tool Name |
 |-----------|-----------|
@@ -102,13 +94,12 @@ MCP_DOCKER_execute_sql({
 
 ---
 
-## Neo4j — Semantic Memory
+## Semantic Knowledge Graph
 
-### When to use which Neo4j server
+### When to use which server
 
 | Need | Use | Why |
 |------|-----|-----|
-| Raw Cypher query | `neo4j-cypher` | Direct Cypher, schema inspection |
 | Knowledge graph CRUD | `neo4j-memory` | Entity/relation/observation operations |
 | Brand Truth / promoted facts | `neo4j-memory` | Structured memory entities |
 
@@ -116,7 +107,7 @@ MCP_DOCKER_execute_sql({
 
 1. Decision is reusable across ≥2 projects
 2. Decision was validated — not just proposed
-3. No duplicate exists in Neo4j
+3. No duplicate exists in the semantic knowledge graph
 
 ### Write Pattern (Always search first)
 
@@ -169,8 +160,8 @@ MCP_DOCKER_create_relations({
 ## Non-Overload Rules
 
 1. **PostgreSQL** is for high-volume event logs (commands, builds, tests, every session action)
-2. **Neo4j** is for promoted memory only (ADRs, patterns, recurring failures + validated fixes)
-3. **Batch writes:** At most **one** Neo4j write per completed task/decision
+2. **The semantic knowledge graph** is for promoted memory only (ADRs, patterns, recurring failures + validated fixes)
+3. **Batch writes:** At most **one** semantic graph write per completed task/decision
 4. **De-duplicate:** **Search first**; only create if new
 5. **Aggregate bursts** into a single "session checkpoint" insight
 
@@ -187,7 +178,6 @@ Team Durham Agent
     ↓
 MCP Docker Toolkit (single runtime)
     ├── database-server → PostgreSQL :5432
-    ├── neo4j-cypher   → Neo4j :7687
     └── neo4j-memory   → Neo4j :7687
 ```
 
@@ -231,7 +221,7 @@ ORDER BY created_at DESC
 
 - `group_id = 'allura-team-durham'` for ALL operations
 - PostgreSQL events are **append-only** — never UPDATE or DELETE
-- Neo4j writes require **deduplication search first**
-- At most **one Neo4j write per task**
+- Semantic graph writes require **deduplication search first**
+- At most **one semantic graph write per task**
 - **NEVER use `docker exec`** — use MCP Docker tools only
 - **NEVER register duplicate MCP servers** — one runtime, one skill, one path

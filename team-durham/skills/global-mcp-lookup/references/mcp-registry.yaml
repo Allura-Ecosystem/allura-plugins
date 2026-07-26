@@ -21,7 +21,7 @@ servers:
   allura_brain:
     id: "allura-brain"
     name: "Allura Brain"
-    description: "Native MCP server for persistent memory (PostgreSQL + Neo4j)"
+    description: "Native MCP server for persistent memory (PostgreSQL (episodic) + RuVector semantic graph)"
     runtime: "native"
     connection: "Direct MCP connection"
     enabled: true

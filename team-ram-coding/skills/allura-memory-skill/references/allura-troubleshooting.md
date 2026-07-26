@@ -53,8 +53,8 @@ docker compose ps
 # PostgreSQL
 docker exec knowledge-postgres psql -U ronin4life -d memory -c "SELECT count(*) FROM allura_memories;"
 
-# Neo4j
-docker exec knowledge-neo4j cypher-shell -u neo4j -p 'REDACTED' "MATCH (m:Memory) RETURN count(m)"
+# Semantic graph (via governed gateway — no direct DB credential)
+curl -fsS "${ALLURA_GATEWAY_URL:-http://localhost:5888}/health"
 
 # Ollama
 curl http://localhost:11434/api/tags | grep qwen3

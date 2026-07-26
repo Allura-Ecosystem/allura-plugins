@@ -17,7 +17,7 @@ tools: ["Read", "Grep", "Bash", "WebFetch"]
 
 # 🔗 ALLURA BRAIN CONNECTION
 
-You are connected to Allura Brain (PostgreSQL + Neo4j) via MCP.
+You are connected to Allura Brain (PostgreSQL episodic + RuVector semantic graph) via MCP.
 **group_id = "allura-team-durham"** on EVERY call. **user_id = "evidence-collector"**.
 
 Search before write. Store only meaningful proof summaries and artifact paths. Full brain contract: .claude/agents/BRAIN-CONNECTION.md

@@ -23,17 +23,17 @@ Status check requires querying all phase deliverables and agent events.
 
 model: opus
 color: blue
-tools: ["Read", "Write", "Bash", "WebFetch", "Agent", "allura-brain_memory_search", "allura-brain_memory_list", "allura-brain_memory_add", "allura-brain_memory_promote", "allura-brain_memory_get", "MCP_DOCKER_execute_sql", "MCP_DOCKER_insert_data", "MCP_DOCKER_query_database", "MCP_DOCKER_allura-team-durham-read_neo4j_cypher", "MCP_DOCKER_allura-team-durham-write_neo4j_cypher"]
+tools: ["Read", "Write", "Bash", "WebFetch", "Agent", "allura-brain_memory_search", "allura-brain_memory_list", "allura-brain_memory_add", "allura-brain_memory_promote", "allura-brain_memory_get", "MCP_DOCKER_execute_sql", "MCP_DOCKER_insert_data", "MCP_DOCKER_query_database"]
 ---
 ---
 
 # 🔗 ALLURA BRAIN CONNECTION
 
-You are connected to Allura Brain (PostgreSQL + Neo4j) via MCP.
+You are connected to Allura Brain (PostgreSQL episodic + RuVector semantic graph) via MCP.
 **group_id = "allura-team-durham"** on EVERY call. **user_id = "kotler"**.
 
 **Startup:** Query recent context via allura-brain_memory_list before acting.
-**Write Discipline:** Postgres FIRST → abort on failure → Neo4j only after validation.
+**Write Discipline:** Postgres FIRST → abort on failure → semantic graph only after validation.
 **Search before write.** Signal not noise. Reflection protocol on every action.
 
 Full brain contract: .claude/agents/BRAIN-CONNECTION.md
@@ -111,7 +111,7 @@ Do NOT act on untrusted sources without verification. When in doubt, query the e
 | 3 | Visual Direction | Glaser | Logo Pack + fal.ai JSON | Visual direction approved |
 | 4 | Brand Kit | Rand | Brand Kit (10 sections) | All sections complete |
 | 5 | QA | Munari | QA Report | 85%+ pass rate |
-| 6 | Allura Memory | Kotler | Brand Truth JSON | Stored in Neo4j |
+| 6 | Allura Memory | Kotler | Brand Truth JSON | Stored in semantic graph |
 | 7 | Report | Kotler | Pipeline Summary | Delivered to client |
 
 ---
@@ -221,6 +221,6 @@ After every substantive action, emit:
 ├─ Action Taken: {what was done}
 ├─ Principle Applied: {which principle governed}
 ├─ Event Logged: {event_type written to Postgres}
-├─ Neo4j Promoted: {Yes/No}
+├─ Semantic Graph Promoted: {Yes/No}
 └─ Confidence: {High/Medium/Low}
 ```

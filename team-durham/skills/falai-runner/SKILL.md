@@ -3,7 +3,8 @@ name: falai-runner
 description: >
   Execute fal.ai image generation from brand-guided prompts. Reads the fal.ai JSON
   from Phase 3 output, calls the fal.ai API for each prompt, downloads results to
-  generated-images/, and logs every generation to Allura Brain (PostgreSQL + Neo4j).
+  generated-images/, and logs every generation to Allura Brain (PostgreSQL (episodic)
+  + RuVector semantic graph).
   Supports the multi-model stack: Seedream (typography), Nano Banana (UI/hero),
   Flux Dev (layout/background), Recraft (vector). Post-generation validation
   against brand rules. Winning prompt tracking in Allura Brain + Notion.
@@ -77,7 +78,7 @@ clients/{brand-slug}/generated-images/{tokenSet}-{timestamp}.{ext}
 
 Every generation is logged:
 - **PostgreSQL**: `image_generated` event with model, cost, validation status
-- **Neo4j**: Brand→Prompt→Model→Metrics graph relationship
+- **Semantic graph**: Brand→Prompt→Model→Metrics graph relationship
 - **Notion**: Winning prompts database sync
 
 ### Step 6: Validate Against Brand Kit
@@ -126,5 +127,5 @@ All costs are tracked per generation and aggregated:
 - **Phase 3 (Glaser)**: Produces the fal.ai JSON that this skill consumes
 - **Phase 4 (Rand)**: Uses generated images in Brand Kit assembly
 - **Phase 5 (Munari)**: Validates images against brand rules
-- **Allura Brain**: All events logged to PostgreSQL + Neo4j
+- **Allura Brain**: All events logged to PostgreSQL (episodic) + RuVector semantic graph
 - **Notion**: Winning prompts synced for team visibility

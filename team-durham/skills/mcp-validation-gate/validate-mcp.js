@@ -31,7 +31,7 @@ const REQUIRED_SERVERS = {
   'mcp-docker': {
     description: 'Database and memory system access',
     critical: true,
-    requiredTools: ['query_database', 'execute_sql', 'insert_data', 'read_neo4j_cypher', 'write_neo4j_cypher']
+    requiredTools: ['query_database', 'execute_sql', 'insert_data']
   },
   'penpot': {
     description: 'Penpot UI/UX design system MCP',
@@ -170,21 +170,41 @@ class MCPValidator {
   }
 
   async discoverServerTools(serverName) {
-    // This would integrate with the actual MCP session discovery
-    // For the harness, we assume tools are available if the server responds
-    // In practice, this calls the MCP session's tool discovery mechanism
-    
-    // Simulated discovery - in production, this queries the MCP client
-    const knownTools = {
-      'fal-ai': ['generate_image', 'get_generation_status', 'list_models'],
-      'figma': ['use_figma', 'get_design_context', 'search_design_system', 'get_screenshot'],
-      'notion': ['create_page', 'update_page', 'get_page', 'append_blocks'],
-      'mcp-docker': ['query_database', 'execute_sql', 'insert_data', 'read_neo4j_cypher', 'write_neo4j_cypher'],
-      'penpot': ['execute_code', 'export_shape', 'import_image', 'penpot_api_info'],
-      'allura-brain': ['memory_search', 'memory_add', 'memory_get', 'memory_list', 'memory_promote', 'memory_delete', 'memory_update', 'memory_restore', 'memory_export']
-    };
-    
-    return knownTools[serverName] || [];
+    // A gate that answers from a fixture is not a gate.
+    //
+    // This function previously returned a hardcoded manifest, so the validator
+    // printed "✅ mcp-docker [CRITICAL]: CONNECTED" and exited 0 regardless of
+    // what was actually reachable — including for two Cypher tools that resolved
+    // nowhere after the RuVector cutover. phase-6-memory green-lit agents into a
+    // tool that did not exist, wearing a passing test as cover.
+    //
+    // Discovery must now be injected by the caller that actually holds an MCP
+    // session. With no channel, this throws and every server reports FAILED —
+    // which is the truthful answer, not a convenient one.
+
+    if (typeof this.toolDiscovery === 'function') {
+      const tools = await this.toolDiscovery(serverName);
+      return Array.isArray(tools) ? tools : [];
+    }
+
+    if (process.env.ALLURA_MCP_VALIDATE_ALLOW_FIXTURE === '1') {
+      if (!this._fixtureWarned) {
+        this._fixtureWarned = true;
+        console.warn(
+          '⚠️  ALLURA_MCP_VALIDATE_ALLOW_FIXTURE=1 — reporting from a static manifest, ' +
+          'NOT from a live MCP session. Results are advisory and MUST NOT gate a phase.'
+        );
+      }
+      return FALLBACK_TOOL_MANIFEST[serverName] || [];
+    }
+
+    throw new MCPValidationError(
+      `No MCP discovery channel. Cannot verify tools on '${serverName}'. ` +
+      'Inject a toolDiscovery(serverName) function from a caller holding a live MCP ' +
+      'session, or set ALLURA_MCP_VALIDATE_ALLOW_FIXTURE=1 for advisory-only output.',
+      'NO_DISCOVERY_CHANNEL',
+      { server: serverName }
+    );
   }
 
   async validateTool(serverName, toolName) {

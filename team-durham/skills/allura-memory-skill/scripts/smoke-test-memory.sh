@@ -44,7 +44,7 @@ if [[ -f "${SCRIPT_DIR}/validate-env.sh" ]]; then
     fi
 else
     echo -e "${YELLOW}SKIP${NC} validate-env.sh not found, proceeding without pre-flight"
-    ((SKIP++))
+    SKIP=$((SKIP + 1))
 fi
 echo ""
 
@@ -57,17 +57,17 @@ echo ""
 
 pass() {
     echo -e "  ${GREEN}PASS${NC} $1"
-    ((PASS++))
+    PASS=$((PASS + 1))
 }
 
 fail() {
     echo -e "  ${RED}FAIL${NC} $1"
-    ((FAIL++))
+    FAIL=$((FAIL + 1))
 }
 
 skip() {
     echo -e "  ${YELLOW}SKIP${NC} $1"
-    ((SKIP++))
+    SKIP=$((SKIP + 1))
 }
 
 # ─── Test 1: Store Raw Trace ───
@@ -142,7 +142,7 @@ echo "  })"
 echo ""
 echo "  Expected: Promotion request queued for curator approval."
 echo "  Note:     Promotion does NOT happen immediately. HITL required."
-echo "  Verify:   System confirms proposal created (not that insight exists in Neo4j)."
+echo "  Verify:   System confirms proposal created (not that the insight is active)."
 echo ""
 
 # ─── Test 5: Supersede Pattern ───
@@ -220,10 +220,10 @@ echo "  Expected: Memory soft-deleted → appears in deleted list → restored �
 echo "  Verify:   Final get returns the original content."
 echo ""
 
-# ─── Test 7: Neo4j Deduplication ───
+# ─── Test 7: Semantic Graph Deduplication ───
 
 echo "═══════════════════════════════════════════════════════════"
-echo "TEST 7: Neo4j deduplication (create + search before create)"
+echo "TEST 7: Semantic graph deduplication (create + search before create)"
 echo "═══════════════════════════════════════════════════════════"
 echo ""
 echo "  Agent action: Create entity, then attempt duplicate creation"
@@ -244,7 +244,7 @@ echo "  Step 3: Rule — if search returns a match, do NOT create duplicate"
 echo "  // SKIP the create_entities call if match found"
 echo ""
 echo "  Expected: Entity created once. Second attempt blocked by search-first rule."
-echo "  Verify:   Only one entity with this name exists in Neo4j."
+echo "  Verify:   Only one entity with this name exists in the semantic graph."
 echo ""
 
 # ─── Test 8: Permission Check ───
@@ -255,7 +255,7 @@ echo "════════════════════════�
 echo ""
 echo "  Verify these permissions are enforced:"
 echo ""
-echo "  | Agent    | PG Write | Neo4j Write | Promote |"
+echo "  | Agent    | PG Write | Graph Write | Promote |"
 echo "  |----------|----------|-------------|---------|"
 echo "  | Kotler   | YES      | SUPERSEDES  | YES     |"
 echo "  | Aaker    | YES      | NO          | YES     |"
@@ -287,7 +287,7 @@ echo ""
 echo "  For each result:"
 echo "  memory_delete({ id: '<id>', group_id: '${GROUP_ID}', user_id: '${TEST_USER}' })"
 echo ""
-echo "  For Neo4j test entities:"
+echo "  For semantic graph test entities:"
 echo "  MCP_DOCKER_search_memories({ query: '${TEST_PREFIX}' })"
 echo "  MCP_DOCKER_add_observations({"
 echo "    entityName: '<entity-name>',"

@@ -8,7 +8,7 @@ Allura Brain is a two-store memory system:
 ┌─────────────────────────────────────────────────────────┐
 │                    ALLURA BRAIN                          │
 ├─────────────────────┬───────────────────────────────────┤
-│   POSTGRESQL 16      │         NEO4J 5.26                 │
+│   POSTGRESQL 16      │      RUVECTOR SEMANTIC GRAPH       │
 │   Episodic Memory    │      Semantic Memory               │
 │                     │                                   │
 │   • Raw traces      │   • Promoted insights              │
@@ -20,11 +20,11 @@ Allura Brain is a two-store memory system:
 ```
 
 **PostgreSQL** is the high-volume append-only log. Cheap writes, full audit trail.
-**Neo4j** is the low-volume curated knowledge graph. Expensive writes, high value.
+**The RuVector semantic graph** is the low-volume curated knowledge graph. Expensive writes, high value.
 
 ---
 
-## Node Types (Neo4j)
+## Node Types (semantic graph)
 
 | Label | Description | Promoted from | Example |
 |-------|-------------|---------------|---------|
@@ -33,7 +33,7 @@ Allura Brain is a two-store memory system:
 | `:ADR` | Architecture Decision Record | `DDR_CREATED` event | "ADR-007: MCP Docker single runtime" |
 | `:Brand` | Brand identity entity | Phase 6 Brand Truth | "Brand: ember-fold" |
 | `:Project` | Client project entity | Phase 0 brief | "Project: ember-fold" |
-| `:Pattern` | Recurring pattern or convention | `LESSON_LEARNED` event | "Always search before writing to Neo4j" |
+| `:Pattern` | Recurring pattern or convention | `LESSON_LEARNED` event | "Always search before writing to the semantic graph" |
 | `:Entity` | General domain entity | Manual curation | "Competitor: Landor" |
 | `:Source` | Evidence source reference | Linked on promotion | "2026-04-21 architecture audit" |
 
@@ -41,18 +41,18 @@ Allura Brain is a two-store memory system:
 
 ### Memory Node (canonical)
 
-```cypher
-(:Memory {
-  id: UUID,
-  group_id: string,       -- required, pattern: ^allura-[a-z0-9-]+$
-  user_id: string,        -- required, Team Durham agent name
-  content: string,        -- required, the actual memory text
-  score: float,           -- 0-1 confidence score
-  deprecated: boolean,    -- true if superseded or revoked
-  created_at: datetime,   -- auto-set on creation
-  source_event_id: string -- optional, links to PostgreSQL trace
-})
-```
+Label: `:Memory`
+
+| Property | Type | Notes |
+|----------|------|-------|
+| `id` | UUID | |
+| `group_id` | string | **required**, pattern: `^allura-[a-z0-9-]+$` |
+| `user_id` | string | **required**, Team Durham agent name |
+| `content` | string | **required**, the actual memory text |
+| `score` | float | 0-1 confidence score |
+| `deprecated` | boolean | true if superseded or revoked |
+| `created_at` | datetime | auto-set on creation |
+| `source_event_id` | string | optional, links to PostgreSQL trace |
 
 ### Event Row (PostgreSQL)
 
@@ -72,7 +72,7 @@ CREATE TABLE events (
 
 ---
 
-## Relationship Types (Neo4j)
+## Relationship Types (semantic graph)
 
 ### Lineage and Versioning
 
@@ -109,21 +109,21 @@ CREATE TABLE events (
 ```
  ┌──────────┐     promote      ┌──────────┐    supersede    ┌──────────┐
  │   RAW    │ ─────────────→   │ CURATED  │ ─────────────→ │ SUPERSEDED│
- │ (PG)     │                  │ (Neo4j)  │                 │ (Neo4j)  │
+ │ (PG)     │                  │ (Graph)  │                 │ (Graph)  │
  └──────────┘                  └──────────┘                 └──────────┘
                                     │                             │
                                     │ deprecate                   │ restore
                                     ▼                             │
                                ┌──────────┐                      │
                                │ DEPRECATED│ ◄────────────────────┘
-                               │ (Neo4j)  │   (within 30-day window)
+                               │ (Graph)  │   (within 30-day window)
                                └──────────┘
                                     │
                                     │ revoke (permanent)
                                     ▼
                                ┌──────────┐
                                │ REVOKED  │
-                               │ (Neo4j)  │
+                               │ (Graph)  │
                                └──────────┘
 ```
 
@@ -132,28 +132,18 @@ CREATE TABLE events (
 | Status | Store | Meaning | Reversible? |
 |--------|-------|---------|-------------|
 | `raw` | PostgreSQL | Unvalidated event trace | No (append-only) |
-| `curated` | Neo4j | Promoted, validated, active | No (only through supersede) |
-| `superseded` | Neo4j | Replaced by newer version | Via `memory_restore` (30 days) |
-| `deprecated` | Neo4j | Marked as no longer canonical | Via `memory_restore` (30 days) |
-| `revoked` | Neo4j | Permanently removed from canon | No |
-| `disputed` | Neo4j | Challenged by conflicting fact | Yes (resolve dispute) |
+| `curated` | Semantic graph | Promoted, validated, active | No (only through supersede) |
+| `superseded` | Semantic graph | Replaced by newer version | Via `memory_restore` (30 days) |
+| `deprecated` | Semantic graph | Marked as no longer canonical | Via `memory_restore` (30 days) |
+| `revoked` | Semantic graph | Permanently removed from canon | No |
+| `disputed` | Semantic graph | Challenged by conflicting fact | Yes (resolve dispute) |
 
 ### Versioning rules
 
-1. **Never edit an existing Neo4j node.** Always create a new version.
+1. **Never edit an existing node in the semantic graph.** Always create a new version.
 2. **Link versions with `SUPERSEDES`** from new → old and `DEPRECATED_BY` from old → new.
 3. **Preserve the full lineage chain.** Never break the version history.
 4. **Retrieval should follow the chain.** Always resolve to the latest non-deprecated version.
-
-```cypher
-// Find the current (non-superseded) version of a decision
-MATCH (d:Decision)-[:SUPERSEDES*0..]->(old:Decision)
-WHERE NOT EXISTS { (newer:Decision)-[:SUPERSEDES]->(d) }
-  AND d.deprecated = false
-RETURN d
-ORDER BY d.created_at DESC
-LIMIT 1
-```
 
 ---
 
@@ -178,7 +168,7 @@ All valid event types that can be logged as raw traces:
 | `BLOCKED` | Progress blocked | Any |
 | `LESSON_LEARNED` | Pattern or insight captured | Munari, Kotler |
 | `BRAND_TRUTH_STORED` | Phase 6 Brand Truth committed | Kotler |
-| `MEMORY_PROMOTED` | Raw trace promoted to Neo4j insight | Any (curator approved) |
+| `MEMORY_PROMOTED` | Raw trace promoted to semantic graph insight | Any (curator approved) |
 | `MEMORY_SUPERSEDED` | Old insight superseded by new | Kotler |
 | `MEMORY_REVOKED` | Insight permanently revoked | Kotler |
 

@@ -181,7 +181,7 @@ These are non-negotiable. Violating them causes data corruption or CHECK constra
 - **Brain is the ONLY memory** — never use local files, no offline fallback
 - **group_id on every call** — always `allura-team-durham` for this project
 - **Postgres is append-only** — never update or delete trace rows
-- **Neo4j uses SUPERSEDES** — create new version nodes, never edit existing ones
+- **The semantic graph uses SUPERSEDES** — create new version nodes, never edit existing ones
 - **Promotion requires HITL** — agents cannot self-promote; goes through curator pipeline
 - **user_id** — use the Team Durham agent name (kotler, aaker, glaser, rand, munari, ogilvy, tufte, scout)
 
@@ -191,6 +191,5 @@ These are non-negotiable. Violating them causes data corruption or CHECK constra
 |---------|-------|
 | Tools not available | Is `alluramemory-mcp` container running? `docker ps` |
 | Empty search results | Verify group_id is `allura-team-durham` |
-| Auth errors in Neo4j logs | Something is connecting without credentials — check for orphan containers |
 | memory_add fails | Check group_id pattern matches `^allura-[a-z0-9-]+$` |
 | Promotion stuck | Normal — requires human approval via `curator:approve` |

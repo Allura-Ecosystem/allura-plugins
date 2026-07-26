@@ -415,7 +415,7 @@ Every phase logs to PostgreSQL `events` table:
 | 5 (Upload) | `BLOCKED` (if Penpot down) or `TASK_COMPLETE` | penpot IDs, dedup count |
 | 7 (QA) | `TASK_COMPLETE` or `TASK_FAILED` | qa score, asset count, variant count |
 
-**Neo4j promotion:** Only Kotler promotes asset metadata to semantic graph after Phase 5 QA pass.
+**Semantic graph promotion:** Only Kotler promotes asset metadata to the semantic knowledge graph after Phase 5 QA pass.
 
 ## Reflection Protocol
 
@@ -426,7 +426,7 @@ After every run, emit:
 ├─ Action Taken: Processed {n} assets, generated {m} variants
 ├─ Principle Applied: Asset-first design — measure before building
 ├─ Event Logged: TASK_COMPLETE or TASK_FAILED to Postgres
-├─ Neo4j Promoted: No (episodic only unless pattern emerges)
+├─ Semantic Graph Promoted: No (episodic only unless pattern emerges)
 └─ Confidence: High / Medium / Low
 ```
 

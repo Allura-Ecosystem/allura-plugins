@@ -2,7 +2,7 @@
 
 ## When to promote
 
-Promotion moves a raw trace from PostgreSQL to a curated insight in Neo4j.
+Promotion moves a raw trace from PostgreSQL to a curated insight in the semantic graph.
 This is irreversible (once promoted, the insight becomes canonical truth).
 
 ### All criteria must be true
@@ -14,14 +14,14 @@ Before requesting promotion, verify **all** of the following:
 | 1 | **Evidence exists** | Raw trace in PostgreSQL supports the claim |
 | 2 | **Useful beyond immediate session** | The insight is reusable across ≥2 projects or sessions |
 | 3 | **Confidence passes threshold** | Score ≥ 0.85 (from `memory_promote` threshold parameter) |
-| 4 | **Not a duplicate** | Search Neo4j for existing similar insights; none found |
+| 4 | **Not a duplicate** | Search the semantic graph for existing similar insights; none found |
 | 5 | **Validated, not just proposed** | The decision or pattern was confirmed in practice, not just suggested |
 
 ### When NOT to promote
 
 - The information is session-specific (e.g., "currently working on X")
 - The information is speculative or unvalidated
-- A similar insight already exists in Neo4j (supersede instead, if different)
+- A similar insight already exists in the semantic graph (supersede instead, if different)
 - The evidence is thin (single observation, no confirmation)
 - The content is temporary state (e.g., "container is restarting")
 
@@ -33,8 +33,8 @@ When you request promotion via `memory_promote`, the system evaluates the candid
 
 | Outcome | Meaning | Next action |
 |---------|---------|-------------|
-| `promoted` | Insight accepted into Neo4j | No further action needed |
-| `duplicate` | Same knowledge already exists in Neo4j | Skip. Optionally add observations to existing node |
+| `promoted` | Insight accepted into the semantic graph | No further action needed |
+| `duplicate` | Same knowledge already exists in the semantic graph | Skip. Optionally add observations to existing node |
 | `related_context` | Similar but not identical insight exists | Consider supersede or add as complementary observation |
 | `possible_supersede` | Existing insight should be updated | Create new version with `SUPERSEDES` relationship |
 | `rejected` | Does not meet promotion criteria | Keep as raw trace; try again with more evidence |
@@ -63,7 +63,7 @@ Approved   Rejected
    │         │
    ▼         ▼
 Write to    Remain as
-Neo4j      raw trace
+the graph   raw trace
 ```
 
 ### How agents request promotion
@@ -73,7 +73,7 @@ Neo4j      raw trace
 memory_promote({
   id: "<episodic-memory-id>",
   group_id: "allura-team-durham",
-  rationale: "Decision validated across 3 client projects. Pattern stable for 2+ weeks. No existing Neo4j insight covers this."
+  rationale: "Decision validated across 3 client projects. Pattern stable for 2+ weeks. No existing semantic graph insight covers this."
 })
 ```
 
@@ -83,7 +83,7 @@ A good rationale answers:
 1. **What evidence** supports this insight? (cite PostgreSQL event IDs if possible)
 2. **How many sessions/projects** has this been validated across?
 3. **Why is this better** than keeping it as raw trace?
-4. **Does anything in Neo4j conflict** with this insight?
+4. **Does anything in the semantic graph conflict** with this insight?
 
 ### Bad rationale examples
 
@@ -100,7 +100,7 @@ These are different operations. Know when to use each:
 
 | Situation | Action |
 |-----------|--------|
-| New knowledge, nothing like it in Neo4j | `memory_promote` |
+| New knowledge, nothing like it in the semantic graph | `memory_promote` |
 | Existing insight needs updating | Supersede: create new, link with `SUPERSEDES` |
 | Existing insight is wrong | Supersede: create corrected version, mark old as deprecated |
 | Two insights conflict | Store both, create `DISPUTES` relationship, flag for human review |
@@ -170,7 +170,7 @@ memory_delete({
   user_id: "kotler"
 })
 
-// 2. Mark the Neo4j node as deprecated
+// 2. Mark the semantic graph node as deprecated
 MCP_DOCKER_add_observations({
   entityName: "Brand: ember-fold",
   observations: ["REVOKED: Archetype classification incorrect. Evidence: competitive analysis re-run showed different result. Revoked by kotler on 2026-04-22."]
@@ -230,4 +230,4 @@ memory_promote({ id: "event-2", ... })
 memory_promote({ id: "event-3", ... })
 ```
 
-**Non-overload rule:** At most **one** Neo4j write per completed task or decision.
+**Non-overload rule:** At most **one** semantic graph write per completed task or decision.

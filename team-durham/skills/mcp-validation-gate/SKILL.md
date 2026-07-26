@@ -120,7 +120,7 @@ async function callWithRetry(server, tool, params, maxRetries = 3) {
 | `fal-ai` | Image generation | `generate_image`, `get_generation_status` |
 | `figma` | Design system | `use_figma`, `get_design_context` |
 | `notion` | Documentation | `create_page`, `update_page` |
-| `mcp-docker` | Database/memory | `query_database`, `execute_sql`, `read_neo4j_cypher` |
+| `mcp-docker` | Database/memory | `query_database`, `execute_sql` |
 
 ---
 

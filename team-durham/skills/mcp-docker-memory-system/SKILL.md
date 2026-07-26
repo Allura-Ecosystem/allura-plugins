@@ -1,6 +1,6 @@
 ---
 name: mcp-docker-memory-system
-description: "Canonical MCP Docker interface for Team Durham's Allura Brain memory system. Use when agents need PostgreSQL event logging, Neo4j graph reads/writes, Notion access through MCP Docker, or the rule that database work must go through MCP tools rather than docker exec."
+description: "Canonical MCP Docker interface for Team Durham's Allura Brain memory system. Use when agents need PostgreSQL event logging, semantic knowledge graph reads/writes, Notion access through MCP Docker, or the rule that database work must go through MCP tools rather than docker exec."
 ---
 
 # Skill: mcp-docker-memory-system
@@ -8,7 +8,7 @@ description: "Canonical MCP Docker interface for Team Durham's Allura Brain memo
 # MCP Docker Memory System — Team Durham
 
 > **Skill for:** All agents in Team Durham
-> **Purpose:** Provides the canonical interface to Allura Brain (PostgreSQL + Neo4j) via MCP_DOCKER tools
+> **Purpose:** Provides the canonical interface to Allura Brain (PostgreSQL (episodic) + RuVector semantic graph) via MCP_DOCKER tools
 
 ---
 
@@ -27,11 +27,11 @@ description: "Canonical MCP Docker interface for Team Durham's Allura Brain memo
 | `mcp__MCP_DOCKER__execute_sql` | Raw SQL reads | All agents (read-only) |
 | `mcp__MCP_DOCKER__insert_data` | Append events only | Kotler, Aaker, Glaser, Rand (write) |
 
-### Neo4j (Semantic Store — Promoted Knowledge Only)
-| Tool | Use | Permission |
+### Semantic Knowledge Graph (Promoted Knowledge Only)
+| Access | Use | Permission |
 |------|-----|------------|
-| `mcp__MCP_DOCKER__read_neo4j_cypher` | Graph reads | All agents (read-only) |
-| `mcp__MCP_DOCKER__write_neo4j_cypher` | Graph writes | Kotler only (SUPERSEDES) |
+| Governed retrieval via Allura Brain memory tools | Graph reads | All agents (read-only) |
+| Governed promotion via Allura Brain memory tools | Graph writes | Kotler only (SUPERSEDES) |
 
 ### Notion (Dashboard + Knowledge Base)
 | Tool | Use | Permission |
@@ -66,18 +66,18 @@ mcp__MCP_DOCKER__insert_data({
 })
 ```
 
-### Neo4j Promotion (Kotler Only)
+### Semantic Graph Promotion (Kotler Only)
 
 1. Search first — never create duplicates
 2. Only promote if: reusable across ≥2 projects, validated, no duplicate
-3. Use `SUPERSEDES` for updates, never mutate
+3. Create a `SUPERSEDES` relation in the semantic graph for updates, never mutate
 
 ---
 
 ## Non-Overload Rules
 
 1. PostgreSQL is for high-volume event logs (every session action)
-2. Neo4j is for promoted memory only (DDRs, patterns, recurring failures + validated fixes)
-3. Batch writes: at most **one** Neo4j write per completed task/decision
+2. The semantic knowledge graph is for promoted memory only (DDRs, patterns, recurring failures + validated fixes)
+3. Batch writes: at most **one** semantic graph write per completed task/decision
 4. De-duplicate: **search first**; only create if new
 5. Aggregate bursts into a single "session checkpoint" insight

@@ -86,7 +86,7 @@ Simulate all agents in one conversation. Format:
 
 **During roundtable:** Log each significant exchange to Brain (episodic).
 
-**When decision reached:** Promote to Neo4j (semantic).
+**When decision reached:** Promote to the semantic knowledge graph.
 
 **When party ends:** Consolidated reflection + PostgreSQL event.
 
@@ -203,7 +203,7 @@ Kotler synthesizes all results, resolves conflicts, and commits.
 4. **group_id on every DB operation** — `allura-team-durham`
 5. **No decisions without Brain search first** — agents cite evidence
 6. **Agents who lack data say "I don't have data on this"** — they don't guess
-7. **Promotion to Neo4j only for multi-agent consensus** — not individual opinions
+7. **Promotion to the semantic knowledge graph only for multi-agent consensus** — not individual opinions
 
 ---
 
