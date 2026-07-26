@@ -28,7 +28,7 @@ Use this entry in your MCP configuration:
         "POSTGRES_PASSWORD": "${POSTGRES_PASSWORD}",
         "POSTGRES_DB": "memory",
         "NEO4J_URI": "bolt://localhost:7687",
-        ""  # Neo4j removed — RuVector uses PG tables,
+        ""  # Neo4j removed — RuVector uses PG tables
         ""  # removed,
         "PROMOTION_MODE": "soc2",
         "AUTO_APPROVAL_THRESHOLD": "0.85"

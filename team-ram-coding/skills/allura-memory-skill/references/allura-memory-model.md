@@ -10,7 +10,7 @@
 - RuVector hybrid search (vector + BM25) for retrieval
 - 237 rows in `allura-system` as of 2026-04-22
 
-### Semantic layer (Neo4j)
+### Semantic layer (RuVector graph on PostgreSQL)
 - Node labels: Memory, Agent, Team, Project
 - Relationship types: SUPERSEDES, AUTHORED_BY, CONTRIBUTES_TO, MEMBER_OF, DELEGATES_TO, ESCALATES_TO, HANDS_OFF_TO, PROPOSES_TO, APPROVES_PROMOTION
 - 81 Memory nodes, 19 Agent nodes in `allura-system` as of 2026-04-22

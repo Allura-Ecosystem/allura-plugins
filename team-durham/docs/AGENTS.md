@@ -17,7 +17,7 @@ make clean         # Remove generated files (keeps source)
 make images        # Execute fal.ai image generation
 make docker-up     # Start Allura Brain containers
 make docker-down   # Stop containers
-make db-status     # Check PostgreSQL + Neo4j connections
+make db-status     # Check PostgreSQL + semantic graph connections
 make db-events     # Show recent Team Durham events
 make penpot-status # Check Penpot MCP server health (both servers)
 make penpot-create # Scaffold Penpot board for CLIENT

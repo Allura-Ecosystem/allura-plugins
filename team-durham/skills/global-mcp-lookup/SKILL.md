@@ -1,6 +1,6 @@
 ---
 name: global-mcp-lookup
-description: "Unified MCP server registry and discovery for Team Durham. Single source of truth for every MCP capability — Penpot, Allura Brain, Context7, Notion, Neo4j, PostgreSQL, Figma, fal.ai, and more. Trigger when asking 'what MCP tools are available?', 'which server provides X?', 'how do I connect to Y?', 'MCP registry', 'MCP lookup', 'available tools', or when onboarding a new agent. Cross-references mcp-registry.yaml as the canonical server index."
+description: "Unified MCP server registry and discovery for Team Durham. Single source of truth for every MCP capability — Penpot, Allura Brain, Context7, Notion, PostgreSQL (RuVector semantic graph), Figma, fal.ai, and more. Trigger when asking 'what MCP tools are available?', 'which server provides X?', 'how do I connect to Y?', 'MCP registry', 'MCP lookup', 'available tools', or when onboarding a new agent. Cross-references mcp-registry.yaml as the canonical server index."
 globs: [".claude/**", "clients/**"]
 ---
 
@@ -33,7 +33,7 @@ Every agent, skill, and command should consult this registry (and its companion 
 | 4 | **Context7** | `api` (HTTP) | `https://context7.com/api/v2` (curl-based) | `MCP_DOCKER_resolve-library-id`, `MCP_DOCKER_get-library-docs` (Docker MCP) + direct `curl` API | ✅ Active | `context7` |
 | 5 | **Figma** | `custom` (OAuth) | Figma API via MCP plugin | `mcp__figma__use_figma`, `mcp__figma__get_screenshot` | ✅ Active | `figma-use` |
 | 6 | **Notion** | Docker (via MCP Docker) | `MCP_DOCKER_notion-*` tools | `MCP_DOCKER_notion-fetch`, `MCP_DOCKER_notion-search`, `MCP_DOCKER_notion-update-page`, `MCP_DOCKER_notion-create-pages`, `MCP_DOCKER_notion-create-database`, `MCP_DOCKER_notion-get-comments`, `MCP_DOCKER_notion-create-comment`, `MCP_DOCKER_notion-move-pages`, `MCP_DOCKER_notion-duplicate-page` | ✅ Active | `notion-brand-publisher`, `notion-policy-reader` |
-| 7 | **Neo4j** | Docker (via MCP Docker) | `bolt://localhost:7687` | `MCP_DOCKER_search_memories`, `MCP_DOCKER_create_entities`, `MCP_DOCKER_create_relations`, `MCP_DOCKER_add_observations`, `MCP_DOCKER_find_memories_by_name`, `MCP_DOCKER_delete_entities`, `MCP_DOCKER_delete_observations`, `MCP_DOCKER_delete_relations` | ✅ Active | `mcp-docker-memory` |
+| 7 | **Semantic Graph (RuVector)** | Governed gateway | `${ALLURA_GATEWAY_URL:-http://localhost:5888}` | `allura-brain_memory_search`, `allura-brain_memory_add`, `allura-brain_memory_promote`, `allura-brain_memory_get`, `allura-brain_memory_list`, `allura-brain_memory_update`, `allura-brain_memory_delete` | ✅ Active | `allura-brain` |
 | 8 | **PostgreSQL** | Docker (via MCP Docker) | `host.docker.internal:5432` | `MCP_DOCKER_query_database`, `MCP_DOCKER_execute_sql`, `MCP_DOCKER_execute_unsafe_sql`, `MCP_DOCKER_insert_data`, `MCP_DOCKER_update_data`, `MCP_DOCKER_delete_data`, `MCP_DOCKER_list_tables`, `MCP_DOCKER_describe_table`, `MCP_DOCKER_create_table` | ✅ Active | `mcp-docker-memory` |
 | 9 | **Perplexica** | `remote` (self-hosted) | `http://127.0.0.1:7722/mcp` | `perplexica_search` | ✅ Active | `perplexica-mcp` |
 | 10 | **fal.ai** | `custom` (API) | `@fal-ai/client` npm package | Fal.ai image generation tools | ✅ Active | `fal-ideogram-executor`, `falai-runner` |
@@ -124,7 +124,7 @@ Notion is accessed entirely through MCP Docker gateway tools:
 
 Which agents can use which MCP servers:
 
-| Agent | DB (PG/Neo4j) | Notion | Penpot | Figma | fal.ai | Context7 | Perplexica |
+| Agent | DB (PG / semantic graph) | Notion | Penpot | Figma | fal.ai | Context7 | Perplexica |
 |-------|---------------|--------|--------|-------|--------|----------|------------|
 | Kotler | ✅ Write | ✅ Write | ✅ Read | ✅ Read | — | ✅ | ✅ |
 | Aaker | ✅ Write | ✅ Write | — | ✅ Read | — | ✅ | ✅ |
