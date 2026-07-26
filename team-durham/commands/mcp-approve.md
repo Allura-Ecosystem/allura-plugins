@@ -16,7 +16,7 @@ Request approval for a pending MCP server.
 
 ```
 /mcp-approve database        # Approve database server
-/mcp-approve neo4j-cypher     # Approve Neo4j Cypher executor
+/mcp-approve ruvector         # Approve RuVector graph adapter
 ```
 
 ## How It Works

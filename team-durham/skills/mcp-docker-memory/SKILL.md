@@ -17,9 +17,9 @@ description: Use this skill when interacting with the Allura Brain memory system
 | Server | Registered Via | Purpose | Status |
 |--------|---------------|---------|--------|
 | `database-server` | MCP Docker Toolkit | PostgreSQL read/write | ✅ Active |
-| `neo4j-cypher` | MCP Docker Toolkit | Raw Cypher queries | ✅ Active |
-| `neo4j-memory` | MCP Docker Toolkit | Knowledge graph CRUD | ✅ Active |
-| `allura-brain` | MCP Docker Toolkit | 10 canonical memory ops | ⚠️ SASL bug (use `database-server` + `neo4j-memory` instead) |
+| `neo4j-cypher` | MCP Docker Toolkit | Raw Cypher queries | ❌ Removed (AD-50) |
+| `neo4j-memory` | MCP Docker Toolkit | Knowledge graph CRUD | ❌ Removed (AD-50) |
+| `allura-brain` | MCP Docker Toolkit | 10 canonical memory ops | Use `allura-brain_memory_*` tools directly |
 
 > **NOTE:** `allura-memory-mcp` Docker container is the backend service that MCP Docker's `allura-brain` routes to. It stays running but is NOT a second MCP server entry. One runtime, one registration.
 
@@ -38,7 +38,7 @@ description: Use this skill when interacting with the Allura Brain memory system
 | List tables | `MCP_DOCKER_list_tables` |
 | Describe table | `MCP_DOCKER_describe_table` |
 
-### Semantic Knowledge Graph (via `neo4j-memory`)
+### Semantic Knowledge Graph (via `allura-brain_memory_*`)
 
 | Operation | Tool Name |
 |-----------|-----------|

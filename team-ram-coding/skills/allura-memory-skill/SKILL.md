@@ -1,6 +1,6 @@
 ---
 name: allura-memory-skill
-description: Use when working with Allura Brain governed memory through MCP — storing, retrieving, curating, promoting, and governing memories with dual-layer PostgreSQL + Neo4j architecture.
+description: Use when working with Allura Brain governed memory through MCP — storing, retrieving, curating, promoting, and governing memories with dual-layer PostgreSQL architecture (episodic traces + RuVector semantic graph).
 allowed-tools: allura-brain_memory_add, allura-brain_memory_search, allura-brain_memory_get, allura-brain_memory_list, allura-brain_memory_update, allura-brain_memory_delete, allura-brain_memory_promote, allura-brain_memory_export, allura-brain_memory_restore, allura-brain_memory_list_deleted, MCP_DOCKER_execute_sql, MCP_DOCKER_query_database
 ---
 
@@ -28,8 +28,8 @@ Use this entry in your MCP configuration:
         "POSTGRES_PASSWORD": "${POSTGRES_PASSWORD}",
         "POSTGRES_DB": "memory",
         "NEO4J_URI": "bolt://localhost:7687",
-        "NEO4J_USER": "neo4j",
-        "NEO4J_PASSWORD": "${NEO4J_PASSWORD}",
+        ""  # Neo4j removed — RuVector uses PG tables,
+        ""  # removed,
         "PROMOTION_MODE": "soc2",
         "AUTO_APPROVAL_THRESHOLD": "0.85"
       }
@@ -55,7 +55,7 @@ Use this skill when:
 - The agent needs to retrieve relevant project or user context before acting
 - The agent must distinguish raw episodic traces from curated semantic knowledge
 - The agent needs to promote, supersede, deprecate, or revoke a memory
-- The agent needs to understand the dual-layer architecture (PG episodic + Neo4j semantic)
+- The agent needs to understand the dual-layer architecture (PG episodic + RuVector semantic graph)
 
 ## Core architecture
 
@@ -67,7 +67,7 @@ Allura Brain is a **dual-layer governed memory system**:
    - Every `allura-brain_memory_add` writes here first
    - Never treat raw traces as final truth
 
-2. **Semantic layer (Neo4j)**
+2. **Semantic layer (RuVector graph on PG)**
    - Curated, versioned knowledge nodes
    - Graph relationships (SUPERSEDES, AUTHORED_BY, CONTRIBUTES_TO)
    - Only populated via curator promotion after policy checks
@@ -148,7 +148,7 @@ When a user asks for memory-related work:
 8. **Troubleshoot systematically**
     - Is the MCP server reachable? (`memory` server via `bun run mcp`)
     - Is PostgreSQL accepting connections? (`localhost:5432`)
-    - Is Neo4j reachable? (`localhost:7687`)
+    - Is the semantic graph gateway reachable? (via ${ALLURA_GATEWAY_URL:-http://localhost:5888})
     - Are credentials and `group_id` correct?
     - Is the embedding service (Ollama) running on host?
     - Check `POSTGRES_PASSWORD` and `NEO4J_PASSWORD` environment variables

@@ -16,8 +16,8 @@ Load an approved MCP server and activate its tools.
 
 ```
 /mcp-load database-server      # Load PostgreSQL database tools
-/mcp-load neo4j-cypher         # Load Neo4j Cypher tools
-/mcp-load neo4j-memory         # Load Neo4j memory tools
+# neo4j-cypher removed (AD-50) — use allura-brain_memory_* tools
+# neo4j-memory removed (AD-50) — use allura-brain_memory_* tools
 ```
 
 ## How It Works

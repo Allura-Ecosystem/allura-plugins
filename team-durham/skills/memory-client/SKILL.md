@@ -25,7 +25,7 @@ Brain is exposed via MCP tools. The server runs as a Docker container or local c
 
 **Pre-flight check** (automatic on session start):
 ```bash
-make db-status  # Should show PostgreSQL: CONNECTED and Neo4j: CONNECTED
+make db-status  # Should show PostgreSQL: CONNECTED and semantic graph: CONNECTED
 ```
 
 If Brain is down, warn the user and continue only with local repo evidence if the task is safe to do without memory. Do not claim hydration or logging happened unless a memory or fallback write actually succeeded.
@@ -168,7 +168,7 @@ Write what matters for next-you:
 memory_add({
   group_id: "allura-team-durham",
   user_id: "brooks",
-  content: "Session 2026-04-20: Fixed MCP topology. Removed allura-brain from Docker Toolkit (was spawning orphans). Consolidated MCP config to opencode.json as single source of truth. All 3 MCPs connected: allura-brain (Docker stdio), neo4j-cypher and neo4j-memory (via MCP_DOCKER gateway). Open: allura-web and allura-http-gateway still showing unhealthy — need restart."
+  content: "Session 2026-04-20: Fixed MCP topology. Removed allura-brain from Docker Toolkit (was spawning orphans). Consolidated MCP config to opencode.json as single source of truth. Allura Brain connected via governed gateway. Neo4j tools removed (AD-50) — semantic graph now RuVector on PG.. Open: allura-web and allura-http-gateway still showing unhealthy — need restart."
 })
 ```
 

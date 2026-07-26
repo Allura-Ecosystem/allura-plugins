@@ -8,7 +8,7 @@ This is not optional. Every action must be logged. Every insight must be searcha
 - **group_id**: `allura-team-durham` (REQUIRED on every call)
 - **user_id**: Your agent name (kotler, aaker, glaser, rand, ogilvy, munari, tufte, scout, openagent)
 - **PostgreSQL (episodic)**: localhost:5432, db=memory, user=ronin4life
-- **Neo4j (semantic)**: bolt://localhost:7687, user=neo4j
+- **Semantic graph (RuVector)**: via governed gateway — no direct DB access
 
 ### MCP Tools Available
 | Tool | Purpose | Permission |

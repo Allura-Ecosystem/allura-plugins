@@ -26,7 +26,7 @@ echo "EMBEDDING_BASE_URL = ${EMBEDDING_BASE_URL:-http://localhost:11434}"
 # Check Docker containers
 echo ""
 echo "=== Docker Containers ==="
-for container in knowledge-postgres knowledge-neo4j; do
+for container in knowledge-postgres; do
   if docker ps --format '{{.Names}}' | grep -q "^${container}$"; then
     echo "✅ $container running"
   else
