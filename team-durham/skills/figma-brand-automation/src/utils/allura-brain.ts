@@ -1,8 +1,9 @@
 /**
  * Allura Brain Integration
  *
- * PostgreSQL + Neo4j logging for all brand automation events.
- * Every action is logged to both databases for complete traceability.
+ * PostgreSQL episodic + RuVector semantic graph logging for all brand automation events.
+ * Every action is logged to PostgreSQL for complete traceability. Promotion to the
+ * semantic graph is governed through the allura-brain_memory_* MCP interface.
  *
  * @module allura-brain
  * @group_id allura-team-durham
@@ -53,9 +54,12 @@ export interface BrainEvent {
 }
 
 /**
- * Neo4j node structure for promoted knowledge
+ * Semantic graph node structure for promoted knowledge.
+ *
+ * The semantic graph runs on the RuVector adapter (PostgreSQL tables) as of AD-49.
+ * Promotion is governed through allura-brain_memory_promote — never direct graph writes.
  */
-export interface Neo4jNode {
+export interface SemanticGraphNode {
   /** Unique identifier for the node */
   id: string;
   /** Node label (e.g., 'Prompt', 'Model', 'Brand') */
@@ -65,9 +69,9 @@ export interface Neo4jNode {
 }
 
 /**
- * Neo4j relationship structure
+ * Semantic graph relationship structure
  */
-export interface Neo4jRelationship {
+export interface SemanticGraphRelationship {
   /** Source node ID */
   from: string;
   /** Target node ID */
@@ -292,43 +296,31 @@ export async function queryBrainEvents(query: EventQuery): Promise<BrainEvent[]>
 }
 
 /**
- * Promote an event to Neo4j knowledge graph.
+ * Promote an event to the semantic graph (RuVector on PostgreSQL).
  *
- * Events are promoted to Neo4j when they represent reusable knowledge
+ * Events are promoted to the semantic graph when they represent reusable knowledge
  * (winning prompts, validated decisions, patterns).
  *
- * Criteria for promotion:
- * 1. Decision is reusable across >=2 projects
- * 2. Decision was validated — not just proposed
- * 3. No duplicate exists in Neo4j
+ * NOT IMPLEMENTED — the previous implementation prepared Cypher against a Neo4j
+ * backend that was sunset in AD-50 (2026-07-17). The semantic graph now runs on
+ * the RuVector adapter (PostgreSQL tables) and promotion is governed through
+ * the allura-brain_memory_promote MCP tool with HITL approval.
+ *
+ * To wire this: call allura-brain_memory_promote with the event's episodic memory ID.
+ * Do not attempt direct graph writes — the governed interface enforces SUPERSEDES
+ * versioning and the HITL promotion gate.
  *
  * @param event - The event to promote
- * @throws Error if promotion fails or event doesn't meet criteria
- * @returns Promise that resolves when promotion is complete
- *
- * @example
- * ```typescript
- * await promoteToNeo4j({
- *   agentId: 'glaser',
- *   eventType: 'winning_prompt_logged',
- *   groupId: 'allura-team-durham',
- *   payload: {
- *     promptId: 'hero-abstract-v1',
- *     model: 'nano-banana-2',
- *     score: 0.95,
- *     tags: ['hero', 'abstract', 'droplet']
- *   }
- * });
- * ```
+ * @throws Error always — this is a stub
  */
-export async function promoteToNeo4j(event: BrainEvent): Promise<void> {
+export async function promoteToSemanticGraph(event: BrainEvent): Promise<void> {
   // Validate event before promotion
   const validation = validateBrainEvent(event);
   if (!validation.valid) {
     throw new Error(`Cannot promote invalid event: ${validation.error}`);
   }
 
-  // Only certain event types should be promoted to Neo4j
+  // Only certain event types should be promoted to the semantic graph
   const promotableTypes = [
     'winning_prompt_logged',
     'DESIGN_DECISION',
@@ -337,63 +329,16 @@ export async function promoteToNeo4j(event: BrainEvent): Promise<void> {
   ];
 
   if (!promotableTypes.includes(event.eventType)) {
-    console.log(`[Allura Brain] Event type '${event.eventType}' not promoted to Neo4j (not in promotable types)`);
+    console.log(`[Allura Brain] Event type '${event.eventType}' not promotable (not in promotable types)`);
     return;
   }
 
-  try {
-    const timestamp = event.timestamp ?? new Date().toISOString();
-
-    // Mock implementation: Log to console
-    // In production, this would:
-    // 1. Search Neo4j first to avoid duplicates
-    // 2. Create nodes and relationships via MCP_DOCKER_write_neo4j_cypher
-    console.log(`[Allura Brain] Promoting to Neo4j:`);
-    console.log(`  Agent: ${event.agentId}`);
-    console.log(`  Event Type: ${event.eventType}`);
-    console.log(`  Timestamp: ${timestamp}`);
-    console.log(`  Payload:`, JSON.stringify(event.payload, null, 2));
-
-    // Production implementation would be:
-    // // 1. Check for duplicates first
-    // const checkResult = await MCP_DOCKER_read_neo4j_cypher({
-    //   query: `MATCH (n {event_id: $eventId, group_id: $groupId}) RETURN n LIMIT 1`,
-    //   parameters: { eventId: event.payload.id, groupId: event.groupId }
-    // });
-    //
-    // if (checkResult.records.length > 0) {
-    //   console.log('[Allura Brain] Duplicate found, skipping promotion');
-    //   return;
-    // }
-    //
-    // // 2. Create nodes and relationships
-    // await MCP_DOCKER_write_neo4j_cypher({
-    //   query: `
-    //     MERGE (e:Event {event_id: $eventId})
-    //       SET e.type = $eventType,
-    //           e.timestamp = $timestamp,
-    //           e.group_id = $groupId
-    //     WITH e
-    //     MERGE (a:Agent {id: $agentId})
-    //     MERGE (a)-[:PERFORMED {on: datetime($timestamp)}]->(e)
-    //     WITH e
-    //     MERGE (g:Group {id: $groupId})
-    //     MERGE (e)-[:BELONGS_TO]->(g)
-    //   `,
-    //   parameters: {
-    //     eventId: event.payload.id ?? `${event.agentId}-${Date.now()}`,
-    //     eventType: event.eventType,
-    //     timestamp: timestamp,
-    //     groupId: event.groupId,
-    //     agentId: event.agentId
-    //   }
-    // });
-
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    console.error(`[Allura Brain] Failed to promote event: ${errorMessage}`);
-    throw new Error(`Failed to promote event to Neo4j: ${errorMessage}`);
-  }
+  throw new Error(
+    `Semantic graph promotion not yet implemented — use allura-brain_memory_promote directly. ` +
+    `Event: ${event.eventType} from ${event.agentId}. The previous Neo4j Cypher path was removed ` +
+    `in AD-50 (2026-07-17). The RuVector semantic graph is governed through the ` +
+    `allura-brain_memory_* MCP interface with HITL approval.`
+  );
 }
 
 /**

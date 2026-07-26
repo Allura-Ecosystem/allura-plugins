@@ -1,8 +1,13 @@
 /**
  * Winning Prompts Tracking System
- * 
- * Tracks successful prompts in Allura Brain (PostgreSQL + Neo4j)
- * and syncs with Notion for team visibility
+ *
+ * Tracks successful prompts in Allura Brain (PostgreSQL episodic + RuVector semantic graph)
+ * and syncs with Notion for team visibility.
+ *
+ * NOTE: Semantic graph operations (promotion, graph queries) are not implemented in this
+ * stub. The previous Neo4j Cypher path was removed in AD-50 (2026-07-17). The RuVector
+ * semantic graph is governed through the allura-brain_memory_* MCP interface with HITL
+ * approval. To wire promotion, call allura-brain_memory_promote with the episodic memory ID.
  */
 
 export interface PromptPerformance {
@@ -33,6 +38,9 @@ import { logToAlluraBrain } from '../utils/allura-brain';
 
 /**
  * Log successful prompt to Allura Brain
+ *
+ * Logs the event to PostgreSQL (episodic). Promotion to the semantic graph
+ * is not implemented — use allura-brain_memory_promote directly when needed.
  */
 export async function logWinningPrompt(
   performance: PromptPerformance
@@ -56,59 +64,20 @@ export async function logWinningPrompt(
       lastUsed: performance.lastUsed
     }
   });
-  
-  // Neo4j: Knowledge graph (prepared for MCP_DOCKER)
-  const cypher = `
-    MATCH (b:Brand {slug: $brandSlug})
-    MERGE (p:Prompt {
-      promptId: $promptId,
-      tokenSet: $tokenSet,
-      model: $model,
-      direction: $direction
-    })
-    MERGE (b)-[:HAS_WINNING_PROMPT]->(p)
-    
-    // Create performance metrics
-    CREATE (pm:PromptMetrics {
-      qualityScore: $qualityScore,
-      cost: $cost,
-      usageCount: $usageCount,
-      createdAt: datetime($createdAt),
-      lastUsed: datetime($lastUsed)
-    })
-    CREATE (p)-[:HAS_METRICS]->(pm)
-    
-    // Tag relationships
-    FOREACH (tag IN $tags |
-      MERGE (t:Tag {name: tag})
-      CREATE (p)-[:TAGGED_AS]->(t)
-    )
-    
-    // Model relationship
-    MERGE (m:AIModel {name: $model})
-    CREATE (p)-[:USES_MODEL]->(m)
-  `;
-  
-  const neo4jParams = {
-    brandSlug: performance.brandSlug,
-    promptId: performance.promptId,
-    tokenSet: performance.tokenSet,
-    model: performance.model,
-    direction: performance.direction,
-    qualityScore: performance.metrics.qualityScore,
-    cost: performance.metrics.cost,
-    usageCount: performance.metrics.usageCount,
-    tags: performance.tags,
-    createdAt: performance.createdAt,
-    lastUsed: performance.lastUsed
-  };
-  
+
   console.log(`[Allura Brain] Logged winning prompt: ${performance.promptId}`);
-  console.log(`[Allura Brain] Neo4j Cypher prepared (requires MCP_DOCKER):`, cypher.substring(0, 100) + '...');
+  console.log(
+    `[Allura Brain] Semantic graph promotion not implemented — ` +
+    `use allura-brain_memory_promote when this prompt should become canonical knowledge.`
+  );
 }
 
 /**
  * Query winning prompts by criteria
+ *
+ * NOT IMPLEMENTED — the previous implementation built a Cypher query against a Neo4j
+ * backend that was sunset in AD-50 (2026-07-17). To query the semantic graph, use
+ * allura-brain_memory_search with the appropriate query string and group_id.
  */
 export async function queryWinningPrompts(
   criteria: {
@@ -120,43 +89,12 @@ export async function queryWinningPrompts(
   }
 ): Promise<PromptPerformance[]> {
   const { brandSlug, model, minQualityScore, tags, limit = 10 } = criteria;
-  
-  // Neo4j query
-  let cypher = `
-    MATCH (b:Brand)-[:HAS_WINNING_PROMPT]->(p:Prompt)-[:HAS_METRICS]->(pm:PromptMetrics)
-    WHERE 1=1
-  `;
-  
-  const params: Record<string, any> = {};
-  
-  if (brandSlug) {
-    cypher += ` AND b.slug = $brandSlug`;
-    params.brandSlug = brandSlug;
-  }
-  
-  if (model) {
-    cypher += ` AND p.model = $model`;
-    params.model = model;
-  }
-  
-  if (minQualityScore) {
-    cypher += ` AND pm.qualityScore >= $minQualityScore`;
-    params.minQualityScore = minQualityScore;
-  }
-  
-  if (tags && tags.length > 0) {
-    cypher += ` AND ALL(tag IN $tags WHERE (p)-[:TAGGED_AS]->(:Tag {name: tag}))`;
-    params.tags = tags;
-  }
-  
-  cypher += `
-    RETURN p, pm
-    ORDER BY pm.qualityScore DESC, pm.usageCount DESC
-    LIMIT $limit
-  `;
-  params.limit = limit;
-  
-  // Mock return - would execute actual Neo4j query
+
+  console.log(`[Allura Brain] queryWinningPrompts not implemented — use allura-brain_memory_search.`);
+  console.log(`  Criteria: brandSlug=${brandSlug ?? 'any'}, model=${model ?? 'any'}, ` +
+    `minQualityScore=${minQualityScore ?? 'any'}, tags=${tags?.join(',') ?? 'none'}, limit=${limit}`);
+
+  // Stub return — the real implementation calls allura-brain_memory_search
   return [];
 }
 
@@ -175,9 +113,9 @@ export async function getTopPromptsForUseCase(
     'infographic': ['infographic', 'data-viz', 'typography'],
     'pattern': ['pattern', 'texture', 'background']
   };
-  
+
   const tags = tagMap[useCase] || [useCase];
-  
+
   return queryWinningPrompts({
     brandSlug,
     tags,
@@ -188,6 +126,10 @@ export async function getTopPromptsForUseCase(
 
 /**
  * Update prompt usage metrics
+ *
+ * Logs the update to PostgreSQL. The previous Cypher SET operation against Neo4j
+ * is removed (AD-50). Semantic graph updates go through allura-brain_memory_update
+ * with SUPERSEDES versioning.
  */
 export async function updatePromptMetrics(
   promptId: string,
@@ -198,30 +140,27 @@ export async function updatePromptMetrics(
   }
 ): Promise<void> {
   const { qualityScore, clientApproval, usageIncrement = 1 } = updates;
-  
-  // Neo4j: Update metrics
-  const cypher = `
-    MATCH (p:Prompt {promptId: $promptId})-[:HAS_METRICS]->(pm:PromptMetrics)
-    SET pm.lastUsed = datetime()
-    ${qualityScore ? ', pm.qualityScore = $qualityScore' : ''}
-    ${clientApproval !== undefined ? ', pm.clientApproval = $clientApproval' : ''}
-    ${usageIncrement ? ', pm.usageCount = pm.usageCount + $usageIncrement' : ''}
-  `;
-  
-  // PostgreSQL: Log update
-  const pgQuery = `
-    INSERT INTO events (agent_id, event_type, group_id, payload, created_at)
-    VALUES ('glaser', 'prompt_metrics_updated', 'allura-team-durham', $1, NOW())
-  `;
-  
+
+  // PostgreSQL: Log update event
   const payload = {
     promptId,
     qualityScore,
     clientApproval,
     usageIncrement
   };
-  
+
+  await logToAlluraBrain({
+    agentId: 'glaser',
+    eventType: 'prompt_metrics_updated',
+    groupId: 'allura-team-durham',
+    payload
+  });
+
   console.log(`[Allura Brain] Updated metrics for: ${promptId}`);
+  console.log(
+    `[Allura Brain] Semantic graph update not implemented — ` +
+    `use allura-brain_memory_update with SUPERSEDES when promoting the change.`
+  );
 }
 
 /**
@@ -248,13 +187,17 @@ export async function syncToNotion(
       'Status': { select: { name: p.metrics.clientApproval ? 'Approved' : 'Testing' } }
     }
   }));
-  
+
   // Would call Notion MCP here
   console.log(`[Notion] Synced ${prompts.length} winning prompts`);
 }
 
 /**
  * Generate prompt performance report
+ *
+ * NOT IMPLEMENTED — the previous implementation built a Cypher aggregation query
+ * against Neo4j. To aggregate from the semantic graph, use allura-brain_memory_search
+ * and aggregate in application code, or query PostgreSQL directly via MCP_DOCKER_execute_sql.
  */
 export async function generatePromptReport(
   brandSlug?: string,
@@ -267,32 +210,15 @@ export async function generatePromptReport(
   topModels: { model: string; count: number; avgQuality: number }[];
   topTags: { tag: string; count: number }[];
 }> {
-  // Neo4j aggregation query
-  const cypher = `
-    MATCH (b:Brand${brandSlug ? ' {slug: $brandSlug}' : ''})-[:HAS_WINNING_PROMPT]->(p:Prompt)-[:HAS_METRICS]->(pm:PromptMetrics)
-    ${startDate ? 'WHERE pm.createdAt >= datetime($startDate)' : ''}
-    ${endDate ? 'AND pm.createdAt <= datetime($endDate)' : ''}
-    
-    RETURN 
-      count(p) as totalPrompts,
-      avg(pm.qualityScore) as averageQuality,
-      sum(pm.cost) as totalCost
-  `;
-  
-  // Mock return
+  console.log(`[Allura Brain] generatePromptReport not implemented — ` +
+    `use allura-brain_memory_search or query PostgreSQL events directly.`);
+
+  // Stub return — callers should not rely on this data
   return {
-    totalPrompts: 42,
-    averageQuality: 8.3,
-    totalCost: 0.84,
-    topModels: [
-      { model: 'fal-ai/seedream-v4.5', count: 15, avgQuality: 8.7 },
-      { model: 'fal-ai/nano-banana-2', count: 12, avgQuality: 8.4 },
-      { model: 'fal-ai/flux-dev', count: 10, avgQuality: 7.9 }
-    ],
-    topTags: [
-      { tag: 'hero-image', count: 18 },
-      { tag: 'typography', count: 15 },
-      { tag: 'logo', count: 12 }
-    ]
+    totalPrompts: 0,
+    averageQuality: 0,
+    totalCost: 0,
+    topModels: [],
+    topTags: []
   };
 }
