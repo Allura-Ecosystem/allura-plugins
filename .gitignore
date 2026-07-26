@@ -1,3 +1,3 @@
 evidence/backups/
-evidence/inventory/raw/
+evidence/inventory/**/raw/
 *.secret-scan.json
