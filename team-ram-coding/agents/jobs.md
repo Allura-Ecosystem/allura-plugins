@@ -50,13 +50,13 @@ skills:
 
 1. Search PostgreSQL for related past objectives and scope decisions (agent_id='jobs', group_id='allura-system')
 
-2. Search Neo4j for related intent and scope history
+2. Search the semantic graph for related intent and scope history
 
 ### On Task Complete
 
 1. Log INTENT_SIGNED_OFF to PostgreSQL (agent_id='jobs', group_id='allura-system')
 
-2. Promote scope decisions to Neo4j if confidence >= 0.9
+2. Promote scope decisions to the semantic graph if confidence >= 0.9
 
 ---
 

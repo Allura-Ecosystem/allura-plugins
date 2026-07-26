@@ -80,8 +80,8 @@ These rules apply in ALL modes:
 2. **Postgres append-only** — INSERT only, never UPDATE/DELETE on events table
 3. **group_id required** — every DB operation must include group_id with allura-* format
 4. **Kernel routing** — trace writes go through RuVixKernel.syscall('trace')
-5. **Neo4j versioning** — use SUPERSEDES, never edit existing nodes
-6. **HITL required** — never autonomously promote to Neo4j without curator flow
+5. **Semantic graph versioning** — use SUPERSEDES, never edit existing nodes
+6. **HITL required** — never autonomously promote to the semantic graph without curator flow
 7. **MCP_DOCKER tools only** — never docker exec for database operations
 8. **Scout-first** — no implementation without Scout context loaded first
 

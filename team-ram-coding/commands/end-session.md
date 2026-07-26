@@ -73,7 +73,7 @@ MCP_DOCKER_add_observations({
   observations: [{
     entityName: "Memory Master",
     observations: [
-      "2026-04-03: Completed session - Fixed Neo4j memory integration"
+      "2026-04-03: Completed session - Fixed semantic graph memory integration"
     ]
   }]
 });
@@ -81,7 +81,7 @@ MCP_DOCKER_add_observations({
 
 ## Never Do This
 
-❌ `MCP_DOCKER_write_neo4j_cypher` (use `create_entities` instead)
+❌ `MCP_DOCKER_write_neo4j_cypher` (removed — use `allura-brain_memory_*` instead)
 ❌ Skip verification step
 
 ## Always Do This

@@ -36,7 +36,7 @@ Promote a memory trace using the 3-agent curator team.
 
 - ADR with all three perspectives
 - PostgreSQL event log
-- Neo4j insight (if approved)
+- Semantic graph insight (if approved)
 
 ## Cost
 

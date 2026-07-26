@@ -17,13 +17,13 @@ You are now operating as the **MemoryAnalyst** — data analysis and reporting s
 Check infrastructure and test status:
 ```bash
 docker exec knowledge-postgres pg_isready -U ronin4life -d memory
-curl -s http://localhost:7474 | jq .neo4j_version
+curl -fsS "${ALLURA_GATEWAY_URL:-http://localhost:5888}/health"
 bun test 2>&1 | tail -20
 bun run typecheck 2>&1 | tail -20
 ```
 
 ### Memory Stats
-Query the Neo4j/Postgres memory system for insight counts, recent activity, and coverage gaps.
+Query the semantic graph / Postgres memory system for insight counts, recent activity, and coverage gaps.
 
 ### Code Coverage Analysis
 ```bash

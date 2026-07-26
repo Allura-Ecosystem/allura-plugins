@@ -1,6 +1,0 @@
-name: allura-brain
-version: "0.1.0"
-description: "Allura Brain governed memory — PostgreSQL + Neo4j with HITL curation. Retrieve before planning, persist concise outcomes after work, enforce allura-* tenant namespace."
-hooks:
-  - on_session_end
-  - on_pre_compress

@@ -19,7 +19,7 @@ Run at the start of every session. Verifies infrastructure, hydrates context fro
 Use MCP tools to verify the memory systems are reachable — never `docker exec`:
 
 ```javascript
-// Verify Neo4j is responsive
+// Verify semantic graph gateway is responsive
 mcp__MCP_DOCKER__mcp - exec({ name: "read_graph", arguments: {} })
 
 // Verify Postgres is responsive
@@ -82,4 +82,4 @@ mcp__MCP_DOCKER__create_entities({
 
 - Skip memory search at session start
 - Use raw Cypher directly (use MCP memory tools instead)
-- Proceed if Postgres/Neo4j are both down without warning the user
+- Proceed if Postgres and the semantic graph are both down without warning the user

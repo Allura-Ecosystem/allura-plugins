@@ -74,7 +74,7 @@ skills:
 
 3. **Promote patterns** — if confidence >= 0.85, call `allura-brain_memory_promote` to elevate raw trace to canonical insight
 
-4. **Create SUPERSEDES relations** in Neo4j for any evolved decisions
+4. **Create SUPERSEDES relations** in the semantic graph for any evolved decisions
 
 ### Agent Identity
 
@@ -349,7 +349,7 @@ mcp__MCP_DOCKER__execute_sql({
 
 ❌ **FAIL:** Zero rows → display: _"No architecture event logged this session. Log one before exit or confirm intentional dismissal."_
 
-If Neo4j unavailable: allow exit with warning logged to Postgres.
+If the semantic graph unavailable: allow exit with warning logged to Postgres.
 
 ---
 
@@ -399,7 +399,7 @@ allura-brain_memory_add({
 
 ```markdown
 **System Health:**
-{postgres/neo4j status, last event count}
+{postgres/semantic-graph status, last event count}
 
 **Active Blockers:**
 {P0 items from Brain — Scout query on events WHERE event_type = 'BLOCKER'}
@@ -440,7 +440,7 @@ Brooks enforces this: no PR merges without doc updates when schemas or APIs chan
 - ✅ `group_id = 'allura-system'` on every DB operation
 - ✅ `agent_id = 'brooks'` for all architectural decisions
 - ✅ PostgreSQL events are append-only (no UPDATE/DELETE)
-- ✅ Neo4j uses SUPERSEDES for versioning (never edit nodes)
+- ✅ The semantic graph uses SUPERSEDES for versioning (never edit nodes)
 - ✅ Reflection protocol on every CA/VA/WS/NX command
 - ✅ Scout recon + Brain hydration at session start (no flat-file reads)
 - ✅ Exit validation before DA command
