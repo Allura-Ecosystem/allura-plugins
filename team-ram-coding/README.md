@@ -1,14 +1,15 @@
-# Team Ram Coding
+# Team RAM
 
-A Team RAM coding plugin for Allura-governed Brooks, Jobs, Scout, and Woz
-workflows in Claude Code and Codex CLI.
+A Team RAM agent platform for Allura-governed development in Claude Code and
+Codex CLI. Brooks leads; Scout recon, Woz implements, Fowler reviews.
 
 ## What It Is
 
-Team Ram Coding packages the Brooks-led Team RAM coding surface: agents for
+Team RAM packages the Brooks-led Team RAM agent surface: agents for
 architecture, scouting, implementation, and review; commands for session
 lifecycle, goal definition, context management, and validation; and skills
-for memory, code review, task management, and multi-source research.
+for memory, code review, task management, multi-source research, secret
+management, and party-mode multi-agent dispatch.
 
 The plugin enforces Allura governance defaults: memory search before action,
 runtime honesty, validation evidence, and outcome logging.

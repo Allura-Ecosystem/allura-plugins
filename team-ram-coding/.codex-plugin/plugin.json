@@ -1,7 +1,7 @@
 {
   "name": "team-ram-coding",
   "version": "0.2.0",
-  "description": "A Team RAM coding plugin for Allura-governed Brooks, Jobs, Scout, and Woz workflows.",
+  "description": "Team RAM agent platform for Allura-governed development: Brooks-led architecture, Scout recon, Woz implementation, code review, memory, task management, multi-source research, and party-mode multi-agent dispatch.",
   "author": {
     "name": "Ronin Local"
   },
