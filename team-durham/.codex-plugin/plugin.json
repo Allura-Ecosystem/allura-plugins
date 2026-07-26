@@ -1,10 +1,11 @@
 {
   "name": "team-durham",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Team Durham brand production team for Codex: agents, skills, commands, governance, and persona research.",
   "author": {
     "name": "Team Durham"
   },
+  "license": "MIT",
   "skills": "./skills/",
   "commands": [
     "./commands/start-session.md",

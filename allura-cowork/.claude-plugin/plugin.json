@@ -1,11 +1,12 @@
 {
   "name": "allura-cowork",
   "displayName": "Allura Cowork",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared Claude Code and Codex cowork protocol for Allura-governed collaboration, runtime honesty, validation, and handoffs.",
   "author": {
     "name": "Ronin / Team RAM"
   },
+  "license": "MIT",
   "keywords": [
     "allura",
     "cowork",

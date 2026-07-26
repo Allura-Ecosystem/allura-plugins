@@ -3,7 +3,7 @@
 ## Quick Start
 
 ```bash
-cd /home/ronin704/Projects/Brand\ maker
+cd /path/to/your/project
 
 # Install fal client (if not already installed)
 npm install @fal-ai/client

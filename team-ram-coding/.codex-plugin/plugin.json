@@ -1,10 +1,11 @@
 {
   "name": "team-ram-coding",
-  "version": "0.1.0+codex.20260530050504",
+  "version": "0.2.0",
   "description": "A Team RAM coding plugin for Allura-governed Brooks, Jobs, Scout, and Woz workflows.",
   "author": {
     "name": "Ronin Local"
   },
+  "license": "MIT",
   "keywords": [
     "allura",
     "team-ram",
@@ -46,7 +47,8 @@
     "./commands/test.md",
     "./commands/ulw.md",
     "./commands/update.md",
-    "./commands/validate-repo.md"
+    "./commands/validate-repo.md",
+    "./commands/check-context-deps.md"
   ],
   "interface": {
     "displayName": "Team Ram Coding",

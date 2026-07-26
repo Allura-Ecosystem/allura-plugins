@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT:-/home/ronin704/plugins/allura-cowork}\"/hooks/cowork-context.py"
+            "command": "command -v python3 >/dev/null 2>&1 && \"${CLAUDE_PLUGIN_ROOT}\"/hooks/cowork-context.py || true"
           }
         ]
       }

@@ -30,7 +30,7 @@ Codex mcp add libreoffice -- fastmcp run ~/tools/mcp-libre/libreoffice_mcp_serve
 ```json
 "libreoffice": {
   "type": "local",
-  "command": ["fastmcp", "run", "/home/ronin704/tools/mcp-libre/libreoffice_mcp_server.py"],
+  "command": ["fastmcp", "run", "${MCP_LIBRE_ROOT}/libreoffice_mcp_server.py"],
   "enabled": true,
   "timeout": 60000
 }

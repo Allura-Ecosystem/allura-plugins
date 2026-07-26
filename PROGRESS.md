@@ -1,28 +1,18 @@
-# Progress
+# Roadmap
 
-## Definition of Done
+## Shipped (v0.2.0)
 
-- [ ] Approved inventory is recorded with provenance.
-- [ ] Canonical packages pass Claude and Codex validation.
-- [ ] Claude migration passes restart verification.
-- [ ] Codex migration passes restart verification.
-- [ ] Cowork, Brain, and governance integration evidence passes.
-- [ ] CI and local drift audits pass.
-- [ ] Ronin approves release or public visibility.
+- 3-plugin marketplace: `allura-cowork`, `team-durham`, `team-ram-coding`
+- Claude Code and Codex CLI manifests for all 3 plugins
+- CI validation: marketplace sources resolve, manifests parse, referenced files exist, no hardcoded paths
+- MIT license
 
-## Phases
+## Next
 
-- [x] Phase 0: Approve organization ownership and create private catalog.
-- [x] Phase 1: Snapshot and inventory live installations.
-- [ ] Phase 2: Select and restore canonical packages.
-- [ ] Phase 3: Validate packages and repair incompatibilities.
-- [ ] Phase 4: Migrate and verify Claude.
-- [ ] Phase 5: Migrate and verify Codex.
-- [ ] Phase 6: Run cross-runtime integration proof.
-- [ ] Phase 7: Install drift prevention and close governance records.
+- Expand eval fixture coverage beyond the current 5 agents
+- OpenCode three-way sync (currently OpenCode tree is a separate surface)
+- Per-skill dependency detection (graceful no-op when a service is absent)
 
-## Current Gate
+## Release Gate
 
-Select canonical candidates using upstream repository history, package hashes,
-manifest validation, and tests. Do not copy packages based only on timestamps
-or version strings.
+See `docs/PUBLIC-RELEASE-PLAN.md` for the full release checklist.

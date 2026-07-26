@@ -1,6 +1,6 @@
 {
   "name": "team-durham",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Team Durham brand production team for Claude Code and Codex: agents, skills, commands, governance, and persona research.",
   "author": {
     "name": "Team Durham"
@@ -19,7 +19,8 @@
     "./agents/data-analyst.md",
     "./agents/agentic-trust-architect.md",
     "./agents/workflow-architect.md",
-    "./agents/openagent.md"
+    "./agents/openagent.md",
+    "./agents/scout-recon.md"
   ],
   "commands": [
     "./commands/start-session.md",

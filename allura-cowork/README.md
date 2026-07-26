@@ -35,6 +35,12 @@ work, and write a receipt before calling work done.
 - GitHub CI runs plugin validation, schema checks, examples, evals, and hook
   smoke tests.
 
+## Requirements
+
+- **Claude Code** or **Codex CLI** with plugin support.
+- **Python 3** on `PATH` — the `UserPromptSubmit` hook calls `hooks/cowork-context.py`. If `python3` is absent, the hook silently no-ops (no error printed); the plugin still loads and commands still work.
+- **Allura Brain** (optional but expected) — skills assume the memory MCP is reachable. Without it, memory-dependent commands will report the missing connection rather than fail silently.
+
 ## Validation
 
 Run:
