@@ -1,0 +1,10 @@
+{
+  "name": "allura-cowork",
+  "version": "0.1.0",
+  "main": "index.js",
+  "opencode": {
+    "agents": "./agents/",
+    "skills": "./skills/",
+    "commands": "./commands/"
+  }
+}
