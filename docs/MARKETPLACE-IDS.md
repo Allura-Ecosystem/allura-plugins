@@ -154,7 +154,7 @@ bash allura-plugins/scripts/plugins-update-all.sh
 |---|---|---|
 | `allura-ecosystem` | `allura-plugins/` (directory) | Primary — all Claude plugins |
 | `team-ram-marketplace` | `Agent-Harnesses/Allura-TeamRam` (directory) | Legacy fallback for team-ram-harness |
-| `allura-local` | `github.com/Charitablebusinessronin/Allura_Memory.git` (git) | Legacy fallback |
+| `allura-local` | `github.com/Allura-Ecosystem/Allura_Memory.git` (git) | Legacy fallback |
 | `team-durham-local` | `github.com/Charitablebusinessronin/team_durham` (git) | Legacy fallback |
 | `claude-plugins-official` | `github.com/anthropics/claude-plugins-official` (git) | Third-party |
 | `harness-marketplace` | `github.com/revfactory/harness` (git) | Third-party |
