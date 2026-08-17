@@ -26,17 +26,18 @@ path scans.
 
 **Date:** 2026-08-17
 **Status:** Decided
-**Decision:** Route Team RAM and Team Durham agents to five model contracts via harness configuration (`opencode.json` and OpenWork `runtime-opencode-config.json`), not via a separate registry or front-matter declarations. The harness config is the runtime enforcement point.
+**Decision:** Route Team RAM and Team Durham agents to model contracts via harness configuration (`opencode.json` and OpenWork `runtime-opencode-config.json`), not via a separate registry or front-matter declarations. The harness config is the runtime enforcement point. Measure the outcomes through one provider-neutral Route Receipt contract, emitted by runtime-specific adapters for OpenCode, native Codex, and Claude Code.
 
 **Model contracts:**
 
 | Contract | Model | Scope |
 |---|---|---|
-| Architecture / final judgment | Codex `gpt-5.6-terra` (fallback: `glm-5.2:cloud` until OPENAI_API_KEY is set) | Architecture, security, data decisions, final review, release gates |
+| Architecture / final judgment | OpenCode subscription `openai/gpt-5.6-terra` | Architecture, security, data decisions, final review, release gates |
+| Codex low-cost first pass | OpenCode subscription `openai/gpt-5.6-luna` | Mechanical first pass when the Codex lane is required but Terra judgment is not |
 | Routine coding | Ollama Cloud `kimi-k2.7-code:cloud` | Contained implementation, test creation, routine fixes |
-| General specialist work | Ollama Cloud `glm-5.2:cloud` | Recon, analysis, research, copy, evidence collection |
-| Vision / visual QA | Ollama Cloud `qwen3.5:397b-cloud` | Visual direction, brand work, visual QA |
-| Scout / low-cost first pass | Ollama Cloud `nemotron-3-super:cloud` | Scout recon, mechanical drafting, classification |
+| General / long-context workhorse | Ollama Cloud `deepseek-v4-flash:cloud` | General reasoning, long-context analysis, high-throughput work |
+| Scout / recon | Ollama Cloud `nemotron-3-super:cloud` | Recon and evidence discovery |
+| Vision / visual QA | Ollama Cloud `kimi-k2.6:cloud` | Visual direction, brand work, visual QA |
 | Retrieval embeddings | Local `qwen3-embedding:8b` | Allura retrieval only |
 
 **Rationale:** A separate `contracts.json` registry with `model_contract` front-matter fields duplicates what the harness config already does. The config maps agents to models — that is the enforcement point. Pike review identified that the registry approach adds a second system with no consumer. The simpler path is to put the policy directly in the config and document it here.
@@ -47,13 +48,14 @@ path scans.
 3. Single-model for all agents — rejected; different task classes have different cost/quality tradeoffs.
 
 **Consequences:**
-- Architecture agents temporarily use `glm-5.2:cloud` as fallback until `OPENAI_API_KEY` is configured for Codex Terra.
-- GPT-5.6 Luna is reserved for future low-cost first-pass work but not yet assigned to any agent.
+- OpenCode uses ChatGPT Plus/Pro subscription authentication through `/connect`; neither routing nor the architecture lane requires an `OPENAI_API_KEY`.
+- GPT-5.6 Luna is the Codex-side low-cost first-pass contract; DeepSeek V4 Flash is the general, long-context workhorse and is not classified as a small model.
+- Kimi K2.6 owns the vision contract. Qwen 3.5 remains a manual incident fallback, not an automatic default.
 - Escalation from routine to architecture is manual until a runtime adapter is built.
-- Allura records route evidence but does not alter routing policy.
+- Allura records provider-neutral route evidence but does not alter routing policy. A scorecard may recommend a change only after 20 comparable, validated samples per model/task-class lane and explicit human approval.
 
 **Owner:** Brooks
-**References:** `team-durham/docs/superpowers/specs/2026-08-16-hybrid-model-routing-design.md`, OpenCode config `~/.config/opencode/opencode.json`, OpenWork config `~/.config/openwork/runtime-opencode-config.json`
+**References:** `team-durham/docs/superpowers/specs/2026-08-16-hybrid-model-routing-design.md`, `team-durham/docs/superpowers/specs/2026-08-17-unified-model-performance-telemetry.md`, OpenCode config `~/.config/opencode/opencode.json`, OpenWork config `~/.config/openwork/runtime-opencode-config.json`
 
 ## Risks
 
