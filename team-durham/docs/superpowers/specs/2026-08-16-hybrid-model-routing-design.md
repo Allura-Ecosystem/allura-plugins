@@ -1,8 +1,8 @@
 # Hybrid Model Routing Design
 
-**Status:** Approved design; implementation not started
-**Date:** 2026-08-16
-**Scope:** Team RAM Coding and Team Durham model-routing declarations
+**Status:** Decided (AD-004); implementation in progress — config-as-enforcement
+**Date:** 2026-08-17 (updated from 2026-08-16)
+**Scope:** Team RAM Coding and Team Durham model-routing across OpenCode and OpenWork harnesses
 
 ## Purpose
 
@@ -16,11 +16,14 @@ it does not autonomously change the routing policy.
 
 | Contract | Default model | Work assigned |
 | --- | --- | --- |
-| Architecture and final judgment | Codex `gpt-5.6-terra` | Architecture, security and data decisions, complex debugging, final review, release gates |
+| Architecture and final judgment | Codex `gpt-5.6-terra` (fallback: `glm-5.2:cloud` until OPENAI_API_KEY is set) | Architecture, security and data decisions, complex debugging, final review, release gates |
 | Routine coding | Ollama Cloud `kimi-k2.7-code:cloud` | Contained implementation, test creation, routine fixes |
 | General specialist work | Ollama Cloud `glm-5.2:cloud` | Recon, analysis, research synthesis, copy, and evidence collection |
 | Vision and visual QA | Ollama Cloud `qwen3.5:397b-cloud` | Visual direction, image-informed brand work, and visual QA |
+| Scout / low-cost first pass | Ollama Cloud `nemotron-3-super:cloud` | Scout recon, mechanical drafting, classification |
 | Retrieval embeddings | Local `qwen3-embedding:8b` | Allura embedding and retrieval only; never agent reasoning |
+
+**Reserved for future:** GPT-5.6 Luna for low-cost first-pass lane (not yet assigned to any agent).
 
 ## Routing Rules
 
@@ -64,12 +67,20 @@ reusable, validated evidence exists.
 - Sensitive input: preserve the project's classification policy; a model
   routing rule never overrides data-handling restrictions.
 
+## Enforcement Approach
+
+Per AD-004 and Pike review, the harness configuration files are the enforcement point — not a separate registry. Agent model assignments live directly in:
+- OpenCode: `~/.config/opencode/opencode.json` → `agent.*.model`
+- OpenWork: `~/.config/openwork/runtime-opencode-config.json` → `agent.*.model`
+
+A separate `contracts.json` + `model_contract` front-matter system was rejected as duplicative complexity with no runtime consumer.
+
 ## Configuration Impact
 
-Implementation will update the Team RAM Coding agent declarations and Team
-Durham routing declarations, add a provider-neutral routing policy, and add
-the Allura event schema/emitters needed for the evidence contract. It will not
-delete installed Ollama models or mutate historic Allura records.
+Implementation updates the harness configs directly:
+- OpenCode: corrected 27 model name mismatches (`:0813`/`:0731` → `:cloud`, bare names → `:cloud` suffix) and applied the approved roster.
+- OpenWork: added provider, model, and small_model sections that were entirely absent.
+- Both configs use `ollama/` prefix with `:cloud` suffix for all cloud models.
 
 ## Validation Criteria
 
