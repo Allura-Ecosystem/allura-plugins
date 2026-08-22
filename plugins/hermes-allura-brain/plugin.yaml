@@ -1,0 +1,5 @@
+name: allura-brain
+version: "0.2.0"
+description: "Allura Brain governed memory over the authenticated public MCP tunnel, with ambient recall and concise outcome persistence."
+hooks:
+  - on_session_end
