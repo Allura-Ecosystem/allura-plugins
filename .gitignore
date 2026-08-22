@@ -1,3 +1,2 @@
-evidence/backups/
-evidence/inventory/**/raw/
-*.secret-scan.json
+__pycache__/
+*.pyc
