@@ -24,6 +24,12 @@
 5. Absolute home-directory paths are prohibited.
 6. Secrets, credentials, tokens, and private customer data are prohibited.
 7. A package records its upstream repository and revision before release.
+8. A public package owns its runtime manifest, README, validation entry point,
+   optional-dependency declaration, and compatibility statement.
+9. The catalog root owns marketplace metadata and shared release validation;
+   packages do not depend on undocumented paths into one another.
+10. Native providers may use a provider-specific manifest contract and are not
+    required to imitate portable Claude/Codex package metadata.
 
 ## Initial Candidate Inventory
 

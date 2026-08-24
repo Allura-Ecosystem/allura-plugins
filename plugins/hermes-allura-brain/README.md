@@ -43,3 +43,23 @@ hermes allura-brain test
 
 The test command performs an authenticated read-only search. It never prints
 credential values and does not create test memories.
+
+## Package Contract
+
+### Native provider manifest
+
+This is a Hermes-native provider, declared by `plugin.yaml` as
+`allura-brain` version `0.2.0`. It is not a Claude marketplace package and does
+not implement the Claude/Codex package-manifest contract.
+
+### Validation
+
+Run `python3 scripts/validate_manifests.py` from the catalog root for native
+manifest and package-contract validation. In a Hermes runtime, use
+`hermes allura-brain test` for the authenticated, read-only provider check.
+
+### Dependencies and degraded behavior
+
+The provider requires the three secret-scope values listed above and the
+canonical public MCP tunnel. Without them it remains unavailable; it does not
+fall back to a local endpoint or report ambient recall/persistence as complete.

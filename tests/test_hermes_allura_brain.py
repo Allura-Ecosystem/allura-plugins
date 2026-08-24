@@ -12,6 +12,44 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1] / "plugins" / "hermes-allura-brain"
 
 
+def _install_agent_test_stubs() -> None:
+    """Make provider unit tests independent of an installed Hermes checkout."""
+    if importlib.util.find_spec("agent") is not None:
+        return
+    agent = types.ModuleType("agent")
+    agent.__path__ = []
+    memory_provider = types.ModuleType("agent.memory_provider")
+    secret_scope = types.ModuleType("agent.secret_scope")
+
+    class MemoryProvider:
+        pass
+
+    setattr(memory_provider, "MemoryProvider", MemoryProvider)
+    setattr(secret_scope, "get_secret", lambda _name, default="": default)
+    sys.modules.setdefault("agent", agent)
+    sys.modules.setdefault("agent.memory_provider", memory_provider)
+    sys.modules.setdefault("agent.secret_scope", secret_scope)
+
+    if importlib.util.find_spec("mcp") is None:
+        mcp = types.ModuleType("mcp")
+        mcp.__path__ = []
+        mcp_client = types.ModuleType("mcp.client")
+        mcp_client.__path__ = []
+        streamable_http = types.ModuleType("mcp.client.streamable_http")
+
+        class ClientSession:
+            pass
+
+        setattr(mcp, "ClientSession", ClientSession)
+        setattr(streamable_http, "streamablehttp_client", lambda *_args, **_kwargs: None)
+        sys.modules.setdefault("mcp", mcp)
+        sys.modules.setdefault("mcp.client", mcp_client)
+        sys.modules.setdefault("mcp.client.streamable_http", streamable_http)
+
+
+_install_agent_test_stubs()
+
+
 def load_plugin():
     name = "allura_brain_test_plugin"
     sys.modules.pop(name, None)

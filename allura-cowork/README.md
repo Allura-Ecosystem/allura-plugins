@@ -49,3 +49,25 @@ Run:
 python3 plugins/allura-cowork/scripts/validate_plugin.py plugins/allura-cowork
 python3 plugins/allura-cowork/scripts/run_evals.py plugins/allura-cowork
 ```
+
+## Package Contract
+
+### Runtime manifests
+
+This portable package is published at `allura-cowork/` through the root Claude
+marketplace and owns `.claude-plugin/plugin.json` and
+`.codex-plugin/plugin.json`. Its public installation path is
+`allura-cowork@allura-ecosystem`.
+
+### Validation
+
+Run the two package checks above from the catalog root, then run
+`python3 scripts/validate_manifests.py` for catalog-level manifest and contract
+validation.
+
+### Dependencies and degraded behavior
+
+Python 3 enables the optional context hook; without it the plugin loads and the
+hook no-ops. Allura Brain is expected for memory-dependent workflows; when it
+is unavailable, those commands report the missing connection rather than
+claiming hydration or persistence.

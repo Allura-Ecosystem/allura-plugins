@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Governed agent teams for coordination, brand production, and software delivery.</strong><br/>
-  One organization-owned catalog for Claude and Codex plugin packages, model policy, and validation tooling.
+   One organization-owned catalog for Claude, Codex, and Hermes plugin packages, model policy, and validation tooling.
 </p>
 
 <p align="center">
@@ -37,19 +37,24 @@ Plugins add skills, commands, and operating roles. They do not replace Allura Br
 
 ## Catalog
 
-The Claude marketplace currently contains three versioned plugins. Counts below are source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running in any runtime.
+The Claude marketplace contains three versioned packages, and the repository also ships one Hermes-native provider. Counts below are source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running in any runtime.
 
 | Plugin | Release metadata | Agent definitions | Command definitions | Skill definitions | Purpose |
 |---|:---:|---:|---:|---:|---|
 | [Allura Cowork](allura-cowork/README.md) | 0.2.0 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
 | [Team Durham](team-durham/README.md) | 0.2.0 | 13* | 21 | 77 | Run brand strategy, naming, visual direction, production, accessibility, and QA |
 | [Team RAM Coding](team-ram-coding/README.md) | 0.2.0 | 11 | 35 | 12 | Run Brooks-led architecture, recon, implementation, review, and validation |
+| [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | 0.2.0 | — | 1 | — | Hermes-native governed recall and outcome persistence provider |
 
-Release metadata is `0.2.0` in the Claude marketplace and in each Claude and Codex `plugin.json`. The three `package.json` files remain at `0.1.0`; package metadata is therefore not in version parity and must not be used to infer a `0.2.0` npm-style package release.
+Release metadata is `0.2.0` in the Claude marketplace, each Claude/Codex
+`plugin.json`, and each portable package's `package.json`.
 
 \* Team Durham has 13 agent-definition files registered in its Claude manifest. Its package README names 12 canonical roles; the additional definition is `openagent`, a generic fallback. Until the package documentation resolves whether that fallback belongs to the canonical roster, describe Durham as **13 definitions / 12 named canonical roles**, not as 13 running agents.
 
-Team RAM Coding has 35 command-definition files, and both current runtime manifests register all 35. Its package README still says 34 commands; that package-level statement is stale.
+Team RAM Coding has 35 command-definition files, and both current runtime
+manifests and its package README register all 35.
+
+Hermes Allura Brain is a Hermes-native provider declared by `plugins/hermes-allura-brain/plugin.yaml`; it is intentionally not listed in the Claude marketplace because it does not implement the Claude/Codex package-manifest contract.
 
 The `allura/` directory is a local Codex README asset and guidance pack. It is not listed as a public Claude marketplace package and still contains manifest placeholders; treat it as internal support material until those fields are resolved.
 
@@ -108,6 +113,7 @@ The plugins are composable but keep distinct ownership:
 - **Durham creates and protects brand intent.**
 - **Team RAM Coding builds and validates software.**
 - **Allura Brain remembers and governs.**
+- **Hermes Allura Brain connects Hermes to governed recall and outcome persistence.**
 
 ## Shared operating contract
 
@@ -132,7 +138,7 @@ All catalog plugins inherit the same Allura expectations:
 /plugin install team-ram-coding@allura-ecosystem
 ```
 
-The Claude catalog is defined in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). Each package also owns its own `.claude-plugin/plugin.json`.
+The Claude catalog is defined in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). Each package also owns its own `.claude-plugin/plugin.json`. Hermes uses its native provider manifest instead; follow [its package README](plugins/hermes-allura-brain/README.md).
 
 ### Codex
 
@@ -229,6 +235,7 @@ These are local audit helpers and are not all run by the current GitHub Actions 
 The current [`.github/workflows/ci.yml`](.github/workflows/ci.yml) checks:
 
 - the Claude marketplace parses and each listed source resolves inside the repository;
+- the Hermes-native `plugins/hermes-allura-brain/plugin.yaml` declares a valid `allura-brain` provider identity, version, and description;
 - Claude marketplace versions match the corresponding Claude `plugin.json` versions;
 - explicitly listed Claude agent paths and all declared Claude command paths exist; list-valued agent manifests and top-level command directories have no on-disk orphans, and nested command definitions are rejected;
 - shipped marketplace plugin directories do not contain the workflow's machine-path patterns or prohibited embedded runtime-config directories;
@@ -289,6 +296,8 @@ allura-plugins/
 ├── allura-cowork/                    coordination and handoff plugin
 ├── team-durham/                      brand-production plugin
 ├── team-ram-coding/                  engineering plugin
+├── plugins/hermes-allura-brain/       Hermes-native Allura Brain provider
+├── _bmad/bmm/                         catalog-local epics and stories
 ├── allura/                           internal README asset/guidance pack
 ├── docs/models.yaml                  canonical model registry
 ├── docs/images/                      README brand assets

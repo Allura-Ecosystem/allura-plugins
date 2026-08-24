@@ -61,3 +61,24 @@ Add the Allura marketplace, then install:
 ## License
 
 MIT — see [LICENSE](../LICENSE).
+
+## Package Contract
+
+### Runtime manifests
+
+This portable package is published at `team-durham/` through the root Claude
+marketplace and owns `.claude-plugin/plugin.json` and
+`.codex-plugin/plugin.json`. Its public installation path is
+`team-durham@allura-ecosystem`.
+
+### Validation
+
+Use the package validation definitions in its skills and run
+`python3 scripts/validate_manifests.py` from the catalog root to verify public
+manifest paths and catalog contract metadata.
+
+### Dependencies and degraded behavior
+
+Allura Brain is expected for memory-dependent workflows. Docker, fal.ai, Figma,
+Notion, and LibreOffice integrations are optional; their related skills report
+the missing dependency and do not establish false execution evidence.

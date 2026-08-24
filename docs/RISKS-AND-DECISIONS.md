@@ -57,6 +57,28 @@ path scans.
 **Owner:** Brooks
 **References:** `team-durham/docs/superpowers/specs/2026-08-16-hybrid-model-routing-design.md`, `team-durham/docs/superpowers/specs/2026-08-17-unified-model-performance-telemetry.md`, OpenCode config `~/.config/opencode/opencode.json`, OpenWork config `~/.config/openwork/runtime-opencode-config.json`
 
+### AD-005: Normalize Plugin Contracts In Place
+
+**Date:** 2026-08-24
+**Status:** Decided
+**Decision:** Retain `allura-plugins/` as the single catalog root and normalize each package in its current folder. Preserve existing public install paths during the transition; use compatibility shims only when a later change requires them.
+
+**Rationale:** The current folders already identify the public package boundaries. The immediate problem is contract drift—manifests, versions, validation, documentation, and runtime expectations—not an excess of nesting. A `packages/` subtree or repository split would add interfaces before the existing contracts are reliable.
+
+**Alternatives Considered:**
+1. Create a new `packages/` subtree — deferred; it can be reconsidered after independent package validation is proven.
+2. Split every package into a top-level repository — rejected; it multiplies release and coordination overhead.
+3. Big-bang relocation and renaming — rejected; it makes compatibility failures indistinguishable from organizational changes.
+
+**Consequences:**
+- Catalog packages must become independently discoverable and verifiable in place.
+- Hermes retains its native provider contract rather than imitating Claude/Codex manifests.
+- Version, command-count, and legacy-path drift become explicit release blockers.
+- No folder move is authorized by this decision.
+
+**Owner:** Brooks
+**References:** `docs/superpowers/specs/2026-08-24-catalog-contract-normalization-design.md`, `docs/DESIGN-PLUGIN-CATALOG.md`
+
 ## Risks
 
 | ID | Risk | Mitigation |

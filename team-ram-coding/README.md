@@ -30,7 +30,7 @@ runtime honesty, validation evidence, and outcome logging.
 
 ## Commands
 
-34 commands covering: `start-session`, `end-session`, `scout`, `architect`,
+35 commands covering: `start-session`, `end-session`, `scout`, `architect`,
 `ralph`, `debug`, `test`, `commit`, `clean`, `optimize`, `validate-repo`,
 `query`, `task`, `goal`, `context`, `party`, `orchestrate`, and more.
 
@@ -58,3 +58,25 @@ Add the Allura marketplace, then install:
 ## License
 
 MIT — see [LICENSE](../LICENSE).
+
+## Package Contract
+
+### Runtime manifests
+
+This portable package is published at `team-ram-coding/` through the root
+Claude marketplace and owns `.claude-plugin/plugin.json` and
+`.codex-plugin/plugin.json`. Its public installation path is
+`team-ram-coding@allura-ecosystem`. It is the catalog-distributed Team RAM
+package; the standalone `allura-team-ram` harness is a separate product.
+
+### Validation
+
+Run the package review gates documented in this package's skills, then run
+`python3 scripts/validate_manifests.py` from the catalog root to verify public
+manifest paths and catalog contract metadata.
+
+### Dependencies and degraded behavior
+
+Allura Brain is expected for memory-dependent workflows. Docker is optional for
+the `mcp-docker` and `varlock` skills; unavailable dependencies cause the
+affected skills to report a visible degraded state rather than claim execution.
