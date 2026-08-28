@@ -1,6 +1,6 @@
 ---
 name: penpot-cms-asset-pipeline
-description: Ingest raw brand images, optimize them for Penpot and web delivery, generate responsive variants, extract metadata, and assemble a Payload CMS-ready asset package with populated MediaAssets collection schema. Trigger when preparing images for Penpot upload, generating CMS-compatible media deliverables, creating responsive image sets, or bridging Penpot exports to Payload CMS collections.
+description: "Prepare Penpot brand assets for Payload CMS delivery."
 trigger: penpot assets, cms pipeline, image optimization, responsive variants, payload cms media, brand asset pipeline, webp conversion, image metadata
 agents: [rand]
 tools: [MCP_DOCKER_mcp-exec, MCP_DOCKER_insert_data, MCP_DOCKER_execute_sql, fs, sharp, crypto]

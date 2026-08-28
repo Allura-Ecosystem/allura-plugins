@@ -1,6 +1,6 @@
 ---
 description: "Brand-auto — bounded autonomous brand work. Brand-orchestrator routes to Durham specialists (Aaker/Kotler/Glaser/Ogilvy/Munari/Rubin), QA + taste gates verify, outcome writes to Brain. Does not ship brand without HITL approval."
-argument-hint: "<brand task description>"
+argument-hint: "[--budget <tokens>] [--max <iterations>] <brand task description>"
 allowed-tools:
   - Read
   - Write
@@ -70,6 +70,15 @@ Agent(subagent_type: "Explore", prompt: "Scout recon for brand task: <task>. Fin
 ```
 
 Scout report informs specialist routing. This step is non-negotiable.
+
+Scout returns a compact ContextPacket capped at 700 output tokens. Load the
+lightweight roster first, then only the selected specialist and 1–3 required
+skills. Never eagerly load the full Durham catalog, Figma API references, or
+Impeccable implementation scripts.
+
+Default budget: 12,000 combined input/output tokens and 5 iterations. Hard
+maximum: 8 iterations. Reaching either budget ends as `exhausted`; verification
+evidence may not be dropped to fit the budget.
 
 ### Phase 2: Specialist Routing
 

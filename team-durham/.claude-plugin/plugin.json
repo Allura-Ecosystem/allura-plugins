@@ -33,6 +33,7 @@
     "./commands/sync-governance.md",
     "./commands/quick-commands.md",
     "./commands/brand-auto.md",
+    "./commands/auto.md",
     "./commands/scout.md",
     "./commands/task.md",
     "./commands/status.md",

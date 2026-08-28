@@ -1,9 +1,6 @@
 ---
 name: figma-api-bridge
-description: >
-  Figma API bridge for Phase 4 Brand Kit export. Creates Figma files from Brand Kit data,
-  sets up design tokens (colors, typography, spacing), builds component libraries,
-  and exports file URLs for client delivery. Integrates with the Team Durham pipeline.
+description: "Bridge Figma REST and plugin APIs for design automation."
 ---
 
 # Figma API Bridge — Brand Kit Export Skill

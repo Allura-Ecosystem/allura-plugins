@@ -1,6 +1,6 @@
 ---
 name: brand-consistency-review
-description: "Phase 5 QA numeric scoring system. 60-item checklist with 85% pass gate. Trigger when running QA review, consistency check, or Munari validation. Use when agent_id=munari runs QR (QA Review) command."
+description: "Score brand compliance with the Munari QA rubric."
 globs: ["clients/**", ".claude/**"]
 ---
 

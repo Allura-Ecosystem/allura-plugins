@@ -1,5 +1,6 @@
 ---
-description: "Brand-loop — bounded autonomous brand work governed by Allura Brain. Follows loopy's feedback-cycle contract (observe/choose/act/verify/record/stop) but uses Team Durham agents: Aaker (strategy), Kotler (positioning), Glaser (visual), Ogilvy (copy), Munari (QA), Rubin (taste gate). HITL taste gate preserved — auto-mode does not ship brand without approval."
+name: brand-loop
+description: "Run bounded autonomous Team Durham brand work."
 ---
 
 # Brand-Loop Skill
@@ -49,6 +50,17 @@ Durham agents for execution and Allura Brain for memory.
    `agent_id: "brand-orchestrator"`.
 6. **Repeat or Stop** — Continue only while progress is measurable and the
    iteration budget remains. Otherwise enter a named terminal state.
+
+## Loading and Token Budget
+
+- Scout ContextPacket: maximum 700 output tokens.
+- Default run: 12,000 combined input/output tokens and 5 iterations.
+- Hard iteration maximum: 8.
+- Route using the lightweight roster, then lazy-load one specialist plus 1–3
+  relevant skills. Do not hydrate the complete Durham package.
+- Full Figma/Penpot references and Impeccable scripts load only when the routed
+  task explicitly needs them.
+- Token or iteration exhaustion is terminal state `exhausted`, not success.
 
 ## Terminal States
 

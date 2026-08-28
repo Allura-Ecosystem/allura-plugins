@@ -1,6 +1,6 @@
 ---
 name: allura-memory-skill
-description: "Governance layer for Allura Brain memory operations. Use when working with persistent memory — storing, retrieving, promoting, superseding, deprecating, or revoking memories. Triggers on: 'store memory', 'search memory', 'promote to insight', 'supersede memory', 'revoke memory', 'memory governance', 'memory hygiene', 'duplicate detection', 'raw trace vs insight', 'semantic graph', 'knowledge graph'. Teaches agents how to use the memory system with manners — raw trace vs curated insight, promotion policy, evidence-first writes, dual-context retrieval, and safe conflict handling. Two-layer architecture: MCP server = runtime packaging, this skill = agent behavior contract."
+description: "Govern persistent Allura Brain memory operations."
 allowed-tools:
   - MCP_DOCKER_search_memories
   - MCP_DOCKER_create_entities
