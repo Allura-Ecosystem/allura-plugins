@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * Test Script: Brand-Guided Generation Workflow v5.0
- * 
+ *
  * Tests the complete pipeline:
  * 1. Load brand context from deliverables
  * 2. Generate brand-guided prompts
  * 3. Select optimal models
  * 4. Validate against brand rules
  * 5. Log to Allura Brain
- * 
+ *
  * Usage: node test-brand-guided-workflow.ts
  */
 
@@ -50,9 +50,9 @@ async function runTest() {
     // ============================================
     console.log('TEST 1: Loading Brand Context');
     console.log('-'.repeat(40));
-    
+
     const brandContext = await loadBrandContext(brandSlug);
-    
+
     console.log('✓ Brand Name:', brandContext.brandName);
     console.log('✓ Archetype:', brandContext.archetype.character);
     console.log('✓ Essence:', brandContext.essence);
@@ -67,12 +67,12 @@ async function runTest() {
     // ============================================
     console.log('TEST 2: Generating Brand-Guided Prompts');
     console.log('-'.repeat(40));
-    
+
     const prompts = generateBrandGuidedPrompts(brandContext);
-    
+
     console.log(`✓ Generated ${prompts.length} prompts`);
     console.log();
-    
+
     // Show first prompt details
     const firstPrompt = prompts[0];
     console.log('Sample Prompt (IMG-1-NB):');
@@ -83,7 +83,7 @@ async function runTest() {
     console.log('  Cost Estimate: $', firstPrompt.costEstimate.toFixed(4));
     console.log('  Prompt Length:', firstPrompt.prompt.length, 'chars');
     console.log();
-    
+
     // Show prompt preview
     console.log('Prompt Preview (first 300 chars):');
     console.log(firstPrompt.prompt.substring(0, 300) + '...');
@@ -94,7 +94,7 @@ async function runTest() {
     // ============================================
     console.log('TEST 3: Cost Calculation');
     console.log('-'.repeat(40));
-    
+
     const cost = calculateCampaignCost();
     console.log('Campaign Cost Breakdown:');
     Object.entries(cost.byModel).forEach(([model, data]) => {
@@ -108,7 +108,7 @@ async function runTest() {
     // ============================================
     console.log('TEST 4: Reference Images');
     console.log('-'.repeat(40));
-    
+
     const references = getBrandReferenceImages(brandContext);
     console.log('✓ Mood Image:', references.moodImage || 'Not found');
     console.log('✓ Logo Files:', references.logoFiles.length);
@@ -120,14 +120,14 @@ async function runTest() {
     // ============================================
     console.log('TEST 5: Brand Context Injection');
     console.log('-'.repeat(40));
-    
+
     const testPrompt = "Abstract brand imagery with warm colors";
     const { enrichedPrompt, enrichedNegative, brandContextUsed } = injectBrandContext(
       testPrompt,
       brandContext,
       { includeLogo: true, includeColors: true, includeShapes: true, includeTypography: true }
     );
-    
+
     console.log('Original:', testPrompt);
     console.log('Enriched Length:', enrichedPrompt.length, 'chars');
     console.log('Brand Context Injected:', brandContextUsed.join(', '));
@@ -141,7 +141,7 @@ async function runTest() {
     // ============================================
     console.log('TEST 6: Validation Rules');
     console.log('-'.repeat(40));
-    
+
     // Mock image analysis
     const mockImageAnalysis = {
       dominantColors: ['#FFC300', '#0581A7', '#F5F5F5'],
@@ -151,7 +151,7 @@ async function runTest() {
       hasLogo: false,
       mood: 'warm'
     };
-    
+
     const validation = validateAgainstBrandKit(mockImageAnalysis, brandContext);
     console.log('Validation Result:', validation.passed ? '✓ PASSED' : '✗ FAILED');
     if (validation.issues.length > 0) {
@@ -167,7 +167,7 @@ async function runTest() {
     // ============================================
     console.log('TEST 7: Full Workflow Execution');
     console.log('-'.repeat(40));
-    
+
     const workflowResult = await executeBrandGuidedWorkflow({
       brandSlug,
       agentId,
@@ -175,7 +175,7 @@ async function runTest() {
       priority: 'quality',
       skipLogging: false
     });
-    
+
     console.log('✓ Workflow Complete');
     console.log(`  Total Images: ${workflowResult.results.length}`);
     console.log(`  Total Cost: $${workflowResult.totalCost.toFixed(4)}`);
@@ -189,7 +189,7 @@ async function runTest() {
     // ============================================
     console.log('TEST 8: Quick Generate (Single Image)');
     console.log('-'.repeat(40));
-    
+
     const quickResult = await quickGenerate(brandSlug, 'hero-image', agentId, 'quality');
     console.log('✓ Quick Generation Ready');
     console.log('  Token Set:', quickResult.tokenSet);
@@ -203,7 +203,7 @@ async function runTest() {
     // ============================================
     console.log('TEST 9: Compare Single vs Multi-Model');
     console.log('-'.repeat(40));
-    
+
     const comparison = await compareApproaches(brandSlug);
     console.log('Single Model:');
     console.log(`  Cost: $${comparison.singleModel.totalCost.toFixed(4)}`);
@@ -219,7 +219,7 @@ async function runTest() {
     // ============================================
     console.log('TEST 10: Report Generation');
     console.log('-'.repeat(40));
-    
+
     const report = workflowResult.report;
     console.log('Report Summary:');
     console.log(`  Total Prompts: ${report.totalPrompts}`);

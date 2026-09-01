@@ -1,0 +1,2 @@
+# Generated Team RAM export preserves canonical bytes, including source-owned whitespace.
+team-ram-coding/** whitespace=-trailing-space,-blank-at-eof

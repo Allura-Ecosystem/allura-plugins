@@ -18,14 +18,14 @@
       "name": "team-durham",
       "source": "./team-durham",
       "description": "Team Durham brand production team for Claude Code and Codex: agents, skills, commands, governance, and persona research.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "category": "Design"
     },
     {
       "name": "team-ram-coding",
       "source": "./team-ram-coding",
       "description": "Team RAM agent platform for Allura-governed development: Brooks-led architecture, Scout recon, Woz implementation, code review, memory, task management, multi-source research, and party-mode multi-agent dispatch.",
-      "version": "0.2.0",
+      "version": "0.4.2",
       "category": "Coding"
     }
   ]

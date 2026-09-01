@@ -204,7 +204,7 @@ export async function logToAlluraBrain(event: BrainEvent): Promise<void> {
     // Production: Write to PostgreSQL via MCP Docker
     // This requires MCP_DOCKER tools to be available
     const payloadJson = JSON.stringify(event.payload).replace(/'/g, "''");
-    
+
     // Use MCP_DOCKER_insert_data for PostgreSQL
     // Note: This is a template - actual execution requires MCP_DOCKER tools
     const insertQuery = {
@@ -212,9 +212,9 @@ export async function logToAlluraBrain(event: BrainEvent): Promise<void> {
       columns: "event_type, group_id, agent_id, payload, created_at",
       values: `'${event.eventType}', '${event.groupId}', '${event.agentId}', '${payloadJson}', '${timestamp}'`
     };
-    
+
     console.log(`[Allura Brain] PostgreSQL insert prepared:`, insertQuery);
-    
+
     // Store in memory for this session (until MCP Docker is available)
     const globalAny = globalThis as any;
     if (!globalAny.__alluraBrainEvents) {

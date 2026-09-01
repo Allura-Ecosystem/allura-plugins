@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": 1,
+  "policy": {
+    "authority": "standalone-source-repositories",
+    "catalogRole": "pinned-generated-distribution",
+    "manualEdits": "forbidden"
+  },
+  "sources": [
+    {
+      "id": "team-ram",
+      "aliases": ["ram", "team-ram-coding", "team-ram-harness"],
+      "repository": "https://github.com/Allura-Ecosystem/allura-team-ram.git",
+      "commit": "9153e2e7dbbf09b6d8f42a9e0852d553a4a5c537",
+      "manifest": "PUBLIC_EXPORT.json",
+      "exporter": "scripts/export-public.mjs",
+      "destination": "team-ram-coding",
+      "runtime": "claude-codex-opencode",
+      "marketplace": true,
+      "marketplaceAlias": "team-ram-coding",
+      "sourceManifestName": "team-ram-harness",
+      "sourcePackageName": "@allura/team-ram-harness",
+      "packageVersion": "0.4.0",
+      "runtimeVersion": "0.4.2"
+    },
+    {
+      "id": "team-durham",
+      "aliases": ["durham"],
+      "repository": "https://github.com/Allura-Ecosystem/team-durham.git",
+      "commit": "7e521976aef40b396e439d45c867d990c8237b11",
+      "manifest": "export-manifest.json",
+      "exporter": "scripts/export_catalog.py",
+      "destination": "team-durham",
+      "runtime": "claude-codex-opencode",
+      "marketplace": true,
+      "marketplaceAlias": "team-durham",
+      "sourceManifestName": "team-durham",
+      "sourcePackageName": "team-durham",
+      "packageVersion": "0.3.0",
+      "runtimeVersion": "0.3.0"
+    },
+    {
+      "id": "mortagate-cowork",
+      "aliases": ["mortagate", "mortgate", "mortagate-cowork", "mortgate-cowork"],
+      "repository": "https://github.com/Allura-Ecosystem/mortagate.git",
+      "commit": "c926bdbe101829c7937ad90f9ee08100a55f463a",
+      "manifest": "catalog-export.json",
+      "exporter": "contract-allowlist",
+      "sourceRoot": "microsoft-cowork",
+      "destination": "packages/mortagate-cowork",
+      "runtime": "microsoft-cowork",
+      "marketplace": false,
+      "marketplaceAlias": null,
+      "sourceManifestName": "mortagate-cowork",
+      "sourcePackageName": "mortagate-cowork",
+      "packageVersion": "0.1.0",
+      "runtimeVersion": "0.1.0"
+    }
+  ]
+}

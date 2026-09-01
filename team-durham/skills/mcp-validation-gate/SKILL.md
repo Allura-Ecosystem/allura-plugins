@@ -89,16 +89,16 @@ Implement exponential backoff for retryable errors:
 // Retry pattern with exponential backoff
 async function callWithRetry(server, tool, params, maxRetries = 3) {
   const delays = [1000, 2000, 4000]; // 1s, 2s, 4s
-  
+
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
       // Pre-validation
       await validateMCPServer(server);
       await validateMCPTool(server, tool);
-      
+
       // Execute
       const result = await executeMCPTool(server, tool, params);
-      
+
       // Post-validation
       return validateResult(result);
     } catch (error) {

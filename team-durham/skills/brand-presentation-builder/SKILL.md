@@ -7,8 +7,8 @@ globs: ["clients/**", ".claude/**"]
 # Brand Presentation Builder
 
 > **Purpose:** Transform 10-section brand kits into interactive, client-ready HTML presentation artifacts
-> **Executor:** @Rand (Brand Kit Builder) + @Glaser (Visual Direction)  
-> **Output:** 5 HTML pages with warm, rounded, floating-card aesthetic  
+> **Executor:** @Rand (Brand Kit Builder) + @Glaser (Visual Direction)
+> **Output:** 5 HTML pages with warm, rounded, floating-card aesthetic
 > **group_id:** `allura-team-durham`
 
 ---
@@ -150,30 +150,30 @@ clients/<client-slug>/presentation-artifacts/
   --color-warm-green: #BDBD0D;
   --color-dark-gray: #142329;
   --color-white: #F5F5F5;
-  
+
   /* Semantic Tokens */
   --color-action-primary: var(--color-warm-yellow);
   --color-text-primary: var(--color-dark-gray);
   --color-surface-primary: var(--color-white);
-  
+
   /* Typography */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
-  
+
   /* Spacing */
   --space-xs: 0.5rem;   /* 8px */
   --space-sm: 1rem;     /* 16px */
   --space-md: 1.5rem;   /* 24px */
   --space-lg: 2rem;     /* 32px */
   --space-xl: 4rem;     /* 64px */
-  
+
   /* Border Radius (Rounded warmth) */
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-full: 9999px;
-  
+
   /* Editorial 3-Layer Shadows */
   --shadow-ambient: 0 4px 20px -4px rgba(20, 35, 41, 0.08);
   --shadow-directional: 0 8px 16px -4px rgba(20, 35, 41, 0.12);

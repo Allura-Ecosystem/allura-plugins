@@ -122,7 +122,7 @@ description: Composes prompts.chat, grep-mcp (GitHub code search), MCP Docker (D
 resolve-library-id("stripe") → "/stripe/stripe-node"
 get-library-docs("/stripe/stripe-node", topic="subscriptions")
 
-// Step 2: Find real implementations (grep-mcp)  
+// Step 2: Find real implementations (grep-mcp)
 grep_query("stripe.subscriptions.create", language="TypeScript")
 
 // Step 3: Get recent articles (MCP Docker)

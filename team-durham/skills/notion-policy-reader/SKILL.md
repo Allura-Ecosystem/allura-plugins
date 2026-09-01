@@ -11,9 +11,9 @@ description: >
 
 # Notion Policy Reader
 
-> **Executor:** Any Team Durham agent  
-> **Type:** Policy Loading & Publishing  
-> **Prerequisite:** NOTION_API_TOKEN configured via MCP Docker  
+> **Executor:** Any Team Durham agent
+> **Type:** Policy Loading & Publishing
+> **Prerequisite:** NOTION_API_TOKEN configured via MCP Docker
 > **group_id:** `allura-team-durham`
 
 ---
@@ -83,7 +83,7 @@ notion_read_page({ page_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890" })
 
 ```
 # Search for project-specific docs
-notion_search({ 
+notion_search({
   query: "Project Brief client-name",
   filter: { property: "object", value: "page" }
 })
@@ -100,9 +100,9 @@ notion_read_page({ page_id: "[brief-page-id]" })
 
 ```
 notion_create_page({
-  parent: { 
-    type: "page_id", 
-    page_id: "[client-parent-page-id]" 
+  parent: {
+    type: "page_id",
+    page_id: "[client-parent-page-id]"
     // OR use: { type: "workspace" } for root-level pages
   },
   title: "[BRAND NAME] — Strategy Pack",
@@ -156,7 +156,7 @@ Error: NOTION_API_TOKEN not set
 Resolution:
 1. Check if Notion MCP is configured
 2. If not configured, inform user:
-   "Notion integration requires NOTION_API_TOKEN. 
+   "Notion integration requires NOTION_API_TOKEN.
     Please configure via MCP Docker: MCP_DOCKER_mcp-config-set --server notion --config '{"internal_integration_token": "your-token"}'"
 3. Fall back to local file reading
 ```

@@ -1,5 +1,7 @@
 # Unified Model-Performance Telemetry
 
+> **Historical design record:** This 2026-08-17 proposal describes a cross-harness Team RAM telemetry scope and uses `group_id=allura-system`. It is not active Team Durham memory guidance. Canonical Durham operations use `group_id=allura-team-durham`; cross-product handoffs go through the owning workflow.
+
 **Status:** Approved architecture; implementation not started
 **Date:** 2026-08-17
 **Scope:** Outcome measurement for OpenCode, native Codex, and Claude Code.

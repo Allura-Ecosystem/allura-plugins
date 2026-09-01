@@ -1,6 +1,6 @@
 # Allura Marketplace IDs — Cross-Runtime Plugin Registry
 
-**Last updated:** 2026-07-16
+**Last updated:** 2026-09-01
 **Author:** Brooks (Chief Architect)
 **Status:** Active
 
@@ -24,34 +24,34 @@ This document maps every Allura plugin to its marketplace ID across all 4 runtim
 ### allura-cowork
 | Runtime | Marketplace ID | Version | Install command |
 |---|---|---|---|
-| Claude | `allura-ecosystem` | 0.1.0 | `claude plugin install allura-cowork@allura-ecosystem` |
-| Codex | `plugins-cli` | 0.1.0 | `[plugins."allura-cowork@plugins-cli"] enabled = true` in `~/.codex/config.toml` |
+| Claude | `allura-ecosystem` | 0.2.0 | `claude plugin install allura-cowork@allura-ecosystem` |
+| Codex | local package | 0.2.0 | Use the runtime's supported local-plugin registration flow for `allura-cowork/` |
 | Hermes | — | — | Not applicable (Claude/Codex plugin) |
 | OpenClaw | — | — | Not yet installed. Compatible bundle: `openclaw plugins install ./allura-plugins/allura-cowork` |
 
 ### team-durham
 | Runtime | Marketplace ID | Version | Install command |
 |---|---|---|---|
-| Claude | `allura-ecosystem` | 0.1.0 | `claude plugin install team-durham@allura-ecosystem` |
-| Codex | `plugins-cli` | 0.1.0 | `[plugins."team-durham@plugins-cli"] enabled = true` |
+| Claude | `allura-ecosystem` | 0.3.0 | `claude plugin install team-durham@allura-ecosystem` |
+| Codex | local generated package | 0.3.0 | Use the runtime's supported local-plugin registration flow for `team-durham/` |
 | Hermes | — | — | Not applicable |
 | OpenClaw | — | — | Not yet installed. Compatible bundle: `openclaw plugins install ./allura-plugins/team-durham` |
 
 ### team-ram-coding
 | Runtime | Marketplace ID | Version | Install command |
 |---|---|---|---|
-| Claude | `allura-ecosystem` | 0.1.0+codex | `claude plugin install team-ram-coding@allura-ecosystem` |
-| Codex | `plugins-cli` | 0.1.0+codex | `[plugins."team-ram-coding@plugins-cli"] enabled = true` |
+| Claude | `allura-ecosystem` | 0.4.2 | `claude plugin install team-ram-coding@allura-ecosystem` |
+| Codex | local generated package | 0.4.2 | Use the runtime's supported local-plugin registration flow for `team-ram-coding/` |
 | Hermes | — | — | Not applicable |
 | OpenClaw | — | — | Not yet installed |
 
-### team-ram-harness
-| Runtime | Marketplace ID | Version | Install command |
+`team-ram-harness` is the source-owned manifest identity inside the generated `team-ram-coding/` directory. It is **not** a second root marketplace entry or a second manual package copy. The root marketplace compatibility alias remains `team-ram-coding`, and CI verifies alias-to-source-manifest resolution.
+
+### mortagate-cowork
+| Runtime | Catalog identity | Version | Install command |
 |---|---|---|---|
-| Claude | `allura-ecosystem` + `team-ram-marketplace` (legacy) | 0.4.2 | `claude plugin install team-ram-harness@allura-ecosystem` |
-| Codex | `plugins-cli` | 0.4.2 | `[plugins."team-ram-harness@plugins-cli"] enabled = true` |
-| Hermes | — | — | Not applicable |
-| OpenClaw | — | — | Not yet installed. Compatible bundle: `openclaw plugins install ./Agent-Harnesses/Allura-TeamRam` |
+| Microsoft Cowork | `packages/mortagate-cowork` | 0.1.0 | Package through the Microsoft 365/Cowork app-package workflow |
+| Claude / Codex | — | — | Not applicable; deliberately absent from those marketplaces |
 
 ### allura (Codex-only)
 | Runtime | Marketplace ID | Version | Install command |
@@ -74,7 +74,7 @@ This document maps every Allura plugin to its marketplace ID across all 4 runtim
 |---|---|---|---|
 | Claude | — | — | Not applicable (Hermes plugin) |
 | Codex | — | — | Not applicable |
-| Hermes | Git repo | 0.1.0 | `hermes plugins install Charitablebusinessronin/hermes-allura-brain --enable` then `hermes config set memory.provider allura-brain` |
+| Hermes | Git repo | 0.2.0 | `hermes plugins install Charitablebusinessronin/hermes-allura-brain --enable` then `hermes config set memory.provider allura-brain` |
 | OpenClaw | — | — | Not applicable |
 
 **Note:** `hermes-allura-brain` is a **memory provider** (single-select), activated via `memory.provider` in `~/.hermes/config.yaml`, NOT via `plugins.enabled`. Update with `hermes plugins update allura-brain`. Verify with `hermes allura-brain status`.
@@ -165,7 +165,7 @@ bash allura-plugins/scripts/plugins-update-all.sh
 ## Rules
 
 1. **One primary marketplace** — `allura-ecosystem` is the primary marketplace for all Allura Claude plugins. Per-plugin marketplaces are legacy fallbacks.
-2. **Version sync** — `plugins-update-all.sh` keeps marketplace.json versions in sync with plugin.json versions. Never hand-edit marketplace versions.
+2. **Source-first version sync** — standalone sources own runtime/package versions; `source-locks.json` pins them, and the generated export verifier enforces marketplace/runtime/package parity where applicable. Do not edit generated manifests.
 3. **Cross-runtime awareness** — the update script handles all 4 runtimes. A plugin may exist in 1, 2, 3, or all 4 runtimes.
 4. **Hermes memory provider** — activated via `memory.provider` config, not `plugins.enabled`. Do not call `hermes plugins enable` for it.
 5. **OpenClaw gateway restart** — required after any OpenClaw plugin update. The script does this automatically.

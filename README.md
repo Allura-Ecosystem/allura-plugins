@@ -27,32 +27,33 @@
 
 ## What this repository owns
 
-`allura-plugins` is the canonical source and governance repository for the Allura plugin layer. It has three jobs:
+`allura-plugins` is the **distribution catalog and release-governance repository** for the Allura plugin layer. Standalone repositories own Team RAM, Team Durham, Mortagate, and Allura Memory source. This catalog has three jobs:
 
-1. **Plugin catalog** — maintain Allura workflow packages and their Claude/Codex manifest surfaces.
+1. **Generated plugin catalog** — publish pinned exports and preserve consumer-facing install aliases without becoming their source authority.
 2. **Model governance** — map agents to primary models, runtime aliases, and fallback chains in one registry.
-3. **Release evidence** — provide checks and evidence paths for manifests, commands, examples, hooks, evals, and runtime-specific updates before a plugin is treated as ready.
+3. **Release evidence** — prove source SHAs, export drift, manifests, commands, examples, hooks, evals, secret scans, and runtime-specific package checks before a plugin is treated as ready.
+
+Machine-readable pins live in [`source-locks.json`](source-locks.json). [`harness-sync.sh`](harness-sync.sh) only moves content from a public standalone repository at its locked full SHA into a generated catalog destination. Generated package files are not authoritative and must not be edited manually.
 
 Plugins add skills, commands, and operating roles. They do not replace Allura Brain or bypass its memory governance.
 
 ## Catalog
 
-The Claude marketplace contains three versioned packages, and the repository also ships one Hermes-native provider. Counts below are source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running in any runtime.
+The Claude marketplace contains three versioned packages. The repository also ships one Hermes-native provider and one runtime-neutral Microsoft Cowork export. Counts below are generated/source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running.
 
 | Plugin | Release metadata | Agent definitions | Command definitions | Skill definitions | Purpose |
 |---|:---:|---:|---:|---:|---|
 | [Allura Cowork](allura-cowork/README.md) | 0.2.0 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
-| [Team Durham](team-durham/README.md) | 0.2.0 | 13* | 21 | 77 | Run brand strategy, naming, visual direction, production, accessibility, and QA |
-| [Team RAM Coding](team-ram-coding/README.md) | 0.2.0 | 11 | 35 | 12 | Run Brooks-led architecture, recon, implementation, review, and validation |
+| [Team Durham](team-durham/README.md) | 0.3.0 | 13* | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
+| [Team RAM Coding](team-ram-coding/README.md) | 0.4.2 runtime / 0.4.0 npm | 11 | 34 | 163 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
 | [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | 0.2.0 | — | 1 | — | Hermes-native governed recall and outcome persistence provider |
+| [Mortagate Cowork](packages/mortagate-cowork/README.md) | 0.1.0 | — | — | 4 | Pinned 19-file Microsoft Cowork package export; not a Claude/Codex marketplace plugin |
 
-Release metadata is `0.2.0` in the Claude marketplace, each Claude/Codex
-`plugin.json`, and each portable package's `package.json`.
+Team Durham's marketplace, Claude, Codex, and npm versions are `0.3.0`. Team RAM deliberately preserves the marketplace alias `team-ram-coding` while the generated source-owned manifests remain named `team-ram-harness`; marketplace/Claude/Codex runtime metadata is `0.4.2`, while the source npm package is independently versioned at `0.4.0`. CI validates those locked identities instead of hand-editing generated source manifests.
 
-\* Team Durham has 13 agent-definition files registered in its Claude manifest. Its package README names 12 canonical roles; the additional definition is `openagent`, a generic fallback. Until the package documentation resolves whether that fallback belongs to the canonical roster, describe Durham as **13 definitions / 12 named canonical roles**, not as 13 running agents.
+\* Team Durham exports 13 loadable agent definitions: 12 canonical roles plus the deliberate `openagent` runtime compatibility fallback. This is not a claim that 13 agents are installed or running.
 
-Team RAM Coding has 35 command-definition files, and both current runtime
-manifests and its package README register all 35.
+Mortagate Cowork targets Microsoft Cowork's app-package and Agent Skills contract. It is linked from this runtime-neutral catalog README but is intentionally absent from the Claude marketplace and Codex marketplace shell.
 
 Hermes Allura Brain is a Hermes-native provider declared by `plugins/hermes-allura-brain/plugin.yaml`; it is intentionally not listed in the Claude marketplace because it does not implement the Claude/Codex package-manifest contract.
 
@@ -99,6 +100,17 @@ Brooks → Scout → Allura Brain → required skills
 The plugin includes task management, code review, multi-source research, MCP orchestration, security policy, secret-handling, and multi-agent dispatch skills.
 
 ## How the plugins fit together
+
+### Source ownership
+
+| Capability | Standalone source authority | Catalog role |
+|---|---|---|
+| Engineering agent harness | [Allura Team RAM](https://github.com/Allura-Ecosystem/allura-team-ram) | Generated `team-ram-coding/` distribution with a compatibility install alias |
+| Brand-production harness | [Team Durham](https://github.com/Allura-Ecosystem/team-durham) | Generated `team-durham/` distribution |
+| Mortgage evidence-review Cowork package | [Mortagate](https://github.com/Allura-Ecosystem/mortagate) | Generated runtime-neutral `packages/mortagate-cowork/` distribution |
+| Governed memory | [Allura Memory](https://github.com/Allura-Ecosystem/Allura_Memory) | Linked dependency/provider surfaces; its source is not owned here |
+
+The standalone repositories own content, contracts, and release exporters. This repository owns source locks, generated distribution paths, marketplace compatibility identities, catalog-level policy, and release verification.
 
 | Need | Lead plugin | Supporting plugin |
 |---|---|---|
@@ -227,23 +239,28 @@ Do not hand-edit scattered agent model fields and then treat them as policy. Upd
 | `bash scripts/models-update-all.sh --dry-run` | Model assignment drift without mutation |
 | `bash scripts/models-eval.sh` | CLASSIC evaluation fixtures |
 | `bash scripts/plugins-update-all.sh --dry-run` | Cross-runtime version/update impact |
+| `./harness-sync.sh --check` | Public source commit availability, deterministic regeneration, provenance, versions, aliases, forbidden files, and byte/hash drift |
+| `gitleaks detect --no-git --source . --config .gitleaks.toml` | Generated-output and catalog secret scan |
 
-These are local audit helpers and are not all run by the current GitHub Actions workflow.
+CI runs the source-export verifier, manifest validator, command audit, JSON/YAML/shell parsing, gitleaks, and package smoke checks. Model-evaluation and runtime-update helpers remain operator-run because they can create evidence or depend on locally installed runtimes.
 
 ### Current CI coverage
 
-The current [`.github/workflows/ci.yml`](.github/workflows/ci.yml) checks:
+The [`.github/workflows/ci.yml`](.github/workflows/ci.yml) checks:
 
+- every locked public source commit can be cloned and regenerated through its canonical exporter/contract with no catalog drift;
+- provenance, allowlists, per-file hashes, generated-file inventories, runtime distinctions, compatibility aliases, and applicable version parity;
 - the Claude marketplace parses and each listed source resolves inside the repository;
 - the Hermes-native `plugins/hermes-allura-brain/plugin.yaml` declares a valid `allura-brain` provider identity, version, and description;
 - Claude marketplace versions match the corresponding Claude `plugin.json` versions;
 - explicitly listed Claude agent paths and all declared Claude command paths exist; list-valued agent manifests and top-level command directories have no on-disk orphans, and nested command definitions are rejected;
 - shipped marketplace plugin directories do not contain the workflow's machine-path patterns or prohibited embedded runtime-config directories;
-- every repository `plugin.json` parses as JSON;
+- repository JSON parses, YAML loads, and shell scripts pass `bash -n`;
 - the root README and LICENSE exist; and
-- a small set of credential patterns is absent from selected text-file extensions.
+- gitleaks reports no unallowlisted findings across the entire checked-out catalog;
+- command audits and package-specific Allura Cowork/Mortagate smoke checks pass.
 
-CI does **not** currently validate `package.json` version parity, Codex manifest path/content parity beyond JSON parsing, command frontmatter, skill metadata, model-registry drift, package evals, Cowork schemas/examples/hooks, external integrations, native runtime installation/loading, or cross-runtime behavioral parity. The workflow name's “5 invariants” refers only to the five structural checks in its Claude-marketplace validation script.
+CI cannot prove optional external integrations, native installation into every locally available runtime, or live cross-runtime behavioral parity. Those require release-environment evidence; CI does not turn a structural package check into a runtime-execution claim.
 
 ### Package checks
 
@@ -258,17 +275,16 @@ Team Durham's validation skills and Team RAM Coding's review gates are documente
 
 ### Definition of ready
 
-A plugin release should have the following evidence before it is described as runtime-ready. The present CI workflow does not enforce every item:
+A generated plugin release is ready for catalog review only when:
 
-1. valid Claude and Codex manifests;
-2. registered commands with descriptions;
-3. complete skill metadata;
-4. no unexplained command collisions;
-5. passing package-specific tests/evals;
-6. reviewed model-registry changes;
-7. documented optional dependencies and degraded behavior;
-8. version parity between package and marketplace metadata;
-9. an evidence-backed release note.
+1. the standalone source repository and exact public full SHA are locked;
+2. its canonical manifest/contract and exporter regenerate the destination with zero drift or unexpected files;
+3. generated provenance and per-file inventories required by the source contract validate;
+4. Claude/Codex manifests and marketplace aliases resolve without modifying generated source identities;
+5. applicable marketplace/runtime/package versions match the machine-readable lock;
+6. commands, JSON, YAML, shell, package smoke, and gitleaks checks pass;
+7. optional dependencies, degraded behavior, exclusions, and runtime distinctions are documented; and
+8. runtime-ready claims beyond CI are backed by evidence from the actual target runtime.
 
 ## Plugin anatomy
 
@@ -294,9 +310,12 @@ allura-plugins/
 ├── .claude-plugin/marketplace.json   Claude marketplace catalog
 ├── .agents/plugins/marketplace.json  Codex marketplace index shell
 ├── allura-cowork/                    coordination and handoff plugin
-├── team-durham/                      brand-production plugin
-├── team-ram-coding/                  engineering plugin
+├── team-durham/                      generated Team Durham distribution
+├── team-ram-coding/                  generated Team RAM distribution (compatibility alias)
+├── packages/mortagate-cowork/        generated Microsoft Cowork distribution (not Claude marketplace)
 ├── plugins/hermes-allura-brain/       Hermes-native Allura Brain provider
+├── source-locks.json                  public repo/SHA/export/runtime/alias locks
+├── harness-sync.sh                    pinned source -> catalog check/sync entrypoint
 ├── _bmad/bmm/                         catalog-local epics and stories
 ├── allura/                           internal README asset/guidance pack
 ├── docs/models.yaml                  canonical model registry
@@ -307,8 +326,8 @@ allura-plugins/
 
 ## Contributing
 
-- Make changes inside the owning plugin; avoid cross-package coupling without a clear shared contract.
-- Update both Claude and Codex manifests when the public surface changes.
+- Make Team RAM, Team Durham, Mortagate, and Allura Memory content changes in their standalone owning repositories, never in generated catalog exports.
+- Update both Claude and Codex manifests in the standalone source when that public surface changes, then regenerate.
 - Add commands explicitly rather than relying on broad globs.
 - Keep secrets and credentials out of manifests, prompts, examples, and test output.
 - Preserve user changes in dirty worktrees.

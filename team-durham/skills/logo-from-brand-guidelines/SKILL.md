@@ -112,11 +112,11 @@ Limitations:
 
 ## Common Pitfalls
 
-- **Pitfall:** Rebuilding a logo from letters because it is faster.  
+- **Pitfall:** Rebuilding a logo from letters because it is faster.
   **Fix:** Crop the actual logo first; recreate only as a fallback.
 
-- **Pitfall:** Using text color values from memory when the board shows different hex values.  
+- **Pitfall:** Using text color values from memory when the board shows different hex values.
   **Fix:** Vision-observed board tokens override stale memory.
 
-- **Pitfall:** Cropping too tightly and clipping drop shadows or tagline.  
+- **Pitfall:** Cropping too tightly and clipping drop shadows or tagline.
   **Fix:** Add padding around the logo; create separate tight and padded variants if needed.

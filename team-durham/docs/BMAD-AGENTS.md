@@ -20,4 +20,3 @@ Bundled files:
 - `source/bmad/custom/*.toml`
 
 Use `$team-durham-bmad` when the user asks why the plugin does not deploy visible agents, or when the task should route through BMAD agent identities.
-

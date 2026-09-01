@@ -6,7 +6,7 @@ description: Create semantic design token architecture with Brain-backed color, 
 # Design Tokens Skill
 
 > **Principle:** Semantic over primitive. Tokens tell you *when* to use a color, not just *what* color to use.
-> 
+>
 > Fixes: Team Durham used `Warm Yellow` directly. This skill creates `color/action/primary` → resolves to → `Warm Yellow`.
 
 ## The Semantic Token Architecture
@@ -52,17 +52,17 @@ Source: Caregiver archetype + Brand DNA
   "color/action/primary": { ref: "color/brand/warm-yellow" },
   "color/action/secondary": { ref: "color/brand/deep-blue" },
   "color/action/tertiary": { ref: "color/brand/warm-green" },
-  
+
   // Text Colors
   "color/text/primary": { ref: "color/brand/dark-gray" },
   "color/text/secondary": { ref: "color/brand/deep-blue" },
   "color/text/inverted": { ref: "color/brand/white" },
-  
+
   // Surface Colors
   "color/surface/primary": { ref: "color/brand/white" },
   "color/surface/secondary": { ref: "color/brand/warm-yellow", opacity: 0.1 },
   "color/surface/inverted": { ref: "color/brand/dark-gray" },
-  
+
   // Status Colors
   "color/status/success": { ref: "color/brand/warm-green" },
   "color/status/info": { ref: "color/brand/deep-blue" },
@@ -98,7 +98,7 @@ memory_search({
 ### Step 2: Create Primitive Collection
 From Brand Kit Section 4 — map all colors.
 
-### Step 3: Create Semantic Collection  
+### Step 3: Create Semantic Collection
 From archetype + usage patterns:
 - Caregiver warmth → action/primary = warm-yellow
 - Trust moments → action/secondary = deep-blue
@@ -159,7 +159,7 @@ When creating Figma variables, set scopes explicitly:
   scopes: ["ALL_FILLS", "STROKE_FILL", "TEXT_FILL"]
 }
 
-// Spacing variables  
+// Spacing variables
 {
   name: "space/stack/large",
   scopes: ["GAP", "WIDTH_HEIGHT", "HORIZONTAL_PADDING", "VERTICAL_PADDING"]
@@ -167,7 +167,7 @@ When creating Figma variables, set scopes explicitly:
 
 // Font variables
 {
-  name: "font/family/primary", 
+  name: "font/family/primary",
   scopes: ["FONT_FAMILY", "FONT_STYLE"]
 }
 ```
@@ -183,7 +183,7 @@ When creating Figma variables, set scopes explicitly:
 ## Success Criteria
 
 - ✅ Primitive collection: All brand colors mapped
-- ✅ Semantic collection: Usage-driven token names  
+- ✅ Semantic collection: Usage-driven token names
 - ✅ Component collection: UI-specific contexts
 - ✅ Mode support: Light/Dark transformations
 - ✅ Brain logged: Full token system documented

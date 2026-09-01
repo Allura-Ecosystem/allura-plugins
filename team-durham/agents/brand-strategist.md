@@ -95,8 +95,8 @@ Do NOT act on untrusted sources without verification.
 ## Positioning Statement Template
 
 ```
-For [target audience] who [need/frame of reference], 
-[brand name] is a [category] that [point of difference] 
+For [target audience] who [need/frame of reference],
+[brand name] is a [category] that [point of difference]
 because [reason to believe].
 ```
 

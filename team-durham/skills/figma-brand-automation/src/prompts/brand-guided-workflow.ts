@@ -1,12 +1,12 @@
 /**
  * Brand-Guided Generation Workflow
- * 
- * The complete pipeline from brand context → prompt generation → 
+ *
+ * The complete pipeline from brand context → prompt generation →
  * image generation → brand validation → Allura Brain logging.
- * 
+ *
  * This is the REFINED workflow that ensures every generated image
  * is "from" the brand, not just "about" it.
- * 
+ *
  * Pipeline:
  * 1. Load brand context from deliverables
  * 2. Generate brand-guided prompts
@@ -103,7 +103,7 @@ export interface WorkflowResult {
 
 /**
  * Execute the complete brand-guided generation workflow
- * 
+ *
  * This is the primary entry point for generating brand imagery.
  * It loads brand context, generates prompts, selects models,
  * validates against brand rules, and logs everything.
@@ -112,14 +112,14 @@ export async function executeBrandGuidedWorkflow(
   config: GenerationWorkflowConfig
 ): Promise<WorkflowResult> {
   const { brandSlug, agentId, groupId, priority } = config;
-  
+
   // ==========================================
   // STEP 1: Load Brand Context
   // ==========================================
   console.log(`[Brand-Guided Workflow] Loading context for: ${brandSlug}`);
-  
+
   const brandContext = await loadBrandContext(brandSlug);
-  
+
   await logToAlluraBrain({
     agentId,
     eventType: 'workflow_started',
@@ -133,14 +133,14 @@ export async function executeBrandGuidedWorkflow(
       logoVariants: brandContext.logo.variants.length
     }
   });
-  
+
   // ==========================================
   // STEP 2: Generate Brand-Guided Prompts
   // ==========================================
   console.log(`[Brand-Guided Workflow] Generating prompts with brand context injection`);
-  
+
   const prompts = generateBrandGuidedPrompts(brandContext);
-  
+
   await logToAlluraBrain({
     agentId,
     eventType: 'prompts_generated',
@@ -152,25 +152,25 @@ export async function executeBrandGuidedWorkflow(
       totalCostEstimate: prompts.reduce((sum, p) => sum + p.costEstimate, 0)
     }
   });
-  
+
   // ==========================================
   // STEP 3: Execute Generation (or prepare for execution)
   // ==========================================
   console.log(`[Brand-Guided Workflow] Preparing ${prompts.length} generations`);
-  
+
   const results: GenerationResult[] = [];
   let totalCost = 0;
   let passedValidation = 0;
   let failedValidation = 0;
   const allBrandContextUsed: string[] = [];
-  
+
   for (const prompt of prompts) {
     // Calculate cost
     totalCost += prompt.costEstimate;
-    
+
     // Track brand context used
     allBrandContextUsed.push(...prompt.brandContextUsed);
-    
+
     // Validate prompt rules (pre-generation)
     const preValidation = {
       hasBrandContext: prompt.brandContextUsed.length > 0,
@@ -178,7 +178,7 @@ export async function executeBrandGuidedWorkflow(
       hasValidationRules: prompt.validationRules.length > 0,
       usesOptimalModel: true // Model was selected by use case
     };
-    
+
     // Create result (in production, this would call fal.ai)
     const result: GenerationResult = {
       tokenSet: prompt.tokenSet,
@@ -194,7 +194,7 @@ export async function executeBrandGuidedWorkflow(
       validationIssues: [],
       eventLogged: false
     };
-    
+
     // ==========================================
     // STEP 4: Post-Generation Validation
     // ==========================================
@@ -203,13 +203,13 @@ export async function executeBrandGuidedWorkflow(
     // const validation = validateGeneration(imageAnalysis, prompt.tokenSet);
     // result.validationPassed = validation.passed;
     // result.validationIssues = validation.issues;
-    
+
     if (result.validationPassed) {
       passedValidation++;
     } else {
       failedValidation++;
     }
-    
+
     // ==========================================
     // STEP 5: Log to Allura Brain
     // ==========================================
@@ -229,7 +229,7 @@ export async function executeBrandGuidedWorkflow(
           promptVersion: prompt.promptVersion
         }
       });
-      
+
       // Log as winning prompt
       await logWinningPrompt({
         promptId: `${brandSlug}-${prompt.tokenSet}-${Date.now()}`,
@@ -249,13 +249,13 @@ export async function executeBrandGuidedWorkflow(
         createdAt: new Date().toISOString(),
         lastUsed: new Date().toISOString()
       });
-      
+
       result.eventLogged = true;
     }
-    
+
     results.push(result);
   }
-  
+
   // ==========================================
   // STEP 6: Sync to Notion
   // ==========================================
@@ -278,15 +278,15 @@ export async function executeBrandGuidedWorkflow(
       createdAt: new Date().toISOString(),
       lastUsed: new Date().toISOString()
     }));
-    
+
     await syncToNotion(promptPerformances);
   }
-  
+
   // ==========================================
   // STEP 7: Generate Report
   // ==========================================
   const report = await generatePromptReport(brandSlug);
-  
+
   await logToAlluraBrain({
     agentId,
     eventType: 'workflow_complete',
@@ -300,7 +300,7 @@ export async function executeBrandGuidedWorkflow(
       brandContextUsed: [...new Set(allBrandContextUsed)]
     }
   });
-  
+
   return {
     config,
     results,
@@ -324,7 +324,7 @@ export async function quickGenerate(
   const brandContext = await loadBrandContext(brandSlug);
   const model = selectOptimalModel(useCase, priority);
   const references = getBrandReferenceImages(brandContext);
-  
+
   // Generate prompt for this use case
   const prompts = generateBrandGuidedPrompts(brandContext);
   const matchingPrompt = prompts.find(p => {
@@ -339,14 +339,14 @@ export async function quickGenerate(
     };
     return useCaseMap[useCase]?.includes(p.tokenSet);
   });
-  
+
   const basePrompt = matchingPrompt?.basePrompt || `Brand imagery for ${brandContext.brandName}. ${brandContext.essence}.`;
   const { enrichedPrompt, enrichedNegative, brandContextUsed } = injectBrandContext(
     basePrompt,
     brandContext,
     { includeLogo: true, includeColors: true, includeShapes: true, includeTypography: true }
   );
-  
+
   return {
     tokenSet: matchingPrompt?.tokenSet || `QUICK-${Date.now()}`,
     direction: matchingPrompt?.direction || `Quick ${useCase}`,
@@ -374,7 +374,7 @@ export async function compareApproaches(
   recommendation: string;
 }> {
   const cost = calculateCampaignCost();
-  
+
   return {
     singleModel: {
       totalCost: 8 * 0.012, // flux-lora

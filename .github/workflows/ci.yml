@@ -6,46 +6,76 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
-  validate-plugins:
-    name: Validate plugin structure (5 invariants)
+  source-first-release-gates:
+    name: Source-first export and package gates
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Validate marketplace, manifests, content, paths, versions
+      - name: Install validation dependencies
+        run: |
+          python3 -m pip install --disable-pip-version-check --no-cache-dir pyyaml
+          GITLEAKS_VERSION=8.30.1
+          curl --fail --location --silent --show-error \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            --output /tmp/gitleaks.tar.gz
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  /tmp/gitleaks.tar.gz" | sha256sum --check
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          sudo install -m 0755 /tmp/gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Verify pinned standalone source exports have no drift
+        run: python3 scripts/verify_source_exports.py --check
+
+      - name: Validate marketplace and runtime manifests
         run: python3 scripts/validate_manifests.py
 
-      - name: Validate JSON files parse
-        run: |
-          set -e
-          errors=0
-          for f in $(find . -name "plugin.json" -not -path "*/node_modules/*" -not -path "*/__pycache__/*"); do
-            python3 -m json.tool "$f" > /dev/null 2>&1 || { echo "❌ Invalid JSON: $f"; errors=$((errors + 1)); }
-          done
-          echo "Validated $(find . -name 'plugin.json' -not -path '*/node_modules/*' -not -path '*/__pycache__/*' | wc -l) plugin.json files"
-          [ $errors -eq 0 ] && echo "✅ All JSON valid" || { echo "❌ $errors errors"; exit 1; }
+      - name: Audit registered commands
+        run: bash scripts/commands-audit.sh
 
-  validate-docs:
-    name: Validate documentation
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check README and LICENSE exist
+      - name: Parse all tracked JSON and YAML
         run: |
-          [ -f "README.md" ] && echo "✅ README.md exists" || { echo "❌ Missing README.md"; exit 1; }
-          [ -f "LICENSE" ] && echo "✅ LICENSE exists" || { echo "❌ Missing LICENSE"; exit 1; }
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+          import yaml
 
-  no-secrets:
-    name: No secrets in repo
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check no credentials committed
+          tracked = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
+          for name in tracked:
+              if not name:
+                  continue
+              path = Path(name)
+              if path.suffix == ".json":
+                  json.loads(path.read_text(encoding="utf-8"))
+              elif path.suffix in {".yaml", ".yml"}:
+                  list(yaml.safe_load_all(path.read_text(encoding="utf-8")))
+          print("tracked JSON/YAML parse passed")
+          PY
+
+      - name: Check tracked shell syntax
         run: |
-          set -e
-          if grep -rE "sk-ant-|sk-proj-|ntn_[a-zA-Z0-9]{10,}|ANTHROPIC_API_KEY=['\"]?[a-zA-Z0-9]" . --include="*.json" --include="*.md" --include="*.ts" -l 2>/dev/null; then
-            echo "❌ Possible API keys found"
-            exit 1
-          fi
-          echo "✅ No credentials detected"
+          while IFS= read -r -d '' file; do
+            bash -n "$file"
+          done < <(git ls-files -z '*.sh')
+
+      - name: Scan complete catalog with gitleaks
+        run: gitleaks detect --no-banner --no-git --source . --redact --config .gitleaks.toml
+
+      - name: Smoke test package validators and eval fixtures
+        run: |
+          python3 allura-cowork/scripts/validate_plugin.py allura-cowork
+          python3 allura-cowork/scripts/run_evals.py allura-cowork
+          python3 packages/mortagate-cowork/scripts/validate_package.py \
+            --package-root packages/mortagate-cowork/appPackage
+
+      - name: Check required catalog documentation
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f HARNESS-SYNC.md
+          test -f source-locks.json

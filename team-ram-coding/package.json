@@ -1,10 +1,126 @@
 {
-  "name": "team-ram-coding",
-  "version": "0.2.0",
-  "main": "index.js",
-  "opencode": {
-    "agents": "./agents/",
-    "skills": "./skills/",
-    "commands": "./commands/"
+  "name": "@allura/team-ram-harness",
+  "version": "0.4.0",
+  "description": "Standalone governed multi-agent software-delivery harness with context-first routing, specialist lanes, review gates, and evidence-backed completion.",
+  "author": "Team RAM Contributors",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/http-server.ts",
+  "exports": {
+    ".": "./src/http-server.ts",
+    "./executor": "./src/agent-executor.ts",
+    "./curator": "./src/curator.ts",
+    "./coherence": "./src/coherence-monitor.ts",
+    "./sona": "./src/sona-trajectory.ts",
+    "./lifecycle": "./src/agent-lifecycle.ts",
+    "./context": "./src/context-packet.ts",
+    "./tool-loading": "./src/tool-loading.ts"
+  },
+  "bin": {
+    "team-ram": "./bin/team-ram.mjs"
+  },
+  "files": [
+    "agents/**",
+    ".opencode/agent/**",
+    ".claude/agents/**",
+    ".claude-plugin/agents/**",
+    ".codex/agents/**",
+    ".opencode/command/**",
+    ".claude/commands/**",
+    ".claude-plugin/commands/**",
+    ".agents/skills/**",
+    ".opencode/skills/**",
+    ".claude/skills/**",
+    ".claude-plugin/skills/**",
+    "bmad-module/skills/**",
+    ".opencode/config/**",
+    ".opencode/contracts/**",
+    ".opencode/hooks/**",
+    ".opencode/routing/**",
+    ".opencode/team-ram-presets.jsonc",
+    ".claude/rules/**",
+    ".claude-plugin/.mcp.json",
+    ".claude-plugin/hooks.json",
+    ".claude-plugin/marketplace.json",
+    ".claude-plugin/plugin.json",
+    ".codex-plugin/plugin.json",
+    ".mcp.json",
+    "hooks/**",
+    "team-ram-presets.schema.json",
+    "bmad-module/.claude-plugin/**",
+    "bmad-module/tools/**",
+    "bin/**",
+    "src/**",
+    "scripts/apply-preset.sh",
+    "scripts/lint-agents.sh",
+    "tooling/agent-sync/**",
+    "migrations/**",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "SOURCE.json",
+    "PUBLIC_EXPORT.json",
+    "docs/installation.md",
+    "docs/configuration.md",
+    "docs/ecosystem-relationships.md",
+    "docs/agents.md",
+    "docs/presets.md",
+    "docs/dual-runtime.md",
+    "docs/quick-reference.md",
+    "docs/TESTING.md",
+    ".opencode/SERVICES.md",
+    ".claude-plugin/README.md",
+    "bmad-module/README.md",
+    "scripts/export-public.mjs",
+    "scripts/validate-public-export.mjs"
+  ],
+  "keywords": [
+    "opencode",
+    "harness",
+    "team-ram",
+    "ai-agents",
+    "multi-agent",
+    "orchestration",
+    "ollama",
+    "sona",
+    "self-evolving"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Allura-Ecosystem/allura-team-ram.git"
+  },
+  "homepage": "https://github.com/Allura-Ecosystem/allura-team-ram#readme",
+  "bugs": {
+    "url": "https://github.com/Allura-Ecosystem/allura-team-ram/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18",
+    "bun": ">=1.1.0"
+  },
+  "scripts": {
+    "service": "bun src/http-server.ts",
+    "service:start": "bash scripts/start-service.sh",
+    "test": "bun test",
+    "test:integration": "bun run test-integration.ts",
+    "test:http": "bun test ./test-http-service.ts",
+    "lint": "bunx @biomejs/biome check .",
+    "lint:fix": "bunx @biomejs/biome check . --write",
+    "format": "bunx @biomejs/biome format . --write",
+    "typecheck": "bunx tsc --noEmit",
+    "validate:export": "node scripts/validate-public-export.mjs",
+    "export:public": "node scripts/export-public.mjs",
+    "prompt:baseline": "bun tooling/prompt-evals/prompt-eval.ts .",
+    "prompt:eval": "bun test tooling/prompt-evals/prompt-eval.test.ts"
+  },
+  "dependencies": {
+    "@ruvector/sona": "^0.1.6"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.16",
+    "bun-types": "^1.3.14",
+    "typescript": "^6.0.3"
   }
 }

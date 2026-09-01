@@ -22,13 +22,15 @@ PLUGINS = ["allura-cowork", "team-durham", "team-ram-coding"]
 MANIFEST_VARIANTS = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json"]
 MARKETPLACE = ".claude-plugin/marketplace.json"
 HERMES_PLUGIN_MANIFEST = "plugins/hermes-allura-brain/plugin.yaml"
+SOURCE_LOCKS = "source-locks.json"
 
 # Catalog contract is deliberately declarative: portable marketplace packages and
 # native providers have different public surfaces and must not be conflated.
 PACKAGE_CONTRACTS = {
     "allura-cowork": {"kind": "portable", "readme": "README.md"},
-    "team-durham": {"kind": "portable", "readme": "README.md"},
-    "team-ram-coding": {"kind": "portable", "readme": "README.md"},
+    "team-durham": {"kind": "generated-portable", "readme": "README.md"},
+    "team-ram-coding": {"kind": "generated-portable", "readme": "README.md"},
+    "packages/mortagate-cowork": {"kind": "generated-runtime-neutral", "readme": "README.md"},
     "plugins/hermes-allura-brain": {"kind": "provider", "readme": "README.md"},
     "allura": {"kind": "internal-support", "readme": "README.md"},
 }
@@ -226,6 +228,12 @@ def _hermes_manifest_version(errors: list) -> str:
 def check_package_contracts(errors: list, warnings: list) -> None:
     """Verify each governed unit has the contract appropriate to its runtime."""
     marketplace = parse_json(REPO_ROOT / MARKETPLACE, errors) or {}
+    lock_data = parse_json(REPO_ROOT / SOURCE_LOCKS, errors) or {}
+    source_locks = {
+        entry.get("destination"): entry
+        for entry in lock_data.get("sources", [])
+        if isinstance(entry, dict) and entry.get("destination")
+    }
     marketplace_versions = {
         entry.get("name"): entry.get("version")
         for entry in marketplace.get("plugins", [])
@@ -271,6 +279,63 @@ def check_package_contracts(errors: list, warnings: list) -> None:
                 hard_fail("CONTRACT", f"{package} version drift: {versions}", errors)
                 continue
             print(f"  CONTRACT OK: {package} (portable) v{versions[0]}")
+        elif kind == "generated-portable":
+            if not readme.is_file():
+                hard_fail("CONTRACT", f"generated package README missing: {readme.relative_to(REPO_ROOT)}", errors)
+                continue
+            receipt_name = "EXPORT_PROVENANCE.json" if package == "team-ram-coding" else "EXPORT.json"
+            receipt = parse_json(package_dir / receipt_name, errors) or {}
+            revision = receipt.get("sourceCommit") or receipt.get("sourceRevision")
+            repository = receipt.get("sourceRepository", "")
+            lock = source_locks.get(package, {})
+            if not revision or not re.fullmatch(r"[0-9a-f]{40}", revision):
+                hard_fail("CONTRACT", f"{package} generated provenance lacks a full source SHA", errors)
+                continue
+            if revision != lock.get("commit") or repository.removesuffix(".git") != str(lock.get("repository", "")).removesuffix(".git"):
+                hard_fail("CONTRACT", f"{package} provenance does not match source-locks.json", errors)
+                continue
+            source_contract = parse_json(package_dir / "SOURCE.json", errors) or {}
+            source_repo = source_contract.get("repository") or source_contract.get("canonicalRepository")
+            source_manifest = source_contract.get("authority", {}).get("manifest") or source_contract.get("exportManifest")
+            if str(source_repo).removesuffix(".git") != str(lock.get("repository", "")).removesuffix(".git") or source_manifest != lock.get("manifest"):
+                hard_fail("CONTRACT", f"{package} SOURCE.json does not match its locked authority/manifest", errors)
+                continue
+            marketplace_alias = lock.get("marketplaceAlias")
+            claude = parse_json(package_dir / ".claude-plugin/plugin.json", errors) or {}
+            codex = parse_json(package_dir / ".codex-plugin/plugin.json", errors) or {}
+            npm = parse_json(package_dir / "package.json", errors) or {}
+            if marketplace_versions.get(marketplace_alias) != lock.get("runtimeVersion"):
+                hard_fail("CONTRACT", f"{package} marketplace alias/runtime version mismatch", errors)
+                continue
+            if claude.get("name") != lock.get("sourceManifestName") or codex.get("name") != lock.get("sourceManifestName"):
+                hard_fail("CONTRACT", f"{package} generated source manifest identity was changed", errors)
+                continue
+            if {claude.get("version"), codex.get("version")} != {lock.get("runtimeVersion")}:
+                hard_fail("CONTRACT", f"{package} Claude/Codex runtime version mismatch", errors)
+                continue
+            if npm.get("name") != lock.get("sourcePackageName") or npm.get("version") != lock.get("packageVersion"):
+                hard_fail("CONTRACT", f"{package} source package identity/version mismatch", errors)
+                continue
+            print(f"  CONTRACT OK: {package} (generated portable) @ {revision}")
+        elif kind == "generated-runtime-neutral":
+            if not readme.is_file():
+                hard_fail("CONTRACT", f"generated package README missing: {readme.relative_to(REPO_ROOT)}", errors)
+                continue
+            receipt = parse_json(package_dir / "EXPORT_PROVENANCE.json", errors) or {}
+            lock = source_locks.get(package, {})
+            if receipt.get("generated") is not True or receipt.get("authoritative") is not False:
+                hard_fail("CONTRACT", f"{package} provenance must mark generated/non-authoritative", errors)
+                continue
+            if receipt.get("sourceCommit") != lock.get("commit") or receipt.get("sourceRepository", "").removesuffix(".git") != str(lock.get("repository", "")).removesuffix(".git"):
+                hard_fail("CONTRACT", f"{package} provenance does not match source-locks.json", errors)
+                continue
+            if receipt.get("contractPath") != lock.get("manifest") or len(receipt.get("files", [])) != 19:
+                hard_fail("CONTRACT", f"{package} contract path or 19-file allowlist receipt is invalid", errors)
+                continue
+            if package in marketplace_versions:
+                hard_fail("CONTRACT", f"{package} must not be listed in the Claude marketplace", errors)
+                continue
+            print(f"  CONTRACT OK: {package} (generated {receipt.get('runtime', 'runtime-neutral')})")
         elif kind == "provider":
             if not _readme_has_contract(readme, provider_markers, errors):
                 continue

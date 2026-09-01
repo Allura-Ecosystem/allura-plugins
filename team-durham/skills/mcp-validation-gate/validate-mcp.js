@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
  * MCP Validation Gate Script
- * 
+ *
  * Validates MCP server connectivity and tool availability
  * for the Team Durham brand production pipeline.
- * 
+ *
  * Usage:
  *   node validate-mcp.js                    # Validate all required servers
  *   node validate-mcp.js --server fal-ai    # Validate specific server
@@ -86,7 +86,7 @@ class MCPValidator {
 
   log(message, level = 'info') {
     if (this.jsonOutput) return;
-    
+
     const prefix = {
       info: 'ℹ️',
       success: '✅',
@@ -94,15 +94,15 @@ class MCPValidator {
       warning: '⚠️',
       debug: '🐛'
     }[level] || 'ℹ️';
-    
+
     if (level === 'debug' && !this.verbose) return;
-    
+
     console.log(`${prefix} ${message}`);
   }
 
   async validateServer(serverName) {
     this.log(`Validating server: ${serverName}`, 'debug');
-    
+
     const result = {
       name: serverName,
       connected: false,
@@ -133,7 +133,7 @@ class MCPValidator {
         for (const toolName of serverConfig.requiredTools) {
           const toolResult = await this.validateTool(serverName, toolName);
           result.tools[toolName] = toolResult;
-          
+
           if (!toolResult.available) {
             result.errors.push(`Tool '${toolName}' unavailable: ${toolResult.error}`);
           }
@@ -154,7 +154,7 @@ class MCPValidator {
       // In a real implementation, this would query the MCP session
       // For now, we simulate the check structure
       const availableTools = await this.discoverServerTools(serverName);
-      
+
       return {
         available: availableTools.length > 0,
         tools: availableTools,
@@ -209,7 +209,7 @@ class MCPValidator {
 
   async validateTool(serverName, toolName) {
     this.log(`  Checking tool: ${serverName}.${toolName}`, 'debug');
-    
+
     const result = {
       name: toolName,
       available: false,
@@ -220,7 +220,7 @@ class MCPValidator {
     try {
       const tools = await this.discoverServerTools(serverName);
       result.available = tools.includes(toolName);
-      
+
       if (result.available) {
         this.log(`  Tool '${toolName}' is available`, 'success');
       } else {
@@ -247,9 +247,9 @@ class MCPValidator {
     for (const [serverName, config] of Object.entries(REQUIRED_SERVERS)) {
       const serverResult = await this.validateServer(serverName);
       this.results.servers[serverName] = serverResult;
-      
+
       const serverPassed = serverResult.connected && serverResult.errors.length === 0;
-      
+
       if (serverPassed) {
         totalPassed++;
       } else {
@@ -276,7 +276,7 @@ class MCPValidator {
 
   async validatePhase(phaseName) {
     const requiredServers = PHASE_REQUIREMENTS[phaseName];
-    
+
     if (!requiredServers) {
       throw new MCPValidationError(
         `Unknown phase: ${phaseName}`,
@@ -298,7 +298,7 @@ class MCPValidator {
     for (const serverName of requiredServers) {
       const serverResult = await this.validateServer(serverName);
       results.servers[serverName] = serverResult;
-      
+
       if (!serverResult.connected || serverResult.errors.length > 0) {
         results.passed = false;
         results.errors.push(...serverResult.errors);
@@ -312,7 +312,7 @@ class MCPValidator {
     try {
       // Check if mcp-docker is available for logging
       const dockerHealth = await this.checkServerHealth('mcp-docker');
-      
+
       if (!dockerHealth.available) {
         this.log('Cannot log to database: mcp-docker unavailable', 'warning');
         return;
@@ -339,7 +339,7 @@ class MCPValidator {
       };
 
       this.log('Validation results logged to PostgreSQL', 'debug');
-      
+
       // Actual implementation would be:
       // await MCP_DOCKER_insert_data({
       //   table_name: "events",
@@ -369,13 +369,13 @@ class MCPValidator {
       const status = result.connected ? '✅ CONNECTED' : '❌ FAILED';
       const config = REQUIRED_SERVERS[serverName];
       const critical = config?.critical ? ' [CRITICAL]' : '';
-      
+
       console.log(`${serverName}${critical}: ${status}`);
-      
+
       if (result.latency_ms) {
         console.log(`  Latency: ${result.latency_ms}ms`);
       }
-      
+
       if (Object.keys(result.tools).length > 0) {
         console.log('  Tools:');
         for (const [toolName, toolResult] of Object.entries(result.tools)) {
@@ -383,7 +383,7 @@ class MCPValidator {
           console.log(`    ${toolStatus} ${toolName}`);
         }
       }
-      
+
       if (result.errors.length > 0) {
         console.log('  Errors:');
         result.errors.forEach(err => console.log(`    ❌ ${err}`));
@@ -421,18 +421,18 @@ async function validateMCPTool(serverName, toolName, options = {}) {
 
 async function runValidationGate(config) {
   const validator = new MCPValidator(config.options || {});
-  
+
   if (config.phase) {
     return await validator.validatePhase(config.phase);
   }
-  
+
   return await validator.validateAll();
 }
 
 async function quickValidate(serverName, toolName, options = {}) {
   const validator = new MCPValidator({ ...options, verbose: false });
   const serverResult = await validator.validateServer(serverName);
-  
+
   if (!serverResult.connected) {
     return {
       ready: false,
@@ -440,7 +440,7 @@ async function quickValidate(serverName, toolName, options = {}) {
       server: serverResult
     };
   }
-  
+
   if (toolName) {
     const toolResult = serverResult.tools[toolName];
     if (!toolResult || !toolResult.available) {
@@ -451,7 +451,7 @@ async function quickValidate(serverName, toolName, options = {}) {
       };
     }
   }
-  
+
   return {
     ready: true,
     error: null,
@@ -483,7 +483,7 @@ async function main() {
         servers: { [serverName]: await validator.validateServer(serverName) },
         overall: { passed: false, checked: 1 }
       };
-      results.overall.passed = results.servers[serverName].connected && 
+      results.overall.passed = results.servers[serverName].connected &&
                                results.servers[serverName].errors.length === 0;
     } else if (phaseIndex !== -1 && args[phaseIndex + 1]) {
       // Validate phase

@@ -1,6 +1,6 @@
 /**
  * Prompts Module Index
- * 
+ *
  * Exports all prompt-related functionality
  */
 

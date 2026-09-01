@@ -46,8 +46,8 @@ Use the STP framework:
 
 Positioning Statement Template:
 ```
-For [target audience] who [need/frame of reference], 
-[brand name] is a [category] that [point of difference] 
+For [target audience] who [need/frame of reference],
+[brand name] is a [category] that [point of difference]
 because [reason to believe].
 ```
 

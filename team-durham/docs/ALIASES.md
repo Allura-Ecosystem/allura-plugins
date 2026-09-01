@@ -18,4 +18,3 @@ Use these aliases when routing user requests inside the plugin.
 | Agentic Trust Architect, permissions, audit, governance | `agentic-trust-architect.md` |
 
 These aliases are plugin routing hints. The canonical content remains in the corresponding agent file.
-

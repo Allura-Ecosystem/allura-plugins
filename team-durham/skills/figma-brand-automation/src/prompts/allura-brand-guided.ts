@@ -1,9 +1,9 @@
 /**
  * Allura Brand Prompts — Brand-Guided Generation v5.0
- * 
+ *
  * Every prompt now uses the Brand Context Injector to pull
  * ACTUAL brand data from deliverables (not random descriptions).
- * 
+ *
  * Key improvements over v4:
  * - Droplet philosophy from logo pack injected into every prompt
  * - Color composition ratios from brand truth (7% yellow, 15% blue, etc.)
@@ -66,7 +66,7 @@ const BASE_PROMPTS = [
       "Mood must be warm, not cold"
     ]
   },
-  
+
   // ============================================
   // IMG-2: COMMUNITY — Nano Banana Pro
   // ============================================
@@ -86,7 +86,7 @@ const BASE_PROMPTS = [
       "Mood must be warm + welcoming"
     ]
   },
-  
+
   // ============================================
   // IMG-3: PATTERN — Flux Dev
   // ============================================
@@ -106,7 +106,7 @@ const BASE_PROMPTS = [
       "Must feel handcrafted, not corporate"
     ]
   },
-  
+
   // ============================================
   // IMG-4: CRAFT DETAIL — Flux Dev
   // ============================================
@@ -126,7 +126,7 @@ const BASE_PROMPTS = [
       "Mood: warm, human, authentic"
     ]
   },
-  
+
   // ============================================
   // LOGO-1: HERO UI — Seedream (typography)
   // ============================================
@@ -146,7 +146,7 @@ const BASE_PROMPTS = [
       "Typography: Outfit heading style"
     ]
   },
-  
+
   // ============================================
   // LOGO-2: SOCIAL CARDS — Seedream
   // ============================================
@@ -166,7 +166,7 @@ const BASE_PROMPTS = [
       "No people (brand identity focus)"
     ]
   },
-  
+
   // ============================================
   // LOGO-3: PATTERN — Recraft (vector)
   // ============================================
@@ -186,7 +186,7 @@ const BASE_PROMPTS = [
       "'allura' wordmark integrated naturally"
     ]
   },
-  
+
   // ============================================
   // LOGO-4: PRESENTATION COVER — Seedream
   // ============================================
@@ -219,7 +219,7 @@ export function generateBrandGuidedPrompts(
   context: BrandContext = ALLURA_BRAND_CONTEXT
 ): BrandGuidedPrompt[] {
   const references = getBrandReferenceImages(context);
-  
+
   return BASE_PROMPTS.map(base => {
     // Inject brand context into prompt
     const { enrichedPrompt, enrichedNegative, brandContextUsed } = injectBrandContext(
@@ -234,13 +234,13 @@ export function generateBrandGuidedPrompts(
         includeVoice: false
       }
     );
-    
+
     // Select optimal model
     const model = selectOptimalModel(base.useCase, 'quality');
-    
+
     // Combine negative prompts
     const fullNegative = `${base.negativeBase}, ${enrichedNegative}`;
-    
+
     return {
       direction: base.direction,
       tokenSet: base.tokenSet,
@@ -336,7 +336,7 @@ export function calculateCampaignCost(): {
   const prompts = generateBrandGuidedPrompts();
   const byModel: Record<string, { count: number; cost: number }> = {};
   let total = 0;
-  
+
   for (const prompt of prompts) {
     if (!byModel[prompt.model]) {
       byModel[prompt.model] = { count: 0, cost: 0 };
@@ -345,11 +345,11 @@ export function calculateCampaignCost(): {
     byModel[prompt.model].cost += prompt.costEstimate;
     total += prompt.costEstimate;
   }
-  
+
   // Compare to single model (flux-lora at $0.012/image)
   const singleModelCost = 8 * 0.012;
   const savingsVsSingleModel = Math.round((total - singleModelCost) * 1000) / 1000;
-  
+
   return {
     total: Math.round(total * 1000) / 1000,
     byModel,

@@ -124,13 +124,13 @@ async function optimizeImage(inputPath, outputPath) {
       .resize(2048, 2048, { fit: 'inside', withoutEnlargement: true })
       .webp({ quality: 85, effort: 4 })
       .withMetadata({ exif: { IFD0: { Copyright: 'Allura Brand Systems' } } });
-    
+
     await optimize.toFile(outputPath);
-    
+
     // Verify output exists and is valid
     const stats = fs.statSync(outputPath);
     if (stats.size === 0) throw new Error('Output file is empty');
-    
+
     return { success: true, size: stats.size };
   } catch (err) {
     // Log per-file failure but continue with others
@@ -218,23 +218,23 @@ If `brand-truth.json` contains `brand.name`, prepend it. If not, use generic des
 async function uploadToPenpot(filePath, fileKey, client) {
   const logPath = `clients/${client}/delivery/penpot-upload-log.json`;
   let uploadLog = {};
-  
+
   if (fs.existsSync(logPath)) {
     uploadLog = JSON.parse(fs.readFileSync(logPath, 'utf8'));
   }
-  
+
   const fileHash = crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
-  
+
   // Idempotency check
   if (uploadLog[fileHash]) {
     console.log(`Skipping ${path.basename(filePath)} — already uploaded (ID: ${uploadLog[fileHash].penpotId})`);
     return { skipped: true, penpotId: uploadLog[fileHash].penpotId };
   }
-  
+
   // MCP validation before upload
   await validateMCPServer('penpot-full');
   await validateMCPTool('penpot-full', 'upload_media');
-  
+
   // Upload with retry
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
@@ -247,7 +247,7 @@ async function uploadToPenpot(filePath, fileKey, client) {
           name: path.basename(filePath)
         }
       });
-      
+
       // Record in log
       uploadLog[fileHash] = {
         penpotId: result.id,
@@ -255,7 +255,7 @@ async function uploadToPenpot(filePath, fileKey, client) {
         uploadedAt: new Date().toISOString()
       };
       fs.writeFileSync(logPath, JSON.stringify(uploadLog, null, 2));
-      
+
       return { success: true, penpotId: result.id };
     } catch (err) {
       if (attempt === 3) {

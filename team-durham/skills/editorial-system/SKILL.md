@@ -16,7 +16,7 @@ description: Create layered shadow systems, editorial grids, and visual depth fo
 Editorial shadows create depth through **layered elevation**, not single drop shadows:
 
 1. **Ambient Shadow** — Large, soft, low opacity (the room light)
-2. **Directional Shadow** — Offset, sharper, medium opacity (the window light)  
+2. **Directional Shadow** — Offset, sharper, medium opacity (the window light)
 3. **Contact Shadow** — Small, tight, high opacity (the ground contact)
 
 ### Visual Effect
@@ -25,7 +25,7 @@ Editorial shadows create depth through **layered elevation**, not single drop sh
 Single Layer (Flat)          3-Layer Editorial (Sophisticated)
         ↓                              ↓
     ┌─────┐                    ┌─────────────┐  ← Ambient (large, soft)
-    │     │                    │  ┌─────┐    │  
+    │     │                    │  ┌─────┐    │
     │ BOX │                    │  │     │    │  ← Directional (offset)
     │     │                    │  │ BOX │    │
     └─────┘                    │  │     │    │
@@ -49,7 +49,7 @@ const editorialShadows = {
     opacity: 0.08,
     color: "#142329" // Dark Gray
   },
-  
+
   // Layer 2: Directional (simulates light source)
   directional: {
     x: 0,
@@ -59,7 +59,7 @@ const editorialShadows = {
     opacity: 0.12,
     color: "#142329"
   },
-  
+
   // Layer 3: Contact (anchors to surface)
   contact: {
     x: 0,
@@ -78,17 +78,17 @@ const editorialShadows = {
 const elevation = {
   // Level 0: Flat (no elevation)
   flat: [],
-  
+
   // Level 1: Card (default card elevation)
   card: [ambient, directional],
-  
+
   // Level 2: Hover (interactive hover state)
   hover: [
     { ...ambient, y: 8, blur: 30, opacity: 0.10 },
     { ...directional, y: 12, blur: 24, opacity: 0.14 },
     contact
   ],
-  
+
   // Level 3: Modal/Overlay (highest elevation)
   modal: [
     { ...ambient, y: 20, blur: 60, opacity: 0.15 },
@@ -114,7 +114,7 @@ const elevation = {
 12-column editorial grid
 │
 ├─ Desktop: 48px margins, 24px gutters
-├─ Tablet: 24px margins, 16px gutters  
+├─ Tablet: 24px margins, 16px gutters
 └─ Mobile: 16px margins, 16px gutters
 ```
 
@@ -155,7 +155,7 @@ memory_search({
 
 ### Step 4: Apply to Components
 - Cards: elevation.card
-- Buttons (hover): elevation.hover  
+- Buttons (hover): elevation.hover
 - Modals: elevation.modal
 
 ### Step 5: Log to Brain

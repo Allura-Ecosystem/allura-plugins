@@ -14,7 +14,7 @@ PostgreSQL (episodic) and the RuVector semantic graph are connected. Use direct 
   "FIGMA_FILE_UPDATED" \
   "glaser" \
   "completed" \
-  '{"file_key": "gnsKN6p6nWnATzZif7l0H5", "changes": ["logo_imported", "colors_corrected"]}'
+  '{"file_key": "FIGMA_FILE_KEY_EXAMPLE", "changes": ["logo_imported", "colors_corrected"]}'
 ```
 
 ### Verify It Worked

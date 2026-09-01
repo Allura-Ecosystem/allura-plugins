@@ -1,11 +1,11 @@
 /**
  * Brand Context Injector
- * 
+ *
  * Reads actual brand assets (brand kit, logo pack, brand truth)
  * and injects them into every fal.ai prompt BEFORE generation.
- * 
+ *
  * This ensures generated images are "from" the brand, not just "about" it.
- * 
+ *
  * Source files:
  * - brand-kit-v3.2-final.md (colors, typography, visual language, shadows)
  * - 03_visual-director_logo-pack.md (droplet philosophy, allura gesture)
@@ -105,18 +105,18 @@ export interface BrandContext {
 
 export const ALLURA_BRAND_CONTEXT: BrandContext = {
   brandName: "allura",
-  
+
   archetype: {
     primary: "Caregiver (50%)",
     secondary: "Creator (30%)",
     tertiary: "Explorer (20%)",
     character: "Warm + Connected"
   },
-  
+
   essence: "Warm technology that brings communities together",
   promise: "We create spaces where connection thrives, community grows, and everyone belongs",
   positioning: "For communities seeking connection and empowerment through thoughtful technology, allura is the community-centered platform that creates warm digital spaces where people truly belong — unlike cold, transactional tech platforms",
-  
+
   colors: {
     primary: {
       name: "Warm Yellow",
@@ -176,7 +176,7 @@ export const ALLURA_BRAND_CONTEXT: BrandContext = {
       "Any color on similar hue"
     ]
   },
-  
+
   typography: {
     heading: "Outfit",
     headingWeights: ["SemiBold 600", "Bold 700"],
@@ -192,20 +192,20 @@ export const ALLURA_BRAND_CONTEXT: BrandContext = {
       caption: "12px"
     }
   },
-  
+
   shapes: {
     borderRadius: "12-16px for cards and containers",
     philosophy: "Droplet curves — fluid, organic shapes that suggest connection and flow",
     avoid: "Sharp corners, rigid geometric forms"
   },
-  
+
   photography: {
     style: "Authentic, documentary-style photography of diverse communities",
     lighting: "Natural light preferred, warm tones, golden hour",
     subjects: "Real community members, genuine moments of connection",
     avoid: "Stock photos, overly staged imagery, isolated individuals"
   },
-  
+
   logo: {
     concept: "The allura gesture — fluid, organic curves that suggest droplets, connection, and flow",
     philosophy: "Golden ratio proportions with droplet curves creating visual harmony",
@@ -226,20 +226,20 @@ export const ALLURA_BRAND_CONTEXT: BrandContext = {
       "Never place on busy backgrounds without clearance"
     ]
   },
-  
+
   visualLanguage: {
     shadowSystem: "3-layer editorial shadows: ambient (0 4px 20px -4px rgba(20,35,41,0.08)) + directional (0 8px 16px -4px rgba(20,35,41,0.12)) + contact (0 2px 4px 0 rgba(20,35,41,0.16))",
     elevationLevels: ["Flat (none)", "Card (ambient+directional)", "Hover (enhanced+contact)", "Modal (full 3-layer)"],
     patternUsage: "Memory Keep Pattern — organic droplet motifs, soft curves suggesting water ripples, Warm Yellow + Deep Blue + Warm Green rhythm",
     iconography: "Rounded, soft, 2px stroke weight, inherits text color tokens, 24px default"
   },
-  
+
   voice: {
     character: "Warmth of a trusted neighbor, thoughtfulness of a close friend. Welcoming without being overly familiar, knowledgeable without being condescending.",
     wordsToUse: ["community", "connection", "belonging", "together", "warmth", "inviting", "craft", "care", "celebrate", "amplify", "support"],
     wordsToAvoid: ["users", "consumers", "targets", "leverage", "utilize", "disruption", "hacking", "AI-powered", "seamless", "frictionless"]
   },
-  
+
   assets: {
     logosDir: "clients/allura-memory/assets/logos/alllura logo final/",
     moodImage: "clients/allura-memory/assets/mood/CMv0S4e4J8qmN70lpLEjD_image (1).png",
@@ -257,7 +257,7 @@ export const ALLURA_BRAND_CONTEXT: BrandContext = {
  * This is prepended to every generation prompt
  */
 export function buildBrandContextPrefix(context: BrandContext): string {
-  return `Brand: ${context.brandName} — ${context.essence}. 
+  return `Brand: ${context.brandName} — ${context.essence}.
 Archetype: ${context.archetype.primary}, ${context.archetype.secondary}, ${context.archetype.tertiary}. Character: ${context.archetype.character}.
 Visual DNA: ${context.logo.dropletPhilosophy}. ${context.logo.gesture}.
 Shapes: ${context.shapes.philosophy}. Avoid: ${context.shapes.avoid}.
@@ -277,7 +277,7 @@ export function buildBrandContextNegatives(context: BrandContext): string {
   const shapeAvoid = context.shapes.avoid;
   const logoMisuse = context.logo.misuseRules.slice(0, 3).join(', ');
   const voiceAvoid = context.voice.wordsToAvoid.slice(0, 5).join(', ');
-  
+
   return `FORBIDDEN COLOR COMBOS: ${forbidden}. AVOID: ${photoAvoid}, ${shapeAvoid}, ${logoMisuse}, ${voiceAvoid}, cold clinical aesthetic, corporate sterile, tech jargon, harsh edges, sharp corners, stock photo look, isolated individuals, staged poses, blue-tinted lighting, neon colors, rainbow gradients, busy cluttered compositions, dark gloomy backgrounds, medical aesthetic, circuit board patterns, corporate grids`;
 }
 
@@ -309,59 +309,59 @@ export function injectBrandContext(
     includeShapes: true,
     includeVoice: false // Usually not needed for image generation
   };
-  
+
   const opts = { ...defaults, ...options };
   const brandContextUsed: string[] = [];
-  
+
   let prefix = `Brand: ${context.brandName} — ${context.essence}. `;
-  
+
   // Archetype always included
   prefix += `Archetype: ${context.archetype.character}. `;
   brandContextUsed.push('archetype');
-  
+
   // Logo philosophy
   if (opts.includeLogo) {
     prefix += `${context.logo.dropletPhilosophy} ${context.logo.gesture} `;
     brandContextUsed.push('logo-philosophy');
   }
-  
+
   // Shapes
   if (opts.includeShapes) {
     prefix += `Shapes: ${context.shapes.philosophy}. Avoid ${context.shapes.avoid}. `;
     brandContextUsed.push('shapes');
   }
-  
+
   // Colors with exact ratios
   if (opts.includeColors) {
     prefix += `Color palette with composition ratios: Warm Yellow ${context.colors.primary.hex} (${context.colors.primary.ratio}), Deep Blue ${context.colors.secondary[0].hex} (${context.colors.secondary[0].ratio}), Warm Green ${context.colors.secondary[1].hex} (${context.colors.secondary[1].ratio}), Dark Gray ${context.colors.neutrals.dark.hex} (${context.colors.neutrals.dark.ratio}), White ${context.colors.neutrals.light.hex} (${context.colors.neutrals.light.ratio}). `;
     brandContextUsed.push('colors');
   }
-  
+
   // Typography
   if (opts.includeTypography) {
     prefix += `Typography: ${context.typography.heading} for headings (${context.typography.headingWeights.join(', ')}), ${context.typography.body} for body (${context.typography.bodyWeights.join(', ')}). `;
     brandContextUsed.push('typography');
   }
-  
+
   // Photography style
   if (opts.includePhotography) {
     prefix += `Photography: ${context.photography.style}. ${context.photography.lighting}. `;
     brandContextUsed.push('photography');
   }
-  
+
   // Shadow system
   prefix += `Shadows: ${context.visualLanguage.shadowSystem}. `;
   brandContextUsed.push('shadows');
-  
+
   // Voice (optional)
   if (opts.includeVoice) {
     prefix += `Voice: ${context.voice.character} `;
     brandContextUsed.push('voice');
   }
-  
+
   const enrichedPrompt = prefix + basePrompt;
   const enrichedNegative = buildBrandContextNegatives(context);
-  
+
   return {
     enrichedPrompt,
     enrichedNegative,
@@ -408,7 +408,7 @@ export function validateAgainstBrandKit(
   issues: { type: string; severity: 'low' | 'medium' | 'high'; description: string }[];
 } {
   const issues: { type: string; severity: 'low' | 'medium' | 'high'; description: string }[] = [];
-  
+
   // Check colors against brand palette
   const brandHexes = [
     context.colors.primary.hex,
@@ -416,9 +416,9 @@ export function validateAgainstBrandKit(
     context.colors.neutrals.dark.hex,
     context.colors.neutrals.light.hex
   ];
-  
+
   for (const color of imageAnalysis.dominantColors) {
-    const isBrandColor = brandHexes.some(bc => 
+    const isBrandColor = brandHexes.some(bc =>
       bc.toLowerCase() === color.toLowerCase()
     );
     if (!isBrandColor) {
@@ -429,9 +429,9 @@ export function validateAgainstBrandKit(
       });
     }
   }
-  
+
   // Check for forbidden color combinations
-  if (imageAnalysis.dominantColors.includes('#0581A7') && 
+  if (imageAnalysis.dominantColors.includes('#0581A7') &&
       imageAnalysis.dominantColors.includes('#FFC300')) {
     issues.push({
       type: 'forbidden_combo',
@@ -439,7 +439,7 @@ export function validateAgainstBrandKit(
       description: 'Deep Blue on Warm Yellow is forbidden (2.5:1 contrast fails WCAG)'
     });
   }
-  
+
   // Check for sharp corners (brand avoids them)
   if (imageAnalysis.hasSharpCorners) {
     issues.push({
@@ -448,7 +448,7 @@ export function validateAgainstBrandKit(
       description: 'Brand philosophy avoids sharp corners — use droplet curves instead'
     });
   }
-  
+
   // Check text content against voice rules
   if (imageAnalysis.hasText) {
     const forbiddenWords = context.voice.wordsToAvoid;
@@ -462,7 +462,7 @@ export function validateAgainstBrandKit(
       }
     }
   }
-  
+
   // Check mood
   if (imageAnalysis.mood === 'cold' || imageAnalysis.mood === 'clinical') {
     issues.push({
@@ -471,7 +471,7 @@ export function validateAgainstBrandKit(
       description: 'Image mood is cold/clinical — brand requires warm + connected'
     });
   }
-  
+
   return {
     passed: issues.filter(i => i.severity === 'high').length === 0,
     issues
@@ -487,12 +487,12 @@ export async function loadBrandContext(brandSlug: string): Promise<BrandContext>
   if (brandSlug === 'allura-memory' || brandSlug === 'allura') {
     return ALLURA_BRAND_CONTEXT;
   }
-  
+
   // For other brands, would read from file system:
   // const brandKit = await readFile(`clients/${brandSlug}/deliverables/04_brand-kit-builder_brand-kit.md`);
   // const logoPack = await readFile(`clients/${brandSlug}/deliverables/03_visual-director_logo-pack.md`);
   // const brandTruth = await readFile(`clients/${brandSlug}/deliverables/06_allura-memory_brand-truth.json`);
   // return parseBrandContext(brandKit, logoPack, brandTruth);
-  
+
   throw new Error(`Brand context not found for: ${brandSlug}`);
 }

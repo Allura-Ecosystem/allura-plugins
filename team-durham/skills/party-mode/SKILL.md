@@ -7,8 +7,8 @@ description: Multi-agent brand roundtable with hybrid execution modes. Debate mo
 
 # Party Mode — Hybrid Multi-Agent Execution
 
-> **Orchestrator:** @Kotler (Brand Orchestrator)  
-> **Modes:** Debate (chat) | Parallel (silent dispatch)  
+> **Orchestrator:** @Kotler (Brand Orchestrator)
+> **Modes:** Debate (chat) | Parallel (silent dispatch)
 > **group_id:** `allura-team-durham`
 
 ---
@@ -91,7 +91,7 @@ TaskCreate({
 })
 
 TaskCreate({
-  agent: "glaser", 
+  agent: "glaser",
   task: "Create color system",
   blockedBy: []
 })
@@ -116,7 +116,7 @@ TaskCreate({
 ```javascript
 function detectMode(userInput) {
   const input = userInput.toLowerCase();
-  
+
   // Roundtable indicators (check first — questions override actions)
   const roundtablePatterns = [
     /\?/,                           // Questions
@@ -124,11 +124,11 @@ function detectMode(userInput) {
     /\b(should|debate|discuss|argue|decide between)\b/,
     /\b(which|what|why|how about)\b/
   ];
-  
+
   for (const pattern of roundtablePatterns) {
     if (pattern.test(input)) return 'roundtable';
   }
-  
+
   // Parallel indicators
   const parallelPatterns = [
     /\b(build|create|generate|make|produce|write|edit|update|sync)\b/,
@@ -136,11 +136,11 @@ function detectMode(userInput) {
     /\b(run|execute|perform|do|start|launch)\b/,
     /\band\b.*\b(and)\b/            // Multiple items
   ];
-  
+
   for (const pattern of parallelPatterns) {
     if (pattern.test(input)) return 'parallel';
   }
-  
+
   // Default: roundtable (safer for ambiguous input)
   return 'roundtable';
 }
@@ -191,7 +191,7 @@ Real-time Collection
     ↓
 Validation Gates
     ├─ Aaker gate: Strategy alignment
-    ├─ Glaser gate: Visual consistency  
+    ├─ Glaser gate: Visual consistency
     └─ Munari gate: QA / Production readiness
     ↓
 Synthesis (Kotler)

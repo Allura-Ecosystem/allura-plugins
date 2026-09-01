@@ -1,0 +1,1459 @@
+{
+  "files": [
+    {
+      "path": ".claude-plugin/plugin.json",
+      "sha256": "aaa8074261049fb975f3e36eff6cf8280b02f1df3181e6d500a96b3088081b4c",
+      "size": 2463
+    },
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "625a305c24cce76b1a87db1d7d56c127c9b60e6ad9aef05ca85e430d429a0c32",
+      "size": 1818
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "sha256": "d2588330461bce5e011505fea9ecc932ce2b8995e3cecca43bf8e47c91155c21",
+      "size": 4891
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "683dddf5364d05256de25208f42bef4983aa8a81604beb927c2eae944e61b859",
+      "size": 1197
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "4d8840594b9b5a61d5fc86b00e2bd04e1996921bb877beb1e5918d99de7fb63f",
+      "size": 587
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "a756ae0286b4e92d8effa788a2766638958eb373806d02718c2acc2d5c744548",
+      "size": 1081
+    },
+    {
+      "path": "README.md",
+      "sha256": "f53e4c1e17c185ce142f752bdd059492beb9cdd8183633c59245297e81cb893a",
+      "size": 6078
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "d2aa4ecf1cd63d1f8980816ad6a2e6ef22f8195c93d794829feb1af947a26ee1",
+      "size": 759
+    },
+    {
+      "path": "SOURCE.json",
+      "sha256": "efd0010043d44968be5796b7dc5de241d2a60927404be11285eda79efecc867a",
+      "size": 895
+    },
+    {
+      "path": "agents/agentic-trust-architect.md",
+      "sha256": "05a4f840f659688eced59886acc15164b23c0763438bdd51f0a1bd08c75b093d",
+      "size": 3949
+    },
+    {
+      "path": "agents/brand-kit-builder.md",
+      "sha256": "bd7027717f8be0db3ce1528133f1248f25fdffda22f51d99d55c8e5bb91b4830",
+      "size": 9598
+    },
+    {
+      "path": "agents/brand-orchestrator.md",
+      "sha256": "f6d75ca8c31512a9326d54466c35a93a435eea1610deca6b09e16af9da8578cb",
+      "size": 4317
+    },
+    {
+      "path": "agents/brand-strategist.md",
+      "sha256": "1043c2c133f8c6922201bfb27dd3301fddbd8744f9dfd99ea99ec53dcbbafe31",
+      "size": 7512
+    },
+    {
+      "path": "agents/copywriter.md",
+      "sha256": "f74d4c222dc65142bd952bfca79b3b39774d6baaa95b8217c258c074898c866d",
+      "size": 7356
+    },
+    {
+      "path": "agents/data-analyst.md",
+      "sha256": "85cbeb10c75c87db7ed61640175b0c82ef7c58535f6ac46e8142fb3295259562",
+      "size": 5918
+    },
+    {
+      "path": "agents/evidence-collector.md",
+      "sha256": "73fd722ac6c1290bab4252e73ab92252cf8e69126f1e46e4a257b578ecdd9c72",
+      "size": 3546
+    },
+    {
+      "path": "agents/openagent.md",
+      "sha256": "fab7d93f9a6a205950898b5518fc788f948f4bcafa50060c2e5a89b116ddd0c5",
+      "size": 4595
+    },
+    {
+      "path": "agents/qa-reviewer.md",
+      "sha256": "87280a7c903ce3e145821d778ed809b0c7e64f843ac65ead9be906ade94f6790",
+      "size": 2953
+    },
+    {
+      "path": "agents/reality-checker.md",
+      "sha256": "91dec35161c9d6dbfbcfb38903742777b8e577b03aabdd7aa5612ca9fb6310ef",
+      "size": 4274
+    },
+    {
+      "path": "agents/scout-recon.md",
+      "sha256": "5edeb338aeddb30d93dcb71b9c588f8409b4bd15882ccdba8c66e9104af3f8c2",
+      "size": 2239
+    },
+    {
+      "path": "agents/visual-director.md",
+      "sha256": "c83fed85e1bafbfe73de8fb64737f2dbda2df497de652233bcdf7be9eafc4973",
+      "size": 8669
+    },
+    {
+      "path": "agents/workflow-architect.md",
+      "sha256": "72fbb00e1d14b5bf5e369780a07ec8065dd09d87b67379574cdaf6f573954516",
+      "size": 3841
+    },
+    {
+      "path": "bmad-module/.claude-plugin/marketplace.json",
+      "sha256": "467085f4d8a90d7e6376589dda500a98a9503bc4e91b4675da40e81f5e438dad",
+      "size": 836
+    },
+    {
+      "path": "bmad-module/README.md",
+      "sha256": "5df99e81b056ee799e84859591dbc66d9688fa715e64dac80e130db79fae6e57",
+      "size": 1028
+    },
+    {
+      "path": "bmad-module/skills/dur-agent-kotler/SKILL.md",
+      "sha256": "14765bc017ef4f3231c99669c3f8c596dc771695d82a8e969fe33392c3de3a04",
+      "size": 540
+    },
+    {
+      "path": "bmad-module/skills/dur-agent-kotler/customize.toml",
+      "sha256": "089717ac6b6d981ed47975573afafe5e7f8eaea67164c9fb2294ff011b504aef",
+      "size": 175
+    },
+    {
+      "path": "bmad-module/skills/dur-agent-munari/SKILL.md",
+      "sha256": "bac578168b53df9e4a2eb623224fbc31f77a379caee9f9f651e0a851d5633f48",
+      "size": 478
+    },
+    {
+      "path": "bmad-module/skills/dur-agent-munari/customize.toml",
+      "sha256": "30b32749e03c3a53134ddde23f930c6f6fc13044f5bb6521b7daca477659259c",
+      "size": 165
+    },
+    {
+      "path": "bmad-module/skills/dur-agent-scout/SKILL.md",
+      "sha256": "e0bc2d451d46b9aaa3a97bcb1e3508e069faf320a4ebd0cdafd40ae71b6d0637",
+      "size": 453
+    },
+    {
+      "path": "bmad-module/skills/dur-agent-scout/customize.toml",
+      "sha256": "49b366ae7158424939cdff7c6a5f435681d00579bdc395795322e991ce596283",
+      "size": 168
+    },
+    {
+      "path": "bmad-module/skills/dur-brand-auto/SKILL.md",
+      "sha256": "685e10621c99ecb68dedd30f3cbe13ffb3e2bf4e55c35c3eb0f25497003f79a9",
+      "size": 534
+    },
+    {
+      "path": "bmad-module/skills/dur-brand-delivery/SKILL.md",
+      "sha256": "f5674db57cea784a37849d30146c6f791d2458464aec69a294a1622e36833ead",
+      "size": 518
+    },
+    {
+      "path": "bmad-module/skills/dur-setup/SKILL.md",
+      "sha256": "a40d0ec68a1a1b14362554d543d31c96b7c54ae9a2f6d3a3efbc22135b217af9",
+      "size": 544
+    },
+    {
+      "path": "bmad-module/skills/dur-setup/assets/module-help.csv",
+      "sha256": "a13f15188f114256fab9b6277be78a0ab92a8576ebe549abe26550370168f197",
+      "size": 1264
+    },
+    {
+      "path": "bmad-module/skills/dur-setup/assets/module.yaml",
+      "sha256": "32c39da1b9c7a3246961220d78e527f970ee3a8fc8178e9a0379268b7e27ffc8",
+      "size": 992
+    },
+    {
+      "path": "bmad-module/tools/validate-adapters.py",
+      "sha256": "bfd6d3bd5f0065a63504885a8747976574de66095930d250b3a3823a0737a6a0",
+      "size": 1673
+    },
+    {
+      "path": "commands/analyst.md",
+      "sha256": "a05d9e88792715ddc6f0b6c654bbfaa70e42fdb8fe766fe7f326633d26070e4c",
+      "size": 1475
+    },
+    {
+      "path": "commands/architect.md",
+      "sha256": "bce91568a06f260812e250055bd1aad8448e66b0679fcc3ff78f2dbb7e9815d2",
+      "size": 2086
+    },
+    {
+      "path": "commands/auto.md",
+      "sha256": "737e41191664f11ad021d47da23f641f1b22150e76efa711101fb26f4ec37461",
+      "size": 2133
+    },
+    {
+      "path": "commands/brand-auto.md",
+      "sha256": "d6fc8960bdade376fffac7f9cc9fee87b867df51fcfe02493891bfc75e4aa699",
+      "size": 6737
+    },
+    {
+      "path": "commands/dashboard.md",
+      "sha256": "52d888e750a5e2e8195cfb4f2558fde2f2bdfb502fd5dd602c15d55f17e28dba",
+      "size": 1968
+    },
+    {
+      "path": "commands/end-session.md",
+      "sha256": "f185291a4bf19f7f64fcbef91e66e008cdf0fc24431325ba8f137947e4431b3b",
+      "size": 3517
+    },
+    {
+      "path": "commands/mcp-approve.md",
+      "sha256": "9c23405eef1469a9260df446751fa8057061cca8b6d13542adde2ae6516fc255",
+      "size": 787
+    },
+    {
+      "path": "commands/mcp-discover.md",
+      "sha256": "bd5d456091b93caaf8ed1093f77ae88f714de09b94d05a18029c48621f19e6a4",
+      "size": 756
+    },
+    {
+      "path": "commands/mcp-load.md",
+      "sha256": "f6672f47fdc7e3057995dd96df72cb8a316864b933a80988914da56de660119c",
+      "size": 1091
+    },
+    {
+      "path": "commands/orchestrate.md",
+      "sha256": "f79f5dc7f2d007fc73e89cf632e91a317c571ac90c1315f9fe0f82a122411199",
+      "size": 4554
+    },
+    {
+      "path": "commands/party.md",
+      "sha256": "1e6972f3b7bb7204a7dea85769ca8e197a558ef72b6835572c46a83e2377a92a",
+      "size": 7061
+    },
+    {
+      "path": "commands/query.md",
+      "sha256": "afc4dc454d302cf5f00349dabcb3b6d991beddda56bd7ed00c94208ef864ddf6",
+      "size": 840
+    },
+    {
+      "path": "commands/quick-commands.md",
+      "sha256": "4dd6e1e1ea245cd95693512dabfa425b6298f72ee50a4fbdff80a8df8a4f5191",
+      "size": 2032
+    },
+    {
+      "path": "commands/ralph.md",
+      "sha256": "aa3fcc2b5d015fc419ee8e38b861801f1b420ff9f22d4525481057791dc144fa",
+      "size": 1792
+    },
+    {
+      "path": "commands/scout.md",
+      "sha256": "38d399ae96e4695118b9cf1ed69c3ed6ec9429c41f66cc1f10a1623a7bbc5a48",
+      "size": 1910
+    },
+    {
+      "path": "commands/scribe.md",
+      "sha256": "2184022ac03a654b2185a1bc30452dfd5185884bc1ee2ab56e46f828011cf9f0",
+      "size": 1548
+    },
+    {
+      "path": "commands/start-session.md",
+      "sha256": "8b10bcc099c490f0c62252f93df83769265f78e9229118b598e8a7e99c79621d",
+      "size": 4719
+    },
+    {
+      "path": "commands/status.md",
+      "sha256": "f2453e90afc9a9773a491501ac8e42cae7f299f9745749f1730fea0a3d361973",
+      "size": 1762
+    },
+    {
+      "path": "commands/sync-governance.md",
+      "sha256": "985188cc61eb72d274b07b12f83d642a094449c2d5b9ca99729e4a45828d3aef",
+      "size": 714
+    },
+    {
+      "path": "commands/task.md",
+      "sha256": "30e5baf6247234b280068ae354158faf76ba74069f3f018ebb3abbf70bf97157",
+      "size": 1283
+    },
+    {
+      "path": "commands/validate-repo.md",
+      "sha256": "dd6559c6b7809ed12cb42d31980dba90e7b24ed1fc99a89c14ad396ed67bd32b",
+      "size": 1656
+    },
+    {
+      "path": "commands/validate.md",
+      "sha256": "b4b060930327bfbd5a848a2655d14a34cc0ba0bec11d684ed1e1f2bf80cffe6e",
+      "size": 1509
+    },
+    {
+      "path": "contracts/context-packet.schema.json",
+      "sha256": "807ce9315f990c6ca01d0a279b30411874b2a0bcc877b4d6dc63ff356b5d2dc6",
+      "size": 1925
+    },
+    {
+      "path": "docs/AGENTS.md",
+      "sha256": "577803450c7bfbbdffe578abe8bfdaa9ad7063b7a70236bf1449c43abc7ce413",
+      "size": 4873
+    },
+    {
+      "path": "docs/ALIASES.md",
+      "sha256": "797e85a83ae1e55933d66507da001edd1e4b2179444fc075548b9ae0b4a3a5e6",
+      "size": 1157
+    },
+    {
+      "path": "docs/BMAD-AGENTS.md",
+      "sha256": "6001efce98a4025e475b0bfd475f79fcabf08c28d2c1b9ca128a2d8f9289b736",
+      "size": 897
+    },
+    {
+      "path": "docs/BRAIN-CONNECTION.md",
+      "sha256": "bef409ed5dfe10f834c8b38e1d97a6c1754d2f858570e6a12ac9a50aa9e8f636",
+      "size": 2749
+    },
+    {
+      "path": "docs/CATALOG-EXPORT.md",
+      "sha256": "32ee6fb03e5c981ab5de06ce79775274a744a5d2aa9bf448eae30f4162d9da79",
+      "size": 1630
+    },
+    {
+      "path": "docs/CONFIGURATION.md",
+      "sha256": "082d1bd67af81104e647c04a2c6822aff5ad7e12d9bef53a6490c6c05ea22d80",
+      "size": 2327
+    },
+    {
+      "path": "docs/DEGRADED-BEHAVIOR.md",
+      "sha256": "ff609d8135ca23334fc24ce4e20ae5fb0a33cc2e4ccf7598aac67dc9b26ecb10",
+      "size": 1489
+    },
+    {
+      "path": "docs/INSTALLATION.md",
+      "sha256": "d0a3103f00ae28b9b4db404e1ec8ae73e477b72718699be3beef0c4277409cac",
+      "size": 1998
+    },
+    {
+      "path": "docs/PLUGIN-CONTENTS.md",
+      "sha256": "1c8ac161619a244ae96b76815f247f6614266cd8c68612383cf6f9a27d488b43",
+      "size": 789
+    },
+    {
+      "path": "docs/superpowers/specs/2026-08-16-hybrid-model-routing-design.md",
+      "sha256": "0cbdfaab49d6be30b7ce6364fc856c4f0f3df7e72fe69555479f27eae76d31d5",
+      "size": 5040
+    },
+    {
+      "path": "docs/superpowers/specs/2026-08-17-unified-model-performance-telemetry.md",
+      "sha256": "1ebf6ce5231cf69d565188f2cd6bb38ff6771e6fde6b365804366b95b87bb0d8",
+      "size": 6359
+    },
+    {
+      "path": "evals/README.md",
+      "sha256": "87a7899e1af00266fa5023929dbf455680f364131cbb1152f3516390e82b15ef",
+      "size": 710
+    },
+    {
+      "path": "evals/candidate-after-core-prompt-cleanup.json",
+      "sha256": "2ba65b787014144afdfd9c2da6ad8c0bfb68daaad0bb0ed7c350fa3c36d232df",
+      "size": 2452
+    },
+    {
+      "path": "evals/current.json",
+      "sha256": "6071592153674ee3872809a99cbd543ca7ffc2499f2aa6478c4dbc1e6579c197",
+      "size": 2457
+    },
+    {
+      "path": "evals/final.json",
+      "sha256": "2ba65b787014144afdfd9c2da6ad8c0bfb68daaad0bb0ed7c350fa3c36d232df",
+      "size": 2452
+    },
+    {
+      "path": "export-manifest.json",
+      "sha256": "e078be5578f6a7ad15f5227a2ffa1646a0b1f3552798b740e43027d1f486b7b8",
+      "size": 900
+    },
+    {
+      "path": "governance/README.md",
+      "sha256": "9f258ac50eb6a40341b31812778c4c23b17af12a4136dce5f5d3362d7a48f320",
+      "size": 919
+    },
+    {
+      "path": "index.js",
+      "sha256": "8222b8169ee86f25cdccd84d340340060ae3f0cff55e2ea9d344d7c332733b71",
+      "size": 21
+    },
+    {
+      "path": "package.json",
+      "sha256": "b693d9f021f2eb08ee9c63a5bb87f53c39782f58fbe79b2ea6b7e59577517e36",
+      "size": 1185
+    },
+    {
+      "path": "rules/agent-routing.md",
+      "sha256": "4de2ad56c2a930f7c88d69c1c15e78296645350f2d2faddaf4bbf1eb03d4ea7a",
+      "size": 3566
+    },
+    {
+      "path": "rules/allura-dashboard-branding.md",
+      "sha256": "b9f744d27b84aef8a6124f908da63d9a4fdf711640313e41263ead8e09606313",
+      "size": 4377
+    },
+    {
+      "path": "rules/documentation-standards.md",
+      "sha256": "69d06aa55f81fe58e4735c8b5c55d48942b08c9c0230fbc8dd4b2d557641c683",
+      "size": 1540
+    },
+    {
+      "path": "rules/mcp-integration.md",
+      "sha256": "65536d43c1c2f276824cd43fab1972e91468faa4c0a35e98808276dc29e33cfe",
+      "size": 4441
+    },
+    {
+      "path": "rules/postgres-best-practices.md",
+      "sha256": "e168d383b1de3c4d93ac8dad367e87b4162338eee29fa62d5309a0420c639dcc",
+      "size": 2064
+    },
+    {
+      "path": "rules/semantic-graph-best-practices.md",
+      "sha256": "47b1e74d428f6daafb033cc94e934d9f0b1e6d94443ecc852df4f0747d85812e",
+      "size": 2394
+    },
+    {
+      "path": "skills/accessibility-aaa/SKILL.md",
+      "sha256": "f93fb1b522eff12e05df7c9f1982b1e70cc785b6c1ed17b806d2bb87b539531d",
+      "size": 6443
+    },
+    {
+      "path": "skills/allura-memory-skill/SKILL.md",
+      "sha256": "8bf664260ddafeb6200c1d1891e17c578a0f67bee7fdd1179f1fdb241a9b3755",
+      "size": 17448
+    },
+    {
+      "path": "skills/allura-memory-skill/metadata.json",
+      "sha256": "24f983f76161776790470e6ee3253cd036b781014eae4429692485a59b7087a4",
+      "size": 1497
+    },
+    {
+      "path": "skills/allura-memory-skill/references/allura-dual-context-retrieval.md",
+      "sha256": "ead5e0d1b893bb45bf641f03052c8e7f0e07228abd1a2691a68b4b08d517b614",
+      "size": 7546
+    },
+    {
+      "path": "skills/allura-memory-skill/references/allura-memory-model.md",
+      "sha256": "f2a2ac2a5f14942928365c14fc3540b29c0b7f4260af433e0c43d3a0fad9fac2",
+      "size": 9009
+    },
+    {
+      "path": "skills/allura-memory-skill/references/allura-promotion-policy.md",
+      "sha256": "9be4f59b0a4311954ee77988ebe301ed6cb1b590b5fbcda800745baa8a3d6416",
+      "size": 7585
+    },
+    {
+      "path": "skills/allura-memory-skill/references/allura-troubleshooting.md",
+      "sha256": "ea70deb9878d0ba46e4c433117739b403a858f1d4c6bdfa8aa4040a352429e74",
+      "size": 8760
+    },
+    {
+      "path": "skills/allura-memory-skill/scripts/smoke-test-memory.sh",
+      "sha256": "e24ae7de4f4884063a786d64ad69b40f803881b9143cfb161622fef65fb6c70c",
+      "size": 13466
+    },
+    {
+      "path": "skills/allura-memory-skill/scripts/validate-env.sh",
+      "sha256": "269d6b2a216d9aa117fd7b56f681ee60b3288acbc75cf6f0440fe08e075a00ea",
+      "size": 8447
+    },
+    {
+      "path": "skills/asset-first-design/SKILL.md",
+      "sha256": "33ee90b9f453efd316aaff28100319c89a6a0c102e108e43176f2404c2d54b34",
+      "size": 4500
+    },
+    {
+      "path": "skills/brand-audit-existing/SKILL.md",
+      "sha256": "7af439d8714668c997aa8d18994d545bb6617c23b3cddb19df88839572747e93",
+      "size": 3706
+    },
+    {
+      "path": "skills/brand-consistency-review/SKILL.md",
+      "sha256": "e1113f8358ab469e417ef052c3dbbc102d6677a7d4d9c05fb74a3093bcfb298a",
+      "size": 12083
+    },
+    {
+      "path": "skills/brand-consistency-review/score-checklist.js",
+      "sha256": "dfb3ed87f855b22bc06428ba6529da6631877d36914ac9f7d713bfd778ec6224",
+      "size": 23436
+    },
+    {
+      "path": "skills/brand-guardian-monitor/SKILL.md",
+      "sha256": "3b3d979585d3c8af183201fd39d10c3d8fce721afe8d0a058bb9604bf51779bb",
+      "size": 3662
+    },
+    {
+      "path": "skills/brand-kit-10-section/SKILL.md",
+      "sha256": "b1ae64c584fb83f2695b04e7a7281baf6f070840eff3fb0b2f81e2c95ef9a54d",
+      "size": 9357
+    },
+    {
+      "path": "skills/brand-loop/SKILL.md",
+      "sha256": "eb11239d1d026ba5cd6387fdfb206c7f13b18474fb8981f56a4a4b7c4bcb34d8",
+      "size": 5676
+    },
+    {
+      "path": "skills/brand-metrics-dashboard/SKILL.md",
+      "sha256": "d37024fd15a60b0646ac0680a03eec9f174d6a96202ab04bb392a435ce40bee1",
+      "size": 3610
+    },
+    {
+      "path": "skills/brand-presentation-builder/SKILL.md",
+      "sha256": "bfff75ad6670693d763d60d2efd25ca062699ef5dacd4ae63346c84d05bb63af",
+      "size": 9695
+    },
+    {
+      "path": "skills/brand-strategy/SKILL.md",
+      "sha256": "97714626b66debe91a038cb3d9915093eaa546c106abd5df0798284fd36f9eb7",
+      "size": 5644
+    },
+    {
+      "path": "skills/client-brief-intake/SKILL.md",
+      "sha256": "6fd54eaf848985474fa570e70f387977ca533f9b2fa867fa03bbc5c2cab4e1ad",
+      "size": 8160
+    },
+    {
+      "path": "skills/client-feedback-loop/SKILL.md",
+      "sha256": "e4673bea391cf226769165c77ad4a1528ab7037250b4de5e92b660df586a1e7d",
+      "size": 3559
+    },
+    {
+      "path": "skills/competitive-intelligence/SKILL.md",
+      "sha256": "adb1bc88958174e7c0b4268bb2e6212aad68f1ce4e38d4c4ba76f927423571af",
+      "size": 6063
+    },
+    {
+      "path": "skills/context7/SKILL.md",
+      "sha256": "89907fab4b8935f4170b3afc296a3578553c0c6d4d5fad40953585f031752eae",
+      "size": 3328
+    },
+    {
+      "path": "skills/copy-pack-assembler/SKILL.md",
+      "sha256": "05fe462f2e861ae0b21f06ee5ac9eea6454430ce1c7e0adbc78b3f2188725221",
+      "size": 8414
+    },
+    {
+      "path": "skills/cross-brand-portfolio/SKILL.md",
+      "sha256": "6f8e6353eb2f85972ec839ad67a5c3020b6704c51339ccf996f09ce2d7de836b",
+      "size": 3705
+    },
+    {
+      "path": "skills/design-tokens/SKILL.md",
+      "sha256": "a57495b45afb7f182c16c1b7ae925134c3e0cf3b5b894b2cf25ee81f2eed0122",
+      "size": 5730
+    },
+    {
+      "path": "skills/docker-presentation-server/SKILL.md",
+      "sha256": "99b8073834c80e7f24fad1f4c0a1602126e68bae0f283ab2afabbba2bc3ab137",
+      "size": 7875
+    },
+    {
+      "path": "skills/editorial-system/SKILL.md",
+      "sha256": "0f2597440e499ebd9dad2f20cd16ca5cf2de72e0f146ffb13191fae9377d3a7c",
+      "size": 7043
+    },
+    {
+      "path": "skills/fal-ai-image-prompt-engineering/SKILL.md",
+      "sha256": "cbc61d751a35db1056b4e929eb38c7e68148d14a005ea2356be5fc36d5d4af57",
+      "size": 7761
+    },
+    {
+      "path": "skills/fal-ideogram-executor/SKILL.md",
+      "sha256": "3527585f029657944b2460c42c31adc5e0a9df93448a8b0377e2c49350969126",
+      "size": 10026
+    },
+    {
+      "path": "skills/fal-ideogram-executor/reference/round4-execution-guide.md",
+      "sha256": "8522d2ea66ea56eb1edc2dae34a4165adf62f772d6796179a90e2358423f366c",
+      "size": 3288
+    },
+    {
+      "path": "skills/fal-ideogram-executor/references/style-presets.md",
+      "sha256": "4ab2ef755eaa66a6c8e8e4cdaa5f100d01e29f31ab023508f59c6cdf02af80ef",
+      "size": 4571
+    },
+    {
+      "path": "skills/fal-ideogram-executor/scripts/execute-round4.js",
+      "sha256": "283f5ecd82573e9518413b90171c7484ee135976a269ced9a3e83804390b2826",
+      "size": 12717
+    },
+    {
+      "path": "skills/fal-ideogram-executor/scripts/redownload-round4.js",
+      "sha256": "bb9af440921b64b01907a92cdedd710c4cd7d4d37ac8f2da19266106543b85d9",
+      "size": 3418
+    },
+    {
+      "path": "skills/falai-runner/SKILL.md",
+      "sha256": "ea3ca9186936966f09d8f2a6a4daa11f44c65165709efb08236b505ddc5e40c2",
+      "size": 4194
+    },
+    {
+      "path": "skills/figma-api-bridge/SKILL.md",
+      "sha256": "8780fcaa1f6810fddd6fd0989703c538cb34570e489ceffe33d21c3b4afba9a2",
+      "size": 14213
+    },
+    {
+      "path": "skills/figma-brand-automation/SKILL.md",
+      "sha256": "d2ef32b9804388e09dfff2ce19a6fd3866444436f46b28439a52ff8fc5c37143",
+      "size": 12011
+    },
+    {
+      "path": "skills/figma-brand-automation/src/index.ts",
+      "sha256": "1466bacc44ee926d413b5c4391ef25eb0a707cd0a25a74c67d1579916e72e46a",
+      "size": 12158
+    },
+    {
+      "path": "skills/figma-brand-automation/src/prompts/allura-brand-guided.ts",
+      "sha256": "3d1d9c301dfdb847bda32b9bfa3b33f49db24bd9202f7d7d52e9ecdffc056bb2",
+      "size": 17809
+    },
+    {
+      "path": "skills/figma-brand-automation/src/prompts/allura-optimized.ts",
+      "sha256": "af072ef32e39fa40dd6cbd1198f9a7d2562651b3171d7ac21aa18a313a5e58d5",
+      "size": 12909
+    },
+    {
+      "path": "skills/figma-brand-automation/src/prompts/brand-context-injector.ts",
+      "sha256": "be685c5420acf66ebfb0759ecde5cb5565b2bd781c7dcb0c297f4651f59a95fd",
+      "size": 17436
+    },
+    {
+      "path": "skills/figma-brand-automation/src/prompts/brand-guided-workflow.ts",
+      "sha256": "71b0e430b4625acc4fc659cb7e763b5ae3f9af3acb00011022798a86fc4f578a",
+      "size": 11726
+    },
+    {
+      "path": "skills/figma-brand-automation/src/prompts/index.ts",
+      "sha256": "b81ef5188950409eb51fc03346703162ae96d60a4ebe9d89096ef2bfcf8ceaf4",
+      "size": 382
+    },
+    {
+      "path": "skills/figma-brand-automation/src/prompts/model-selection.ts",
+      "sha256": "f18d1215367648a4a46f5ef6d994dd2893fe57f7788ea83256cfb22341188ecd",
+      "size": 6659
+    },
+    {
+      "path": "skills/figma-brand-automation/src/prompts/winning-prompts-tracking.ts",
+      "sha256": "53e2007784ef92efab1fec4911d53c4bf230ba928e3535fdb7959a7eceffe802",
+      "size": 6953
+    },
+    {
+      "path": "skills/figma-brand-automation/src/tools/analyze-template.ts",
+      "sha256": "ffac457bcdb700c25af937f828e1111782e621eb945bed665c4537d96b7e6938",
+      "size": 2729
+    },
+    {
+      "path": "skills/figma-brand-automation/src/tools/customize-brand.ts",
+      "sha256": "3dfb0fdd60fd37d64b51bcd886ea5f3c10880dcbdf2ec63bbdf0b11a28d8fa37",
+      "size": 2466
+    },
+    {
+      "path": "skills/figma-brand-automation/src/tools/duplicate-template.ts",
+      "sha256": "f45b3774b56324a82f9a1369c029928e7cbb313194de4d2be24fa4c695cc4864",
+      "size": 1252
+    },
+    {
+      "path": "skills/figma-brand-automation/src/tools/export-deliverable.ts",
+      "sha256": "7b0332d8b4b5e89468acd1ad77c029dad9ebec15ac1dc379207f0c920b26af77",
+      "size": 1621
+    },
+    {
+      "path": "skills/figma-brand-automation/src/tools/qa-validation.ts",
+      "sha256": "0eb72a165e608fc963a428f94d22e13868d8b36c757e29a823558db7235f8f23",
+      "size": 914
+    },
+    {
+      "path": "skills/figma-brand-automation/src/utils/allura-brain.ts",
+      "sha256": "7cfd60659b01027d5c084ca2989514119e13cabd074d3d8ecd156029defc1618",
+      "size": 13266
+    },
+    {
+      "path": "skills/figma-brand-automation/test/test-brand-guided-workflow.ts",
+      "sha256": "f78ad19fa4851bbe8a1ab7a23b6ca37985c1a83b754806d4af880fc4da254b15",
+      "size": 9803
+    },
+    {
+      "path": "skills/figma-code-connect/SKILL.md",
+      "sha256": "cbe88c1b03bc67dd4b402c3390d0cfed0d649cee584f7ffcb1a824110ed43407",
+      "size": 16985
+    },
+    {
+      "path": "skills/figma-code-connect/references/advanced-patterns.md",
+      "sha256": "ac2cb232aca4e43b75169f47f5550d6e7e48a8df0eb55aa1adbfb1a2ab0aa1b4",
+      "size": 10069
+    },
+    {
+      "path": "skills/figma-code-connect/references/api.md",
+      "sha256": "aa98fd9e4252345af519a38fba1f5d90571a04c88bd2b122b5f432ec3404ac1d",
+      "size": 22879
+    },
+    {
+      "path": "skills/figma-component-sync/SKILL.md",
+      "sha256": "d0571d8bd127f97629779f3907ccc49e5d7cf8a07731a814a5170a1d5bd9512f",
+      "size": 7652
+    },
+    {
+      "path": "skills/figma-create-design-system-rules/SKILL.md",
+      "sha256": "e6ec2c0e284345289cecab7db9ea00256e52912b1f17d4f7a041c101a4f0ecdd",
+      "size": 17984
+    },
+    {
+      "path": "skills/figma-create-new-file/SKILL.md",
+      "sha256": "d63737c15b71483ced5db971c8316795322723ef137dc8f4447019cb3f3847d4",
+      "size": 2763
+    },
+    {
+      "path": "skills/figma-devtools-vision/SKILL.md",
+      "sha256": "22ce97e1718ad7e43454634c5eb75f3954920d79b67f62d078cf7e11213f396c",
+      "size": 5345
+    },
+    {
+      "path": "skills/figma-generate-design/SKILL.md",
+      "sha256": "6267c4f31e894bb6d499e96c3fea9e93b8162e6ceffc3c2dd321de8450cff104",
+      "size": 21571
+    },
+    {
+      "path": "skills/figma-generate-library/SKILL.md",
+      "sha256": "85fb72d06c9bd2d4b8e1b5500f41e0862c8dec122bbaf5c25b9fe8256f98b3e5",
+      "size": 17696
+    },
+    {
+      "path": "skills/figma-generate-library/references/code-connect-setup.md",
+      "sha256": "5a02dedec8797710da32bdf6ce312ea1ada6455760b624c66736497441126664",
+      "size": 12133
+    },
+    {
+      "path": "skills/figma-generate-library/references/component-creation.md",
+      "sha256": "bc5d5b3a96b1c25a3b0ab9559acf89af3c9e9dd47be52c45ad8a50fafadf726b",
+      "size": 39340
+    },
+    {
+      "path": "skills/figma-generate-library/references/discovery-phase.md",
+      "sha256": "d0281648be73c0743c7e7939c9ff5354af1944585c33322022e92b90077d10ec",
+      "size": 19102
+    },
+    {
+      "path": "skills/figma-generate-library/references/documentation-creation.md",
+      "sha256": "a9c2b38f44d873838a2e6cdb6e52bad2be7ac0228bd6abd96f22e0bae4e2d019",
+      "size": 28047
+    },
+    {
+      "path": "skills/figma-generate-library/references/error-recovery.md",
+      "sha256": "48ee5516eae51732d5b68a50c9cf90e86a30d481e203fd8fc090d25f499d2b10",
+      "size": 21835
+    },
+    {
+      "path": "skills/figma-generate-library/references/naming-conventions.md",
+      "sha256": "16810f87eab00ea93644035dca95e2d927b266b9fcbf5460c1712dab30638442",
+      "size": 19003
+    },
+    {
+      "path": "skills/figma-generate-library/references/token-creation.md",
+      "sha256": "15ae8148d4d6b697160dbbc19868485ab2fefc47dfc4a15f9569695213994dda",
+      "size": 35100
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/bindVariablesToComponent.js",
+      "sha256": "333f5cdda0f75b9d52a8fa2d50369677e6247532bd74580a9fe611fe270e092a",
+      "size": 3734
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/cleanupOrphans.js",
+      "sha256": "fe61c1320ab7cba6e34a565901d8bb0fe691a2cb940f42fc98d348817916aa11",
+      "size": 3671
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/createComponentWithVariants.js",
+      "sha256": "bb49ab8921f239e4c0a188c83bf382f00dcfa877afb340a8d0ff473fed764777",
+      "size": 4943
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/createDocumentationPage.js",
+      "sha256": "0093d6a6c85b16e125ebb60a6b698011fde9f803e98cafc67c0e048d9ee2bb88",
+      "size": 5212
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/createSemanticTokens.js",
+      "sha256": "15682762708cbfcca1b2734c72fce8b981528c4b1131c8f1645b411edbc94b46",
+      "size": 3891
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/createVariableCollection.js",
+      "sha256": "27de8086b7e9cc2ed475d7ba5014d91e62527982a5216a8cfcda1c8bef14f117",
+      "size": 1785
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/inspectFileStructure.js",
+      "sha256": "3b72f89e6bd3db81bc68b18afb2bac3a337b9c0538d0b889802c2c995ae7eba8",
+      "size": 3650
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/rehydrateState.js",
+      "sha256": "4daf5e653699fd720b43bd3eec3715887a92039a8646301fc4534028fd3d1f93",
+      "size": 2989
+    },
+    {
+      "path": "skills/figma-generate-library/scripts/validateCreation.js",
+      "sha256": "dae970b4d80c4d0994f14c89ad01c04115604444b916a0b8fc342ed262fdfa97",
+      "size": 2718
+    },
+    {
+      "path": "skills/figma-implement-design/SKILL.md",
+      "sha256": "1eff5150b8f20c35ba3bd9130f748965f68ac0a63414350027e5fe31fb3dc7a8",
+      "size": 11681
+    },
+    {
+      "path": "skills/figma-use/SKILL.md",
+      "sha256": "9acb14c05755d56b3a37b7de12ccc3db6739a2da54e30d772a900a2c145f8b7c",
+      "size": 18083
+    },
+    {
+      "path": "skills/figma-use/references/api-reference.md",
+      "sha256": "edad2e56f829bf19b97000d587f674778c31b3765707c482a8336cd955a50b33",
+      "size": 12497
+    },
+    {
+      "path": "skills/figma-use/references/common-patterns.md",
+      "sha256": "7132d74c84160eb2b19d30a6d1c2836637599648226e2c2ee7e662685266bd94",
+      "size": 13430
+    },
+    {
+      "path": "skills/figma-use/references/component-patterns.md",
+      "sha256": "fbece7096eebfbfd571c8b28aefcc20ead5989561ee23ba403c1578a216cbe2a",
+      "size": 17879
+    },
+    {
+      "path": "skills/figma-use/references/effect-style-patterns.md",
+      "sha256": "9f960df3fcec1c0601e57db2f6506dde0ab524baeb462b01fb4f745972ffb2e7",
+      "size": 3182
+    },
+    {
+      "path": "skills/figma-use/references/gotchas.md",
+      "sha256": "b329969840db4a16f2d55e9805ec8f37dd405cc9537301d3306a011957375072",
+      "size": 28723
+    },
+    {
+      "path": "skills/figma-use/references/plugin-api-patterns.md",
+      "sha256": "01145715706f11ddc30cd274ed2a78020c7588b1fe4fd91046fb1b896fd3ffae",
+      "size": 12991
+    },
+    {
+      "path": "skills/figma-use/references/plugin-api-standalone.d.ts",
+      "sha256": "0b14ca770f0dbc67dae427cecba0557f6ed1aba6085f6a9754a3d63509c7a686",
+      "size": 451753
+    },
+    {
+      "path": "skills/figma-use/references/plugin-api-standalone.index.md",
+      "sha256": "c99cd63617ad87fcb554f9b9df4fb6b9660d3919b9bea16fd3a54bc58f0026d7",
+      "size": 28607
+    },
+    {
+      "path": "skills/figma-use/references/text-style-patterns.md",
+      "sha256": "716f42be3c75215aa7b8acb43a0fa1b5e4e79599bc951ab87bd4d44189898875",
+      "size": 7657
+    },
+    {
+      "path": "skills/figma-use/references/validation-and-recovery.md",
+      "sha256": "c917194630d37e62a2946c8a041765f7066654a7a50c907f293de7d1dec7399e",
+      "size": 4553
+    },
+    {
+      "path": "skills/figma-use/references/variable-patterns.md",
+      "sha256": "1c394e6344cea9677b1ece96cc977d2c82dac457ee482435bdacd7b8d0871f73",
+      "size": 13430
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-components--creating.md",
+      "sha256": "f383ea109e48c335c5855a8c7be15402e0ba72d5313c34cde6cebf550a6443ff",
+      "size": 2199
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-components--using.md",
+      "sha256": "e4e82a8492ec830f18a3120cae9755f389da92aabb2693ef87c396fd281af576",
+      "size": 2062
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-components.md",
+      "sha256": "9d7b785468b3b7f2e47026e024f43b63551e5c5c2687ab8e885da20f1dbb8e9b",
+      "size": 4052
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-effect-styles.md",
+      "sha256": "d0b9b409fda5e22a9095420c606224a2c9b166abbeda6e8b284a820b6d9d7907",
+      "size": 3268
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-text-styles.md",
+      "sha256": "9ecf3c0ec5e01ffe7d9cae609042c2df333b81b071ea5aaf2bc7aef427837cb8",
+      "size": 5179
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-variables--creating.md",
+      "sha256": "3a2f9796aac9d419705ca02b9fab29a46282f0921c4c0a01704cec7e43d8ccf2",
+      "size": 1559
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-variables--using.md",
+      "sha256": "3a328d9f2a176a4086ee7c3e14ca83ee730f4d44b5c1b2276247481fdab6a5e7",
+      "size": 1908
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds-variables.md",
+      "sha256": "51e2e13658a80ebd1683890cba656b48caf1da670b53b7945dd3cad6b2796958",
+      "size": 5183
+    },
+    {
+      "path": "skills/figma-use/references/working-with-design-systems/wwds.md",
+      "sha256": "e514da78a7eed6a55c95d6b52a600bd38252bb28ad1dde689a7c72f30c99a9f8",
+      "size": 5220
+    },
+    {
+      "path": "skills/frontend-design/SKILL.md",
+      "sha256": "2e83efb3345db82c04f9d9eda9298295f34c2e3c017244a8a35f409fb0087b88",
+      "size": 4442
+    },
+    {
+      "path": "skills/global-mcp-lookup/SKILL.md",
+      "sha256": "26eaa054bb783ab04f81f41f993f8dbca4efd3e45d22de684cc0c8a840f5680d",
+      "size": 10540
+    },
+    {
+      "path": "skills/global-mcp-lookup/references/mcp-registry.yaml",
+      "sha256": "eb09f73be550556e8ee6e6d119a808b7ab2941d7f47328d873bc45e2d52b09c7",
+      "size": 4409
+    },
+    {
+      "path": "skills/impeccable/SKILL.md",
+      "sha256": "3fc1b6e05575471f5c2c80f0db9fb129e029898868d8362d97bfe7f87b366989",
+      "size": 12953
+    },
+    {
+      "path": "skills/impeccable/agents/openai.yaml",
+      "sha256": "cbd8bd68fa00935dd0f179adb169252629cf7ee443ea9dc7db77e7ef2cf77446",
+      "size": 235
+    },
+    {
+      "path": "skills/impeccable/reference/adapt.md",
+      "sha256": "6b3dfd7e0ad5dd7126bedbefe0a3e8eb019d2c1de6508117bbf39ad13f4420fb",
+      "size": 6503
+    },
+    {
+      "path": "skills/impeccable/reference/animate.md",
+      "sha256": "7b52920bbefad7ed890f7b0ccb8efcad9523828247456f8c76a8c5d3837c1fd7",
+      "size": 7974
+    },
+    {
+      "path": "skills/impeccable/reference/audit.md",
+      "sha256": "31522c2bd400e7924c0f29ff2745d33dc03d6093a374de71e42e53275e6db2cd",
+      "size": 7464
+    },
+    {
+      "path": "skills/impeccable/reference/bolder.md",
+      "sha256": "e7398112f848ddd17faab51d5d872333298d0456ee50face31b910eeee098970",
+      "size": 6658
+    },
+    {
+      "path": "skills/impeccable/reference/brand.md",
+      "sha256": "6791f04b9afb4fee5d40b7d3971129567aa4520a791c510325b52223c3455742",
+      "size": 10447
+    },
+    {
+      "path": "skills/impeccable/reference/clarify.md",
+      "sha256": "6b99c57de45a6fa31a30119a71e7fcfa91c18ddc72730d171aea0eddcda72ae4",
+      "size": 6185
+    },
+    {
+      "path": "skills/impeccable/reference/cognitive-load.md",
+      "sha256": "7653f0a2f60f6d0471581f4b84c24df5408e70f8e2b727a6cdf3872dcf42676f",
+      "size": 4826
+    },
+    {
+      "path": "skills/impeccable/reference/color-and-contrast.md",
+      "sha256": "3113174f4b0047027338a904e2b0c0084b353f0d5a0e2a94e21d8bf0c3e7e05f",
+      "size": 5786
+    },
+    {
+      "path": "skills/impeccable/reference/colorize.md",
+      "sha256": "ddaa2f9f2d9505f06cc93b5660a14849ba67548419d7220741ee0560083b7618",
+      "size": 8188
+    },
+    {
+      "path": "skills/impeccable/reference/craft.md",
+      "sha256": "965510682f778d51c3038eb885bb02ae07c43c12c0d92298e0861e562c56728c",
+      "size": 14612
+    },
+    {
+      "path": "skills/impeccable/reference/critique.md",
+      "sha256": "aabebad0889ef47e9d554c64669aaa60667bb883f844cd281134ed53c057d698",
+      "size": 13476
+    },
+    {
+      "path": "skills/impeccable/reference/delight.md",
+      "sha256": "6fbe4fe184d9dc2f14c9f1a15037989f978e863fa7143429bf9fffa42a36f801",
+      "size": 9898
+    },
+    {
+      "path": "skills/impeccable/reference/distill.md",
+      "sha256": "d2d88be06b8ef702eff91a428cb40972ce42392834b9e43d583d3c2d2a1d7774",
+      "size": 5774
+    },
+    {
+      "path": "skills/impeccable/reference/document.md",
+      "sha256": "12236a58d44583d3d4d1ff58416a44b85dbdba45f5764e0dafc504488aa2a222",
+      "size": 28299
+    },
+    {
+      "path": "skills/impeccable/reference/extract.md",
+      "sha256": "5b090391f799e3ffd5084f3594a387297988293d93e6bc0f112c41702e87da29",
+      "size": 3573
+    },
+    {
+      "path": "skills/impeccable/reference/harden.md",
+      "sha256": "adb732a8becc385b157e22d874d5ec2517f03e6b1a2b01cc41d0c4b612440dba",
+      "size": 8677
+    },
+    {
+      "path": "skills/impeccable/reference/heuristics-scoring.md",
+      "sha256": "c047724521f6f73e2eecacf62e77498848370a8e4a0b32c900bd87ae9f1134ea",
+      "size": 8934
+    },
+    {
+      "path": "skills/impeccable/reference/interaction-design.md",
+      "sha256": "7f545df683b1897460cdc8d94adfa1410c4c4a23fdb1545fbe95dc6e9af1b486",
+      "size": 7085
+    },
+    {
+      "path": "skills/impeccable/reference/layout.md",
+      "sha256": "e67ad4015aad1a3ec774c804cbcff7f1a3f4e9a2d4bf3598f1c8370e88e77d2e",
+      "size": 8090
+    },
+    {
+      "path": "skills/impeccable/reference/live.md",
+      "sha256": "6e9c3922f45c2a319cd21db27721ee8c0fcd2602ad886413485944fdb8acfa5f",
+      "size": 46386
+    },
+    {
+      "path": "skills/impeccable/reference/motion-design.md",
+      "sha256": "a5a603df679dcfd3ba21ddc5901010add77eb674d02ca685f60f7a75fff03f2b",
+      "size": 5793
+    },
+    {
+      "path": "skills/impeccable/reference/onboard.md",
+      "sha256": "ae2e9890e30cd6cad6408155b429fc822719996e3bff951ceddf61a095df1133",
+      "size": 7774
+    },
+    {
+      "path": "skills/impeccable/reference/optimize.md",
+      "sha256": "e97b5543e1188d41729fb0162349e41f8ba48dcc27ced548b06dea54a4ab9de7",
+      "size": 7657
+    },
+    {
+      "path": "skills/impeccable/reference/overdrive.md",
+      "sha256": "ec34849028b8a1e9aba7c166260e354b0e317b728a32f3c4888261da73464376",
+      "size": 9230
+    },
+    {
+      "path": "skills/impeccable/reference/personas.md",
+      "sha256": "ebe587eeca9acd60143512e6b57235cdb31b8263c2d4ef28c0b0784980ca134a",
+      "size": 7132
+    },
+    {
+      "path": "skills/impeccable/reference/polish.md",
+      "sha256": "1f457bb2d2fb5234bddce0afa9370935d4207addc7e74ec7e1b01b30d9dc5645",
+      "size": 12105
+    },
+    {
+      "path": "skills/impeccable/reference/product.md",
+      "sha256": "74c4063cda1aff10d45b6e3b92cd2fd61e1ed0550ba5d7a0331dff5958029fec",
+      "size": 4160
+    },
+    {
+      "path": "skills/impeccable/reference/quieter.md",
+      "sha256": "d6b7588c1f06e6524a3f4af6739eadd5771caf6ea6ebd973ae05983bde3ed5ac",
+      "size": 5008
+    },
+    {
+      "path": "skills/impeccable/reference/responsive-design.md",
+      "sha256": "5add44195a42cf7fa82aecadaad79b8875446b930e06d087d73f3722533fd95a",
+      "size": 3464
+    },
+    {
+      "path": "skills/impeccable/reference/shape.md",
+      "sha256": "808ef64bb9087eaf1d3740d15258af16c6b9b843e5a6f44c92516224ba1f5089",
+      "size": 9665
+    },
+    {
+      "path": "skills/impeccable/reference/spatial-design.md",
+      "sha256": "10c743ee8245fc1be9e8af2b79dd08b0dae19fcde33d46c9730c000d7e13b7cd",
+      "size": 3545
+    },
+    {
+      "path": "skills/impeccable/reference/teach.md",
+      "sha256": "97dfca0073badcecfa8a29f03dfae909b4684896eddcde5121966fb7a5f34858",
+      "size": 9668
+    },
+    {
+      "path": "skills/impeccable/reference/typeset.md",
+      "sha256": "b30e50cbb418899e4a3d817c5845481c67adf74a7878a7f8e1d791148b0d6fa2",
+      "size": 6342
+    },
+    {
+      "path": "skills/impeccable/reference/typography.md",
+      "sha256": "48df5e595ee4ccc9691845785d2ea3f53ac1096cf3128fc4fec1537273746a99",
+      "size": 8274
+    },
+    {
+      "path": "skills/impeccable/reference/ux-writing.md",
+      "sha256": "0cd5e958d92be6e2331cb199d6ed5d98597aa20ec4922d4c3df56e7753cfc00c",
+      "size": 4330
+    },
+    {
+      "path": "skills/impeccable/scripts/cleanup-deprecated.mjs",
+      "sha256": "5b1a36e3241e14ba8645881e8f07255748ca7f7a158a11e1df99043357a4b6d2",
+      "size": 9130
+    },
+    {
+      "path": "skills/impeccable/scripts/command-metadata.json",
+      "sha256": "d7167de1e3c242eb3788389f7c856914d05aef8e38271f9fc1aa48005992621a",
+      "size": 7944
+    },
+    {
+      "path": "skills/impeccable/scripts/design-parser.mjs",
+      "sha256": "6e7b463344cdf59353acaf48f554ac0aad5a0a46cb1237a0d1a697ddc7759eab",
+      "size": 25217
+    },
+    {
+      "path": "skills/impeccable/scripts/detect-csp.mjs",
+      "sha256": "2d80520bef13cb93107699714bc0d2be5a2787a9aa079ecec91b94508a8125a4",
+      "size": 6761
+    },
+    {
+      "path": "skills/impeccable/scripts/is-generated.mjs",
+      "sha256": "ed5b0b00e99ed385db541c7a068cb85f72456a4b6aa7a5460037d24b58bd90cd",
+      "size": 2269
+    },
+    {
+      "path": "skills/impeccable/scripts/live-accept.mjs",
+      "sha256": "92c0a973866a6c69795713e3562d8b4dcb57db95ab7603edac29cde656cc0a83",
+      "size": 22906
+    },
+    {
+      "path": "skills/impeccable/scripts/live-browser.js",
+      "sha256": "9f7966d60272750afe60362eaced1c7594b8593d0e958ed441f33af47e173e4d",
+      "size": 194763
+    },
+    {
+      "path": "skills/impeccable/scripts/live-inject.mjs",
+      "sha256": "e29df8b91edff7bd83f5d54f26fc28e2ba37c587dad90e5607d9952c4453145d",
+      "size": 17344
+    },
+    {
+      "path": "skills/impeccable/scripts/live-poll.mjs",
+      "sha256": "11595ac2c2d019a68d9f1879001b5e2bcc8c76738aeb0e9a1ef225e37235d617",
+      "size": 6853
+    },
+    {
+      "path": "skills/impeccable/scripts/live-server.mjs",
+      "sha256": "86688d84fa69a1193c7147c15ca335410fdea1f443285904b41dca41b7558235",
+      "size": 27342
+    },
+    {
+      "path": "skills/impeccable/scripts/live-wrap.mjs",
+      "sha256": "232c5c08eb676d24f4516d2b4948b55daea8eda1a33f85dcc9bb07bbd01e100b",
+      "size": 23412
+    },
+    {
+      "path": "skills/impeccable/scripts/live.mjs",
+      "sha256": "ea2648d8a65a544d77916abd584d6ad870ed1ca496351f3bbb9d0e24e814a5a6",
+      "size": 8595
+    },
+    {
+      "path": "skills/impeccable/scripts/load-context.mjs",
+      "sha256": "59c32629220174811912474ae55b9e5081105db7b8d62cf7bb4e94af049b7a93",
+      "size": 5126
+    },
+    {
+      "path": "skills/impeccable/scripts/modern-screenshot.umd.js",
+      "sha256": "bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b",
+      "size": 29290
+    },
+    {
+      "path": "skills/impeccable/scripts/pin.mjs",
+      "sha256": "89a7056adfaca280519a1cc679b2e33f083300c3ed02a4fe7c71cf4d8c443bb6",
+      "size": 6125
+    },
+    {
+      "path": "skills/logo-direction-generator/SKILL.md",
+      "sha256": "7730cf7317b57539fd5ea60ed3d4cbca47cda0c6ca8e002180b3a7a74071cca6",
+      "size": 9948
+    },
+    {
+      "path": "skills/logo-from-brand-guidelines/SKILL.md",
+      "sha256": "b53ab1b16c8557511a8f66ed3035287b30d434be51fc93f2b09106b56592e0ee",
+      "size": 3882
+    },
+    {
+      "path": "skills/mcp-docker/SKILL.md",
+      "sha256": "a36e808b0f7d0f8a3bcd0d6b3bc87ff02eec5d4d778569884ddfbd00f3553876",
+      "size": 9340
+    },
+    {
+      "path": "skills/mcp-docker/references/api_reference.md",
+      "sha256": "7dfc1389f6005083d34ff69d93551f56976753e7fca8a4113abcc952ed78544a",
+      "size": 961
+    },
+    {
+      "path": "skills/mcp-docker/references/docker-mcp-catalog.md",
+      "sha256": "0e01221c795437b46fca253826b9683444cd63144187d7e998cd8d5c8b42627c",
+      "size": 6631
+    },
+    {
+      "path": "skills/mcp-docker-memory/SKILL.md",
+      "sha256": "03f8bf58ec27348176d8883753c491e7da296706b83c83ab210473f22ad465f2",
+      "size": 7158
+    },
+    {
+      "path": "skills/mcp-docker-memory-system/SKILL.md",
+      "sha256": "ae76f0095ec2f4cfcd151c55f1c08db7e54d2192eb94a84ccbbf272be8f2ccf4",
+      "size": 3205
+    },
+    {
+      "path": "skills/mcp-libre/SKILL.md",
+      "sha256": "92ca44470cc7b379715aa46c5fbdbb58fd5ae13dd29afb4c0d4715ffc5cf1f23",
+      "size": 4274
+    },
+    {
+      "path": "skills/mcp-validation-gate/SKILL.md",
+      "sha256": "f40394ca87d030feca56824897ddde4ac192b57413a88ae67e54542477a1c719",
+      "size": 7935
+    },
+    {
+      "path": "skills/mcp-validation-gate/validate-mcp.js",
+      "sha256": "e587eda1f548862e184bd9a8bbd0a39a8a51dbd70f90421c3e56ff5f19b7a7e8",
+      "size": 16432
+    },
+    {
+      "path": "skills/memory-client/ONBOARDING.md",
+      "sha256": "51defb116790d41b571e9bdd42bb5e98b160db89d2978b40a8aea9b8aa1f44f9",
+      "size": 2023
+    },
+    {
+      "path": "skills/memory-client/SKILL.md",
+      "sha256": "aa138706c07477be0f2b7eeee6a2e99bbf7f2f45cdce515da2d017a14ec44d06",
+      "size": 8180
+    },
+    {
+      "path": "skills/memory-client/metadata.json",
+      "sha256": "7974876c71290a1374c0b0921a6cb5d75b32b63e3b79b1942a6be47179f134c5",
+      "size": 334
+    },
+    {
+      "path": "skills/naming-pack/SKILL.md",
+      "sha256": "5b7677756301bc6ff35433423aaae03e81a511d2de13154fd7fdd8badd8d431b",
+      "size": 8862
+    },
+    {
+      "path": "skills/notion-brand-publisher/SKILL.md",
+      "sha256": "69a0fb1eca500847fc6d245b76203eaed8ac5d8d10de692a52f4178594736eb4",
+      "size": 8477
+    },
+    {
+      "path": "skills/notion-policy-reader/SKILL.md",
+      "sha256": "11b12bedd8958c5ef6669e44df70beb956003fc7168787a82eea062db4c13d74",
+      "size": 8950
+    },
+    {
+      "path": "skills/omni-tool-compose/SKILL.md",
+      "sha256": "3b1215f515a9f699eb782f7e9c59bd0d4c2b9ecbb668d5c1d7d8779113594dd7",
+      "size": 7884
+    },
+    {
+      "path": "skills/party-mode/SKILL.md",
+      "sha256": "54fc1b16dbf8d66178fcdd7d18a0772585c07d156838d6c1d2b62914616f36c4",
+      "size": 9613
+    },
+    {
+      "path": "skills/party-mode/mode-detector.js",
+      "sha256": "6962e216075acff458783024c5452925aea2ef904c27adb4c0ef84cf9e1fb846",
+      "size": 1493
+    },
+    {
+      "path": "skills/party-mode/parallel-dispatcher.js",
+      "sha256": "5e4e910ecbba40fb2c5092142b5966c75183a04a33c64ff178d6bee2ef35f6d0",
+      "size": 7289
+    },
+    {
+      "path": "skills/party-mode/team-durham-roster.json",
+      "sha256": "18d81bd719e35315440a51c44d75a662df8cf25f244acecb8bf7aef9850792d4",
+      "size": 14016
+    },
+    {
+      "path": "skills/penpot-cms-asset-pipeline/SKILL.md",
+      "sha256": "9c8235b99c9e701389004e009478530f42f7a7eeb993323714b67ef28b3c30dc",
+      "size": 16339
+    },
+    {
+      "path": "skills/penpot-create-board/SKILL.md",
+      "sha256": "44425c2cd319757cbb63c33925d5f4dd147f039faca02082b1a0fae4de1dc2ec",
+      "size": 3350
+    },
+    {
+      "path": "skills/penpot-export-handoff/SKILL.md",
+      "sha256": "2e1a5481750fa402ddb16441f349ea26272f1ca6883d093d90be33f7e60cd198",
+      "size": 5759
+    },
+    {
+      "path": "skills/penpot-foundations/SKILL.md",
+      "sha256": "a476de83058f23a1ec908d891fc56f02408261a134ba60a5b96901f327682031",
+      "size": 3687
+    },
+    {
+      "path": "skills/penpot-implement-mockups/SKILL.md",
+      "sha256": "87a0ffe6c665a93e0ef112dd94a7fb65d593b429feab3c0a93a99fd4b318d289",
+      "size": 3802
+    },
+    {
+      "path": "skills/penpot-uiux-design/SKILL.md",
+      "sha256": "d15c5f2607fc96c272738343f58d054357bf54042be36f7d68a1f473fc78bdfe",
+      "size": 12950
+    },
+    {
+      "path": "skills/penpot-uiux-design/references/accessibility.md",
+      "sha256": "04f5a97f6edeb22c5b79e1aad304cb8d597a4a9612b6ce3770116c5e383c6f33",
+      "size": 7427
+    },
+    {
+      "path": "skills/penpot-uiux-design/references/component-patterns.md",
+      "sha256": "03c7bcc8e68bb27cd314ce5177774ba3f99898e73678677c39976fd9a95f289a",
+      "size": 11689
+    },
+    {
+      "path": "skills/penpot-uiux-design/references/platform-guidelines.md",
+      "sha256": "15a3af3bb18d00d2e9e1e17aa45ce2f125fe129166c99b4bd2307a4f6d3fceeb",
+      "size": 10146
+    },
+    {
+      "path": "skills/penpot-uiux-design/references/setup-troubleshooting.md",
+      "sha256": "d7cc248eb26d11fadda00023212ce088a93aa99d25e5786344de07d04686b433",
+      "size": 11986
+    },
+    {
+      "path": "skills/penpot-upload-media/SKILL.md",
+      "sha256": "e791f727d48287ef68dae9499cd47ab22b68efb582e5b77d08d2ffac8385671e",
+      "size": 3351
+    },
+    {
+      "path": "skills/penpot-use/SKILL.md",
+      "sha256": "6cf1f6d810571f38ffa0c9cae3b296fbef576b7ccb4128ef79a7657dcd93ae1f",
+      "size": 2613
+    },
+    {
+      "path": "skills/skill-creator/SKILL.md",
+      "sha256": "8b4b5c8ead69cb90d82ff732ca90b684ea9a1f4035f8f57114779c00313e6182",
+      "size": 2485
+    },
+    {
+      "path": "skills/source-command-dashboard/SKILL.md",
+      "sha256": "3307c4ea3b36126df30c438d5af5847df0afdb920065f4e3221416e03937531d",
+      "size": 1972
+    },
+    {
+      "path": "skills/source-command-end-session/SKILL.md",
+      "sha256": "7cc8e37207d2445ed1c599caa9434abefe3b110e94142b695dcc4260e2f867fd",
+      "size": 3447
+    },
+    {
+      "path": "skills/source-command-orchestrate/SKILL.md",
+      "sha256": "572da7c66b01a581151f98fd346b940ea1a735a4546cdf0b9a0924ac3607fb58",
+      "size": 4680
+    },
+    {
+      "path": "skills/source-command-party/SKILL.md",
+      "sha256": "5b2f80798d993799d772d655218efd3d3ba8afb7865151755b7f15720a1aa32c",
+      "size": 7054
+    },
+    {
+      "path": "skills/source-command-query/SKILL.md",
+      "sha256": "0f0a079703a0919934b9d6165c90e9150d6d9bad46033ee45b6032290d61758f",
+      "size": 948
+    },
+    {
+      "path": "skills/source-command-quick-commands/SKILL.md",
+      "sha256": "f0d4f159e1734fe998b4faafc14a9232d4e68a229400417dcbf56a898834ca5f",
+      "size": 1633
+    },
+    {
+      "path": "skills/source-command-start-session/SKILL.md",
+      "sha256": "b320e92e68d4c43164fdc2a7321504d6c63073a20ce0235e434b9ddef1e7675b",
+      "size": 4176
+    },
+    {
+      "path": "skills/source-command-status/SKILL.md",
+      "sha256": "c7fef12450b8efca6de98a6e1ae52215d5b9e66a9f1dff9978ca786d08edf139",
+      "size": 1866
+    },
+    {
+      "path": "skills/source-command-sync-governance/SKILL.md",
+      "sha256": "2aeb5ba08f1fe4d72c5853e5ea47b1be1c791fa0e16effd595946e5d708415dc",
+      "size": 895
+    },
+    {
+      "path": "skills/source-command-task/SKILL.md",
+      "sha256": "e47f79849ac4665ae73b1cb3e39d0d4beb5b6cc003714b68bd013e6e0e4cc9e5",
+      "size": 1336
+    },
+    {
+      "path": "skills/source-command-validate/SKILL.md",
+      "sha256": "5ab1ee81001c0a5b8d7e20125a61d6242db33eb1922a96f6f4a61132ab6275c3",
+      "size": 1640
+    },
+    {
+      "path": "skills/stakeholder-alignment/SKILL.md",
+      "sha256": "0b6b6fda51f2301a53e12e4b05302864d285d840477af33dd8aad99d4f802c72",
+      "size": 3953
+    },
+    {
+      "path": "skills/task-management/SKILL.md",
+      "sha256": "5cb92890d67c000968af616c132a27cec7431cea45ca83e2a3382e5194f4e197",
+      "size": 4051
+    },
+    {
+      "path": "skills/team-durham/SKILL.md",
+      "sha256": "5272abcd2199aca661028584bebcfe84b39ecffb42ae86ab021d2a1891673233",
+      "size": 2516
+    },
+    {
+      "path": "skills/team-durham-agent-router/SKILL.md",
+      "sha256": "2a34c2057118f4d7a6ceb4552050e2d938a62dc39f844d8eb6039ba4d59a1637",
+      "size": 3018
+    },
+    {
+      "path": "skills/team-durham-bmad/SKILL.md",
+      "sha256": "b934baeec138891e86f34850532e41537f84b77c7ebd345be71334ee6712ee12",
+      "size": 2139
+    },
+    {
+      "path": "skills/trademark-screening/SKILL.md",
+      "sha256": "798498b26be97c19c84adcb7eb075f1858b1e81693eca0102f77f225a54279fd",
+      "size": 3471
+    },
+    {
+      "path": "skills/workspace-guide/SKILL.md",
+      "sha256": "6fa6c4c0d624f6c962c6e8cdcb5d54c5a530976d1f26a3eb8b662f5c409af5f5",
+      "size": 1639
+    }
+  ],
+  "package": "team-durham",
+  "schemaVersion": 1,
+  "sourceDirty": false,
+  "sourceRepository": "https://github.com/Allura-Ecosystem/team-durham",
+  "sourceRevision": "7e521976aef40b396e439d45c867d990c8237b11"
+}

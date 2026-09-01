@@ -36,7 +36,7 @@ When components are created or modified in Figma:
 // Detected: New component in Figma
 {
   event: "COMPONENT_CREATED",
-  file_key: "gnsKN6p6nWnATzZif7l0H5",
+  file_key: "FIGMA_FILE_KEY_EXAMPLE",
   node_id: "13:3",
   name: "Logo/Full/Color",
   properties: {
@@ -54,7 +54,7 @@ memory_add({
   metadata: {
     client: "allura-memory",
     figma: {
-      file_key: "gnsKN6p6nWnATzZif7l0H5",
+      file_key: "FIGMA_FILE_KEY_EXAMPLE",
       node_id: "13:3",
       component_name: "Logo/Full/Color"
     },
@@ -89,9 +89,9 @@ const brain_version = memory_get(memory_id);
 
 if (figma_version.lastModified > brain_version.timestamp) {
   // Figma is newer — update Brain
-  memory_update(memory_id, { 
+  memory_update(memory_id, {
     content: "Component updated in Figma",
-    metadata: figma_version.properties 
+    metadata: figma_version.properties
   });
 } else if (brain_version.timestamp > figma_version.lastModified) {
   // Brain is newer — update Figma (rare)
@@ -111,7 +111,7 @@ memory_search({
 });
 
 // Verify Figma file access
-const file_key = "gnsKN6p6nWnATzZif7l0H5";
+const file_key = "FIGMA_FILE_KEY_EXAMPLE";
 const metadata = await figma.getMetadata(file_key);
 ```
 
@@ -146,7 +146,7 @@ Monitor Figma for changes:
 // Poll every 30 seconds for changes
 setInterval(async () => {
   const changes = await figma.checkChanges(file_key, last_sync_timestamp);
-  
+
   for (const change of changes) {
     memory_add({
       group_id: "allura-team-durham",

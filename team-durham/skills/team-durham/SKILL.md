@@ -57,4 +57,3 @@ Use this skill when the user asks to work through Team Durham or any of its agen
 - Vision-critical agents inspect actual image files.
 - Project-specific gates apply only to that project.
 - Do not treat Allura Dashboard or RuVix/theDerm rules as global Team Durham law.
-

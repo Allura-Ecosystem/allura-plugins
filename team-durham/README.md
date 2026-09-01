@@ -1,84 +1,119 @@
 # Team Durham
 
-A multi-agent brand production team for Claude Code and Codex CLI.
+Team Durham is a portable, governed multi-agent system for turning a client brief into brand strategy, naming, visual direction, a production-ready brand kit, and evidence-backed QA.
 
-Team Durham packages a complete design-team harness for brand production:
-strategy, naming, visual direction, brand kit assembly, QA, memory, and
-delivery. Twelve canonical agents, ~70 skills, 21 commands, governance
-rules, and persona research.
+This repository is the **canonical public source** for Team Durham. Catalog copies are generated exports; they are not edited independently.
 
-## Core Agents
+## What is included
 
-| Agent | Persona | Canonical Role |
-|-------|---------|----------------|
-| Kotler | Philip Kotler | Brand Orchestrator + STP gate |
-| Aaker | Jennifer Aaker | Brand Strategy + personality |
-| Ogilvy | David Ogilvy | Naming, copy, voice |
-| Glaser | Milton Glaser | Visual direction + logo |
-| Rand | Paul Rand | Brand kit + design system |
-| Munari | Bruno Munari | QA, consistency, accessibility |
-| Tufte | Edward Tufte | Evidence, data, competitive intelligence |
-| Scout | Utility | Fast read-only recon |
-| Reality Checker | Allura Ops | Evidence-based readiness |
-| Evidence Collector | Allura Ops | Screenshot/artifact proof |
-| Workflow Architect | Allura Ops | Handoffs and state machines |
-| Agentic Trust Architect | Allura Ops | Permissions, audit, memory trust |
+- **12 canonical roles** for strategy, creative production, QA, evidence, workflow, and trust
+- **1 compatibility fallback definition** (`openagent`) for runtimes that require a generic catch-all
+- **77 skills** and **22 commands**
+- Contracts, governance rules, prompt evaluations, Claude/Codex manifests, and a BMAD adapter
+- A deterministic catalog export contract with source-revision provenance
 
-## Operating Rules
+> **Why 13 files but 12 roles?** `agents/` contains 13 loadable definitions. Twelve represent Team Durham's canonical role model. `openagent.md` is a runtime compatibility fallback with no persona and is deliberately not counted as a canonical role. See [Architecture](ARCHITECTURE.md#role-model-12--1).
 
-- STP before pixels.
-- Search before write.
-- Brand truth is canonical once locked.
-- QA is read-only: Munari flags, producers fix.
-- Project-specific governance applies only to that project.
-- Persona research grounds voice, but governance wins.
+## Canonical roles
 
-## Requirements
+| Definition | Persona | Responsibility |
+| --- | --- | --- |
+| `brand-orchestrator` | Philip Kotler | Pipeline routing and STP gate |
+| `brand-strategist` | Jennifer Aaker | Positioning, personality, and brand truth |
+| `copywriter` | David Ogilvy | Naming, voice, and copy |
+| `visual-director` | Milton Glaser | Visual direction and logo systems |
+| `brand-kit-builder` | Paul Rand | Brand kit and design-system assembly |
+| `qa-reviewer` | Bruno Munari | Read-only consistency and readiness QA |
+| `data-analyst` | Edward Tufte | Research and evidence-based analysis |
+| `scout-recon` | Utility role | Fast, read-only discovery |
+| `reality-checker` | Operations role | Proof-based completion gate |
+| `evidence-collector` | Operations role | Screenshots and artifact evidence |
+| `workflow-architect` | Operations role | Handoffs, states, and recovery paths |
+| `agentic-trust-architect` | Operations role | Identity, authorization, audit, and provenance |
 
-- **Claude Code** or **Codex CLI** with plugin support.
-- **Allura Brain** (expected) — most skills assume the memory MCP is
-  reachable. Without it, memory-dependent commands report the missing
-  connection rather than fail silently.
-- **Docker** (optional) — the `mcp-docker`, `mcp-docker-memory`,
-  `docker-presentation-server`, and `mcp-validation-gate` skills use the
-  Docker MCP toolkit.
-- **fal.ai** (optional) — `fal-ideogram-executor`, `falai-runner`, and
-  `fal-ai-image-prompt-engineering` require `FAL_KEY`.
-- **Figma** (optional) — `figma-*` skills require `FIGMA_TOKEN`.
-- **Notion** (optional) — `notion-*` skills require `NOTION_TOKEN`.
-- **LibreOffice** (optional) — `mcp-libre` requires LibreOffice and the
-  `fastmcp` CLI. Set `MCP_LIBRE_ROOT` to the server install path.
+## Operating model
+
+1. **Discover before changing** — Scout locates authoritative context and risks.
+2. **Strategy before pixels** — Kotler and Aaker lock audience, positioning, and brand truth first.
+3. **Specialists produce** — Ogilvy, Glaser, and Rand create the system and deliverables.
+4. **QA stays independent** — Munari reports findings; producing roles perform fixes.
+5. **Claims require evidence** — Reality Checker and Evidence Collector verify the actual artifact.
+6. **Governance wins over persona** — project/client authority and safety constraints outrank stylistic simulation.
 
 ## Install
 
-Add the Allura marketplace, then install:
+Clone the canonical repository:
 
+```bash
+git clone https://github.com/Allura-Ecosystem/team-durham.git
+cd team-durham
+python3 scripts/validate_repository.py
 ```
-/plugin marketplace add Allura-Ecosystem/allura-plugins
-/plugin install team-durham@allura-ecosystem
+
+For Claude Code development, load the checkout as a local plugin:
+
+```bash
+claude --plugin-dir "$PWD"
 ```
+
+The generated `allura-plugins` catalog package remains the consumer-friendly marketplace route after catalog integration. It must identify the exact standalone commit from which it was exported. See [Installation](docs/INSTALLATION.md) and [Catalog export](docs/CATALOG-EXPORT.md).
+
+## Configure
+
+Team Durham works without external services for file-based strategy and production guidance. Integrations are opt-in:
+
+| Capability | Configuration | When unavailable |
+| --- | --- | --- |
+| Allura Memory / Brain | MCP server plus scoped `group_id` | No durable recall/write; workflow must report degraded state |
+| Figma | Runtime MCP configuration; token supplied outside the repo | Figma-specific skills stop or offer a file-based path |
+| fal.ai | `FAL_KEY` in the caller's secret store | Image-generation steps stop; no synthetic success evidence |
+| Notion | `NOTION_TOKEN` in the caller's secret store | Publishing steps are skipped and reported |
+| Docker MCP toolkit | Docker and configured MCP gateway | Docker-backed tools remain unavailable |
+| LibreOffice MCP | `MCP_LIBRE_ROOT` and `fastmcp` | Office automation remains unavailable |
+
+Never commit credentials. Full details: [Configuration](docs/CONFIGURATION.md) and [Degraded behavior](docs/DEGRADED-BEHAVIOR.md).
+
+## Repository map
+
+```text
+agents/             canonical role definitions (+ openagent compatibility fallback)
+commands/           canonical user-facing workflows
+skills/             canonical reusable procedures
+contracts/          machine-readable handoff contracts
+governance/         authority and policy notes
+rules/              runtime guidance
+evals/              canonical prompt-evaluation snapshots and policy
+bmad-module/         generated/runtime adapter source
+.claude-plugin/      Claude manifest
+.codex-plugin/       Codex manifest
+scripts/             validation and catalog export
+clients/             preserved historical/client workspace data; not exported
+.opencode/           preserved legacy Team RAM/OpenCode compatibility surface; not canonical
+```
+
+## Ecosystem boundaries
+
+- **Team Durham** owns this brand-production role/command/skill source.
+- **Allura Memory** is an optional governed memory dependency, not bundled here.
+- **Team RAM** is a separate engineering-delivery harness. The preserved `.opencode/` surface in this repository is compatibility history, not Team Durham authority.
+- **allura-plugins** is a distribution catalog. Its Team Durham directory must be generated from a pinned commit of this repository.
+
+See [Architecture](ARCHITECTURE.md) for authority and dependency boundaries.
+
+## Validate and export
+
+```bash
+npm test
+npm run export:check
+npm run export -- --output /tmp/team-durham-export
+```
+
+The exporter injects the source Git SHA and a SHA-256 file inventory into the generated package. CI verifies manifests, role counts, paths, JSON contracts, evaluations, and export reproducibility.
+
+## Security and contributing
+
+Read [SECURITY.md](SECURITY.md) before reporting vulnerabilities and [CONTRIBUTING.md](CONTRIBUTING.md) before changing canonical surfaces.
 
 ## License
 
-MIT — see [LICENSE](../LICENSE).
-
-## Package Contract
-
-### Runtime manifests
-
-This portable package is published at `team-durham/` through the root Claude
-marketplace and owns `.claude-plugin/plugin.json` and
-`.codex-plugin/plugin.json`. Its public installation path is
-`team-durham@allura-ecosystem`.
-
-### Validation
-
-Use the package validation definitions in its skills and run
-`python3 scripts/validate_manifests.py` from the catalog root to verify public
-manifest paths and catalog contract metadata.
-
-### Dependencies and degraded behavior
-
-Allura Brain is expected for memory-dependent workflows. Docker, fal.ai, Figma,
-Notion, and LibreOffice integrations are optional; their related skills report
-the missing dependency and do not establish false execution evidence.
+MIT — see [LICENSE](LICENSE).

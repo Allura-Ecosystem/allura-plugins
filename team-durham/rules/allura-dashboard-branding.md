@@ -59,10 +59,10 @@ RuVix must reject or escalate dashboard work when:
 
 For every Durham dashboard brand gate:
 
-1. Update the canonical Notion Work Item with status, reviewer, decision, and evidence link.
-2. Log a memory to Allura Brain using `group_id=allura-team-durham` and the reviewing agent's `user_id`.
-3. If the rule affects implementation, mirror the decision to `group_id=allura-system` via Gilliam or the owning implementation agent.
-4. Store the evidence artifact in the Allura repo before claiming completion.
+1. Update the canonical Notion Work Item with status, reviewer, decision, and evidence link when that integration is available.
+2. Log a memory to Allura Memory using `group_id=allura-team-durham` and the reviewing agent's `user_id` when the write succeeds.
+3. If the decision affects the Allura product, hand it to the owning Allura implementation workflow with evidence. Team Durham does not write to `allura-system` or claim that handoff as a completed implementation.
+4. Store the evidence artifact in the owning repository before claiming completion.
 
 ## Ready-to-Dispatch Prompt
 

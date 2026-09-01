@@ -1,0 +1,13 @@
+title = "Allura Plugins gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Team Durham Figma design-token idempotency metadata keys; these are documented collection identifiers, not credentials. The file is a generated export from the pinned standalone source."
+paths = ['''^team-durham/skills/figma-generate-library/references/token-creation\.md$''']
+regexTarget = "secret"
+regexes = [
+  '''^collection/primitives$''',
+  '''^primitive/blue/500$'''
+]

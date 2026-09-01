@@ -1,6 +1,6 @@
 /**
  * Allura Brand Prompts - Optimized for 2026 Models
- * 
+ *
  * Based on research:
  * - Seedream v4.5: Best typography, posters, text-heavy
  * - Nano Banana 2: Best UI, hero images, clean compositions
@@ -39,7 +39,7 @@ export const ALLURA_OPTIMIZED_PROMPTS: OptimizedPrompt[] = [
     expectedStrengths: ["clean-composition", "4k-output", "text-ready"],
     costEstimate: 0.015
   },
-  
+
   // ============================================
   // COMMUNITY - Nano Banana Pro (better detail)
   // ============================================
@@ -56,7 +56,7 @@ export const ALLURA_OPTIMIZED_PROMPTS: OptimizedPrompt[] = [
     expectedStrengths: ["detail", "composition", "realism"],
     costEstimate: 0.025
   },
-  
+
   // ============================================
   // PATTERNS - Flux Dev (best for backgrounds)
   // ============================================
@@ -73,7 +73,7 @@ export const ALLURA_OPTIMIZED_PROMPTS: OptimizedPrompt[] = [
     expectedStrengths: ["layout", "abstract", "cost-effective"],
     costEstimate: 0.012
   },
-  
+
   // ============================================
   // CRAFT DETAIL - Flux Dev (good textures)
   // ============================================
@@ -90,7 +90,7 @@ export const ALLURA_OPTIMIZED_PROMPTS: OptimizedPrompt[] = [
     expectedStrengths: ["texture", "materials", "cost-effective"],
     costEstimate: 0.012
   },
-  
+
   // ============================================
   // LOGO HERO - Seedream (best typography)
   // ============================================
@@ -107,7 +107,7 @@ export const ALLURA_OPTIMIZED_PROMPTS: OptimizedPrompt[] = [
     expectedStrengths: ["typography", "poster-design", "text-integration"],
     costEstimate: 0.02
   },
-  
+
   // ============================================
   // SOCIAL CARDS - Seedream (text + layout)
   // ============================================
@@ -124,7 +124,7 @@ export const ALLURA_OPTIMIZED_PROMPTS: OptimizedPrompt[] = [
     expectedStrengths: ["typography", "social-layout", "brand-identity"],
     costEstimate: 0.02
   },
-  
+
   // ============================================
   // LOGO PATTERN - Recraft (vector output)
   // ============================================
@@ -141,7 +141,7 @@ export const ALLURA_OPTIMIZED_PROMPTS: OptimizedPrompt[] = [
     expectedStrengths: ["vector-style", "clean-shapes", "scalable"],
     costEstimate: 0.02
   },
-  
+
   // ============================================
   // PRESENTATION COVER - Seedream (poster design)
   // ============================================
@@ -180,7 +180,7 @@ export function getPromptsByUseCase(useCase: string): OptimizedPrompt[] {
     'social': ['LOGO-2-SEEDREAM'],
     'presentation': ['LOGO-4-SEEDREAM']
   };
-  
+
   const tokenSets = useCaseMap[useCase] || [];
   return ALLURA_OPTIMIZED_PROMPTS.filter(p => tokenSets.includes(p.tokenSet));
 }
@@ -194,7 +194,7 @@ export function calculateAlluraCampaignCost(): {
 } {
   const byModel: Record<string, { count: number; cost: number }> = {};
   let total = 0;
-  
+
   for (const prompt of ALLURA_OPTIMIZED_PROMPTS) {
     if (!byModel[prompt.model]) {
       byModel[prompt.model] = { count: 0, cost: 0 };
@@ -203,7 +203,7 @@ export function calculateAlluraCampaignCost(): {
     byModel[prompt.model].cost += prompt.costEstimate;
     total += prompt.costEstimate;
   }
-  
+
   return {
     total: Math.round(total * 1000) / 1000,
     byModel

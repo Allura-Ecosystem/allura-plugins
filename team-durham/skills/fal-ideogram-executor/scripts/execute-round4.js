@@ -91,7 +91,7 @@ async function executePrompt(promptConfig, index) {
   console.log(`\n🎨 Generating [${index + 1}/${PROMPTS.length}]: ${promptConfig.name}`);
   console.log(`   ID: ${promptConfig.id}`);
   console.log(`   Style: ${promptConfig.stylePreset} | Size: ${promptConfig.size}`);
-  
+
   try {
     const { request_id } = await fal.queue.submit(CONFIG.model, {
       input: {
@@ -103,32 +103,32 @@ async function executePrompt(promptConfig, index) {
         image_size: promptConfig.size || CONFIG.defaultSize
       }
     });
-    
+
     console.log(`   ✓ Submitted (Request ID: ${request_id})`);
-    
+
     // Poll for completion
     let status;
     let attempts = 0;
     const maxAttempts = 60; // 5 minutes max at 5-second intervals
-    
+
     do {
       await new Promise(r => setTimeout(r, 5000));
       status = await fal.queue.status(CONFIG.model, { requestId: request_id });
       attempts++;
       process.stdout.write(`   ⏳ Status: ${status.status} (${attempts}s)\r`);
     } while (status.status !== "COMPLETED" && attempts < maxAttempts);
-    
+
     if (status.status !== "COMPLETED") {
       throw new Error("Generation timed out");
     }
-    
+
     // Fetch result
     const result = await fal.queue.result(CONFIG.model, { requestId: request_id });
     const imageUrl = result.data.images[0].url;
-    
+
     console.log(`   ✓ Complete!`);
     console.log(`   📸 ${imageUrl}`);
-    
+
     // Save metadata
     const metadata = {
       id: promptConfig.id,
@@ -142,15 +142,15 @@ async function executePrompt(promptConfig, index) {
       strategy: "Sage60/Lover25/Ruler15",
       round: 4
     };
-    
+
     await fs.mkdir(CONFIG.outputDir, { recursive: true });
     await fs.writeFile(
       path.join(CONFIG.outputDir, `${promptConfig.id}-metadata.json`),
       JSON.stringify(metadata, null, 2)
     );
-    
+
     return { success: true, url: imageUrl, metadata };
-    
+
   } catch (error) {
     console.error(`   ✗ Error: ${error.message}`);
     return { success: false, error: error.message };
@@ -168,37 +168,37 @@ async function main() {
   console.log(`\nOutput directory: ${CONFIG.outputDir}`);
   console.log(`Rendering speed: ${CONFIG.renderingSpeed}`);
   console.log(`Total prompts: ${PROMPTS.length}`);
-  
+
   const results = [];
-  
+
   for (let i = 0; i < PROMPTS.length; i++) {
     const result = await executePrompt(PROMPTS[i], i);
     results.push(result);
-    
+
     // Brief pause between requests
     if (i < PROMPTS.length - 1) {
       await new Promise(r => setTimeout(r, 2000));
     }
   }
-  
+
   // Summary
   console.log("\n═════════════════════════════════════════════════════════════");
   console.log("                         SUMMARY                             ");
   console.log("═════════════════════════════════════════════════════════════");
-  
+
   const successful = results.filter(r => r.success);
   const failed = results.filter(r => !r.success);
-  
+
   console.log(`\n✓ Successful: ${successful.length}/${PROMPTS.length}`);
   console.log(`✗ Failed: ${failed.length}/${PROMPTS.length}`);
-  
+
   if (successful.length > 0) {
     console.log("\nGenerated images:");
     successful.forEach((r, i) => {
       console.log(`  ${i + 1}. ${r.url}`);
     });
   }
-  
+
   console.log("\n✨ Round 4 Complete — Review outputs for Lover archetype embodiment");
 }
 

@@ -1,11 +1,11 @@
 /**
  * Model Selection Engine
- * 
+ *
  * Selects optimal fal.ai model based on use case
  * Based on 2026 research: Seedream (typography), Nano Banana (UI), Flux (layout)
  */
 
-export type ModelUseCase = 
+export type ModelUseCase =
   | 'typography'
   | 'logo-concept'
   | 'hero-image'
@@ -109,25 +109,25 @@ export const USE_CASE_MODEL_MAP: Record<ModelUseCase, string[]> = {
  */
 export function selectOptimalModel(useCase: ModelUseCase, priority: 'quality' | 'speed' | 'cost' = 'quality'): string {
   const candidates = USE_CASE_MODEL_MAP[useCase];
-  
+
   if (!candidates || candidates.length === 0) {
     return 'fal-ai/flux-dev'; // Default fallback
   }
-  
+
   if (priority === 'cost') {
     // Return cheapest option
-    return candidates.sort((a, b) => 
+    return candidates.sort((a, b) =>
       MODEL_REGISTRY[a].costPerImage - MODEL_REGISTRY[b].costPerImage
     )[0];
   }
-  
+
   if (priority === 'speed') {
     // Return fastest (schnell for flux, or nano banana)
-    return candidates.find(m => m.includes('schnell')) || 
+    return candidates.find(m => m.includes('schnell')) ||
            candidates.find(m => m.includes('nano-banana')) ||
            candidates[0];
   }
-  
+
   // Quality: return first (already ordered by quality)
   return candidates[0];
 }
@@ -143,22 +143,22 @@ export function calculateGenerationCost(
 } {
   const breakdown: { useCase: string; model: string; count: number; cost: number }[] = [];
   let totalCost = 0;
-  
+
   for (const { useCase, count, priority = 'quality' } of useCases) {
     const model = selectOptimalModel(useCase, priority);
     const modelConfig = MODEL_REGISTRY[model];
     const cost = modelConfig.costPerImage * count;
-    
+
     breakdown.push({
       useCase,
       model,
       count,
       cost: Math.round(cost * 1000) / 1000
     });
-    
+
     totalCost += cost;
   }
-  
+
   return {
     totalCost: Math.round(totalCost * 1000) / 1000,
     breakdown
@@ -191,6 +191,6 @@ export function getModelStack(workflow: 'logo-design' | 'brand-kit' | 'social-ca
       'fal-ai/seedream-v4.5'    // Text integration
     ]
   };
-  
+
   return stacks[workflow] || ['fal-ai/flux-dev'];
 }

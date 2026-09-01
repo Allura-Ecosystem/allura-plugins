@@ -1,16 +1,16 @@
 /**
  * Figma Brand Automation Skill - Main Entry Point
- * 
+ *
  * Integrates with Team Durham's 8-phase pipeline and Allura Brain
  * to automate brand kit creation from Figma Community templates.
- * 
+ *
  * v5.0: Brand-Guided Generation
  * - Brand Context Injector reads ACTUAL deliverables (not random descriptions)
  * - Every prompt is enriched with real brand data before generation
  * - Multi-model stack: Seedream (typography), Nano Banana (UI), Flux (layout), Recraft (vector)
  * - Post-generation validation against brand kit rules
  * - Winning prompt tracking in Allura Brain + Notion
- * 
+ *
  * Key Principle: Images must be FROM the brand, not just ABOUT it.
  */
 
@@ -20,16 +20,16 @@ import { customizeWithBrand } from './tools/customize-brand';
 import { exportDeliverable } from './tools/export-deliverable';
 import { runQAValidation } from './tools/qa-validation';
 import { logToAlluraBrain } from './utils/allura-brain';
-import { 
-  selectOptimalModel, 
-  calculateGenerationCost, 
+import {
+  selectOptimalModel,
+  calculateGenerationCost,
   getModelStack,
-  ModelUseCase 
+  ModelUseCase
 } from './prompts/model-selection';
-import { 
+import {
   ALLURA_OPTIMIZED_PROMPTS,
   calculateAlluraCampaignCost,
-  exportForExecution 
+  exportForExecution
 } from './prompts/allura-optimized';
 
 // v5.0: Brand-Guided Generation
@@ -64,8 +64,8 @@ import {
   syncToNotion,
   generatePromptReport
 } from './prompts/winning-prompts-tracking';
-import { 
-  executeModelStack, 
+import {
+  executeModelStack,
   compareApproaches as compareModelStackApproaches
 } from './prompts/model-stack';
 
@@ -165,7 +165,7 @@ export class FigmaBrandAutomationSkill {
    */
   async duplicateCommunityTemplate(params: TemplateDuplicateParams) {
     const result = await duplicateCommunityTemplate(params);
-    
+
     await logToAlluraBrain({
       agentId: params.agentId,
       eventType: 'template_duplicated',
@@ -185,7 +185,7 @@ export class FigmaBrandAutomationSkill {
    */
   async analyzeTemplateStructure(params: TemplateAnalysisParams) {
     const result = await analyzeTemplateStructure(params);
-    
+
     await logToAlluraBrain({
       agentId: params.agentId,
       eventType: 'template_analyzed',
@@ -205,7 +205,7 @@ export class FigmaBrandAutomationSkill {
    */
   async customizeWithBrand(params: CustomizationParams) {
     const result = await customizeWithBrand(params);
-    
+
     await logToAlluraBrain({
       agentId: params.agentId,
       eventType: 'brand_customized',
@@ -226,7 +226,7 @@ export class FigmaBrandAutomationSkill {
    */
   async exportDeliverable(params: ExportParams) {
     const result = await exportDeliverable(params);
-    
+
     await logToAlluraBrain({
       agentId: params.agentId,
       eventType: 'deliverable_exported',
@@ -247,7 +247,7 @@ export class FigmaBrandAutomationSkill {
    */
   async runQAValidation(params: QAParams) {
     const result = await runQAValidation(params);
-    
+
     await logToAlluraBrain({
       agentId: params.agentId,
       eventType: 'qa_validation_complete',
@@ -274,7 +274,7 @@ export class FigmaBrandAutomationSkill {
       // Use multi-model stack
       const workflowType = this.mapUseCaseToWorkflow(useCase);
       const result = await executeModelStack(workflowType, brandSlug, agentId, basePrompt);
-      
+
       await logToAlluraBrain({
         agentId,
         eventType: 'image_stack_generated',
@@ -296,7 +296,7 @@ export class FigmaBrandAutomationSkill {
       // Use single optimal model
       const model = selectOptimalModel(useCase, priority);
       const cost = this.getModelCost(model);
-      
+
       // Log generation
       await logToAlluraBrain({
         agentId,
@@ -370,7 +370,7 @@ export class FigmaBrandAutomationSkill {
     };
 
     await logWinningPrompt(performance);
-    
+
     // Sync to Notion
     await syncToNotion([performance]);
 

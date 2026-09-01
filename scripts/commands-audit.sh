@@ -4,17 +4,16 @@
 # Exit 0 = clean, Exit 1 = issues found
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ANY_FAIL=0
 
 log() { echo "[commands-audit] $*" >&2; }
 
 # Plugin definitions: name|commands_dir|claude_manifest|codex_manifest
 PLUGINS=(
-  "team-ram-harness|$REPO_ROOT/Agent-Harnesses/Allura-TeamRam/.opencode/command|$REPO_ROOT/Agent-Harnesses/Allura-TeamRam/.claude-plugin/plugin.json|$REPO_ROOT/Agent-Harnesses/Allura-TeamRam/.codex-plugin/plugin.json"
-  "team-durham|$REPO_ROOT/allura-plugins/team-durham/commands|$REPO_ROOT/allura-plugins/team-durham/.claude-plugin/plugin.json|$REPO_ROOT/allura-plugins/team-durham/.codex-plugin/plugin.json"
-  "allura-cowork|$REPO_ROOT/allura-plugins/allura-cowork/commands|$REPO_ROOT/allura-plugins/allura-cowork/.claude-plugin/plugin.json|$REPO_ROOT/allura-plugins/allura-cowork/.codex-plugin/plugin.json"
-  "team-ram-coding|$REPO_ROOT/allura-plugins/team-ram-coding/commands|$REPO_ROOT/allura-plugins/team-ram-coding/.claude-plugin/plugin.json|$REPO_ROOT/allura-plugins/team-ram-coding/.codex-plugin/plugin.json"
+  "team-ram-coding|$REPO_ROOT/team-ram-coding/.opencode/command|$REPO_ROOT/team-ram-coding/.claude-plugin/plugin.json|$REPO_ROOT/team-ram-coding/.codex-plugin/plugin.json"
+  "team-durham|$REPO_ROOT/team-durham/commands|$REPO_ROOT/team-durham/.claude-plugin/plugin.json|$REPO_ROOT/team-durham/.codex-plugin/plugin.json"
+  "allura-cowork|$REPO_ROOT/allura-cowork/commands|$REPO_ROOT/allura-cowork/.claude-plugin/plugin.json|$REPO_ROOT/allura-cowork/.codex-plugin/plugin.json"
 )
 
 echo "PLUGIN COMMAND AUDIT"

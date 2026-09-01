@@ -11,7 +11,7 @@ Ship the Allura plugin catalog as a validated, publicly releasable set of Claude
 
 ## Product Boundary
 
-`allura-plugins` is the canonical source and governance repository for the Allura plugin layer. It owns the plugin catalog, model governance, Hermes-native connector packaging, and release evidence. Plugins add skills, commands, and operating roles; they do not replace Allura Brain or bypass its memory governance.
+`allura-plugins` is the generated distribution catalog and release-governance repository for the Allura plugin layer. Standalone Team RAM, Team Durham, Mortagate, and Allura Memory repositories own their source content and export contracts; this repository owns pinned source locks, marketplace compatibility identities, catalog-level model policy, Hermes-native connector packaging, and release evidence. Plugins add skills, commands, and operating roles; they do not replace Allura Brain or bypass its memory governance.
 
 ## Current State
 

@@ -193,14 +193,14 @@ MCP Docker Toolkit (single runtime)
 
 ### Last Session Event
 ```sql
-SELECT * FROM events 
-WHERE agent_id = 'kotler' AND group_id = 'allura-team-durham' 
+SELECT * FROM events
+WHERE agent_id = 'kotler' AND group_id = 'allura-team-durham'
 ORDER BY created_at DESC LIMIT 1
 ```
 
 ### Recent Decisions
 ```sql
-SELECT * FROM events 
+SELECT * FROM events
 WHERE event_type IN ('DESIGN_DECISION', 'DDR_CREATED')
   AND group_id = 'allura-team-durham'
 ORDER BY created_at DESC LIMIT 10
@@ -208,8 +208,8 @@ ORDER BY created_at DESC LIMIT 10
 
 ### Pipeline Status
 ```sql
-SELECT agent_id, event_type, status, created_at 
-FROM events 
+SELECT agent_id, event_type, status, created_at
+FROM events
 WHERE group_id = 'allura-team-durham'
   AND created_at > NOW() - INTERVAL '24 hours'
 ORDER BY created_at DESC

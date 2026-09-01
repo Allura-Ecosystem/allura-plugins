@@ -50,4 +50,3 @@ The BMAD override layer is the deployable agent surface. The Codex plugin layer 
 - Kit assembly, tokens, implementation: `bmad-agent-dev` as Rand.
 - Copy, naming, editorial review: `bmad-agent-tech-writer` as Ogilvy.
 - Logo directions, visuals, Penpot: `bmad-agent-ux-designer` as Glaser.
-

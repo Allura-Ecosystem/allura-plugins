@@ -1,0 +1,111 @@
+{
+  "authoritative": false,
+  "contractPath": "catalog-export.json",
+  "contractSha256": "ad8ca9288e4adef2eb0860a5951e6b27580b166b1b39e0faf741527f106eb623",
+  "files": [
+    {
+      "path": "PRIVACY.md",
+      "sha256": "5779d77de4f8ddc468b38ba3a1986fc9961bfb858448f52856a8deab3b1051d9",
+      "size": 553
+    },
+    {
+      "path": "README.md",
+      "sha256": "7af6ef2b8ed59c6ae4c8c016d4a1a16cdbeef1a3453c516d045a287bcc70ed0b",
+      "size": 4472
+    },
+    {
+      "path": "TERMS.md",
+      "sha256": "f4775ecaea6146c76299551167691b55b9e54edd3707da98799ac9f350eb9fbc",
+      "size": 482
+    },
+    {
+      "path": "appPackage/color.png",
+      "sha256": "9447feb4fd716366a8bff7e312610f441650d38081641e2d627678fdc67f9779",
+      "size": 450
+    },
+    {
+      "path": "appPackage/manifest.json",
+      "sha256": "82c0a501a67ac249f48695da8d04572107d2759148d611c09be1cfe2e48b2988",
+      "size": 1277
+    },
+    {
+      "path": "appPackage/outline.png",
+      "sha256": "245a82e115217ea58a29329710f13d48617347f30d71db98f8c7657ad7b696d5",
+      "size": 98
+    },
+    {
+      "path": "appPackage/skills/audit-packet-draft/SKILL.md",
+      "sha256": "7ad3d87849071d0508f74636607182834d3ba4de5daf9d5f3e57dd12d16468e7",
+      "size": 1690
+    },
+    {
+      "path": "appPackage/skills/audit-packet-draft/references/safety-boundaries.md",
+      "sha256": "386ca7da18e81227ec0a2dcd2bd54d684e66280a6f93efe88b5cc98dec586e3c",
+      "size": 1042
+    },
+    {
+      "path": "appPackage/skills/loan-file-evidence-review/SKILL.md",
+      "sha256": "6d380490fbf9978aeac395581d7d97bbb79bf56adf905ab5752d652d4a78efae",
+      "size": 1926
+    },
+    {
+      "path": "appPackage/skills/loan-file-evidence-review/references/safety-boundaries.md",
+      "sha256": "386ca7da18e81227ec0a2dcd2bd54d684e66280a6f93efe88b5cc98dec586e3c",
+      "size": 1042
+    },
+    {
+      "path": "appPackage/skills/mortgage-case-onboarding/SKILL.md",
+      "sha256": "d81cf7f877065764af4cde526c62d8b3da32a5706020b1461df034abfa636f8a",
+      "size": 1681
+    },
+    {
+      "path": "appPackage/skills/mortgage-case-onboarding/references/safety-boundaries.md",
+      "sha256": "386ca7da18e81227ec0a2dcd2bd54d684e66280a6f93efe88b5cc98dec586e3c",
+      "size": 1042
+    },
+    {
+      "path": "appPackage/skills/policy-replay-review/SKILL.md",
+      "sha256": "f97d0adeaeb91f7cac3fb0b84704f3361c671b79532a640da311b6d50b61fb56",
+      "size": 1636
+    },
+    {
+      "path": "appPackage/skills/policy-replay-review/references/safety-boundaries.md",
+      "sha256": "386ca7da18e81227ec0a2dcd2bd54d684e66280a6f93efe88b5cc98dec586e3c",
+      "size": 1042
+    },
+    {
+      "path": "docs/CONNECTOR-ROADMAP.md",
+      "sha256": "b4af606228ece6da1652d967b0dbae9735ddadf2e5ce3613897ace1777d8a53b",
+      "size": 2665
+    },
+    {
+      "path": "docs/REFERENCE-ARCHITECTURE.md",
+      "sha256": "1ee1a26e29c8d347d6a18e1b413d072782c29c9890fc4248f657bd9a6348fdce",
+      "size": 1850
+    },
+    {
+      "path": "m365agents.yml",
+      "sha256": "f1d10744c243b6bb3516a3e22707831072e3a0741fcf28dcada73e4cb8ce15d6",
+      "size": 477
+    },
+    {
+      "path": "scripts/generate_icons.py",
+      "sha256": "b3a06bc72f0923af09a0261c76068685dab5e20a8ebcf59c5fa4a31247c12913",
+      "size": 926
+    },
+    {
+      "path": "scripts/validate_package.py",
+      "sha256": "d5983324f859573ca5ccb85aec333b7e32d985a4c054091546ad69c31ece212e",
+      "size": 4008
+    }
+  ],
+  "generated": true,
+  "generatedBy": "allura-plugins/scripts/verify_source_exports.py",
+  "manualEdits": "forbidden; change the standalone source and regenerate",
+  "packageId": "mortagate-cowork",
+  "runtime": "microsoft-cowork",
+  "schemaVersion": 1,
+  "sourceCommit": "c926bdbe101829c7937ad90f9ee08100a55f463a",
+  "sourceRepository": "https://github.com/Allura-Ecosystem/mortagate.git",
+  "version": "0.1.0"
+}
