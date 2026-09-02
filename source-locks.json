@@ -43,7 +43,7 @@
       "id": "mortagate-cowork",
       "aliases": ["mortagate", "mortgate", "mortagate-cowork", "mortgate-cowork"],
       "repository": "https://github.com/Allura-Ecosystem/mortagate.git",
-      "commit": "c926bdbe101829c7937ad90f9ee08100a55f463a",
+      "commit": "0fd75552060f81ca98e6c756b9286eb3d80b8c32",
       "manifest": "catalog-export.json",
       "exporter": "contract-allowlist",
       "sourceRoot": "microsoft-cowork",
@@ -53,8 +53,8 @@
       "marketplaceAlias": null,
       "sourceManifestName": "mortagate-cowork",
       "sourcePackageName": "mortagate-cowork",
-      "packageVersion": "0.1.0",
-      "runtimeVersion": "0.1.0"
+      "packageVersion": "0.2.0",
+      "runtimeVersion": "0.2.0"
     }
   ]
 }
