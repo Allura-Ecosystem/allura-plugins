@@ -27,6 +27,13 @@
       "description": "Team RAM agent platform for Allura-governed development: Brooks-led architecture, Scout recon, Woz implementation, code review, memory, task management, multi-source research, and party-mode multi-agent dispatch.",
       "version": "0.4.2",
       "category": "Coding"
+    },
+    {
+      "name": "mortgate-cowork",
+      "source": "./packages/mortagate-cowork",
+      "description": "Mortgate evidence-review skills: mortgage case onboarding, loan-file evidence review, policy-replay review, and audit-packet drafting with fixed safety boundaries. Never approves/denies credit or updates loan systems.",
+      "version": "0.1.0",
+      "category": "Productivity"
     }
   ]
 }
