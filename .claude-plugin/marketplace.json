@@ -34,6 +34,13 @@
       "description": "Mortgate evidence-review skills: mortgage case onboarding, loan-file evidence review, policy-replay review, and audit-packet drafting with fixed safety boundaries. Never approves/denies credit or updates loan systems.",
       "version": "0.1.0",
       "category": "Productivity"
+    },
+    {
+      "name": "bumblebee",
+      "source": "./bumblebee",
+      "description": "Supply-chain threat intelligence plugin: pinned Bumblebee scanner wrapped as a governed, policy-gated Allura agent tool for read-only package inventory and vulnerability exposure.",
+      "version": "0.1.0",
+      "category": "Security"
     }
   ]
 }

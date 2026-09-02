@@ -1,0 +1,43 @@
+{
+  "name": "bumblebee",
+  "displayName": "Bumblebee",
+  "version": "0.1.0",
+  "description": "Supply-chain threat intelligence plugin: pinned Bumblebee scanner wrapped as a governed, policy-gated Allura agent tool for read-only package inventory and vulnerability exposure.",
+  "author": {
+    "name": "Allura-Ecosystem"
+  },
+  "license": "MIT",
+  "keywords": [
+    "allura",
+    "bumblebee",
+    "supply-chain",
+    "security",
+    "vulnerability",
+    "scanner",
+    "governance"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "commands": "./commands/",
+  "docs": "./docs/",
+  "interface": {
+    "displayName": "Bumblebee",
+    "shortDescription": "Supply-chain threat intelligence via governed scanner integration.",
+    "longDescription": "Bumblebee wraps a pinned upstream scanner (perplexityai/bumblebee v0.1.2) as a deterministic, policy-gated Allura agent tool. It provides read-only supply-chain inventory, vulnerability exposure intelligence, and downstream handoff to Allura's exposure and governed-response services with zero-trust, fail-closed gates at every stage.",
+    "developerName": "Allura-Ecosystem",
+    "category": "Security",
+    "capabilities": [
+      "Supply-Chain Inventory",
+      "Vulnerability Exposure",
+      "Governed Scanner Integration",
+      "Policy-Gated Ingestion",
+      "Threat Intelligence"
+    ],
+    "defaultPrompt": [
+      "Run a Bumblebee supply-chain scan.",
+      "Check vulnerability exposure for this endpoint.",
+      "Show the latest Bumblebee scan summary.",
+      "Promote the latest Bumblebee batch."
+    ]
+  }
+}
