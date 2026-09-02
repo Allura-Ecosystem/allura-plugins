@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 from pathlib import Path
 
 
@@ -25,6 +26,18 @@ def test_catalog_validation_includes_hermes_native_plugin(capsys):
 
     output = capsys.readouterr().out
     assert "HERMES MANIFEST OK: allura-brain v0.2.0" in output
+
+
+def test_codex_marketplace_lists_every_portable_plugin():
+    marketplace = json.loads(
+        (ROOT / ".agents" / "plugins" / "marketplace.json").read_text(encoding="utf-8")
+    )
+
+    assert [entry["name"] for entry in marketplace["plugins"]] == [
+        "allura-cowork",
+        "team-durham",
+        "team-ram-coding",
+    ]
 
 
 def test_catalog_contracts_validate_current_packages():

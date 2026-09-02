@@ -21,6 +21,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 PLUGINS = ["allura-cowork", "team-durham", "team-ram-coding"]
 MANIFEST_VARIANTS = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json"]
 MARKETPLACE = ".claude-plugin/marketplace.json"
+CODEX_MARKETPLACE = ".agents/plugins/marketplace.json"
 HERMES_PLUGIN_MANIFEST = "plugins/hermes-allura-brain/plugin.yaml"
 SOURCE_LOCKS = "source-locks.json"
 
@@ -105,6 +106,47 @@ def check_marketplace(errors: list, warnings: list) -> None:
             hard_fail("MARKETPLACE", f"{name} missing version", errors)
         if not category:
             warnings.append(f"MARKETPLACE: {name} missing category")
+
+
+def check_codex_marketplace(errors: list, warnings: list) -> None:
+    """Ensure every portable package is discoverable by Codex, not only Claude."""
+    mp_path = REPO_ROOT / CODEX_MARKETPLACE
+    mp = parse_json(mp_path, errors)
+    if mp is None:
+        return
+
+    entries = mp.get("plugins")
+    if not isinstance(entries, list):
+        hard_fail("CODEX MARKETPLACE", "top-level 'plugins' is not a list", errors)
+        return
+
+    names = [entry.get("name") for entry in entries if isinstance(entry, dict)]
+    if names != PLUGINS:
+        hard_fail(
+            "CODEX MARKETPLACE",
+            f"plugin inventory must be {PLUGINS}, got {names}",
+            errors,
+        )
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            hard_fail("CODEX MARKETPLACE", f"non-object plugin entry: {entry!r}", errors)
+            continue
+        name = entry.get("name", "<missing>")
+        source = entry.get("source")
+        if not isinstance(source, dict) or source.get("source") != "local":
+            hard_fail("CODEX MARKETPLACE", f"{name} must declare a local source object", errors)
+            continue
+        path = source.get("path")
+        if not isinstance(path, str) or path.startswith(("/", "..")):
+            hard_fail("CODEX MARKETPLACE", f"{name} has invalid source path {path!r}", errors)
+            continue
+        if not (REPO_ROOT / path).is_dir():
+            hard_fail("CODEX MARKETPLACE", f"{name} source path {path!r} is missing", errors)
+            continue
+        print(f"  CODEX MARKETPLACE OK: {name} -> {path}")
+        if not entry.get("category"):
+            warnings.append(f"CODEX MARKETPLACE: {name} missing category")
 
 
 def check_manifests(errors: list, warnings: list) -> None:
@@ -392,6 +434,7 @@ def main() -> int:
 
     print("[1] Marketplace source resolution")
     check_marketplace(errors, warnings)
+    check_codex_marketplace(errors, warnings)
 
     print("\n[2] Manifest parsing + referenced path resolution")
     check_manifests(errors, warnings)
