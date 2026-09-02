@@ -1,0 +1,16 @@
+{
+  "name": "bumblebee",
+  "version": "0.1.0",
+  "description": "Supply-chain threat intelligence plugin: pinned Bumblebee scanner wrapped as a governed, policy-gated Allura agent tool.",
+  "license": "MIT",
+  "files": [
+    ".claude-plugin/",
+    ".codex-plugin/",
+    "agents/",
+    "commands/",
+    "docs/",
+    "skills/",
+    "LICENSE",
+    "README.md"
+  ]
+}
