@@ -101,6 +101,14 @@ The plugin includes task management, code review, multi-source research, MCP orc
 
 ## How the plugins fit together
 
+<p align="center">
+  <a href="docs/images/allura-agent-runtime.png"><img src="docs/images/allura-agent-runtime.png" alt="Allura agent runtime connecting intent, workflow, tools and memory, response, and a connected result inside policy and checkpoint boundaries." width="900" /></a>
+</p>
+
+The runtime keeps intent, workflow, tools, memory, and response distinct so a
+plugin can coordinate work without pretending that every execution surface is
+the same system.
+
 ### Source ownership
 
 | Capability | Standalone source authority | Catalog role |
@@ -128,6 +136,10 @@ The plugins are composable but keep distinct ownership:
 - **Hermes Allura Brain connects Hermes to governed recall and outcome persistence.**
 
 ## Shared operating contract
+
+<p align="center">
+  <a href="docs/images/allura-governance-flow.png"><img src="docs/images/allura-governance-flow.png" alt="Allura governance flow from proposed action through policy enforcement and human approval to retained evidence." width="900" /></a>
+</p>
 
 All catalog plugins inherit the same Allura expectations:
 
