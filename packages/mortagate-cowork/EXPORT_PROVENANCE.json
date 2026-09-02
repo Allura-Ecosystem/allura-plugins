@@ -25,7 +25,7 @@
     },
     {
       "path": "appPackage/manifest.json",
-      "sha256": "82c0a501a67ac249f48695da8d04572107d2759148d611c09be1cfe2e48b2988",
+      "sha256": "57f1df10141ecc5984d9a3224b02c86293a80ba0d7e9bfa52217a81458a02279",
       "size": 1277
     },
     {
@@ -35,8 +35,8 @@
     },
     {
       "path": "appPackage/skills/audit-packet-draft/SKILL.md",
-      "sha256": "7ad3d87849071d0508f74636607182834d3ba4de5daf9d5f3e57dd12d16468e7",
-      "size": 1690
+      "sha256": "8bcffbecd6a545a45e93ce258cd20c7081e8c5de9a3b67e8c74000e67da313e5",
+      "size": 1824
     },
     {
       "path": "appPackage/skills/audit-packet-draft/references/safety-boundaries.md",
@@ -45,8 +45,8 @@
     },
     {
       "path": "appPackage/skills/loan-file-evidence-review/SKILL.md",
-      "sha256": "6d380490fbf9978aeac395581d7d97bbb79bf56adf905ab5752d652d4a78efae",
-      "size": 1926
+      "sha256": "3d70f2107adf830a822f263496d2829e15554975dfc6c8e55b1a00ccb39651dc",
+      "size": 2850
     },
     {
       "path": "appPackage/skills/loan-file-evidence-review/references/safety-boundaries.md",
@@ -65,8 +65,8 @@
     },
     {
       "path": "appPackage/skills/policy-replay-review/SKILL.md",
-      "sha256": "f97d0adeaeb91f7cac3fb0b84704f3361c671b79532a640da311b6d50b61fb56",
-      "size": 1636
+      "sha256": "c581f28aabc7b117f0bbf84f61ab21a5fd21cff2cbe671fcdb9bc408830fff51",
+      "size": 1770
     },
     {
       "path": "appPackage/skills/policy-replay-review/references/safety-boundaries.md",
@@ -105,7 +105,7 @@
   "packageId": "mortagate-cowork",
   "runtime": "microsoft-cowork",
   "schemaVersion": 1,
-  "sourceCommit": "c926bdbe101829c7937ad90f9ee08100a55f463a",
+  "sourceCommit": "0fd75552060f81ca98e6c756b9286eb3d80b8c32",
   "sourceRepository": "https://github.com/Allura-Ecosystem/mortagate.git",
-  "version": "0.1.0"
+  "version": "0.2.0"
 }
