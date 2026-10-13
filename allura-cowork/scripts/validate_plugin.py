@@ -68,6 +68,12 @@ def main() -> int:
         if "skills" not in manifest:
             errors.append(f"{name} manifest missing skills")
 
+    expected_agents = sorted('./' + str(path.relative_to(root)) for path in (root / 'agents').glob('*.md'))
+    if claude.get('agents') != expected_agents:
+        errors.append('Claude agents must be an explicit array of every agent file path')
+    if 'agents' in codex or 'commands' in codex:
+        errors.append('Codex manifest must expose skills rather than unsupported agents/commands')
+
     if "hooks" not in hooks:
         errors.append("hooks.json missing hooks root")
     if schema.get("title") != "Allura Cowork Handoff":

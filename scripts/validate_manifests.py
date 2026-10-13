@@ -145,6 +145,10 @@ def check_codex_marketplace(errors: list, warnings: list) -> None:
         if not (REPO_ROOT / path).is_dir():
             hard_fail("CODEX MARKETPLACE", f"{name} source path {path!r} is missing", errors)
             continue
+        manifest = parse_json(REPO_ROOT / path / ".codex-plugin/plugin.json", errors)
+        if manifest is None or manifest.get("name") != name:
+            hard_fail("CODEX MARKETPLACE", f"{name} manifest name must match marketplace alias", errors)
+            continue
         print(f"  CODEX MARKETPLACE OK: {name} -> {path}")
         if not entry.get("category"):
             warnings.append(f"CODEX MARKETPLACE: {name} missing category")
@@ -366,8 +370,11 @@ def check_package_contracts(errors: list, warnings: list) -> None:
             if marketplace_versions.get(marketplace_alias) != lock.get("runtimeVersion"):
                 hard_fail("CONTRACT", f"{package} marketplace alias/runtime version mismatch", errors)
                 continue
-            if claude.get("name") != lock.get("sourceManifestName") or codex.get("name") != lock.get("sourceManifestName"):
+            if claude.get("name") != lock.get("sourceManifestName") or codex.get("name") != lock.get("codexManifestName", lock.get("sourceManifestName")):
                 hard_fail("CONTRACT", f"{package} generated source manifest identity was changed", errors)
+                continue
+            if codex.get("name") != marketplace_alias:
+                hard_fail("CONTRACT", f"{package} Codex manifest name must match marketplace alias", errors)
                 continue
             if {claude.get("version"), codex.get("version")} != {lock.get("runtimeVersion")}:
                 hard_fail("CONTRACT", f"{package} Claude/Codex runtime version mismatch", errors)

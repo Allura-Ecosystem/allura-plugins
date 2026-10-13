@@ -39,18 +39,20 @@ Plugins add skills, commands, and operating roles. They do not replace Allura Br
 
 ## Catalog
 
+The reviewed updates are published on `codex/adaptive-team-workflows` in this catalog and the corresponding source repositories. Existing default branches are unchanged. The [native rollout receipt](evidence/native-rollout-2026-10-13.json) records tested versions, installation checks, preserved local configuration, and remaining limitations. The standalone [Allura Framework](https://github.com/Allura-Ecosystem/allura-framework) is a separate private repository with offline agent/workflow/project authoring; access requires repository permission.
+
 The Claude and Codex marketplaces contain four versioned portable packages. The repository also ships one Hermes-native provider and one runtime-neutral Microsoft Cowork export. Counts below are generated/source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running.
 
 | Plugin | Release metadata | Agent definitions | Command definitions | Skill definitions | Purpose |
 |---|:---:|---:|---:|---:|---|
-| [Allura Cowork](allura-cowork/README.md) | 0.3.0 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
-| [Team Durham](team-durham/README.md) | 0.4.0 | 13* | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
-| [Team RAM Coding](team-ram-coding/README.md) | 0.5.0 | 11 | 34 | 163 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
+| [Allura Cowork](allura-cowork/README.md) | 0.3.1 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
+| [Team Durham](team-durham/README.md) | 0.4.1 | 13* | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
+| [Team RAM Coding](team-ram-coding/README.md) | 0.5.1 | 11 | 34 | 163 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
 | [Bumblebee](bumblebee/README.md) | 0.1.1 | — | 1 | 1 | Pinned read-only supply-chain evidence review; no scanner installation implied |
 | [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | 0.2.0 | — | 1 | — | Hermes-native governed recall and outcome persistence provider |
 | [Mortagate Cowork](packages/mortagate-cowork/README.md) | 0.2.1 | — | — | 4 | Pinned 23-file Microsoft Cowork package export; not a Claude/Codex marketplace plugin |
 
-Team Durham is version `0.4.0`; Team RAM package and runtime versions are aligned at `0.5.0`. The catalog preserves the `team-ram-coding` alias while source manifests retain `team-ram-harness`. CI validates pinned source identities and native Codex manifest compatibility. Codex discovers workflows through skills; Claude retains command registration.
+Team Durham is version `0.4.1`; Team RAM package and runtime versions are aligned at `0.5.1`. Codex requires the `team-ram-coding` manifest name to match the catalog alias; the standalone Claude manifest retains `team-ram-harness`. Source locks record both identities. CI validates pinned source identities and native Codex manifest compatibility. Codex discovers workflows through skills; Claude retains command registration.
 
 \* Team Durham exports 13 loadable agent definitions: 12 canonical roles plus the deliberate `openagent` runtime compatibility fallback. This is not a claim that 13 agents are installed or running.
 
@@ -58,7 +60,7 @@ Mortagate Cowork targets Microsoft Cowork's app-package and Agent Skills contrac
 
 Hermes Allura Brain is a Hermes-native provider declared by `plugins/hermes-allura-brain/plugin.yaml`; it is intentionally not listed in the Claude marketplace because it does not implement the Claude/Codex package-manifest contract.
 
-[Team RAM + Team Durham for Hermes](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) is a separate native plugin, linked here rather than generated into this catalog or registered in its Claude/Codex marketplaces. Its `1.1.0` upgrade is a local validation release pending publication; this link does not imply the remote repository already ships that version. See [Hermes team usage](#hermes-team-ram--team-durham) below.
+[Team RAM + Team Durham for Hermes](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) is a separate native plugin, linked here rather than generated into this catalog or registered in its Claude/Codex marketplaces. Its `1.1.1` upgrade is published on [`codex/adaptive-hermes-teams`](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/tree/codex/adaptive-hermes-teams); the default branch is unchanged. See [Hermes team usage](#hermes-team-ram--team-durham) below.
 
 The `allura/` directory is a local Codex README asset and guidance pack. It is not listed as a public Claude marketplace package and remains internal support material. Its manifest placeholders have been resolved; this upgrade does not publish it.
 
@@ -177,9 +179,9 @@ The root [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) 
 ### Hermes: Team RAM + Team Durham
 
 The external [native team plugin](https://github.com/Allura-Ecosystem/hermes-team-ram-durham)
-uses the Hermes identity `team-ram-durham`. Version `1.1.0` is pending publication;
-check its source release evidence before treating a remote install as that version.
-The following describes the local `1.1.0` implementation:
+uses the Hermes identity `team-ram-durham`. Its published upgrade branch is
+`codex/adaptive-hermes-teams`; a default-branch install is not an upgrade-branch install.
+The following describes the current native conversation-routing implementation:
 
 ```text
 /ram <task>

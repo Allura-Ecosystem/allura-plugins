@@ -2,12 +2,12 @@
   "files": [
     {
       "path": ".claude-plugin/plugin.json",
-      "sha256": "859f50df834e1b9de692cd1df0b13aa13440e2e8cf006848e65649fbf2dab78a",
+      "sha256": "dafc7ce9283bab35f79462fef9722e919675da590054f32660f1f20c35298402",
       "size": 2464
     },
     {
       "path": ".codex-plugin/plugin.json",
-      "sha256": "c2001f893a9cd3ce9ba9d24f56fa2fda2f4e1388968d11fece241f8911a77ab1",
+      "sha256": "5c9cbf06b7b5cdfb6f89f18a7b2270d38669ca61b690a26f4c6fe1dd6d4a42e2",
       "size": 1119
     },
     {
@@ -17,8 +17,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e6c63f92a99483266460631deca8bef523bf18e1f7489ab054c0eb8f5964ed58",
-      "size": 2493
+      "sha256": "8d28eee04a898716dd4a0e221c4dc5f7a28150012b9b8cceb1592342a331b4d3",
+      "size": 2912
     },
     {
       "path": "CONTRIBUTING.md",
@@ -42,18 +42,18 @@
     },
     {
       "path": "SOURCE.json",
-      "sha256": "b77db3e8920cee70572429409708c0fd740a63318eb736cbc874fc813422c520",
+      "sha256": "1b385e2f44cec0a50be5b9f8cb009394c2f3ff6d330133de5b37cf5f1020fbd0",
       "size": 895
     },
     {
       "path": "agents/agentic-trust-architect.md",
-      "sha256": "fce111b67fce499b1f75648b2dd552ddefaaf7e0d35519b09a1981db39b87c09",
-      "size": 4178
+      "sha256": "5723c1e1daaa73cac962dc1adb3b3c5b2b65f525c5c276221f04d298e965438b",
+      "size": 4190
     },
     {
       "path": "agents/brand-kit-builder.md",
-      "sha256": "1bfe843967fa14bd0312e0a9ebe3368875c39de2261dfe857408511dcc5c7d7c",
-      "size": 9829
+      "sha256": "4fce7ae013078c0571397f274da4ad67219b1c40a468bad44cf94fa63b1e0770",
+      "size": 9857
     },
     {
       "path": "agents/brand-orchestrator.md",
@@ -62,28 +62,28 @@
     },
     {
       "path": "agents/brand-strategist.md",
-      "sha256": "157aaa9e32916b77a45d4ce878163941367af5c387cf099635128de42d41eb63",
-      "size": 7829
+      "sha256": "2535ac3547d5436fc64162c48c2759f0678d6f19b298cd067d49f4893a355727",
+      "size": 7857
     },
     {
       "path": "agents/copywriter.md",
-      "sha256": "d4c7718e2458face457bfb033be8eb43b9bf479972cbc94387a28396ff8662c0",
-      "size": 7701
+      "sha256": "c8426a4d131612370a4048a20c2175b383179d3e617c2383273a502e3baf5318",
+      "size": 7729
     },
     {
       "path": "agents/data-analyst.md",
-      "sha256": "71ab4cc9da6ee901e82fe8d5bde6b616bef48099e973287e6fcafacb5b845e90",
-      "size": 6322
+      "sha256": "801e5ef28327cc85f2f82be6418d78772b5a075978c67dd56a3cbb2e971a7e0c",
+      "size": 6350
     },
     {
       "path": "agents/evidence-collector.md",
-      "sha256": "350a00b6d63fb6a51bfaf382fd6ca7c9b462f255c1088d421d4a37042eaf2e33",
-      "size": 3775
+      "sha256": "d48e709d23a100d9fa5a9dccbab8b96594eb7e440d211fb9a6f52975958945b2",
+      "size": 3787
     },
     {
       "path": "agents/openagent.md",
-      "sha256": "daa00389ae5b8dfa9c51d61334d6e6c9bef3c5126690927c4c587239de8927e0",
-      "size": 4882
+      "sha256": "868f38d99c5cb1da5042b473b4f30125f2e6a4902e75f73cd670563f62c8d50d",
+      "size": 4910
     },
     {
       "path": "agents/qa-reviewer.md",
@@ -92,8 +92,8 @@
     },
     {
       "path": "agents/reality-checker.md",
-      "sha256": "b43ff0a9e9a54d82b0e766a0a363b7a6cb3be34ec784778c39b843c17eea2fe4",
-      "size": 4503
+      "sha256": "8bec479b1e3768dff0e27efbfa8c0ece046eab4982ba045f05eddd20cfa60236",
+      "size": 4518
     },
     {
       "path": "agents/scout-recon.md",
@@ -102,13 +102,13 @@
     },
     {
       "path": "agents/visual-director.md",
-      "sha256": "8558fe5ccf0217badc11e5bb536c9c60ad9158dfd95b4e8f6e6a62b93aee417a",
-      "size": 8956
+      "sha256": "b1fe2029ef3e793f05dda56936f1ecc95ec40aaf74258ee70f5144bc4f74f4a9",
+      "size": 8984
     },
     {
       "path": "agents/workflow-architect.md",
-      "sha256": "56d60a24e393fb76a6ac182b9b6f55dd89641a1c8b1cd6cb994bfd7ed644d0c5",
-      "size": 4050
+      "sha256": "62c1d17e7b2b0b588990f436282c37d4bfe70b230118fe9ce7123f9434dc7bb4",
+      "size": 4062
     },
     {
       "path": "bmad-module/.claude-plugin/marketplace.json",
@@ -397,7 +397,7 @@
     },
     {
       "path": "evals/candidate-adaptive-workflow.json",
-      "sha256": "1d88ad950959297ced62c849b7a54e2f013ef9ce21b8aef362b2a579718a87fe",
+      "sha256": "f7443377e8ee9234ec6388e13d85589e6de9e80969d4df5f2d12b5d6fbe5bf63",
       "size": 2196
     },
     {
@@ -437,7 +437,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "b6802e4b2004d321b07011e17083b8b4d3827cd81fb1893bc765b82d5b18b109",
+      "sha256": "e7c7416be3dae3defd831fd28a5a3209720eb3e022b26e49b534e336eb4207cb",
       "size": 1185
     },
     {
@@ -1505,5 +1505,5 @@
   "schemaVersion": 1,
   "sourceDirty": false,
   "sourceRepository": "https://github.com/Allura-Ecosystem/team-durham",
-  "sourceRevision": "f5c834b92a92be206977849dc2e2873b552971be"
+  "sourceRevision": "a6fd21f3855be2ff9b701d79f0554ac57d09047f"
 }

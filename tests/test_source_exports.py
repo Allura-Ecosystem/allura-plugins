@@ -125,3 +125,20 @@ def test_sync_allows_catalog_version_transition_but_checks_source_version(tmp_pa
     (tmp_path / ".codex-plugin/plugin.json").write_text(json.dumps({"name": "example", "version": "wrong"}))
     with pytest.raises(exports.ExportError, match="runtime version parity"):
         exports.validate_versions(tmp_path, lock, catalog, syncing=True)
+
+
+def test_runtime_identity_allows_source_owned_codex_name_but_rejects_alias_drift(tmp_path):
+    exports = module("verify_source_exports")
+    for relative, name in [("package.json", "@example/source"), (".claude-plugin/plugin.json", "source-name"), (".codex-plugin/plugin.json", "public-name")]:
+        path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"name": name, "version": "0.2.0"}))
+    lock = {"id": "example", "marketplace": True, "marketplaceAlias": "public-name", "destination": "example", "runtimeVersion": "0.2.0", "packageVersion": "0.2.0", "sourceManifestName": "source-name", "codexManifestName": "public-name", "sourcePackageName": "@example/source"}
+    catalog = {"plugins": [{"name": "public-name", "source": "./example", "version": "0.2.0"}]}
+    exports.validate_versions(tmp_path, lock, catalog)
+    (tmp_path / ".codex-plugin/plugin.json").write_text(json.dumps({"name": "source-name", "version": "0.2.0"}))
+    with pytest.raises(exports.ExportError, match="identity mismatch"):
+        exports.validate_versions(tmp_path, lock, catalog)
+    lock["codexManifestName"] = "source-name"
+    with pytest.raises(exports.ExportError, match="Codex manifest name must match marketplace alias"):
+        exports.validate_versions(tmp_path, lock, catalog)
