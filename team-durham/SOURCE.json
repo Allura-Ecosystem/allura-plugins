@@ -22,7 +22,7 @@
   "exportManifest": "export-manifest.json",
   "exportScript": "scripts/export_catalog.py",
   "name": "team-durham",
-  "revision": "7e521976aef40b396e439d45c867d990c8237b11",
+  "revision": "f5c834b92a92be206977849dc2e2873b552971be",
   "revisionMode": "injected-at-export",
   "roleCount": {
     "canonical": 12,

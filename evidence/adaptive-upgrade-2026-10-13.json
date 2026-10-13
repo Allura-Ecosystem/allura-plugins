@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-13",
+  "status": "local-review-ready",
+  "sourcePins": {
+    "team-ram": {
+      "revision": "64503a3f488f4232d5311963a522444c35ed5326",
+      "version": "0.5.0"
+    },
+    "team-durham": {
+      "revision": "f5c834b92a92be206977849dc2e2873b552971be",
+      "version": "0.4.0"
+    },
+    "mortagate-cowork": {
+      "revision": "22342172beb6286207617bbfa5e67bd4ab913fb5",
+      "version": "0.2.1"
+    },
+    "bumblebee": {
+      "revision": "207496c24cec4f1199a02f236605b626db567a2e",
+      "version": "0.1.1"
+    }
+  },
+  "checks": {
+    "ramTests": 111,
+    "catalogTests": 53,
+    "durhamOfflineCases": 18,
+    "nativeCodexPackages": [
+      "allura-cowork",
+      "team-durham",
+      "team-ram-coding",
+      "bumblebee"
+    ],
+    "modelSurfaces": 71,
+    "modelDrift": 0,
+    "pinnedExports": "passed using matching-origin committed local sources",
+    "secretScan": "passed",
+    "commandAudit": "passed; 13 documented shared command names"
+  },
+  "measuredModelPerformance": null,
+  "brain": "tools unavailable; no search or write claimed",
+  "published": false,
+  "installed": false,
+  "pending": [
+    "Publish reviewed source branches before catalog pins become remotely fetchable",
+    "Mortgate blind behavioral and tenant/toolkit gates",
+    "Live model performance pilot",
+    "Explicit runtime rollout"
+  ],
+  "evidenceDocument": "docs/ADAPTIVE-RELEASE.md"
+}

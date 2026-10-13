@@ -32,3 +32,12 @@ Explain Allura as the operating system for governed agent work:
 - Treat memory as context, not proof of completion.
 - Keep project-local agent teams scoped to the repo that declares them.
 - Use plain language before introducing internal terms.
+
+## Bounded execution
+
+Use one writer and the configured model for a clear README task. Reuse verified
+project facts and packaged assets within their source revision; refresh claims
+when the source changes. Add brand review when strategy or visual direction
+changes. Draft locally under existing authority; publishing requires explicit
+authority. Never claim a model, memory call, or speed improvement was verified
+without a receipt.

@@ -25,6 +25,7 @@ REQUIRED = [
     "docs/COMMAND-MENU.md",
     "docs/EVALS.md",
     "docs/DOGFOOD.md",
+    "docs/ADAPTIVE-WORK.md",
     "evals/cases.json",
     "examples/golden/claude-to-codex.json",
     "examples/golden/codex-to-claude.json",
@@ -54,6 +55,11 @@ def main() -> int:
     schema = load_json(root / "schemas/handoff.schema.json")
 
     errors = []
+    package = load_json(root / "package.json")
+    if len({package.get("version"), codex.get("version"), claude.get("version")}) != 1:
+        errors.append("package and runtime versions differ")
+    if "model: inherit" not in (root / "agents/cowork-orchestrator.md").read_text():
+        errors.append("orchestrator must inherit the configured model")
     for name, manifest in [("codex", codex), ("claude", claude)]:
         if manifest.get("name") != "allura-cowork":
             errors.append(f"{name} manifest name mismatch")

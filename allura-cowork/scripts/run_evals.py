@@ -16,6 +16,7 @@ def main() -> int:
         root / "commands/cowork-close.md",
         root / "docs/COMMAND-MENU.md",
         root / "docs/EVALS.md",
+        root / "docs/ADAPTIVE-WORK.md",
     ]
     corpus = "\n".join(path.read_text(encoding="utf-8") for path in corpus_paths)
     corpus_lower = corpus.lower()

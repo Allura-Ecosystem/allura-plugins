@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-PLUGINS = ["allura-cowork", "team-durham", "team-ram-coding"]
+PLUGINS = ["allura-cowork", "team-durham", "team-ram-coding", "bumblebee"]
 MANIFEST_VARIANTS = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json"]
 MARKETPLACE = ".claude-plugin/marketplace.json"
 CODEX_MARKETPLACE = ".agents/plugins/marketplace.json"
@@ -31,6 +31,7 @@ PACKAGE_CONTRACTS = {
     "allura-cowork": {"kind": "portable", "readme": "README.md"},
     "team-durham": {"kind": "generated-portable", "readme": "README.md"},
     "team-ram-coding": {"kind": "generated-portable", "readme": "README.md"},
+    "bumblebee": {"kind": "generated-portable", "readme": "README.md"},
     "packages/mortagate-cowork": {"kind": "generated-runtime-neutral", "readme": "README.md"},
     "plugins/hermes-allura-brain": {"kind": "provider", "readme": "README.md"},
     "allura": {"kind": "internal-support", "readme": "README.md"},
@@ -161,6 +162,8 @@ def check_manifests(errors: list, warnings: list) -> None:
                 continue
 
             print(f"  MANIFEST PARSE OK: {plugin} ({runtime})")
+            if runtime == "codex-plugin":
+                check_codex_contract(data, str(manifest_path), errors)
 
             # Required fields sanity check
             for field in ("name", "version", "description"):
@@ -169,9 +172,11 @@ def check_manifests(errors: list, warnings: list) -> None:
 
             # Paths declared in the manifest must resolve relative to the plugin root.
             refs = []
-            for field in ("skills", "agents", "commands", "hooks"):
+            for field in ("skills", "agents", "commands", "hooks", "mcpServers"):
                 value = data.get(field)
                 if value is None:
+                    continue
+                if field == "mcpServers" and isinstance(value, dict):
                     continue
                 if isinstance(value, str):
                     refs.append((field, value))
@@ -208,6 +213,18 @@ def check_manifests(errors: list, warnings: list) -> None:
                                     cmd = hook.get("command", "")
                                 if isinstance(cmd, str) and cmd.startswith(("/", "C:")):
                                     hard_fail("HOOK", f"{resolved} event {event} uses absolute command path: {cmd}", errors)
+
+
+def check_codex_contract(data: dict, label: str, errors: list) -> None:
+    """Catch incompatible Claude fields before distributing a Codex manifest."""
+    for field in ("agents", "commands", "mcp", "hooks"):
+        if field in data:
+            hard_fail("CODEX", f"{label}: unsupported field {field}", errors)
+    if data.get("skills") not in ("skills", "./skills", "./skills/"):
+        hard_fail("CODEX", f"{label}: skills must use the plugin-root skills directory", errors)
+    interface = data.get("interface", {})
+    if not interface.get("defaultPrompt") and not interface.get("default_prompt"):
+        hard_fail("CODEX", f"{label}: defaultPrompt is required", errors)
 
 
 def check_hermes_manifest(errors: list) -> None:
@@ -325,7 +342,7 @@ def check_package_contracts(errors: list, warnings: list) -> None:
             if not readme.is_file():
                 hard_fail("CONTRACT", f"generated package README missing: {readme.relative_to(REPO_ROOT)}", errors)
                 continue
-            receipt_name = "EXPORT_PROVENANCE.json" if package == "team-ram-coding" else "EXPORT.json"
+            receipt_name = "EXPORT.json" if package == "team-durham" else "EXPORT_PROVENANCE.json"
             receipt = parse_json(package_dir / receipt_name, errors) or {}
             revision = receipt.get("sourceCommit") or receipt.get("sourceRevision")
             repository = receipt.get("sourceRepository", "")
@@ -371,10 +388,10 @@ def check_package_contracts(errors: list, warnings: list) -> None:
             if receipt.get("sourceCommit") != lock.get("commit") or receipt.get("sourceRepository", "").removesuffix(".git") != str(lock.get("repository", "")).removesuffix(".git"):
                 hard_fail("CONTRACT", f"{package} provenance does not match source-locks.json", errors)
                 continue
-            if receipt.get("contractPath") != lock.get("manifest") or len(receipt.get("files", [])) != 19:
-                hard_fail("CONTRACT", f"{package} contract path or 19-file allowlist receipt is invalid", errors)
+            if receipt.get("contractPath") != lock.get("manifest") or len(receipt.get("files", [])) != lock.get("exportFileCount", 19):
+                hard_fail("CONTRACT", f"{package} contract path or pinned allowlist receipt is invalid", errors)
                 continue
-            if package in marketplace_versions:
+            if set([lock.get("id"), *lock.get("aliases", [])]) & marketplace_versions.keys():
                 hard_fail("CONTRACT", f"{package} must not be listed in the Claude marketplace", errors)
                 continue
             print(f"  CONTRACT OK: {package} (generated {receipt.get('runtime', 'runtime-neutral')})")

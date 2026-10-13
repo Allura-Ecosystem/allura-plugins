@@ -37,6 +37,7 @@ def test_codex_marketplace_lists_every_portable_plugin():
         "allura-cowork",
         "team-durham",
         "team-ram-coding",
+        "bumblebee",
     ]
 
 
@@ -60,3 +61,14 @@ def test_contract_rejects_missing_required_readme(monkeypatch):
     validator.check_package_contracts(errors, [])
 
     assert any("missing.md" in error for error in errors)
+
+
+def test_codex_rejects_claude_fields_before_distribution():
+    validator = load_validator()
+    errors = []
+    validator.check_codex_contract({"commands": [], "agents": [], "mcp": "./.mcp.json", "skills": "./.opencode/skills/"}, "fixture", errors)
+    assert any("unsupported field commands" in error for error in errors)
+    assert any("unsupported field agents" in error for error in errors)
+    assert any("unsupported field mcp" in error for error in errors)
+    assert any("plugin-root skills" in error for error in errors)
+    assert any("defaultPrompt" in error for error in errors)

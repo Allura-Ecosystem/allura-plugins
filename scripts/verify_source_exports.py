@@ -95,10 +95,19 @@ def tree_inventory(root: Path) -> list[dict[str, Any]]:
     return sorted(rows, key=lambda row: row["path"])
 
 
-def clone_pinned(lock: dict[str, Any], parent: Path) -> Path:
+def clone_pinned(lock: dict[str, Any], parent: Path, local_source: Path | None = None) -> Path:
     parent.mkdir(parents=True, exist_ok=True)
     checkout = parent / lock["id"]
-    run(["git", "clone", "--quiet", "--no-checkout", lock["repository"], str(checkout)], cwd=parent)
+    repository = lock["repository"]
+    if local_source is not None:
+        local_source = local_source.resolve()
+        origin = run(["git", "remote", "get-url", "origin"], cwd=local_source)
+        if normalized_repo(origin) != normalized_repo(repository):
+            raise ExportError(f"{lock['id']}: local source origin differs from the locked repository")
+        run(["git", "cat-file", "-e", f"{lock['commit']}^{{commit}}"], cwd=local_source)
+        repository = str(local_source)
+    # Clone committed objects; never copy a source worktree's uncommitted files.
+    run(["git", "clone", "--quiet", "--no-checkout", repository, str(checkout)], cwd=parent)
     commit = lock["commit"]
     try:
         run(["git", "cat-file", "-e", f"{commit}^{{commit}}"], cwd=checkout)
@@ -129,6 +138,22 @@ def validate_lock(lock: dict[str, Any]) -> None:
         raise ExportError(f"{lock['id']}: destination escapes repository")
 
 
+def checked_source_path(root: Path, relative: Path) -> Path:
+    """Require containment and regular ancestors, not just a regular final file."""
+    if relative.is_absolute() or ".." in relative.parts or not relative.parts:
+        raise ExportError(f"unsafe package export path: {relative}")
+    item = root
+    for part in relative.parts:
+        item = item / part
+        if item.is_symlink():
+            raise ExportError(f"symlinked package export path: {relative}")
+    try:
+        item.resolve(strict=True).relative_to(root.resolve(strict=True))
+    except (ValueError, OSError) as exc:
+        raise ExportError(f"missing or escaping package export path: {relative}") from exc
+    return item
+
+
 def generate_mortagate(source: Path, output: Path, lock: dict[str, Any]) -> None:
     contract_path = source / lock["manifest"]
     contract = read_json(contract_path)
@@ -141,15 +166,17 @@ def generate_mortagate(source: Path, output: Path, lock: dict[str, Any]) -> None
     if destination != lock["destination"]:
         raise ExportError("mortagate contract destination does not match lock")
     include = contract.get("export", {}).get("include")
-    if not isinstance(include, list) or len(include) != 19 or len(set(include)) != 19:
-        raise ExportError("mortagate contract must contain the exact 19-file allowlist")
+    if not isinstance(include, list) or not include or not all(isinstance(item, str) for item in include) or len(set(include)) != len(include):
+        raise ExportError("mortagate contract must contain a non-empty unique file allowlist")
+    if len(include) != lock.get("exportFileCount", 19):
+        raise ExportError("mortagate allowlist size differs from the pinned lock")
     output.mkdir(parents=True)
     payload_rows: list[dict[str, Any]] = []
     for relative in include:
         relative_path = Path(relative)
         if relative_path.is_absolute() or ".." in relative_path.parts:
             raise ExportError(f"mortagate unsafe allowlist path: {relative}")
-        source_file = source / source_root / relative_path
+        source_file = checked_source_path(source, Path(source_root) / relative_path)
         if not source_file.is_file() or source_file.is_symlink():
             raise ExportError(f"mortagate allowlisted regular file missing: {relative}")
         target = output / relative_path
@@ -183,6 +210,38 @@ def generate_mortagate(source: Path, output: Path, lock: dict[str, Any]) -> None
     write_json(output / "EXPORT_PROVENANCE.json", receipt)
 
 
+def generate_package_files(source: Path, output: Path, lock: dict[str, Any]) -> None:
+    """Export a pinned package's explicit files list; refuse unsafe paths/symlinks."""
+    package = read_json(source / lock["manifest"])
+    include = package.get("files", [])
+    if not isinstance(include, list) or not include or not all(isinstance(item, str) for item in include) or len(include) != len(set(include)):
+        raise ExportError("package files must be a non-empty unique allowlist")
+    output.mkdir(parents=True)
+    for relative in [*include, "package.json"]:
+        path = Path(relative)
+        if path.is_absolute() or ".." in path.parts or not path.parts:
+            raise ExportError(f"unsafe package export path: {relative}")
+        item = checked_source_path(source, path)
+        candidates = [item, *item.rglob("*")] if item.is_dir() else [item]
+        if not item.exists() or any(candidate.is_symlink() for candidate in candidates):
+            raise ExportError(f"missing or symlinked package export path: {relative}")
+        target = output / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if item.is_dir():
+            shutil.copytree(item, target)
+        else:
+            shutil.copyfile(item, target)
+    write_json(output / "SOURCE.json", {
+        "canonicalRepository": lock["repository"], "exportManifest": lock["manifest"],
+        "revision": lock["commit"], "sourceDirty": False,
+    })
+    write_json(output / "EXPORT_PROVENANCE.json", {
+        "generated": True, "authoritative": False, "sourceRepository": lock["repository"],
+        "sourceCommit": lock["commit"], "contractPath": lock["manifest"],
+        "files": tree_inventory(output),
+    })
+
+
 def generate(lock: dict[str, Any], source: Path, output: Path) -> None:
     if lock["id"] == "team-ram":
         run(["node", lock["exporter"], str(output)], cwd=source)
@@ -190,6 +249,8 @@ def generate(lock: dict[str, Any], source: Path, output: Path) -> None:
         run([sys.executable, lock["exporter"], "--output", str(output)], cwd=source)
     elif lock["id"] == "mortagate-cowork":
         generate_mortagate(source, output, lock)
+    elif lock["exporter"] == "package-files":
+        generate_package_files(source, output, lock)
     else:
         raise ExportError(f"unsupported source id: {lock['id']}")
 
@@ -219,7 +280,7 @@ def verify_no_secrets(output: Path, lock: dict[str, Any]) -> None:
         raise ExportError("mortagate: dirty repository-root .mcp.json leaked into export")
 
 
-def validate_versions(output: Path, lock: dict[str, Any], marketplace: dict[str, Any]) -> None:
+def validate_versions(output: Path, lock: dict[str, Any], marketplace: dict[str, Any], *, syncing: bool = False) -> None:
     entries = [entry for entry in marketplace.get("plugins", []) if entry.get("name") == lock.get("marketplaceAlias")]
     if lock["marketplace"]:
         if len(entries) != 1:
@@ -228,7 +289,9 @@ def validate_versions(output: Path, lock: dict[str, Any], marketplace: dict[str,
         if entry.get("source") != f"./{lock['destination']}":
             raise ExportError(f"{lock['id']}: marketplace alias source does not resolve to generated destination")
         if entry.get("version") != lock["runtimeVersion"]:
-            raise ExportError(f"{lock['id']}: marketplace/runtime version mismatch")
+            if not syncing:
+                raise ExportError(f"{lock['id']}: marketplace/runtime version mismatch")
+            print(f"  {lock['id']}: catalog metadata will need synchronization after source export")
         claude = read_json(output / ".claude-plugin/plugin.json")
         codex = read_json(output / ".codex-plugin/plugin.json")
         package = read_json(output / "package.json")
@@ -289,10 +352,17 @@ def verify_source_receipt(output: Path, lock: dict[str, Any]) -> None:
         ]
         if {row["path"]: row for row in receipt_files} != {row["path"]: row for row in actual_files}:
             raise ExportError("team-durham EXPORT.json per-file inventory mismatch")
-    else:
+    elif lock["id"] == "mortagate-cowork":
         receipt = read_json(output / "EXPORT_PROVENANCE.json")
-        if receipt.get("generated") is not True or receipt.get("authoritative") is not False or len(receipt.get("files", [])) != 19:
-            raise ExportError("mortagate generated provenance/19-file inventory mismatch")
+        if receipt.get("generated") is not True or receipt.get("authoritative") is not False or len(receipt.get("files", [])) != lock.get("exportFileCount", 19):
+            raise ExportError("mortagate generated provenance/allowlist inventory mismatch")
+        if receipt.get("sourceCommit") != lock["commit"] or normalized_repo(receipt.get("sourceRepository", "")) != normalized_repo(lock["repository"]):
+            raise ExportError("mortagate source identity mismatch")
+    elif lock["exporter"] == "package-files":
+        receipt = read_json(output / "EXPORT_PROVENANCE.json")
+        actual = [row for row in tree_inventory(output) if row["path"] != "EXPORT_PROVENANCE.json"]
+        if receipt.get("generated") is not True or receipt.get("sourceCommit") != lock["commit"] or normalized_repo(receipt.get("sourceRepository", "")) != normalized_repo(lock["repository"]) or receipt.get("files") != actual:
+            raise ExportError("package source identity or inventory mismatch")
 
 
 def compare_or_sync(expected: Path, destination: Path, sync: bool, lock: dict[str, Any]) -> None:
@@ -341,6 +411,7 @@ def parse_args() -> argparse.Namespace:
     mode.add_argument("--check", action="store_true", help="fail if catalog differs from pinned source exports")
     mode.add_argument("--sync", action="store_true", help="replace selected destinations with pinned source exports")
     parser.add_argument("--package", action="append", default=[], help="source id or compatibility alias; repeatable (default: all)")
+    parser.add_argument("--source", action="append", default=[], metavar="ID=PATH", help="use committed objects from a local source with matching origin; repeatable")
     return parser.parse_args()
 
 
@@ -356,12 +427,18 @@ def main() -> int:
         for lock in locks:
             validate_lock(lock)
         locks = selected_locks(locks, args.package)
+        sources = {}
+        for binding in args.source:
+            name, separator, value = binding.partition("=")
+            if not separator or not value or name not in {lock["id"] for lock in locks} or name in sources:
+                raise ExportError(f"invalid or duplicate local source binding: {binding}")
+            sources[name] = Path(value)
         marketplace = read_json(MARKETPLACE_PATH)
         with tempfile.TemporaryDirectory(prefix="allura-source-exports-") as directory:
             temporary = Path(directory)
             for lock in locks:
                 print(f"[{lock['id']}] {lock['repository']}@{lock['commit']}")
-                source = clone_pinned(lock, temporary / "sources")
+                source = clone_pinned(lock, temporary / "sources", sources.get(lock["id"]))
                 if not (source / lock["manifest"]).is_file():
                     raise ExportError(f"{lock['id']}: canonical manifest/contract missing")
                 output = temporary / "exports" / lock["id"]
@@ -369,7 +446,7 @@ def main() -> int:
                 generate(lock, source, output)
                 verify_no_secrets(output, lock)
                 verify_source_receipt(output, lock)
-                validate_versions(output, lock, marketplace)
+                validate_versions(output, lock, marketplace, syncing=args.sync)
                 compare_or_sync(output, ROOT / lock["destination"], args.sync, lock)
         print(f"source export {'sync' if args.sync else 'check'} passed for {len(locks)} package(s)")
         return 0

@@ -1,7 +1,7 @@
 {
   "authoritative": false,
   "contractPath": "catalog-export.json",
-  "contractSha256": "ad8ca9288e4adef2eb0860a5951e6b27580b166b1b39e0faf741527f106eb623",
+  "contractSha256": "d2b9a34b026bbc9b5315c34162bd8bcfe2cd883508f72c644a63d2f178873af3",
   "files": [
     {
       "path": "PRIVACY.md",
@@ -10,8 +10,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "7af6ef2b8ed59c6ae4c8c016d4a1a16cdbeef1a3453c516d045a287bcc70ed0b",
-      "size": 4472
+      "sha256": "8541451ef569df5c38d85d7f34d4fdffbaba51ea46c8ebc222f0561335fa99a3",
+      "size": 6664
     },
     {
       "path": "TERMS.md",
@@ -25,7 +25,7 @@
     },
     {
       "path": "appPackage/manifest.json",
-      "sha256": "57f1df10141ecc5984d9a3224b02c86293a80ba0d7e9bfa52217a81458a02279",
+      "sha256": "3510eb38ef72c46ffc55e81de5f311a906edf45ce72fbcfcdeb14ee4416f6a09",
       "size": 1277
     },
     {
@@ -35,8 +35,13 @@
     },
     {
       "path": "appPackage/skills/audit-packet-draft/SKILL.md",
-      "sha256": "8bcffbecd6a545a45e93ce258cd20c7081e8c5de9a3b67e8c74000e67da313e5",
-      "size": 1824
+      "sha256": "6c837eda33081f7f5a6247c94e90a496ee543caa9b30960bee8df5af72a49ed3",
+      "size": 3086
+    },
+    {
+      "path": "appPackage/skills/audit-packet-draft/references/evidence-metadata.md",
+      "sha256": "f026d61a373f23169078982d8a887fb1617f5f13353360c160c5581b6e13ca76",
+      "size": 2100
     },
     {
       "path": "appPackage/skills/audit-packet-draft/references/safety-boundaries.md",
@@ -45,8 +50,13 @@
     },
     {
       "path": "appPackage/skills/loan-file-evidence-review/SKILL.md",
-      "sha256": "3d70f2107adf830a822f263496d2829e15554975dfc6c8e55b1a00ccb39651dc",
-      "size": 2850
+      "sha256": "3bb36c50eec389b2d6a44892ba9f8ba0583c72bc215f2da9a17215ba113e2643",
+      "size": 4112
+    },
+    {
+      "path": "appPackage/skills/loan-file-evidence-review/references/evidence-metadata.md",
+      "sha256": "f026d61a373f23169078982d8a887fb1617f5f13353360c160c5581b6e13ca76",
+      "size": 2100
     },
     {
       "path": "appPackage/skills/loan-file-evidence-review/references/safety-boundaries.md",
@@ -55,8 +65,8 @@
     },
     {
       "path": "appPackage/skills/mortgage-case-onboarding/SKILL.md",
-      "sha256": "d81cf7f877065764af4cde526c62d8b3da32a5706020b1461df034abfa636f8a",
-      "size": 1681
+      "sha256": "0e28b1c217d3d93313216c7280d7b7efe2c5ac3ed958f37df4373226bdba5889",
+      "size": 3010
     },
     {
       "path": "appPackage/skills/mortgage-case-onboarding/references/safety-boundaries.md",
@@ -65,13 +75,23 @@
     },
     {
       "path": "appPackage/skills/policy-replay-review/SKILL.md",
-      "sha256": "c581f28aabc7b117f0bbf84f61ab21a5fd21cff2cbe671fcdb9bc408830fff51",
-      "size": 1770
+      "sha256": "40f00be1f27e6190b6bc7a26c0ebe75d6c84db7283b5c361b03a4fa96d35d49b",
+      "size": 3032
+    },
+    {
+      "path": "appPackage/skills/policy-replay-review/references/evidence-metadata.md",
+      "sha256": "f026d61a373f23169078982d8a887fb1617f5f13353360c160c5581b6e13ca76",
+      "size": 2100
     },
     {
       "path": "appPackage/skills/policy-replay-review/references/safety-boundaries.md",
       "sha256": "386ca7da18e81227ec0a2dcd2bd54d684e66280a6f93efe88b5cc98dec586e3c",
       "size": 1042
+    },
+    {
+      "path": "docs/CHANGE-MANAGEMENT.md",
+      "sha256": "f4081ad4903f109b39b7243ac57ef7ffe81716e9b471f6435e1439957982699e",
+      "size": 3919
     },
     {
       "path": "docs/CONNECTOR-ROADMAP.md",
@@ -105,7 +125,7 @@
   "packageId": "mortagate-cowork",
   "runtime": "microsoft-cowork",
   "schemaVersion": 1,
-  "sourceCommit": "0fd75552060f81ca98e6c756b9286eb3d80b8c32",
+  "sourceCommit": "22342172beb6286207617bbfa5e67bd4ab913fb5",
   "sourceRepository": "https://github.com/Allura-Ecosystem/mortagate.git",
-  "version": "0.2.0"
+  "version": "0.2.1"
 }

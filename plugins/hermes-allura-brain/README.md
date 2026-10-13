@@ -63,3 +63,13 @@ manifest and package-contract validation. In a Hermes runtime, use
 The provider requires the three secret-scope values listed above and the
 canonical public MCP tunnel. Without them it remains unavailable; it does not
 fall back to a local endpoint or report ambient recall/persistence as complete.
+
+## Context reuse across team work
+
+Pass a compact recall receipt to authorized workers in the same project and tenant
+instead of asking every persona to repeat the same retrieval. Record query,
+retrieval time, source IDs and task scope; refresh changed or contradictory facts.
+Authorization and live governance checks still run at the protected operation.
+This is orchestration guidance; this provider does not implement a cross-session
+cache or choose models. Existing authenticated recall and outcome persistence
+behavior is unchanged.

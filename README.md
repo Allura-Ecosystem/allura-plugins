@@ -39,17 +39,18 @@ Plugins add skills, commands, and operating roles. They do not replace Allura Br
 
 ## Catalog
 
-The Claude marketplace contains three versioned packages. The repository also ships one Hermes-native provider and one runtime-neutral Microsoft Cowork export. Counts below are generated/source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running.
+The Claude and Codex marketplaces contain four versioned portable packages. The repository also ships one Hermes-native provider and one runtime-neutral Microsoft Cowork export. Counts below are generated/source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running.
 
 | Plugin | Release metadata | Agent definitions | Command definitions | Skill definitions | Purpose |
 |---|:---:|---:|---:|---:|---|
-| [Allura Cowork](allura-cowork/README.md) | 0.2.0 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
-| [Team Durham](team-durham/README.md) | 0.3.0 | 13* | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
-| [Team RAM Coding](team-ram-coding/README.md) | 0.4.2 runtime / 0.4.0 npm | 11 | 34 | 163 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
+| [Allura Cowork](allura-cowork/README.md) | 0.3.0 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
+| [Team Durham](team-durham/README.md) | 0.4.0 | 13* | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
+| [Team RAM Coding](team-ram-coding/README.md) | 0.5.0 | 11 | 34 | 163 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
+| [Bumblebee](bumblebee/README.md) | 0.1.1 | — | 1 | 1 | Pinned read-only supply-chain evidence review; no scanner installation implied |
 | [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | 0.2.0 | — | 1 | — | Hermes-native governed recall and outcome persistence provider |
-| [Mortagate Cowork](packages/mortagate-cowork/README.md) | 0.1.0 | — | — | 4 | Pinned 19-file Microsoft Cowork package export; not a Claude/Codex marketplace plugin |
+| [Mortagate Cowork](packages/mortagate-cowork/README.md) | 0.2.1 | — | — | 4 | Pinned 23-file Microsoft Cowork package export; not a Claude/Codex marketplace plugin |
 
-Team Durham's marketplace, Claude, Codex, and npm versions are `0.3.0`. Team RAM deliberately preserves the marketplace alias `team-ram-coding` while the generated source-owned manifests remain named `team-ram-harness`; marketplace/Claude/Codex runtime metadata is `0.4.2`, while the source npm package is independently versioned at `0.4.0`. CI validates those locked identities instead of hand-editing generated source manifests.
+Team Durham is version `0.4.0`; Team RAM package and runtime versions are aligned at `0.5.0`. The catalog preserves the `team-ram-coding` alias while source manifests retain `team-ram-harness`. CI validates pinned source identities and native Codex manifest compatibility. Codex discovers workflows through skills; Claude retains command registration.
 
 \* Team Durham exports 13 loadable agent definitions: 12 canonical roles plus the deliberate `openagent` runtime compatibility fallback. This is not a claim that 13 agents are installed or running.
 
@@ -57,7 +58,7 @@ Mortagate Cowork targets Microsoft Cowork's app-package and Agent Skills contrac
 
 Hermes Allura Brain is a Hermes-native provider declared by `plugins/hermes-allura-brain/plugin.yaml`; it is intentionally not listed in the Claude marketplace because it does not implement the Claude/Codex package-manifest contract.
 
-The `allura/` directory is a local Codex README asset and guidance pack. It is not listed as a public Claude marketplace package and still contains manifest placeholders; treat it as internal support material until those fields are resolved.
+The `allura/` directory is a local Codex README asset and guidance pack. It is not listed as a public Claude marketplace package and remains internal support material. Its manifest placeholders have been resolved; this upgrade does not publish it.
 
 ### Allura Cowork
 
@@ -367,3 +368,10 @@ MIT — see [LICENSE](LICENSE).
 <p align="center">
   <strong>Coordinate clearly. Create deliberately. Build with evidence.</strong>
 </p>
+
+## Adaptive workflow upgrade
+
+See [release evidence and rollout boundaries](docs/ADAPTIVE-RELEASE.md) for risk-based
+routes, context reuse, model inheritance, source pins, and validation limits.
+The catalog model scripts audit source-owned bindings; they never rewrite generated
+agents or report simulated benchmarks as successful model evaluations.

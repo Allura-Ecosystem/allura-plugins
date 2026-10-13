@@ -59,7 +59,7 @@ Munari/`qa-reviewer` is read-only by design. A failed gate routes work back to t
 
 ### Codex
 
-`.codex-plugin/plugin.json` publishes skills and commands. Codex plugin packaging does not create native subagents, so Team Durham also includes BMAD adapter material under `bmad-module/`.
+`.codex-plugin/plugin.json` exposes `skills/`. The Team Durham entry skill indexes every bundled command runbook; migrated `source-command-*` skills provide direct workflow entry points. Agent files are referenced role guidance, not automatically registered native Codex subagents. Commands remain bundled documents, not a Codex manifest field. Optional BMAD adapter material lives under `bmad-module/`.
 
 ### OpenCode / Team RAM compatibility
 
@@ -102,3 +102,19 @@ Optional integrations fail closed for claims:
 - No integration failure may be hidden behind a success response.
 
 See [docs/DEGRADED-BEHAVIOR.md](docs/DEGRADED-BEHAVIOR.md).
+
+## Adaptive workflow (0.4.0)
+
+See [the shared operating policy](governance/adaptive-workflow.md). Choose a
+quick, standard, or sensitive route; retain one accountable producer and select
+review by risk. Canonical agents inherit the configured model. Overrides require
+actual availability and capability checks, not a fixed persona/model pairing.
+ContextPacket v1.1 adds tenant/project, timestamp, revisions, authority references,
+and Brain status. Older packets must be refreshed to this scoped contract before
+reuse. Independent work may parallelize after approved inputs; locked strategy,
+name-dependent logos, human promotion/shipping approval, and read-only QA remain.
+
+`python3 scripts/validate_repository.py` includes offline prompt-contract routing
+fixtures. These checks do not establish live latency, cost, or model quality.
+Pilot representative tasks and compare elapsed time, handoffs, review rounds,
+first-pass acceptance, and cost per accepted result before claiming improvement.

@@ -1,0 +1,135 @@
+{
+  "authoritative": false,
+  "contractPath": "package.json",
+  "files": [
+    {
+      "kind": "file",
+      "path": ".claude-plugin/plugin.json",
+      "sha256": "c06e2660c152668a6803beab4bf2494a4521f4ab2c13d32c4b86cf9b12ca5a2b",
+      "size": 1585
+    },
+    {
+      "kind": "file",
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "cc4834e90bccca4319ede23bd71667c20ddb81090cbebca4b5637e1b0cfb18d1",
+      "size": 1505
+    },
+    {
+      "kind": "file",
+      "path": "LICENSE",
+      "sha256": "e38d1797834b28d41856eeee7c6b9f059320e84b02ef0476bce6b9bf22af77dd",
+      "size": 1072
+    },
+    {
+      "kind": "file",
+      "path": "README.md",
+      "sha256": "db52c499d9633bc332287911e423c001901773c77a20cb2e1766ce1eee1df36f",
+      "size": 13360
+    },
+    {
+      "kind": "file",
+      "path": "SOURCE.json",
+      "sha256": "187669c4688a8a19272f8ac818d54b2823112ba01abceb8be8c9cd475b17d053",
+      "size": 199
+    },
+    {
+      "kind": "file",
+      "path": "commands/bumblebee-review.md",
+      "sha256": "6c876262d552fc524dbb9a79f4113a10058024574c9d94a691c29a79149dba49",
+      "size": 413
+    },
+    {
+      "kind": "file",
+      "path": "docs/architecture.md",
+      "sha256": "3720f0ca27b051254a62e14c34b8b97e90f4aa5200d5d9fa5f4055fd1ca1ed08",
+      "size": 7875
+    },
+    {
+      "kind": "file",
+      "path": "docs/framework-mapping.md",
+      "sha256": "4fd6c3fc148f5c35d984a93c95ddf4aba4459dec6714c012a6fc4620579ee15f",
+      "size": 10895
+    },
+    {
+      "kind": "file",
+      "path": "docs/images/allura-bumblebee-governance-layer-v1.png",
+      "sha256": "8b5768e7ba6d3e0c181309dd47f92c48b506727938e691cc9d22883567ac6670",
+      "size": 1306377
+    },
+    {
+      "kind": "file",
+      "path": "docs/images/allura-bumblebee-role-based-access-v1.png",
+      "sha256": "aaffca2b32017749897f7541d579138691a8ebdebdbe3f51d8d3ef692099b0fe",
+      "size": 1208484
+    },
+    {
+      "kind": "file",
+      "path": "docs/images/allura-bumblebee-scan-to-trusted-exposure-v1.png",
+      "sha256": "08961e3b7ad7ae6ce2794c883c91a785212df2146072edf7923adce7b1ba3f04",
+      "size": 1430376
+    },
+    {
+      "kind": "file",
+      "path": "docs/images/allura-bumblebee-trusted-inventory-v1.png",
+      "sha256": "ea84783d61b1c33d2abf45aad43ea70ba2e77bb01271adb7e3f7d5b4e9cf94db",
+      "size": 1258296
+    },
+    {
+      "kind": "file",
+      "path": "docs/images/allura-bumblebee-vulnerability-proves-itself-v1.png",
+      "sha256": "1ee68cb206c951f5eab6a21fea78ad09ecc3b6ab43f4c04d511cfc3028d9b389",
+      "size": 1338172
+    },
+    {
+      "kind": "file",
+      "path": "docs/images/allura-bumblebee-zero-trust-by-design-v1.png",
+      "sha256": "6bf37b09775b476a3546119e5395551e6e03d9cf34830b640cacea9637ca1a22",
+      "size": 1280771
+    },
+    {
+      "kind": "file",
+      "path": "docs/security.md",
+      "sha256": "c498b2327500e7f4a660b5fe0cc035d476fbc904723cc23b8dc3d2a717623e10",
+      "size": 6503
+    },
+    {
+      "kind": "file",
+      "path": "docs/state-model.md",
+      "sha256": "17226200fc56a04a90912c12cc2bd240039ddcc9042a61e552075ca6e3bc74c2",
+      "size": 4565
+    },
+    {
+      "kind": "file",
+      "path": "docs/transport.md",
+      "sha256": "1116a05bed8e563365cd163515cbb43b0a51def8d95f6e7bab8f349716046b97",
+      "size": 4899
+    },
+    {
+      "kind": "file",
+      "path": "docs/upstream-pin.md",
+      "sha256": "5e3511e70f610c9ad3c76b01dc46c68bb6a7d7be71cfb73bddfb2b28628b3708",
+      "size": 3501
+    },
+    {
+      "kind": "file",
+      "path": "docs/workflow-evaluation.md",
+      "sha256": "a5209b0aa6aa7540563ba3ece036795fa815e6ce16d267b62aeb0e3659a8216d",
+      "size": 1272
+    },
+    {
+      "kind": "file",
+      "path": "package.json",
+      "sha256": "9e5b644374b69d191930c0942ef1677ec2560f344850f70d855cc34934b61d8a",
+      "size": 348
+    },
+    {
+      "kind": "file",
+      "path": "skills/bumblebee-review/SKILL.md",
+      "sha256": "584b786ae3456502822ab9ec582b734f6dd5d651d9eb31643f4aabf3da351c7b",
+      "size": 2868
+    }
+  ],
+  "generated": true,
+  "sourceCommit": "207496c24cec4f1199a02f236605b626db567a2e",
+  "sourceRepository": "https://github.com/Allura-Ecosystem/bumblebee.git"
+}

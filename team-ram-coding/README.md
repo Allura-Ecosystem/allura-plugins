@@ -2,11 +2,7 @@
 
 **A standalone, governed multi-agent software-delivery harness for OpenCode, Claude Code, and Codex.**
 
-Team RAM turns a software request into a controlled work graph: scope the intent, hydrate repository context, dispatch bounded specialist lanes in the background, reconcile their results, review the actual change, and report command-level evidence. Provider presets change models without changing role authority or delivery gates.
-
-<p align="center">
-  <img src="docs/images/allura-team-ram-governed-workflow-v1.png" alt="Team RAM governed workflow: orchestration, specialist roles, governance checks, optional shared memory, and controlled delivery." width="1200" />
-</p>
+Turn a software request into a controlled work graph: scope intent, hydrate context, dispatch specialist lanes in the background, reconcile results, review the actual change, and report evidence. Provider presets change models without changing role authority or delivery gates.
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" /></a>
@@ -14,13 +10,77 @@ Team RAM turns a software request into a controlled work graph: scope the intent
   <a href="https://bun.sh"><img src="https://img.shields.io/badge/runtime-Bun%20%E2%89%A51.1-f9f1e1?logo=bun" alt="Bun" /></a>
 </p>
 
+---
+
+## How Team RAM operates
+
+### 1. Specialists move as one team
+
+<p align="center">
+  <a href="docs/images/specialists-move-as-one-team.png"><img src="docs/images/specialists-move-as-one-team.png" alt="Specialists move as one team: a task is framed, work is coordinated, specialists contribute, and results are verified. Brooks orchestration sits at the center of architecture, implementation, review, test, and governance, producing a verified deliverable." width="900" /></a>
+</p>
+
+Team RAM routes a task brief through **Brooks orchestration** to the lanes that fit it — architecture, implementation, review, test, and governance — and returns a verified deliverable. **Task is framed** → **work is coordinated** → **specialists contribute** → **results are verified**. Clear routing replaces isolated handoffs, and repeatable checkpoints replace ad hoc ones.
+
+---
+
+### 2. Every action leaves proof
+
+<p align="center">
+  <a href="docs/images/every-action-leaves-proof.png"><img src="docs/images/every-action-leaves-proof.png" alt="Source, review, and result stay connected to durable evidence record" width="900" /></a>
+</p>
+
+Nothing is silent. Every decision, every change, every check is recorded. Source, review step, and outcome remain connected and auditable forever.
+
+---
+
+### 3. Access has boundaries
+
+<p align="center">
+  <a href="docs/images/access-has-boundaries.png"><img src="docs/images/access-has-boundaries.png" alt="Two labeled workspaces on either side of a policy boundary; private work stays in its own workspace" width="900" /></a>
+</p>
+
+Specialist lanes work independently but within clear boundaries. Policy gates prevent accidental or malicious crossing. Tenant isolation and role-based permissions are enforced at every step.
+
+---
+
+### 4. Enterprise governance and safety
+
+<p align="center">
+  <a href="docs/images/enterprise-governance-safety.png"><img src="docs/images/enterprise-governance-safety.png" alt="Policy hooks, human approval, and append-only audit evidence surrounding the agent workflow" width="900" /></a>
+</p>
+
+Governance wraps the entire workflow. **Policy hooks** validate actions before dispatch. **Human review** gates protected operations. **Append-only audit trails** capture every decision. Nothing materializes without passing the gate.
+
+---
+
+### 5. Persistent agent memory
+
+<p align="center">
+  <a href="docs/images/persistent-agent-memory.png"><img src="docs/images/persistent-agent-memory.png" alt="One PostgreSQL engine with episodic evidence and canonical graph tables, governed retrieval, and tenant-aware controls" width="900" /></a>
+</p>
+
+Optional Allura Brain integration adds durable memory across sessions. One PostgreSQL engine holds both episodic evidence (events, traces) and canonical graph (versioned knowledge). Retrieval is governed and scoped to your tenant.
+
+---
+
+### 6. Graph migration and versioning
+
+<p align="center">
+  <a href="docs/images/ad50-canonical-graph-migration.png"><img src="docs/images/ad50-canonical-graph-migration.png" alt="Canonical graph versioning: new nodes supersede old ones while history remains auditable" width="900" /></a>
+</p>
+
+Knowledge evolves through immutable versioning. New versions supersede old ones; the full history stays traceable. Graph-based relationships preserve the why behind every architectural decision.
+
+---
+
 ## What the harness does
 
-- **Background orchestration:** Brooks decomposes work and can dispatch independent read-only or specialist tasks concurrently, then reconciles results before the writer proceeds.
+- **Background orchestration:** Brooks decomposes work and dispatches independent read-only or specialist tasks concurrently, then reconciles results before the writer proceeds.
 - **Context-first routing:** Jobs establishes intent and boundaries; Scout discovers the live code, instructions, risks, and validation commands before implementation.
 - **Specialist lanes:** Woz owns implementation while Pike, Fowler, Bellard, Carmack, Knuth, and Hightower apply interface, maintainability, diagnostics, performance, data, and infrastructure expertise.
-- **Review before completion:** reviewers inspect the real diff and artifacts; mutation, deployment, and self-modification boundaries retain human approval.
-- **Evidence, not completion theater:** a task is complete only with executed checks, concrete outcomes, and explicit blockers or exclusions.
+- **Review before completion:** Reviewers inspect the real diff and artifacts; mutation, deployment, and self-modification boundaries retain human approval.
+- **Evidence, not completion theater:** A task is complete only with executed checks, concrete outcomes, and explicit blockers or exclusions.
 - **Role-stable presets:** Ollama, OpenAI, Anthropic, and mixed presets change model assignments while keeping permissions and lane responsibilities intact.
 - **Optional governed memory:** Allura Memory can add cross-session retrieval and evidence traces. Without it, the core orchestration and review flow remains usable.
 
@@ -178,3 +238,21 @@ CI rejects stale patterns, unclassified files under public roots, package/manife
 This repository is the canonical standalone source for Team RAM. Ownership and export semantics are declared in [`SOURCE.json`](SOURCE.json); the public package boundary is declared in [`PUBLIC_EXPORT.json`](PUBLIC_EXPORT.json). Historical planning records may describe earlier ownership arrangements, but they do not override these machine-readable contracts.
 
 MIT licensed. See [LICENSE](LICENSE).
+
+## Adaptive workflows (0.5)
+
+Team RAM now selects quick, standard, or sensitive delivery based on risk and scope.
+See [.opencode/contracts/adaptive-workflow.md](.opencode/contracts/adaptive-workflow.md).
+Scout output length never escalates a task, and the selected specialist owns the
+first iteration as well as retries. Runtime and plugin agents are generated from
+one source; run `node tooling/agent-sync/sync-agents.mjs --check` to detect drift.
+Models inherit the configured host selection. Configure supported explicit tier
+choices in `tooling/agent-sync/models.map.json`, then regenerate with `--apply`.
+
+The standalone HTTP executor is a text-only Anthropic transport, not a workspace
+coding runtime. Direct API mode needs both `ANTHROPIC_API_KEY` and a concrete
+`TEAM_RAM_ANTHROPIC_MODEL`; CLI aliases such as `inherit` are rejected. Without a
+backend it returns a failed diagnostic. Hydration and implementation requests
+require a tool-capable Codex, Claude Code, or OpenCode host; generated text and model
+confidence cannot establish completion. No existing task approval is renewed merely
+because work crosses a persona boundary.
