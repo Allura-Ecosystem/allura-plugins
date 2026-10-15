@@ -15,7 +15,7 @@
         "team-ram-harness"
       ],
       "repository": "https://github.com/Allura-Ecosystem/allura-team-ram.git",
-      "commit": "42dbd25f01539b5296ae636871ad032b61267c43",
+      "commit": "f708f30f47cfbc5fd04925dc8d1d19c280448ff9",
       "manifest": "PUBLIC_EXPORT.json",
       "exporter": "scripts/export-public.mjs",
       "destination": "team-ram-coding",
@@ -24,8 +24,8 @@
       "marketplaceAlias": "team-ram-coding",
       "sourceManifestName": "team-ram-harness",
       "sourcePackageName": "@allura/team-ram-harness",
-      "packageVersion": "0.5.1",
-      "runtimeVersion": "0.5.1",
+      "packageVersion": "0.6.0",
+      "runtimeVersion": "0.6.0",
       "codexManifestName": "team-ram-coding"
     },
     {
