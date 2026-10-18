@@ -40,12 +40,12 @@ This document maps every Allura plugin to its marketplace ID across all 4 runtim
 ### team-ram-coding
 | Runtime | Marketplace ID | Version | Install command |
 |---|---|---|---|
-| Claude | `allura-ecosystem` | 0.4.2 | `claude plugin install team-ram-coding@allura-ecosystem` |
-| Codex | local generated package | 0.4.2 | Use the runtime's supported local-plugin registration flow for `team-ram-coding/` |
+| Claude | `allura-ecosystem` | 0.6.0 | `claude plugin install team-ram-coding@allura-ecosystem` |
+| Codex | local generated package | 0.6.0 | Use the runtime's supported local-plugin registration flow for `team-ram-coding/` |
 | Hermes | — | — | Not applicable |
 | OpenClaw | — | — | Not yet installed |
 
-`team-ram-harness` is the source-owned manifest identity inside the generated `team-ram-coding/` directory. It is **not** a second root marketplace entry or a second manual package copy. The root marketplace compatibility alias remains `team-ram-coding`, and CI verifies alias-to-source-manifest resolution.
+Claude uses the source-owned manifest identity `team-ram-harness`; Codex uses `team-ram-coding`, which is also the root marketplace alias. These are runtime-specific identities for the same generated source package, not extra package copies. CI verifies each identity against the canonical source contract.
 
 ### mortagate-cowork
 | Runtime | Catalog identity | Version | Install command |
