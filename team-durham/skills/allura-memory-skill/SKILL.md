@@ -49,8 +49,11 @@ memory_add({ group_id: projectGroup,
   metadata: { source: "conversation" } })
 ```
 
-The observed search schema supports `query`, `group_id`, `include_global`,
-`limit`, `min_score`, and optional verified `user_id`; it has no `status` filter.
+Inspect the live search schema for supported fields; the current schema includes
+`status: "approved" | "all"`. Prefer approved retrieval. Broader `all` retrieval
+requires authorized scope and current tool support; it can expose historical or
+unapproved evidence and never proves approval. If `all` fails, report the failure;
+do not silently equate approved-only results with complete episodic coverage.
 The observed add schema supports `content`, `group_id`, optional verified
 `user_id`, optional `threshold`, and metadata `source`, `conversation_id`,
 `agent_id`. Do not invent `tags`, `memory_type`, or approval fields. Put labels,

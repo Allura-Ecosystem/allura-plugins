@@ -17,21 +17,29 @@ Use this skill to route user requests into the Team Durham design team.
 
 ## Agent Calls
 
-| User asks for | Call |
-|---------------|------|
-| Kotler, Cutler, brand orchestrator, PM, pipeline | `kotler` |
-| Aaker, strategy, STP, positioning | `aaker` |
-| Glaser, logo, visuals, visual direction | `glaser` |
-| Ogilvy, copy, naming, voice | `ogilvy` |
-| Rand, brand kit, tokens, system | `rand` |
-| Munari, QA, audit, consistency | `munari` |
-| Tufte, research, data, competitive intelligence | `tufte` |
-| Scout, recon, find files | `scout` |
-| Reality check, verify, done claim | `reality-checker` |
-| Evidence, screenshot, proof packet | `evidence-collector` |
-| Workflow, handoff, state machine | `workflow-architect` |
-| Trust, permissions, audit | `agentic-trust-architect` |
-| Unknown ownership | `kotler` first; `openagent` only after Kotler delegates fallback |
+| Public name / capability | Public target when registered | Canonical target when registered |
+| --- | --- | --- |
+| Kotler; orchestration, workflow, trust accountability, unclear ownership | `kotler` | `brand-orchestrator` |
+| Aaker; strategy, STP, positioning | `aaker` | `brand-strategist` |
+| Ogilvy; copy, naming, voice | `ogilvy` | `copywriter` |
+| Glaser; logo, visuals, visual direction | `glaser` | `visual-director` |
+| Rand; brand kit, tokens, system, UX artifacts | `rand` | `brand-kit-builder` |
+| Munari; independent QA, readiness, trust-boundary review | `munari` | `qa-reviewer` |
+| Tufte; research, recon, evidence requirements and provenance | `tufte` | `data-analyst` |
+
+Resolve the public identity against the current runtime's actual registered agent
+names before invoking. Prefer its public target when registered (the named Codex
+registry); otherwise use its canonical target only when that target is registered
+(the Claude plugin manifest). If neither exists, report the specific missing
+invocation capability. Do not invent a runtime target or create duplicate native
+registrations. Keep canonical filenames, frontmatter names, and manifest entries
+stable. Load the full selected canonical definition regardless of runtime spelling.
+
+`resolveAgentTarget(publicName, availableNames)` in
+`../party-mode/parallel-dispatcher.js` implements this exact resolution contract.
+Pass an observed runtime registry, never a presumed roster. Dispatcher plan records
+use public identities; the external executor resolves the target before actual
+agent invocation. A task record is not an invocation receipt.
 
 ## Activation Protocol
 
@@ -40,7 +48,7 @@ Use this skill to route user requests into the Team Durham design team.
    directly to the named specialist within its permissions; no extra chair call.
 3. Load the selected canonical definition in `../../agents/` and 1–3 relevant skills.
 4. Obtain or reuse the scoped ContextPacket and Brain receipt before brand work.
-   Use `group_id: allura-team-durham` and the acting agent identity. Refresh only
+   Use `group_id: allura-team-durham` and the authenticated principal; record the persona in metadata. Refresh only
    changed dependencies or authority. Report unavailable Brain tools honestly.
 5. Present a menu only when requested or the task is unclear.
 6. Keep one accountable producer through execution and the risk-selected review.
@@ -56,7 +64,7 @@ Use this skill to route user requests into the Team Durham design team.
 - Rand assembles production-ready brand systems.
 - Munari reviews only; fixes go back to producers.
 - Tufte validates evidence and research.
-- Operations agents handle proof, workflows, trust, and readiness.
+- Tufte owns evidence requirements and provenance; live capture requires an observed permitted capture tool and actual executor receipt, otherwise remains unconfirmed; Kotler owns workflow and trust accountability; Munari independently reviews readiness and trust boundaries.
 
 ## Memory Rule
 

@@ -8,7 +8,10 @@ name, persona, or guessed personal tenant for authenticated scope.
 Use relevant dates, sources, status/lineage actually returned, and current local
 evidence to assess results. High score is relevance, not human approval. Empty
 results are no matches, not an inventory. Graph-only results do not establish
-episodic coverage; state this limitation. No invented `status` request filter.
+episodic coverage; state this limitation. Inspect the live schema: the current
+search tool supports `status: "approved" | "all"`. Prefer approved retrieval;
+authorized `all` results may include historical or unapproved evidence. A failed
+`all` call leaves broader coverage unconfirmed, even if approved retrieval works.
 
 Global/cross-project retrieval requires explicit authorization and actual tool
 support. `include_global` is a scope flag, not a way to retrieve unapproved or

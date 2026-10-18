@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generated": true,
   "sourceRepository": "https://github.com/Allura-Ecosystem/allura-team-ram.git",
-  "sourceCommit": "f708f30f47cfbc5fd04925dc8d1d19c280448ff9",
+  "sourceCommit": "440882e8ff47ae0c69ce85d86427a0b7a6deaa25",
   "manifest": "PUBLIC_EXPORT.json",
-  "fileCount": 153
+  "fileCount": 154
 }
