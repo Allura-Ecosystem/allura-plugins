@@ -1,0 +1,11 @@
+{
+  "sourceName": "Prompt Optimization Bot",
+  "sourceVersion": "0.33.2",
+  "sourceKind": "owner-supplied installed plugin",
+  "sourceFile": "skills/instructions/SKILL.md",
+  "sourceSha256": "3023ffee6cfa81a086b736ba5f8b94c862ebbba7b01c5fd18051af8b67df25c8",
+  "packagedFile": "skills/instructions/SKILL.md",
+  "packagedSha256": "3023ffee6cfa81a086b736ba5f8b94c862ebbba7b01c5fd18051af8b67df25c8",
+  "sourcePreserved": true,
+  "modifications": []
+}

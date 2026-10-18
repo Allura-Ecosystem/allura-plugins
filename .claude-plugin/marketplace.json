@@ -34,6 +34,27 @@
       "category": "Security",
       "version": "0.1.1",
       "description": "Supply-chain threat intelligence plugin: pinned Bumblebee scanner wrapped as a governed, policy-gated Allura agent tool for read-only package inventory and vulnerability exposure."
+    },
+    {
+      "name": "prompt-optimization-bot",
+      "source": "./plugins/prompt-optimization-bot",
+      "version": "0.33.2",
+      "description": "Preserve intent and turn rough requests into clear, effective prompts.",
+      "category": "Productivity"
+    },
+    {
+      "name": "corplawyer-bot",
+      "source": "./plugins/corplawyer-bot",
+      "version": "0.8.1",
+      "description": "Corporate law and small-business tool planning instructions supplied by the owner.",
+      "category": "Productivity"
+    },
+    {
+      "name": "team-durham-app-audit",
+      "source": "./plugins/team-durham-app-audit",
+      "version": "1.0.1",
+      "description": "Read-only brand and UX audit against locked brand truth with scoped evidence.",
+      "category": "Productivity"
     }
   ]
 }

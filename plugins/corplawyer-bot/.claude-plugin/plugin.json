@@ -1,0 +1,9 @@
+{
+  "name": "corplawyer-bot",
+  "version": "0.8.1",
+  "description": "Corporate law and small-business tool planning instructions supplied by the owner.",
+  "author": {
+    "name": "Sabir"
+  },
+  "skills": "./skills/"
+}

@@ -18,6 +18,7 @@ def test_metadata_check_is_read_only_and_sync_preserves_existing_policy(tmp_path
     policy = {"installation": "AVAILABLE", "authentication": "ON_USE"}
     write(".agents/plugins/marketplace.json", {"name": "test", "plugins": [{"name": "portable", "source": {"source": "local", "path": "./portable"}, "policy": policy}, {"name": "native-alias"}]})
     write("portable/.claude-plugin/plugin.json", {"version": "0.3.0", "description": "Portable fixture"})
+    write("portable/.codex-plugin/plugin.json", {"name": "portable"})
     before = {path: path.read_bytes() for path in tmp_path.rglob("*.json")}
     assert len(module.synchronize(tmp_path, check=True)) == 2
     assert before == {path: path.read_bytes() for path in before}

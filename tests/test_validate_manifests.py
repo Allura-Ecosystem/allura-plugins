@@ -25,7 +25,7 @@ def test_catalog_validation_includes_hermes_native_plugin(capsys):
     assert validator.main() == 0
 
     output = capsys.readouterr().out
-    assert "HERMES MANIFEST OK: allura-brain v0.2.0" in output
+    assert "HERMES MANIFEST OK: allura-brain v0.3.0" in output
 
 
 def test_codex_marketplace_lists_every_portable_plugin():

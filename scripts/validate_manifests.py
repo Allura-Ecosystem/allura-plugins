@@ -19,6 +19,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PLUGINS = ["allura-cowork", "team-durham", "team-ram-coding", "bumblebee"]
+DUAL_PLUGINS = ["plugins/prompt-optimization-bot", "plugins/corplawyer-bot", "plugins/team-durham-app-audit"]
 MANIFEST_VARIANTS = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json"]
 MARKETPLACE = ".claude-plugin/marketplace.json"
 CODEX_MARKETPLACE = ".agents/plugins/marketplace.json"
@@ -156,9 +157,10 @@ def check_codex_marketplace(errors: list, warnings: list) -> None:
 
 def check_manifests(errors: list, warnings: list) -> None:
     """Validate each target plugin's Claude and Codex manifests."""
-    for plugin in PLUGINS:
+    for plugin in PLUGINS + DUAL_PLUGINS:
         plugin_dir = REPO_ROOT / plugin
-        for variant in MANIFEST_VARIANTS:
+        variants = [".claude-plugin/plugin.json"] if plugin in DUAL_PLUGINS else MANIFEST_VARIANTS
+        for variant in variants:
             manifest_path = plugin_dir / variant
             runtime = variant.split("/")[0].lstrip(".")
             data = parse_json(manifest_path, errors)
@@ -259,6 +261,36 @@ def check_hermes_manifest(errors: list) -> None:
 
     if not errors:
         print(f"  HERMES MANIFEST OK: {fields['name']} v{fields['version']}")
+
+
+def check_dual_skill_packages(errors: list) -> None:
+    """Skill adapters have native Hermes and Claude identities, not Codex exports."""
+    import hashlib
+    marketplace = parse_json(REPO_ROOT / MARKETPLACE, errors) or {}
+    entries = {entry.get("source", "").removeprefix("./"): entry for entry in marketplace.get("plugins", [])}
+    for package in DUAL_PLUGINS:
+        root = REPO_ROOT / package
+        claude = parse_json(root / ".claude-plugin/plugin.json", errors) or {}
+        fields = {}
+        path = root / "plugin.yaml"
+        if path.is_file():
+            for line in path.read_text().splitlines():
+                if ":" in line:
+                    key, value = line.split(":", 1)
+                    fields[key.strip()] = value.strip().strip('"')
+        for key in ("name", "version", "description"):
+            if not claude.get(key) or fields.get(key) != claude.get(key) or entries.get(package, {}).get(key) != claude.get(key):
+                hard_fail("DUAL", f"{package} {key} differs across Hermes/Claude/marketplace", errors)
+        for filename in ("__init__.py", "README.md"):
+            if not (root / filename).is_file():
+                hard_fail("DUAL", f"{package} missing {filename}", errors)
+        receipt = parse_json(root / "SOURCE_PROVENANCE.json", errors) or {}
+        skill = root / receipt.get("packagedFile", "missing")
+        if not skill.is_file() or hashlib.sha256(skill.read_bytes()).hexdigest() != receipt.get("packagedSha256"):
+            hard_fail("DUAL", f"{package} skill provenance hash mismatch", errors)
+        if receipt.get("sourcePreserved") and receipt.get("sourceSha256") != receipt.get("packagedSha256"):
+            hard_fail("DUAL", f"{package} source preservation claim differs", errors)
+        print(f"  DUAL SKILL PACKAGE: {package}")
 
 
 def _readme_has_contract(path: Path, required_markers: tuple[str, ...], errors: list) -> bool:
@@ -427,7 +459,7 @@ def check_hardcoded_paths(errors: list, warnings: list) -> None:
         ".css", ".scss", ".html", ".txt", ".toml", ".jsonc",
     }
 
-    for plugin in PLUGINS:
+    for plugin in PLUGINS + DUAL_PLUGINS:
         plugin_dir = REPO_ROOT / plugin
         for root, dirs, files in os.walk(plugin_dir):
             # Skip dependency/build artifacts
@@ -468,6 +500,7 @@ def main() -> int:
 
     print("\n[4] Hermes native manifest")
     check_hermes_manifest(errors)
+    check_dual_skill_packages(errors)
 
     print("\n[5] Package contracts")
     check_package_contracts(errors, warnings)

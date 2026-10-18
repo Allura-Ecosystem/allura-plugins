@@ -1,0 +1,11 @@
+{
+  "sourceName": "CorpLawyer Bot",
+  "sourceVersion": "0.8.1+bundle.1fcb82aa319c769f99f7af68ac329fa0",
+  "sourceKind": "owner-supplied installed plugin",
+  "sourceFile": "skills/instructions/SKILL.md",
+  "sourceSha256": "5103be0174e6b79f00367a38fe98ec41ebfa1864bae035c97e8c688fe0be0712",
+  "packagedFile": "skills/instructions/SKILL.md",
+  "packagedSha256": "5103be0174e6b79f00367a38fe98ec41ebfa1864bae035c97e8c688fe0be0712",
+  "sourcePreserved": true,
+  "modifications": []
+}

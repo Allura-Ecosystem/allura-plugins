@@ -32,6 +32,8 @@ def synchronize(root: Path, check: bool = False) -> list[str]:
         manifest = json.loads((plugin / ".claude-plugin/plugin.json").read_text())
         entry["version"] = manifest["version"]
         entry["description"] = manifest["description"]
+        if not (plugin / ".codex-plugin/plugin.json").is_file():
+            continue
         if not any(item["name"] == entry["name"] for item in codex["plugins"]):
             codex["plugins"].append({
                 "name": entry["name"],

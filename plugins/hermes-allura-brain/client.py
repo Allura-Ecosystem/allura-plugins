@@ -22,6 +22,17 @@ def _safe_error(text: str) -> str:
     return safe[:1000]
 
 
+def checked_result(result: Any) -> Dict[str, Any]:
+    """Reject application errors even when the MCP envelope is successful."""
+    if not isinstance(result, dict):
+        raise RuntimeError("Allura Brain returned a non-object tool result")
+    if ("error" in result or result.get("isError") or result.get("is_error")
+            or result.get("success") is False or result.get("ok") is False
+            or result.get("status") in ("error", "failed", "denied")):
+        raise RuntimeError("Allura Brain returned an application error")
+    return result
+
+
 class AlluraBrainClient:
     """Open a short-lived authenticated MCP session for each operation."""
 
@@ -100,9 +111,9 @@ class AlluraBrainClient:
                 )
             structured = getattr(result, "structuredContent", None)
             if isinstance(structured, dict):
-                return structured
+                return checked_result(structured)
             try:
-                return json.loads(raw) if raw else {}
+                return checked_result(json.loads(raw)) if raw else {}
             except json.JSONDecodeError:
                 return {"raw": raw}
 
