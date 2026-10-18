@@ -78,15 +78,30 @@ for entry in "${PLUGINS[@]}"; do
     fmt=$(python3 -c "
 import json
 d = json.load(open('$mf'))
-cmds = d.get('commands', 'NOT_SET')
-if isinstance(cmds, list): print(f'array ({len(cmds)})')
+cmds = d.get('commands')
+if 'commands' not in d: print('NOT_SET')
+elif isinstance(cmds, list): print(f'array ({len(cmds)})')
 elif isinstance(cmds, str): print(f'glob: \"{cmds}\"')
-else: print('NOT_SET')
+else: print(f'invalid: {type(cmds).__name__}')
 " 2>/dev/null)
     if [[ "$fmt" == "NOT_SET" ]]; then
-      echo "  ⚠️  $name ($label): commands not set"
+      disk_count=0
+      if [[ -d "$cmd_dir" ]]; then
+        for f in "$cmd_dir"/*.md; do
+          [[ -f "$f" ]] && disk_count=$((disk_count + 1))
+        done
+      fi
+      if [[ $disk_count -eq 0 ]]; then
+        echo "  ✅ $name ($label): no commands (empty commands field omitted)"
+      else
+        echo "  ❌ $name ($label): commands not set despite $disk_count command files"
+        ANY_FAIL=1
+      fi
     elif [[ "$fmt" == glob* ]]; then
       echo "  ⚠️  $name ($label): $fmt — should be explicit array"
+      ANY_FAIL=1
+    elif [[ "$fmt" == invalid* ]]; then
+      echo "  ❌ $name ($label): invalid commands field type ($fmt)"
       ANY_FAIL=1
     else
       echo "  ✅ $name ($label): $fmt"

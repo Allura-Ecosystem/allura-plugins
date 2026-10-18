@@ -232,8 +232,17 @@ def validate_versions(output: Path, lock: dict[str, Any], marketplace: dict[str,
         claude = read_json(output / ".claude-plugin/plugin.json")
         codex = read_json(output / ".codex-plugin/plugin.json")
         package = read_json(output / "package.json")
-        if claude.get("name") != lock["sourceManifestName"] or codex.get("name") != lock["sourceManifestName"]:
-            raise ExportError(f"{lock['id']}: source manifest identity mismatch; generated manifests must not be hand-edited to alias")
+        source_contract = read_json(output / "SOURCE.json")
+        expected_claude_name = lock["sourceManifestName"]
+        expected_codex_name = lock.get("codexManifestName", expected_claude_name)
+        runtime_identities = source_contract.get("runtimeIdentities", {})
+        if (
+            claude.get("name") != expected_claude_name
+            or codex.get("name") != expected_codex_name
+            or runtime_identities.get("claudeManifestName", expected_claude_name) != expected_claude_name
+            or runtime_identities.get("codexManifestName", expected_codex_name) != expected_codex_name
+        ):
+            raise ExportError(f"{lock['id']}: runtime manifest identities do not match source contract and lock")
         if claude.get("version") != lock["runtimeVersion"] or codex.get("version") != lock["runtimeVersion"]:
             raise ExportError(f"{lock['id']}: Claude/Codex/runtime version parity failed")
         if package.get("name") != lock["sourcePackageName"] or package.get("version") != lock["packageVersion"]:
@@ -246,7 +255,10 @@ def validate_versions(output: Path, lock: dict[str, Any], marketplace: dict[str,
                 for relative in value:
                     if not (output / relative).exists():
                         raise ExportError(f"{lock['id']}: Claude manifest {field} path does not resolve: {relative}")
-        print(f"  compatibility alias: {lock['marketplaceAlias']} -> {lock['sourceManifestName']} v{lock['runtimeVersion']}")
+        print(
+            f"  compatibility alias: {lock['marketplaceAlias']} -> "
+            f"Claude {expected_claude_name}, Codex {expected_codex_name} v{lock['runtimeVersion']}"
+        )
     elif entries:
         raise ExportError(f"{lock['id']}: non-Claude runtime package must not appear in Claude marketplace")
 

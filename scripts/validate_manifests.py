@@ -307,8 +307,16 @@ def check_package_contracts(errors: list, warnings: list) -> None:
             if marketplace_versions.get(marketplace_alias) != lock.get("runtimeVersion"):
                 hard_fail("CONTRACT", f"{package} marketplace alias/runtime version mismatch", errors)
                 continue
-            if claude.get("name") != lock.get("sourceManifestName") or codex.get("name") != lock.get("sourceManifestName"):
-                hard_fail("CONTRACT", f"{package} generated source manifest identity was changed", errors)
+            expected_claude_name = lock.get("sourceManifestName")
+            expected_codex_name = lock.get("codexManifestName", expected_claude_name)
+            runtime_identities = source_contract.get("runtimeIdentities", {})
+            if (
+                claude.get("name") != expected_claude_name
+                or codex.get("name") != expected_codex_name
+                or runtime_identities.get("claudeManifestName", expected_claude_name) != expected_claude_name
+                or runtime_identities.get("codexManifestName", expected_codex_name) != expected_codex_name
+            ):
+                hard_fail("CONTRACT", f"{package} generated runtime manifest identities do not match their source lock", errors)
                 continue
             if {claude.get("version"), codex.get("version")} != {lock.get("runtimeVersion")}:
                 hard_fail("CONTRACT", f"{package} Claude/Codex runtime version mismatch", errors)

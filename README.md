@@ -45,11 +45,11 @@ The Claude marketplace contains three versioned packages. The repository also sh
 |---|:---:|---:|---:|---:|---|
 | [Allura Cowork](allura-cowork/README.md) | 0.2.0 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
 | [Team Durham](team-durham/README.md) | 0.3.0 | 13* | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
-| [Team RAM Coding](team-ram-coding/README.md) | 0.4.2 runtime / 0.4.0 npm | 11 | 34 | 163 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
+| [Team RAM Coding](team-ram-coding/README.md) | 0.6.0 runtime / 0.6.0 npm | 10 | 0 | 10 | Generated Team RAM export with Brooks-led routing, context hydration, implementation, review, and the Allura workflow menu |
 | [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | 0.2.0 | — | 1 | — | Hermes-native governed recall and outcome persistence provider |
 | [Mortagate Cowork](packages/mortagate-cowork/README.md) | 0.1.0 | — | — | 4 | Pinned 19-file Microsoft Cowork package export; not a Claude/Codex marketplace plugin |
 
-Team Durham's marketplace, Claude, Codex, and npm versions are `0.3.0`. Team RAM deliberately preserves the marketplace alias `team-ram-coding` while the generated source-owned manifests remain named `team-ram-harness`; marketplace/Claude/Codex runtime metadata is `0.4.2`, while the source npm package is independently versioned at `0.4.0`. CI validates those locked identities instead of hand-editing generated source manifests.
+Team Durham's marketplace, Claude, Codex, and npm versions are `0.3.0`. Team RAM keeps the Claude manifest identity `team-ram-harness` and Codex manifest identity `team-ram-coding`; the marketplace alias is also `team-ram-coding`. Marketplace, Claude, Codex, and source package metadata are all `0.6.0`. CI validates these runtime-specific identities and the exact source commit instead of hand-editing generated source manifests.
 
 \* Team Durham exports 13 loadable agent definitions: 12 canonical roles plus the deliberate `openagent` runtime compatibility fallback. This is not a claim that 13 agents are installed or running.
 
