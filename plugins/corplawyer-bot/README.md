@@ -14,10 +14,10 @@ installed by this package. Broader compliance automation remains later work.
 
 ## Use
 
-The source release is on `codex/hermes-plugin-setup-20261018`:
+The source release is available from `main`:
 
 ```sh
-git clone --branch codex/hermes-plugin-setup-20261018 --single-branch https://github.com/Allura-Ecosystem/allura-plugins.git allura-plugin-release
+git clone --branch main --single-branch https://github.com/Allura-Ecosystem/allura-plugins.git allura-plugin-release
 cd allura-plugin-release
 claude --plugin-dir ./plugins/corplawyer-bot
 hermes plugins install "file://$(pwd)#plugins/corplawyer-bot" --enable

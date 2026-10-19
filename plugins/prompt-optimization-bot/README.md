@@ -14,11 +14,10 @@ install a model, start agents, add browser access, or configure credentials.
 
 ### Use
 
-These packages are on `codex/hermes-plugin-setup-20261018`; default `main`
-does not contain this release yet. Clone the release branch first:
+This package is available from `main`. Clone the catalog first:
 
 ```sh
-git clone --branch codex/hermes-plugin-setup-20261018 --single-branch https://github.com/Allura-Ecosystem/allura-plugins.git allura-plugin-release
+git clone --branch main --single-branch https://github.com/Allura-Ecosystem/allura-plugins.git allura-plugin-release
 cd allura-plugin-release
 claude --plugin-dir ./plugins/prompt-optimization-bot
 hermes plugins install "file://$(pwd)#plugins/prompt-optimization-bot" --enable

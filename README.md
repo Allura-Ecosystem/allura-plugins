@@ -11,6 +11,7 @@
 
 <p align="center">
   <a href="#catalog">Catalog</a> ·
+  <a href="#start-in-chat">Start in chat</a> ·
   <a href="#installation">Installation</a> ·
   <a href="#how-the-plugins-fit-together">Architecture</a> ·
   <a href="#model-governance">Model governance</a> ·
@@ -39,7 +40,7 @@ Plugins add skills, commands, and operating roles. They do not replace Allura Br
 
 ## Catalog
 
-The current plugin setup update is published on `codex/hermes-plugin-setup-20261018`, based on the pinned `codex/persona-rollout-20261018` release. Existing default branches are unchanged. The [earlier native rollout receipt](evidence/native-rollout-2026-10-13.json) records historical installation checks; it does not certify installation of these new packages. The standalone [Allura Framework](https://github.com/Allura-Ecosystem/allura-framework) is a separate private repository with offline agent/workflow/project authoring; access requires repository permission.
+Install this catalog from `main`. The October 19 release includes the shared conversation menu, RAM–Durham Council guidance, scoped Hermes memory, Prompt Optimization Bot, and six CorpLawyer skills. [Release evidence](evidence/menu-corplawyer-2026-10-19.json) records the reviewed revisions and observed runtime checks. The [earlier native rollout receipt](evidence/native-rollout-2026-10-13.json) is historical and does not certify installation of these versions. The standalone [Allura Framework](https://github.com/Allura-Ecosystem/allura-framework) is a separate private repository; access requires repository permission.
 
 The Claude and Codex marketplaces share four versioned portable packages. Claude additionally lists three skill packages that also register natively in Hermes: Prompt Optimization Bot, CorpLawyer Bot, and Team Durham App Audit. The repository also ships one Hermes-native provider and one runtime-neutral Microsoft Cowork export. Counts below are generated/source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running.
 
@@ -63,7 +64,7 @@ Mortagate Cowork targets Microsoft Cowork's app-package and Agent Skills contrac
 
 Hermes Allura Brain is a Hermes-native provider declared by `plugins/hermes-allura-brain/plugin.yaml`; it is intentionally not listed in the Claude marketplace because it does not implement the Claude/Codex package-manifest contract.
 
-[Team RAM + Team Durham for Hermes](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) is a separate native plugin, linked here rather than generated into this catalog or registered in its Claude/Codex marketplaces. Its `1.3.0` upgrade is published on [`codex/adaptive-hermes-teams`](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/tree/codex/adaptive-hermes-teams); the default branch is unchanged. The source update is tracked in [PR #1](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/pull/1). See [Hermes team usage](#hermes-team-ram--team-durham) below.
+[Team RAM + Team Durham for Hermes](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) is a separate native plugin, linked here rather than generated into this catalog or registered in its Claude/Codex marketplaces. Version `1.3.0` is available from its `main` branch. See [Hermes team usage](#hermes-team-ram--team-durham) below.
 
 The `allura/` directory is a local Codex README asset and guidance pack. It is not listed as a public Claude marketplace package and remains internal support material. Its manifest placeholders have been resolved; this upgrade does not publish it.
 
@@ -106,6 +107,29 @@ Brooks → Scout → Allura Brain → required skills
 ```
 
 The plugin includes task management, code review, multi-source research, MCP orchestration, security policy, secret-handling, and multi-agent dispatch skills.
+
+## Start in chat
+
+After loading Allura Cowork or a team entry skill, ask for **Menu** or **Help**:
+
+| Choice | Result |
+|---|---|
+| Next steps | One to three useful actions, with a recommended next action and reason |
+| Help with a prompt | A ready-to-use prompt that preserves your intent and constraints |
+| Council | One bounded decision examined by relevant, actually invoked RAM and Durham specialists |
+| Work | Carry out the authorized task and check the result |
+| Loop | Work, check, and improve within an agreed goal and iteration bound |
+| Validate | Compare the result with acceptance criteria and actual evidence |
+| More | Available research, memory, skill creation, Party, Setup, and Doctor workflows |
+
+For an unclear idea, **Next steps** is the recommended starting point. A clear
+request can go directly to **Work**. The full menu appears on activation or
+request; ordinary work continues without repeating it. These are conversational
+choices, not a promise that every host registers matching slash commands.
+
+Council requires actual delegation support. If that capability is unavailable,
+the agent discloses the limitation and can prepare a council brief. Loading role
+guidance alone does not establish specialist execution or agreement.
 
 ## How the plugins fit together
 
@@ -171,7 +195,35 @@ All catalog plugins inherit the same Allura expectations:
 /plugin install team-ram-coding@allura-ecosystem
 ```
 
+Optional Claude skill packages:
+
+```text
+/plugin install prompt-optimization-bot@allura-ecosystem
+/plugin install corplawyer-bot@allura-ecosystem
+/plugin install team-durham-app-audit@allura-ecosystem
+```
+
+For an existing Claude installation, refresh the marketplace and update the
+packages you use:
+
+```text
+/plugin marketplace update allura-ecosystem
+/plugin update allura-cowork@allura-ecosystem
+/plugin update team-ram-coding@allura-ecosystem
+/plugin update team-durham@allura-ecosystem
+```
+
+Update optional packages the same way, then reload plugins or restart the session
+as supported by your Claude version. Marketplace updates and source merges do
+not themselves refresh every installed runtime cache.
+
 The Claude catalog is defined in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). Each package also owns its own `.claude-plugin/plugin.json`. Hermes uses its native provider manifest instead; follow [its package README](plugins/hermes-allura-brain/README.md).
+
+The CorpLawyer and Prompt Bot entries are Git-owned compatibility packages for
+Claude and Hermes. Installing them does not update the owner's separate account
+GPTs. CorpLawyer `0.9.0` supplies intake, official-source research, contract review,
+counsel briefs, scoped Allura continuity, and an entry skill. Follow its
+[package instructions](plugins/corplawyer-bot/README.md) for direct skill loading.
 
 ### Codex
 
@@ -182,8 +234,8 @@ The root [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) 
 ### Hermes: Team RAM + Team Durham
 
 The external [native team plugin](https://github.com/Allura-Ecosystem/hermes-team-ram-durham)
-uses the Hermes identity `team-ram-durham`. Its published upgrade branch is
-`codex/adaptive-hermes-teams`; a default-branch install is not an upgrade-branch install.
+uses the Hermes identity `team-ram-durham`. Install its `main` branch using the
+owning repository's [installation instructions](https://github.com/Allura-Ecosystem/hermes-team-ram-durham#install).
 Version `1.3.0` exports ten RAM roles, seven Durham roles, and the shared Cowork conversation menu. The following describes the native conversation-routing implementation:
 
 ```text
@@ -195,8 +247,9 @@ Version `1.3.0` exports ten RAM roles, seven Durham roles, and the shared Cowork
 ```
 
 On RAM activation or an explicit menu request, the adapter loads the canonical
-chat menu and recommends the next applicable step: Setup, Doctor, Work, then
-Review. Ordinary work does not repeat the menu.
+chat menu described under [Start in chat](#start-in-chat) and recommends a next
+action suited to the task. Setup and Doctor remain available under More.
+Ordinary work does not repeat the menu.
 
 The native `allura_team` tool loads role and workflow guidance for the current
 conversation. The active agent then carries out the task with the configured model
@@ -216,9 +269,11 @@ teams' names separate. Entry workflows are `team-ram-durham:ram` and
 
 [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) remains the separate
 memory provider. The team plugin does not install or reconfigure it. Brain calls
-use explicit tenant scope: RAM `allura-system`, Durham `allura-team-durham`.
-Unavailable scoped memory is reported honestly; no provider-default tenant fallback
-is implied.
+use the authenticated project/task scope. RAM's `allura-system` and Durham's
+`allura-team-durham` are default hints requiring authorization, not permission to
+switch tenants. A Council specialist inherits the validated task scope; the
+adapter reports `scope_status: inherit_authenticated_task`. Unavailable or denied
+memory is disclosed, with no tenant or credential fallback.
 
 ### Requirements
 
@@ -319,6 +374,17 @@ The [`.github/workflows/ci.yml`](.github/workflows/ci.yml) checks:
 
 CI cannot prove optional external integrations, native installation into every locally available runtime, or live cross-runtime behavioral parity. Those require release-environment evidence; CI does not turn a structural package check into a runtime-execution claim.
 
+### October 19 runtime evidence
+
+The [dated release receipt](evidence/menu-corplawyer-2026-10-19.json) records five
+actual Hermes conversation checks: menu, direct work, stopping on a simulated scope denial,
+honest Council unavailability, and a fictional supplied-contract review. Native
+Claude package validation passed, while a Claude conversation check was blocked
+by expired OAuth authentication. Live legal research, real matter continuity,
+human usability, and native live multi-agent Council execution remain unverified.
+These observations describe those runs; a GitHub merge does not install a plugin
+or establish a new runtime result.
+
 ### Package checks
 
 Allura Cowork:
@@ -371,6 +437,10 @@ allura-plugins/
 ├── team-ram-coding/                  generated Team RAM distribution (compatibility alias)
 ├── packages/mortagate-cowork/        generated Microsoft Cowork distribution (not Claude marketplace)
 ├── plugins/hermes-allura-brain/       Hermes-native Allura Brain provider
+├── plugins/prompt-optimization-bot/   prompt refinement skills for Claude/Hermes
+├── plugins/corplawyer-bot/            six legal workflow skills for Claude/Hermes
+├── plugins/team-durham-app-audit/     read-only brand and UX audit skill
+├── evidence/                         dated source and runtime verification receipts
 ├── source-locks.json                  public repo/SHA/export/runtime/alias locks
 ├── harness-sync.sh                    pinned source -> catalog check/sync entrypoint
 ├── _bmad/bmm/                         catalog-local epics and stories
