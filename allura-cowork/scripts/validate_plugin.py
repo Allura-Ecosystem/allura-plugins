@@ -11,6 +11,7 @@ REQUIRED = [
     ".claude-plugin/plugin.json",
     "README.md",
     "skills/allura-cowork/SKILL.md",
+    "skills/allura-menu/SKILL.md",
     "agents/cowork-orchestrator.md",
     "commands/cowork-start.md",
     "commands/cowork-handoff.md",

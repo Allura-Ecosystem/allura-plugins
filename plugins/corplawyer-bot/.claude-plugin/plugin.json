@@ -1,7 +1,7 @@
 {
   "name": "corplawyer-bot",
-  "version": "0.8.1",
-  "description": "Corporate law and small-business tool planning instructions supplied by the owner.",
+  "version": "0.9.0",
+  "description": "Business legal intake, evidence-led contract review, official-source research and counsel briefs with scoped Allura continuity.",
   "author": {
     "name": "Sabir"
   },

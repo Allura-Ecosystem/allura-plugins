@@ -1,6 +1,15 @@
 # Allura Cowork Command Menu
 
-Use these commands as the user-facing entry points.
+On activation or a menu request, use `skills/allura-menu/SKILL.md`:
+
+Next steps · Help with a prompt · Council · Work · Loop · Validate · More
+
+The choices work in ordinary conversation. Recommend one relevant next action
+with a reason and owner. Do clear work directly; avoid repeating the full menu.
+Council requires actual delegated specialists; Loop requires an explicit bound.
+
+The existing cowork commands below remain available for runtime handoffs and
+receipts where the host registers them.
 
 ## Start
 

@@ -1,21 +1,20 @@
 # CorpLawyer Bot
 
-Corporate law and small-business tool planning instructions supplied by the owner.
+Six practical skills support business issue discovery, contract review through a
+counsel brief, current official-source research, and authorized Allura continuity.
+The original owner prompt is retained under `provenance/`; it is no longer the
+active instruction to design a tool for every request.
 
-The source skill is preserved byte-for-byte. Packaging supplies instructions, not a hosted legal database, legal research service, or automatic update mechanism. Current legal questions still require authoritative current sources and qualified review as appropriate.
+## Package contract
 
-## Package Contract
+Version `0.9.0`. Native Hermes registers each actual `SKILL.md` file under the
+`corplawyer-bot:` namespace. Claude discovers the six folders under `./skills/`.
+No browser service, legal database, model, credentials or memory provider is
+installed by this package. Broader compliance automation remains later work.
 
-### Runtime manifests
+## Use
 
-Version `0.8.1`. Hermes uses `plugin.yaml` and `__init__.py`; Claude uses
-`.claude-plugin/plugin.json` and discovers `skills/`. This package does not
-install a model, start agents, add browser access, or configure credentials.
-
-### Use
-
-These packages are on `codex/hermes-plugin-setup-20261018`; default `main`
-does not contain this release yet. Clone the release branch first:
+The source release is on `codex/hermes-plugin-setup-20261018`:
 
 ```sh
 git clone --branch codex/hermes-plugin-setup-20261018 --single-branch https://github.com/Allura-Ecosystem/allura-plugins.git allura-plugin-release
@@ -24,22 +23,55 @@ claude --plugin-dir ./plugins/corplawyer-bot
 hermes plugins install "file://$(pwd)#plugins/corplawyer-bot" --enable
 ```
 
-The native Hermes installer reads the committed local Git checkout. Select the
-intended Hermes profile before installing. To load explicitly,
-call `skill_view(name="corplawyer-bot:instructions")`, then give the task in ordinary chat.
-Claude can select the skill as `/corplawyer-bot:instructions` after loading the package.
+The Hermes installer reads the committed checkout. Select the intended Hermes
+profile before installing. Load the entry with
+`skill_view(name="corplawyer-bot:instructions")` and state the task in chat.
+For a direct review use `skill_view(name="corplawyer-bot:contract-review")`.
+Claude exposes `/corplawyer-bot:instructions` and
+`/corplawyer-bot:contract-review`; the other folders are discoverable in the same
+namespace. Ordinary clear tasks proceed without a compulsory menu.
 
-### Validation
+The bundled skills are `instructions`, `matter-intake`, `legal-research`,
+`contract-review`, `counsel-brief`, and `allura-continuity`. Each links to the
+related workflow only when needed. A contract review starts when requested or
+relevant to the owner's issue. Unclear business help starts with issue discovery.
 
-Run `python3 scripts/validate_manifests.py` and
-`python3 -m pytest tests/test_skill_packages.py` from the catalog root.
-Use `claude plugin validate ./plugins/corplawyer-bot` for native Claude validation.
-The registration tests also exercise native Hermes when its SDK is installed.
+## Dependencies and limits
 
-### Dependencies and degraded behavior
+Current legal claims require actual retrieval of current official sources.
+Without an available research tool the agent can examine supplied clauses and
+prepare a draft brief, explicitly leaving legal conclusions unverified.
+Allura continuity uses only the existing authenticated provider and authorized
+business/matter scope. Missing or denied memory never triggers another tenant,
+identity or credential. Document-only work may continue from supplied material
+with the limitation stated. Concise permitted outcome retention is separate from
+bulk agreement retention, and semantic promotion remains human governed.
 
-Instructions are bundled; live external services and runtime tools are not.
-Report missing tools or authentication and limit claims to observed evidence.
-Read `SOURCE_PROVENANCE.json` for the source version, content hashes, and changes.
-This source package is distinct from the owner's existing account plugin;
-publishing this repository does not update that account installation.
+Prompt Bot and Allura Council are optional installed capabilities, not hidden
+package dependencies. No skill may claim they executed without actual tools.
+Publishing this source does not update the owner's account plugin or caches.
+
+## Validation and realistic sample
+
+From the catalog root:
+
+```sh
+python3 scripts/validate_manifests.py
+python3 -m pytest tests/test_skill_packages.py
+claude plugin validate ./plugins/corplawyer-bot
+```
+
+Run pytest using the Hermes virtualenv interpreter to exercise its actual SDK;
+without that SDK the native cases skip. Tests use a temporary `HERMES_HOME` and
+do not call live legal or memory services. They verify source snapshot hashes,
+all six registrations, namespace paths, and bundled-reference integrity.
+
+`evaluation/fictional-services-agreement.md` is a fictional supplied-document
+exercise. `evaluation/scenario.json` gives a request and capability restrictions;
+`evaluation/review-criteria.md` records the observable evidence to assess.
+These are fixtures, not an actual legal opinion, live source-research receipt,
+Allura access result or behavioral evaluation. Native conversation evaluation
+must record its actual response before anyone claims the workflow passed.
+
+`SOURCE_PROVENANCE.json` records the unchanged original snapshot and hashes of
+transformed/new skills. Changes here do not overwrite the source account plugin.

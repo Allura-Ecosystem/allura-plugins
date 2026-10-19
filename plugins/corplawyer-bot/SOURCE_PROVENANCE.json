@@ -5,7 +5,40 @@
   "sourceFile": "skills/instructions/SKILL.md",
   "sourceSha256": "5103be0174e6b79f00367a38fe98ec41ebfa1864bae035c97e8c688fe0be0712",
   "packagedFile": "skills/instructions/SKILL.md",
-  "packagedSha256": "5103be0174e6b79f00367a38fe98ec41ebfa1864bae035c97e8c688fe0be0712",
-  "sourcePreserved": true,
-  "modifications": []
+  "packagedSha256": "4d0bea48e128de4c316455132bc5650968a60083e97f9cb69dd6f299c33aa84c",
+  "sourcePreserved": false,
+  "modifications": [
+    "Preserve the original owner prompt as a historical snapshot outside skill discovery.",
+    "Replace generic legal-tool design entry with issue-sensitive workflow routing.",
+    "Add matter intake, official-source research, contract review, counsel brief and scoped Allura continuity skills.",
+    "Provide native namespaced Hermes sibling-skill loading while retaining Claude relative resource links."
+  ],
+  "originalSnapshot": "provenance/original-instructions.md",
+  "originalSnapshotSha256": "5103be0174e6b79f00367a38fe98ec41ebfa1864bae035c97e8c688fe0be0712",
+  "resources": [
+    {
+      "path": "skills/instructions/SKILL.md",
+      "sha256": "4d0bea48e128de4c316455132bc5650968a60083e97f9cb69dd6f299c33aa84c"
+    },
+    {
+      "path": "skills/matter-intake/SKILL.md",
+      "sha256": "799cbc195adff3a66ede8e7568d33547106b9ee9c1925946a03925b4c2a5503c"
+    },
+    {
+      "path": "skills/legal-research/SKILL.md",
+      "sha256": "d0c702950d3612f7b1f063aa7e270ff7781b1b66efdfad7d06acecbc57b0b081"
+    },
+    {
+      "path": "skills/contract-review/SKILL.md",
+      "sha256": "f39368351dcb4bc028c1021bb353d30152273c4ad05823bcd77be2083646955e"
+    },
+    {
+      "path": "skills/counsel-brief/SKILL.md",
+      "sha256": "75b2b3dce257c79e90e756ff35219923d48b55befc8b466b34e801dc1ade4a44"
+    },
+    {
+      "path": "skills/allura-continuity/SKILL.md",
+      "sha256": "902e6b910daed675e58ad044a618c42dff3dd3f772751461b0f03c69b48037a5"
+    }
+  ]
 }

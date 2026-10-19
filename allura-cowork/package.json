@@ -1,10 +1,23 @@
 {
   "name": "allura-cowork",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "main": "index.js",
   "opencode": {
     "agents": "./agents/",
     "skills": "./skills/",
     "commands": "./commands/"
-  }
+  },
+  "files": [
+    "skills/",
+    "agents/",
+    "commands/",
+    "hooks/",
+    "schemas/",
+    "scripts/",
+    "docs/",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    "README.md",
+    "index.js"
+  ]
 }

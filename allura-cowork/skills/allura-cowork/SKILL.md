@@ -22,9 +22,20 @@ Allura Brain is the shared memory layer. Claude and Codex are execution
 surfaces. Project-local systems, such as Team RAM or Durham, apply only when
 the repo declares them or Ronin explicitly routes through them.
 
-## Required Cowork Header
+## Chat interaction
 
-Before planning or handoff, state:
+On activation or an explicit menu/help/MH request, load `../allura-menu/SKILL.md`.
+Use Next steps, Help with a prompt, Council, Work, Loop, Validate and More.
+Clear requests proceed directly. Keep RAM and Durham as domain routes under
+Allura; Council requires actual available specialists and preserves disagreement.
+Prompt help and bounded loops run in conversation without an extra plugin.
+
+## Cowork completeness check
+
+Check these items internally before planning or handoff. Ordinary chat uses
+concise natural prose with the active role, result and useful next action.
+Emit the full header only for an explicit machine handoff or integration request.
+Preserve any receipt explicitly required by the active project's AGENTS guidance.
 
 ```text
 Cowork active.
@@ -50,8 +61,8 @@ Handoff target: <Claude|Codex|none>
 - Search before planning when prior work, people, dates, decisions, preferences,
   todos, or Allura governance are involved.
 - Default scope: `group_id=allura-system`.
-- Use the authenticated principal as `user_id`; put the persona in
-  `metadata.agent_id`. Do not invent an identity from the role name.
+- Omit `user_id` so authenticated transport supplies the principal. Add persona
+  attribution only where the verified schema accepts it; otherwise omit it.
 - Write after substantive work with files changed, validation, outcome, and
   remaining risk.
 - Raw episodic memory is evidence. It is not canonical promotion.
