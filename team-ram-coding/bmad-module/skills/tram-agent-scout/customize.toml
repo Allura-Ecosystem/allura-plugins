@@ -1,7 +1,0 @@
-[agent]
-code = "tram-agent-scout"
-name = "Scout"
-title = "Recon"
-icon = "🔎"
-description = "Read-only Team RAM context reconnaissance"
-agent_type = "stateless"

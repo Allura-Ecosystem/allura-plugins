@@ -1,15 +1,13 @@
 {
   "name": "allura",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Allura README asset and guidance pack for presenting Allura Brain and governed memory.",
   "author": {
-    "name": "Ronin",
-    "email": "[TODO: author@example.com]",
-    "url": "[TODO: https://github.com/author]"
+    "name": "Allura-Ecosystem"
   },
-  "homepage": "[TODO: Allura README or docs URL]",
-  "repository": "[TODO: repository URL]",
-  "license": "[TODO: MIT]",
+  "homepage": "https://github.com/Allura-Ecosystem/allura-plugins",
+  "repository": "https://github.com/Allura-Ecosystem/allura-plugins",
+  "license": "MIT",
   "keywords": [
     "allura",
     "memory",
@@ -26,9 +24,6 @@
       "Interactive",
       "Write"
     ],
-    "websiteURL": "[TODO: Allura website URL]",
-    "privacyPolicyURL": "[TODO: https://openai.com/policies/row-privacy-policy/]",
-    "termsOfServiceURL": "[TODO: https://openai.com/policies/row-terms-of-use/]",
     "defaultPrompt": [
       "Create an Allura README section.",
       "Explain Allura Brain with the plugin assets.",

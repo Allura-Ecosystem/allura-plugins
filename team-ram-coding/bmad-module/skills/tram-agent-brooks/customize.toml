@@ -1,7 +1,0 @@
-[agent]
-code = "tram-agent-brooks"
-name = "Brooks"
-title = "Chief Architect"
-icon = "🏛️"
-description = "Team RAM architecture and routing adapter"
-agent_type = "autonomous"

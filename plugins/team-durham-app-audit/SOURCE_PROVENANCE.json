@@ -1,0 +1,15 @@
+{
+  "sourceName": "Team Durham App Audit",
+  "sourceVersion": "1.0.0",
+  "sourceKind": "owner-supplied installed plugin",
+  "sourceFile": "skills/app-audit/SKILL.md",
+  "sourceSha256": "8ff0b365c276209e59442b90ebb1dcc6f2671f275bfab427ef569857a9cd91bc",
+  "packagedFile": "skills/app-audit/SKILL.md",
+  "packagedSha256": "1f6145f77546c1a63427c9b4d2b36c85b12274114f40a34af56e9ef60958d2f4",
+  "sourcePreserved": false,
+  "modifications": [
+    "Align roles: Munari audit, Rand UX, Glaser visual fixes, Kotler evidence.",
+    "Keep QA read-only; separate visual implementation from audit evidence.",
+    "Require authenticated allura-team-durham access and governed append-only evidence; clarify RuVector default and unavailable capabilities."
+  ]
+}

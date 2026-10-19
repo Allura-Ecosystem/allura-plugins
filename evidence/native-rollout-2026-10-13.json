@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-13",
+  "status": "native-installation-verified",
+  "supersedesForCurrentRollout": "evidence/adaptive-upgrade-2026-10-13.json",
+  "publication": {
+    "existingDefaultBranchesChanged": false,
+    "catalogRevision": "containing commit",
+    "sourceBranchesPublished": true,
+    "sources": {
+      "allura-framework": {
+        "revision": "3738f31e3019376a6c1d10d2ccdcfd94668bf7b5",
+        "branch": "codex/framework-builder",
+        "visibility": "private"
+      },
+      "Allura_Memory": {
+        "revision": "0e51cfad82d541081cfe707c94b364e90ace853d",
+        "branch": "codex/framework-foundation"
+      },
+      "allura-team-ram": {
+        "revision": "42dbd25f01539b5296ae636871ad032b61267c43",
+        "branch": "codex/adaptive-team-workflows",
+        "version": "0.5.1"
+      },
+      "team-durham": {
+        "revision": "a6fd21f3855be2ff9b701d79f0554ac57d09047f",
+        "branch": "codex/adaptive-team-workflows",
+        "version": "0.4.1"
+      },
+      "mortagate": {
+        "revision": "22342172beb6286207617bbfa5e67bd4ab913fb5",
+        "branch": "codex/adaptive-team-workflows",
+        "version": "0.2.1"
+      },
+      "bumblebee": {
+        "revision": "207496c24cec4f1199a02f236605b626db567a2e",
+        "branch": "codex/adaptive-team-workflows",
+        "version": "0.1.1"
+      },
+      "hermes-team-ram-durham": {
+        "revision": "5b9d7fcfebc83643856b53f130b313bb28f0c179",
+        "branch": "codex/adaptive-hermes-teams",
+        "version": "1.1.1"
+      }
+    }
+  },
+  "validation": {
+    "frameworkTests": 106,
+    "frameworkTypecheck": "passed",
+    "frameworkSchemaParity": "passed",
+    "memoryFoundationTests": 44,
+    "memoryTypecheck": "passed",
+    "memorySkillAndDocumentationChecks": "passed",
+    "ramTests": 113,
+    "ramTypecheck": "passed",
+    "ramLint": "passed with warnings",
+    "durhamRegressionTests": 5,
+    "catalogTests": 55,
+    "catalogManifests": "passed",
+    "catalogMetadata": "current",
+    "catalogPinnedSourceParity": "passed for all four generated packages",
+    "hermesActualSdkTests": 28,
+    "hermesSkippedTests": 0,
+    "independentScoutReview": "passed"
+  },
+  "installed": {
+    "codex": {
+      "enabled": {
+        "team-ram-coding": "0.5.1",
+        "team-durham": "0.4.1",
+        "allura-cowork": "0.3.1"
+      },
+      "sourceFileMismatches": 0,
+      "legacyMortgate": "remains disabled"
+    },
+    "claude": {
+      "enabled": {
+        "team-ram-coding": "0.5.1",
+        "team-durham": "0.4.1",
+        "allura-cowork": "0.3.1"
+      },
+      "sourceFileMismatches": 0,
+      "marketplace": "canonical local catalog",
+      "recoveredLegacy": {
+        "mortgate-cowork": "0.1.0",
+        "allura-governance": "0.1.3",
+        "team-durham-app-audit": "1.0.0"
+      },
+      "legacyRecovery": "backed-up working versions preserved in local recovery marketplace; not version upgrades",
+      "unrelatedSettings": "preserved"
+    },
+    "opencode": {
+      "runtime": "1.18.31",
+      "nativeSkillDiscoveryExit": 0,
+      "discoveredSkills": 271,
+      "canonicalCatalogSkills": 219,
+      "change": "removed only invalid executable plugin path; retained native skill and agent paths",
+      "modelOverrides": "preserved"
+    },
+    "hermes": {
+      "profiles": [
+        "default",
+        "gilliam"
+      ],
+      "version": "1.1.1",
+      "sourceFilesCheckedPerProfile": 600,
+      "sourceFileMismatches": 0,
+      "isolatedSdkLoader": "passed for both profiles",
+      "skillFiles": 241,
+      "commands": 26,
+      "registeredTool": "allura_team",
+      "defaultConfig": "unchanged",
+      "gilliamGuidanceToolset": "allura_teams",
+      "gilliamToolsetEnablement": [
+        "toolsets",
+        "platform_toolsets.cli"
+      ],
+      "gilliamAuthorization": "user explicitly approved CLI-only enablement",
+      "messagingPlatformSettings": "unchanged",
+      "gilliamBrainLocalPatch": "preserved; five file hashes unchanged",
+      "stickyActiveProfile": "unchanged"
+    }
+  },
+  "backups": {
+    "codex": "~/.codex/plugin-backups/allura-update-20261013T215443Z",
+    "claude": "~/.claude/backups/allura-plugin-upgrade-20261013T215416Z",
+    "opencode": "~/.config/opencode/backups/allura-plugin-update-20261013T215712Z",
+    "hermes": "~/.hermes/plugin-backups/allura-rollout-20261013T220354Z"
+  },
+  "limitations": [
+    "Installation and isolated registration verified; active-session exposure requires restart or a new session.",
+    "No live model performance claim or autonomous durable runtime claim.",
+    "Allura Brain tools unavailable; no memory search, writeback, or live connectivity receipt.",
+    "Existing OpenCode shared skill-name collisions remain; no unapproved renaming performed.",
+    "Native Claude validation has nonblocking ignored-field, skill-symlink and hook-path quoting warnings.",
+    "Mortagate Microsoft-native 0.2.1 source published; legacy Claude package preserved because it is a different runtime contract. Behavioral and tenant/toolkit gates remain pending.",
+    "Bumblebee source updated and published; not newly installed where absent.",
+    "Gilliam Allura Brain local credential-selection patch retained; default-profile provider configuration was not repaired or exercised.",
+    "Existing repository default branches were not merged or changed."
+  ]
+}

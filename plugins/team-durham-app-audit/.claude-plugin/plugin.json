@@ -1,0 +1,9 @@
+{
+  "name": "team-durham-app-audit",
+  "version": "1.0.1",
+  "description": "Read-only brand and UX audit against locked brand truth with scoped evidence.",
+  "author": {
+    "name": "Sabir"
+  },
+  "skills": "./skills/"
+}

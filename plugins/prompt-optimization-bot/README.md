@@ -1,0 +1,44 @@
+# Prompt Optimization Bot
+
+Preserve intent and turn rough requests into clear, effective prompts.
+
+The source skill is preserved byte-for-byte. /FORGE, /REFINE, /ANALYSE, /EXPLORE, /TEST, and /QUICK are prompt modes interpreted after the skill is loaded; no global slash-command handlers are installed.
+
+## Package Contract
+
+### Runtime manifests
+
+Version `0.33.2`. Hermes uses `plugin.yaml` and `__init__.py`; Claude uses
+`.claude-plugin/plugin.json` and discovers `skills/`. This package does not
+install a model, start agents, add browser access, or configure credentials.
+
+### Use
+
+This package is available from `main`. Clone the catalog first:
+
+```sh
+git clone --branch main --single-branch https://github.com/Allura-Ecosystem/allura-plugins.git allura-plugin-release
+cd allura-plugin-release
+claude --plugin-dir ./plugins/prompt-optimization-bot
+hermes plugins install "file://$(pwd)#plugins/prompt-optimization-bot" --enable
+```
+
+The native Hermes installer reads the committed local Git checkout. Select the
+intended Hermes profile before installing. To load explicitly,
+call `skill_view(name="prompt-optimization-bot:instructions")`, then give the task in ordinary chat.
+Claude can select the skill as `/prompt-optimization-bot:instructions` after loading the package.
+
+### Validation
+
+Run `python3 scripts/validate_manifests.py` and
+`python3 -m pytest tests/test_skill_packages.py` from the catalog root.
+Use `claude plugin validate ./plugins/prompt-optimization-bot` for native Claude validation.
+The registration tests also exercise native Hermes when its SDK is installed.
+
+### Dependencies and degraded behavior
+
+Instructions are bundled; live external services and runtime tools are not.
+Report missing tools or authentication and limit claims to observed evidence.
+Read `SOURCE_PROVENANCE.json` for the source version, content hashes, and changes.
+This source package is distinct from the owner's existing account plugin;
+publishing this repository does not update that account installation.

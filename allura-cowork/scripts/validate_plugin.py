@@ -11,6 +11,7 @@ REQUIRED = [
     ".claude-plugin/plugin.json",
     "README.md",
     "skills/allura-cowork/SKILL.md",
+    "skills/allura-menu/SKILL.md",
     "agents/cowork-orchestrator.md",
     "commands/cowork-start.md",
     "commands/cowork-handoff.md",
@@ -25,6 +26,7 @@ REQUIRED = [
     "docs/COMMAND-MENU.md",
     "docs/EVALS.md",
     "docs/DOGFOOD.md",
+    "docs/ADAPTIVE-WORK.md",
     "evals/cases.json",
     "examples/golden/claude-to-codex.json",
     "examples/golden/codex-to-claude.json",
@@ -54,6 +56,11 @@ def main() -> int:
     schema = load_json(root / "schemas/handoff.schema.json")
 
     errors = []
+    package = load_json(root / "package.json")
+    if len({package.get("version"), codex.get("version"), claude.get("version")}) != 1:
+        errors.append("package and runtime versions differ")
+    if "model: inherit" not in (root / "agents/cowork-orchestrator.md").read_text():
+        errors.append("orchestrator must inherit the configured model")
     for name, manifest in [("codex", codex), ("claude", claude)]:
         if manifest.get("name") != "allura-cowork":
             errors.append(f"{name} manifest name mismatch")
@@ -61,6 +68,12 @@ def main() -> int:
             errors.append(f"{name} manifest still contains TODO placeholder")
         if "skills" not in manifest:
             errors.append(f"{name} manifest missing skills")
+
+    expected_agents = sorted('./' + str(path.relative_to(root)) for path in (root / 'agents').glob('*.md'))
+    if claude.get('agents') != expected_agents:
+        errors.append('Claude agents must be an explicit array of every agent file path')
+    if 'agents' in codex or 'commands' in codex:
+        errors.append('Codex manifest must expose skills rather than unsupported agents/commands')
 
     if "hooks" not in hooks:
         errors.append("hooks.json missing hooks root")

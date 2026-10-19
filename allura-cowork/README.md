@@ -71,3 +71,9 @@ Python 3 enables the optional context hook; without it the plugin loads and the
 hook no-ops. Allura Brain is expected for memory-dependent workflows; when it
 is unavailable, those commands report the missing connection rather than
 claiming hydration or persistence.
+
+## Adaptive work (0.3.0)
+
+Use [Adaptive cowork](docs/ADAPTIVE-WORK.md) for risk-based routes, context reuse,
+model inheritance and selective review. Existing approval and evidence boundaries
+remain in force. Offline evaluations check instructions, not model performance.

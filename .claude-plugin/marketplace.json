@@ -10,29 +10,50 @@
     {
       "name": "allura-cowork",
       "source": "./allura-cowork",
-      "description": "Shared Claude Code and Codex cowork protocol for Allura-governed collaboration, runtime honesty, validation, and handoff",
-      "version": "0.2.0",
+      "description": "Shared Claude Code and Codex cowork protocol for Allura-governed collaboration, runtime honesty, validation, and handoffs.",
+      "version": "0.4.0",
       "category": "Coordination"
     },
     {
       "name": "team-durham",
       "source": "./team-durham",
       "description": "Team Durham brand production team for Claude Code and Codex: agents, skills, commands, governance, and persona research.",
-      "version": "0.3.0",
+      "version": "0.4.3",
       "category": "Design"
     },
     {
       "name": "team-ram-coding",
       "source": "./team-ram-coding",
-      "description": "Team RAM agent platform for Allura-governed development: Brooks-led architecture, Scout recon, Woz implementation, code review, memory, task management, multi-source research, and party-mode multi-agent dispatch.",
-      "version": "0.4.2",
+      "description": "Team RAM OpenCode Harness \u2014 self-evolving multi-agent orchestration with 10 specialists, SONA learning, coherence monitoring, and HITL governance. Portable harness for deterministic AI-powered software development.",
+      "version": "0.6.2",
       "category": "Coding"
     },
     {
-      "name": "mortgate-cowork",
-      "source": "./packages/mortagate-cowork",
-      "description": "Mortgate evidence-review skills: mortgage case onboarding, loan-file evidence review, policy-replay review, and audit-packet drafting with fixed safety boundaries. Never approves/denies credit or updates loan systems.",
-      "version": "0.1.0",
+      "name": "bumblebee",
+      "source": "./bumblebee",
+      "category": "Security",
+      "version": "0.1.1",
+      "description": "Supply-chain threat intelligence plugin: pinned Bumblebee scanner wrapped as a governed, policy-gated Allura agent tool for read-only package inventory and vulnerability exposure."
+    },
+    {
+      "name": "prompt-optimization-bot",
+      "source": "./plugins/prompt-optimization-bot",
+      "version": "0.33.2",
+      "description": "Preserve intent and turn rough requests into clear, effective prompts.",
+      "category": "Productivity"
+    },
+    {
+      "name": "corplawyer-bot",
+      "source": "./plugins/corplawyer-bot",
+      "version": "0.9.0",
+      "description": "Business legal intake, evidence-led contract review, official-source research and counsel briefs with scoped Allura continuity.",
+      "category": "Productivity"
+    },
+    {
+      "name": "team-durham-app-audit",
+      "source": "./plugins/team-durham-app-audit",
+      "version": "1.0.1",
+      "description": "Read-only brand and UX audit against locked brand truth with scoped evidence.",
       "category": "Productivity"
     }
   ]

@@ -1,6 +1,6 @@
 {
   "name": "allura-cowork",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "description": "Shared Claude Code and Codex cowork protocol for Allura-governed collaboration, runtime honesty, validation, and handoffs.",
   "author": {
     "name": "Ronin / Team RAM"
@@ -15,13 +15,6 @@
     "handoff"
   ],
   "skills": "./skills/",
-  "commands": [
-    "./commands/cowork-start.md",
-    "./commands/cowork-handoff.md",
-    "./commands/cowork-validate.md",
-    "./commands/cowork-close.md"
-  ],
-  "hooks": "./hooks/hooks.json",
   "interface": {
     "displayName": "Allura Cowork",
     "shortDescription": "Coordinate Claude and Codex with governed handoffs.",

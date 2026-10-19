@@ -14,6 +14,7 @@ PLUGINS=(
   "team-ram-coding|$REPO_ROOT/team-ram-coding/.opencode/command|$REPO_ROOT/team-ram-coding/.claude-plugin/plugin.json|$REPO_ROOT/team-ram-coding/.codex-plugin/plugin.json"
   "team-durham|$REPO_ROOT/team-durham/commands|$REPO_ROOT/team-durham/.claude-plugin/plugin.json|$REPO_ROOT/team-durham/.codex-plugin/plugin.json"
   "allura-cowork|$REPO_ROOT/allura-cowork/commands|$REPO_ROOT/allura-cowork/.claude-plugin/plugin.json|$REPO_ROOT/allura-cowork/.codex-plugin/plugin.json"
+  "bumblebee|$REPO_ROOT/bumblebee/commands|$REPO_ROOT/bumblebee/.claude-plugin/plugin.json|$REPO_ROOT/bumblebee/.codex-plugin/plugin.json"
 )
 
 echo "PLUGIN COMMAND AUDIT"
@@ -79,12 +80,13 @@ for entry in "${PLUGINS[@]}"; do
 import json
 d = json.load(open('$mf'))
 cmds = d.get('commands', 'NOT_SET')
-if isinstance(cmds, list): print(f'array ({len(cmds)})')
+if cmds == 'NOT_SET': print('NOT_SET')
+elif isinstance(cmds, list): print(f'array ({len(cmds)})')
 elif isinstance(cmds, str): print(f'glob: \"{cmds}\"')
 else: print('NOT_SET')
 " 2>/dev/null)
     if [[ "$fmt" == "NOT_SET" ]]; then
-      echo "  ⚠️  $name ($label): commands not set"
+      echo "  INFO: $name ($label): no command manifest; use runtime skills"
     elif [[ "$fmt" == glob* ]]; then
       echo "  ⚠️  $name ($label): $fmt — should be explicit array"
       ANY_FAIL=1

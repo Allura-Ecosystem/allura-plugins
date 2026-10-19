@@ -18,9 +18,11 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-PLUGINS = ["allura-cowork", "team-durham", "team-ram-coding"]
+PLUGINS = ["allura-cowork", "team-durham", "team-ram-coding", "bumblebee"]
+DUAL_PLUGINS = ["plugins/prompt-optimization-bot", "plugins/corplawyer-bot", "plugins/team-durham-app-audit"]
 MANIFEST_VARIANTS = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json"]
 MARKETPLACE = ".claude-plugin/marketplace.json"
+CODEX_MARKETPLACE = ".agents/plugins/marketplace.json"
 HERMES_PLUGIN_MANIFEST = "plugins/hermes-allura-brain/plugin.yaml"
 SOURCE_LOCKS = "source-locks.json"
 
@@ -30,6 +32,7 @@ PACKAGE_CONTRACTS = {
     "allura-cowork": {"kind": "portable", "readme": "README.md"},
     "team-durham": {"kind": "generated-portable", "readme": "README.md"},
     "team-ram-coding": {"kind": "generated-portable", "readme": "README.md"},
+    "bumblebee": {"kind": "generated-portable", "readme": "README.md"},
     "packages/mortagate-cowork": {"kind": "generated-runtime-neutral", "readme": "README.md"},
     "plugins/hermes-allura-brain": {"kind": "provider", "readme": "README.md"},
     "allura": {"kind": "internal-support", "readme": "README.md"},
@@ -107,11 +110,57 @@ def check_marketplace(errors: list, warnings: list) -> None:
             warnings.append(f"MARKETPLACE: {name} missing category")
 
 
+def check_codex_marketplace(errors: list, warnings: list) -> None:
+    """Ensure every portable package is discoverable by Codex, not only Claude."""
+    mp_path = REPO_ROOT / CODEX_MARKETPLACE
+    mp = parse_json(mp_path, errors)
+    if mp is None:
+        return
+
+    entries = mp.get("plugins")
+    if not isinstance(entries, list):
+        hard_fail("CODEX MARKETPLACE", "top-level 'plugins' is not a list", errors)
+        return
+
+    names = [entry.get("name") for entry in entries if isinstance(entry, dict)]
+    if names != PLUGINS:
+        hard_fail(
+            "CODEX MARKETPLACE",
+            f"plugin inventory must be {PLUGINS}, got {names}",
+            errors,
+        )
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            hard_fail("CODEX MARKETPLACE", f"non-object plugin entry: {entry!r}", errors)
+            continue
+        name = entry.get("name", "<missing>")
+        source = entry.get("source")
+        if not isinstance(source, dict) or source.get("source") != "local":
+            hard_fail("CODEX MARKETPLACE", f"{name} must declare a local source object", errors)
+            continue
+        path = source.get("path")
+        if not isinstance(path, str) or path.startswith(("/", "..")):
+            hard_fail("CODEX MARKETPLACE", f"{name} has invalid source path {path!r}", errors)
+            continue
+        if not (REPO_ROOT / path).is_dir():
+            hard_fail("CODEX MARKETPLACE", f"{name} source path {path!r} is missing", errors)
+            continue
+        manifest = parse_json(REPO_ROOT / path / ".codex-plugin/plugin.json", errors)
+        if manifest is None or manifest.get("name") != name:
+            hard_fail("CODEX MARKETPLACE", f"{name} manifest name must match marketplace alias", errors)
+            continue
+        print(f"  CODEX MARKETPLACE OK: {name} -> {path}")
+        if not entry.get("category"):
+            warnings.append(f"CODEX MARKETPLACE: {name} missing category")
+
+
 def check_manifests(errors: list, warnings: list) -> None:
     """Validate each target plugin's Claude and Codex manifests."""
-    for plugin in PLUGINS:
+    for plugin in PLUGINS + DUAL_PLUGINS:
         plugin_dir = REPO_ROOT / plugin
-        for variant in MANIFEST_VARIANTS:
+        variants = [".claude-plugin/plugin.json"] if plugin in DUAL_PLUGINS else MANIFEST_VARIANTS
+        for variant in variants:
             manifest_path = plugin_dir / variant
             runtime = variant.split("/")[0].lstrip(".")
             data = parse_json(manifest_path, errors)
@@ -119,6 +168,8 @@ def check_manifests(errors: list, warnings: list) -> None:
                 continue
 
             print(f"  MANIFEST PARSE OK: {plugin} ({runtime})")
+            if runtime == "codex-plugin":
+                check_codex_contract(data, str(manifest_path), errors)
 
             # Required fields sanity check
             for field in ("name", "version", "description"):
@@ -127,9 +178,11 @@ def check_manifests(errors: list, warnings: list) -> None:
 
             # Paths declared in the manifest must resolve relative to the plugin root.
             refs = []
-            for field in ("skills", "agents", "commands", "hooks"):
+            for field in ("skills", "agents", "commands", "hooks", "mcpServers"):
                 value = data.get(field)
                 if value is None:
+                    continue
+                if field == "mcpServers" and isinstance(value, dict):
                     continue
                 if isinstance(value, str):
                     refs.append((field, value))
@@ -168,6 +221,18 @@ def check_manifests(errors: list, warnings: list) -> None:
                                     hard_fail("HOOK", f"{resolved} event {event} uses absolute command path: {cmd}", errors)
 
 
+def check_codex_contract(data: dict, label: str, errors: list) -> None:
+    """Catch incompatible Claude fields before distributing a Codex manifest."""
+    for field in ("agents", "commands", "mcp", "hooks"):
+        if field in data:
+            hard_fail("CODEX", f"{label}: unsupported field {field}", errors)
+    if data.get("skills") not in ("skills", "./skills", "./skills/"):
+        hard_fail("CODEX", f"{label}: skills must use the plugin-root skills directory", errors)
+    interface = data.get("interface", {})
+    if not interface.get("defaultPrompt") and not interface.get("default_prompt"):
+        hard_fail("CODEX", f"{label}: defaultPrompt is required", errors)
+
+
 def check_hermes_manifest(errors: list) -> None:
     """Validate the Hermes-native connector manifest without pretending it is a Claude package."""
     manifest_path = REPO_ROOT / HERMES_PLUGIN_MANIFEST
@@ -196,6 +261,36 @@ def check_hermes_manifest(errors: list) -> None:
 
     if not errors:
         print(f"  HERMES MANIFEST OK: {fields['name']} v{fields['version']}")
+
+
+def check_dual_skill_packages(errors: list) -> None:
+    """Skill adapters have native Hermes and Claude identities, not Codex exports."""
+    import hashlib
+    marketplace = parse_json(REPO_ROOT / MARKETPLACE, errors) or {}
+    entries = {entry.get("source", "").removeprefix("./"): entry for entry in marketplace.get("plugins", [])}
+    for package in DUAL_PLUGINS:
+        root = REPO_ROOT / package
+        claude = parse_json(root / ".claude-plugin/plugin.json", errors) or {}
+        fields = {}
+        path = root / "plugin.yaml"
+        if path.is_file():
+            for line in path.read_text().splitlines():
+                if ":" in line:
+                    key, value = line.split(":", 1)
+                    fields[key.strip()] = value.strip().strip('"')
+        for key in ("name", "version", "description"):
+            if not claude.get(key) or fields.get(key) != claude.get(key) or entries.get(package, {}).get(key) != claude.get(key):
+                hard_fail("DUAL", f"{package} {key} differs across Hermes/Claude/marketplace", errors)
+        for filename in ("__init__.py", "README.md"):
+            if not (root / filename).is_file():
+                hard_fail("DUAL", f"{package} missing {filename}", errors)
+        receipt = parse_json(root / "SOURCE_PROVENANCE.json", errors) or {}
+        skill = root / receipt.get("packagedFile", "missing")
+        if not skill.is_file() or hashlib.sha256(skill.read_bytes()).hexdigest() != receipt.get("packagedSha256"):
+            hard_fail("DUAL", f"{package} skill provenance hash mismatch", errors)
+        if receipt.get("sourcePreserved") and receipt.get("sourceSha256") != receipt.get("packagedSha256"):
+            hard_fail("DUAL", f"{package} source preservation claim differs", errors)
+        print(f"  DUAL SKILL PACKAGE: {package}")
 
 
 def _readme_has_contract(path: Path, required_markers: tuple[str, ...], errors: list) -> bool:
@@ -283,7 +378,7 @@ def check_package_contracts(errors: list, warnings: list) -> None:
             if not readme.is_file():
                 hard_fail("CONTRACT", f"generated package README missing: {readme.relative_to(REPO_ROOT)}", errors)
                 continue
-            receipt_name = "EXPORT_PROVENANCE.json" if package == "team-ram-coding" else "EXPORT.json"
+            receipt_name = "EXPORT.json" if package == "team-durham" else "EXPORT_PROVENANCE.json"
             receipt = parse_json(package_dir / receipt_name, errors) or {}
             revision = receipt.get("sourceCommit") or receipt.get("sourceRevision")
             repository = receipt.get("sourceRepository", "")
@@ -307,8 +402,11 @@ def check_package_contracts(errors: list, warnings: list) -> None:
             if marketplace_versions.get(marketplace_alias) != lock.get("runtimeVersion"):
                 hard_fail("CONTRACT", f"{package} marketplace alias/runtime version mismatch", errors)
                 continue
-            if claude.get("name") != lock.get("sourceManifestName") or codex.get("name") != lock.get("sourceManifestName"):
+            if claude.get("name") != lock.get("sourceManifestName") or codex.get("name") != lock.get("codexManifestName", lock.get("sourceManifestName")):
                 hard_fail("CONTRACT", f"{package} generated source manifest identity was changed", errors)
+                continue
+            if codex.get("name") != marketplace_alias:
+                hard_fail("CONTRACT", f"{package} Codex manifest name must match marketplace alias", errors)
                 continue
             if {claude.get("version"), codex.get("version")} != {lock.get("runtimeVersion")}:
                 hard_fail("CONTRACT", f"{package} Claude/Codex runtime version mismatch", errors)
@@ -329,10 +427,10 @@ def check_package_contracts(errors: list, warnings: list) -> None:
             if receipt.get("sourceCommit") != lock.get("commit") or receipt.get("sourceRepository", "").removesuffix(".git") != str(lock.get("repository", "")).removesuffix(".git"):
                 hard_fail("CONTRACT", f"{package} provenance does not match source-locks.json", errors)
                 continue
-            if receipt.get("contractPath") != lock.get("manifest") or len(receipt.get("files", [])) != 19:
-                hard_fail("CONTRACT", f"{package} contract path or 19-file allowlist receipt is invalid", errors)
+            if receipt.get("contractPath") != lock.get("manifest") or len(receipt.get("files", [])) != lock.get("exportFileCount", 19):
+                hard_fail("CONTRACT", f"{package} contract path or pinned allowlist receipt is invalid", errors)
                 continue
-            if package in marketplace_versions:
+            if set([lock.get("id"), *lock.get("aliases", [])]) & marketplace_versions.keys():
                 hard_fail("CONTRACT", f"{package} must not be listed in the Claude marketplace", errors)
                 continue
             print(f"  CONTRACT OK: {package} (generated {receipt.get('runtime', 'runtime-neutral')})")
@@ -361,7 +459,7 @@ def check_hardcoded_paths(errors: list, warnings: list) -> None:
         ".css", ".scss", ".html", ".txt", ".toml", ".jsonc",
     }
 
-    for plugin in PLUGINS:
+    for plugin in PLUGINS + DUAL_PLUGINS:
         plugin_dir = REPO_ROOT / plugin
         for root, dirs, files in os.walk(plugin_dir):
             # Skip dependency/build artifacts
@@ -392,6 +490,7 @@ def main() -> int:
 
     print("[1] Marketplace source resolution")
     check_marketplace(errors, warnings)
+    check_codex_marketplace(errors, warnings)
 
     print("\n[2] Manifest parsing + referenced path resolution")
     check_manifests(errors, warnings)
@@ -401,6 +500,7 @@ def main() -> int:
 
     print("\n[4] Hermes native manifest")
     check_hermes_manifest(errors)
+    check_dual_skill_packages(errors)
 
     print("\n[5] Package contracts")
     check_package_contracts(errors, warnings)

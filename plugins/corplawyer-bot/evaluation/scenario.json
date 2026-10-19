@@ -1,0 +1,6 @@
+{
+  "request": "I represent Customer, Cedar Lantern LLC. Review the supplied FSA-EXAMPLE v3 for the biggest business risks before we negotiate, suggest revisions, and produce a short brief I can take to counsel. I only have this copy. Do not send anything or save the full agreement. Current web research and Allura memory are unavailable for this exercise.",
+  "document": "fictional-services-agreement.md",
+  "capabilities": {"current_web": false, "allura_memory": false, "external_sends": false},
+  "artifact": "A review and counsel brief derived only from the supplied fictional text."
+}

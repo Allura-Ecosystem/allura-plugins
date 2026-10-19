@@ -10,6 +10,10 @@ the same runtime.
 
 ## Core Contract
 
+Apply [Adaptive cowork](../../docs/ADAPTIVE-WORK.md): choose quick, standard, or
+sensitive work by risk; reuse fresh scoped context; inherit the configured model;
+keep one accountable owner and add independent review where the risk warrants it.
+
 ```text
 Intent -> Project context -> Allura Brain -> Route -> Work -> Validate -> Receipt -> Handoff or close
 ```
@@ -18,9 +22,20 @@ Allura Brain is the shared memory layer. Claude and Codex are execution
 surfaces. Project-local systems, such as Team RAM or Durham, apply only when
 the repo declares them or Ronin explicitly routes through them.
 
-## Required Cowork Header
+## Chat interaction
 
-Before planning or handoff, state:
+On activation or an explicit menu/help/MH request, load `../allura-menu/SKILL.md`.
+Use Next steps, Help with a prompt, Council, Work, Loop, Validate and More.
+Clear requests proceed directly. Keep RAM and Durham as domain routes under
+Allura; Council requires actual available specialists and preserves disagreement.
+Prompt help and bounded loops run in conversation without an extra plugin.
+
+## Cowork completeness check
+
+Check these items internally before planning or handoff. Ordinary chat uses
+concise natural prose with the active role, result and useful next action.
+Emit the full header only for an explicit machine handoff or integration request.
+Preserve any receipt explicitly required by the active project's AGENTS guidance.
 
 ```text
 Cowork active.
@@ -46,8 +61,8 @@ Handoff target: <Claude|Codex|none>
 - Search before planning when prior work, people, dates, decisions, preferences,
   todos, or Allura governance are involved.
 - Default scope: `group_id=allura-system`.
-- Use the active actor as `user_id`, for example `troy-curator`, `team-ram`,
-  or `codex-cowork`.
+- Omit `user_id` so authenticated transport supplies the principal. Add persona
+  attribution only where the verified schema accepts it; otherwise omit it.
 - Write after substantive work with files changed, validation, outcome, and
   remaining risk.
 - Raw episodic memory is evidence. It is not canonical promotion.
@@ -65,6 +80,9 @@ Explicit approval is required before:
 - Notion sync
 - Done/Approved status moves
 - public or external sends
+
+Existing explicit authorization satisfies the relevant boundary within its scope.
+Prepare and validate reversible local work before requesting any missing authority.
 
 ## Handoff Packet
 
@@ -97,6 +115,10 @@ If validation fails, treat the cowork state as `BLOCKED` until the packet is
 fixed or the missing evidence is explicitly acknowledged.
 
 ## Routing Defaults
+
+These are domain suggestions, not mandatory vendor handoffs. Keep the current
+runtime when its tools and evaluated capabilities meet the task. Apply the
+adaptive contract before adding a second runtime or reviewer.
 
 - Codex: repository edits, validation loops, code review, practical
   implementation, commits.

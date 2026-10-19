@@ -1,6 +1,6 @@
 # Mortgate Evidence Review for Copilot Cowork
 
-A native Microsoft Copilot Cowork skills package for internal, human-supervised mortgage evidence review.
+A native Microsoft Copilot Cowork skills package for internal, human-supervised mortgage evidence review. **Mortgate is a capability you install into an AI workspace you already use — not another mortgage SaaS platform.**
 
 It helps an authorized employee:
 
@@ -28,6 +28,52 @@ Human-review draft and cited findings
 Authorized employee uses the approved system of record
 ```
 
+### The moat is the workflow
+
+A generic AI session can read PDFs. Mortgate tells the host **what to look for, in what order, how to compare it, what it must not do, what evidence it must retain, and what artifact to hand back to the reviewer**:
+
+```text
+Case onboarding
+→ Document inventory
+→ Evidence comparison
+→ Gap detection
+→ Conflict detection
+→ Policy replay
+→ Citations
+→ Audit packet
+→ Human decision
+```
+
+### One capability, multiple AI workspaces
+
+```text
+                 MORTGATE
+       Mortgage Review Methodology
+                    │
+          ┌─────────┼─────────┐
+          ↓         ↓         ↓
+       Cowork    ChatGPT    Codex
+          │         │         │
+          └─────────┼─────────┘
+                    ↓
+          Supplied Mortgage File
+                    ↓
+        Structured Evidence Review
+                    ↓
+            Cited Audit Packet
+                    ↓
+              HUMAN REVIEW
+```
+
+> [!NOTE]
+> **Copilot Cowork is the current canonical product surface** (ADR-36). The ChatGPT/Codex surfaces above are the architecture and product-strategy direction — they are not shipped until the corresponding packaging actually lands in this repository.
+
+### The pitch
+
+> Don't buy another mortgage AI platform. Upgrade the AI workspace you already have.
+
+Ocrolus, LoanLogics, and similar vendors sell systems. Mortgate sells **capability**: **no new SaaS · no new workflow · no automated credit decision**.
+
 ## Current release: skills only
 
 `appPackage/` is a Microsoft 365 app package source. The four skills are standard Agent Skills and require no live API, credential, connector, or data store.
@@ -38,6 +84,15 @@ Authorized employee uses the approved system of record
 | `loan-file-evidence-review` | Summarize supplied evidence and identify gaps |
 | `policy-replay-review` | Compare supplied expected and actual replay results |
 | `audit-packet-draft` | Prepare a human-review handoff packet |
+
+## Workflow update — 0.2.1
+
+The four skills now carry forward cited evidence for the same case and source
+versions, refresh findings when inputs change, and proceed directly when scope
+and materials are already supplied. One capable host model can carry out the
+requested review without repeating intake or launching a specialist for each
+skill. Human review, refusal boundaries, and the skills-only package remain
+unchanged. See [change management](docs/CHANGE-MANAGEMENT.md) for validation limits.
 
 ## Local validation and packaging
 
