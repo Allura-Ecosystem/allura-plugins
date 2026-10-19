@@ -45,17 +45,17 @@ The Claude and Codex marketplaces share four versioned portable packages. Claude
 
 | Plugin | Release metadata | Agent definitions | Command definitions | Skill definitions | Purpose |
 |---|:---:|---:|---:|---:|---|
-| [Allura Cowork](allura-cowork/README.md) | 0.3.1 | 1 | 4 | 1 | Coordinate Claude and Codex with hydration, honest attribution, evidence, handoff, and closeout |
-| [Team Durham](team-durham/README.md) | 0.4.2-persona.20261018 | 7 | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
-| [Team RAM Coding](team-ram-coding/README.md) | 0.6.1-persona.20261018 | 10 | — | 10 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
+| [Allura Cowork](allura-cowork/README.md) | 0.4.0 | 1 | 4 | 2 | Shared conversation menu, scoped coordination, validation, handoff, and closeout |
+| [Team Durham](team-durham/README.md) | 0.4.3 | 7 | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
+| [Team RAM Coding](team-ram-coding/README.md) | 0.6.2 | 10 | — | 10 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
 | [Bumblebee](bumblebee/README.md) | 0.1.1 | — | 1 | 1 | Pinned read-only supply-chain evidence review; no scanner installation implied |
 | [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | 0.3.0 | — | 1 | — | Hermes-native governed recall and outcome persistence provider |
 | [Prompt Optimization Bot](plugins/prompt-optimization-bot/README.md) | 0.33.2 | — | — | 1 | Owner-supplied prompt refinement instructions for Hermes and Claude |
-| [CorpLawyer Bot](plugins/corplawyer-bot/README.md) | 0.8.1 | — | — | 1 | Owner-supplied corporate-law tool planning instructions for Hermes and Claude |
+| [CorpLawyer Bot](plugins/corplawyer-bot/README.md) | 0.9.0 | — | — | 6 | Business legal intake, sourced contract review, counsel briefs, and scoped Allura continuity |
 | [Team Durham App Audit](plugins/team-durham-app-audit/README.md) | 1.0.1 | — | — | 1 | Read-only STP-gated brand and UX audit for Hermes and Claude |
 | [Mortagate Cowork](packages/mortagate-cowork/README.md) | 0.2.1 | — | — | 4 | Pinned 23-file Microsoft Cowork package export; not a Claude/Codex marketplace plugin |
 
-Team Durham is pinned at `0.4.2-persona.20261018`; Team RAM package and runtime versions are aligned at `0.6.1-persona.20261018`. Codex requires the `team-ram-coding` manifest name to match the catalog alias; the standalone Claude manifest retains `team-ram-harness`. Source locks record both identities. CI validates pinned source identities and native Codex manifest compatibility. Team RAM exposes ten public skills rather than its retired internal command tree; Durham retains its command definitions. Codex discovers workflows through skills.
+Team Durham is pinned at `0.4.3`; Team RAM package and runtime versions are aligned at `0.6.2`. Codex requires the `team-ram-coding` manifest name to match the catalog alias; the standalone Claude manifest retains `team-ram-harness`. Source locks record both identities. CI validates pinned source identities and native Codex manifest compatibility. Team RAM exposes ten public skills rather than its retired internal command tree; Durham retains its command definitions. Codex discovers workflows through skills.
 
 Team Durham exports seven canonical roles. Source counts do not establish installation or execution.
 
@@ -63,7 +63,7 @@ Mortagate Cowork targets Microsoft Cowork's app-package and Agent Skills contrac
 
 Hermes Allura Brain is a Hermes-native provider declared by `plugins/hermes-allura-brain/plugin.yaml`; it is intentionally not listed in the Claude marketplace because it does not implement the Claude/Codex package-manifest contract.
 
-[Team RAM + Team Durham for Hermes](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) is a separate native plugin, linked here rather than generated into this catalog or registered in its Claude/Codex marketplaces. Its `1.2.0` upgrade is published on [`codex/adaptive-hermes-teams`](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/tree/codex/adaptive-hermes-teams); the default branch is unchanged. The source update is tracked in [PR #1](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/pull/1). See [Hermes team usage](#hermes-team-ram--team-durham) below.
+[Team RAM + Team Durham for Hermes](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) is a separate native plugin, linked here rather than generated into this catalog or registered in its Claude/Codex marketplaces. Its `1.3.0` upgrade is published on [`codex/adaptive-hermes-teams`](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/tree/codex/adaptive-hermes-teams); the default branch is unchanged. The source update is tracked in [PR #1](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/pull/1). See [Hermes team usage](#hermes-team-ram--team-durham) below.
 
 The `allura/` directory is a local Codex README asset and guidance pack. It is not listed as a public Claude marketplace package and remains internal support material. Its manifest placeholders have been resolved; this upgrade does not publish it.
 
@@ -184,7 +184,7 @@ The root [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) 
 The external [native team plugin](https://github.com/Allura-Ecosystem/hermes-team-ram-durham)
 uses the Hermes identity `team-ram-durham`. Its published upgrade branch is
 `codex/adaptive-hermes-teams`; a default-branch install is not an upgrade-branch install.
-Version `1.2.0` exports ten RAM roles and seven Durham roles. The following describes the native conversation-routing implementation:
+Version `1.3.0` exports ten RAM roles, seven Durham roles, and the shared Cowork conversation menu. The following describes the native conversation-routing implementation:
 
 ```text
 /ram activate

@@ -2,13 +2,13 @@
   "files": [
     {
       "path": ".claude-plugin/plugin.json",
-      "sha256": "7b435dc1bd14ead052105ad6bcec4e2e5371d72ce6adb959e375f46deec4e8b0",
-      "size": 2321
+      "sha256": "8b7349b50ee06af347dd8cfc09baf14018bd690c978e88c77f8cd69f1ec9c8c9",
+      "size": 2304
     },
     {
       "path": ".codex-plugin/plugin.json",
-      "sha256": "fa5931d72099c339b71ff03748410db95fa06fdd9e7a08eb691407c0fa990b6c",
-      "size": 1190
+      "sha256": "caa724c2d0e229129fc68705836eff15fbee95e022fc94757fa848716424a712",
+      "size": 1173
     },
     {
       "path": "ARCHITECTURE.md",
@@ -42,7 +42,7 @@
     },
     {
       "path": "SOURCE.json",
-      "sha256": "5991a6059c78741544790589c9d393b627df17b74820a9db954d7d8ceecdd018",
+      "sha256": "810cb74c4de16b9414c30075742f0d6a8d1ab0209944e1bdb27ad5b699ce2c33",
       "size": 749
     },
     {
@@ -212,8 +212,8 @@
     },
     {
       "path": "commands/quick-commands.md",
-      "sha256": "b1abd72c5d688d8a5499a47b6a90b18e5c92e8740590efc755faa37455a8b747",
-      "size": 2225
+      "sha256": "fd026702f10cb2b338b6c60f48831356fb26eeca8003ef96abbdfdaa64fbc3ba",
+      "size": 5480
     },
     {
       "path": "commands/ralph.md",
@@ -487,8 +487,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "1045f89af3a8572d0840386c88881ac6b2877ad0b5b98ba21c0f3827ace228d2",
-      "size": 1202
+      "sha256": "4a64632d85ac881a91d93e5c097f2b6da48b4bb027fe2255759af7a94110a9a7",
+      "size": 1185
     },
     {
       "path": "rules/agent-routing.md",
@@ -1487,8 +1487,8 @@
     },
     {
       "path": "skills/source-command-quick-commands/SKILL.md",
-      "sha256": "0daad1de5dbd3a5ab735d1bf020fc6c0b4d9f3b7a1fc1a85459828abf8f5d837",
-      "size": 1788
+      "sha256": "0be5cf4aed2a4852919bf8786dddd5906da5facd65d1b800bf25b086f83285dc",
+      "size": 5550
     },
     {
       "path": "skills/source-command-start-session/SKILL.md",
@@ -1527,8 +1527,8 @@
     },
     {
       "path": "skills/team-durham/SKILL.md",
-      "sha256": "0554951fc1a3bfe3904bf3f508859f3ef0fd8ec43d4f2dd2a14a777705a3aae5",
-      "size": 5436
+      "sha256": "22b7fd8f8aa73a9cdb68275adfa426c61444c7d2176f437e413bd202bb4c32b5",
+      "size": 5934
     },
     {
       "path": "skills/team-durham-agent-router/SKILL.md",
@@ -1555,5 +1555,5 @@
   "schemaVersion": 1,
   "sourceDirty": false,
   "sourceRepository": "https://github.com/Allura-Ecosystem/team-durham",
-  "sourceRevision": "c15b9fa15428cae50a2e06715a327296c19a3633"
+  "sourceRevision": "d3b86da46c1a65eebcb797b0d6fef51a0723407c"
 }
