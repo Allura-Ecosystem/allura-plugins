@@ -11,21 +11,21 @@
       "name": "allura-cowork",
       "source": "./allura-cowork",
       "description": "Shared Claude Code and Codex cowork protocol for Allura-governed collaboration, runtime honesty, validation, and handoffs.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "category": "Coordination"
     },
     {
       "name": "team-durham",
       "source": "./team-durham",
       "description": "Team Durham brand production team for Claude Code and Codex: agents, skills, commands, governance, and persona research.",
-      "version": "0.4.3",
+      "version": "0.4.4",
       "category": "Design"
     },
     {
       "name": "team-ram-coding",
       "source": "./team-ram-coding",
       "description": "Team RAM OpenCode Harness \u2014 self-evolving multi-agent orchestration with 10 specialists, SONA learning, coherence monitoring, and HITL governance. Portable harness for deterministic AI-powered software development.",
-      "version": "0.6.2",
+      "version": "0.6.3",
       "category": "Coding"
     },
     {

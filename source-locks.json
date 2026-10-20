@@ -15,7 +15,7 @@
         "team-ram-harness"
       ],
       "repository": "https://github.com/Allura-Ecosystem/allura-team-ram.git",
-      "commit": "2f929bfe6ab6a6b469735e92c23db0e23af92515",
+      "commit": "b0340dfa040e852df4e056a944ad673c5db65270",
       "manifest": "PUBLIC_EXPORT.json",
       "exporter": "scripts/export-public.mjs",
       "destination": "team-ram-coding",
@@ -24,8 +24,8 @@
       "marketplaceAlias": "team-ram-coding",
       "sourceManifestName": "team-ram-harness",
       "sourcePackageName": "@allura/team-ram-harness",
-      "packageVersion": "0.6.2",
-      "runtimeVersion": "0.6.2",
+      "packageVersion": "0.6.3",
+      "runtimeVersion": "0.6.3",
       "codexManifestName": "team-ram-coding"
     },
     {
@@ -34,7 +34,7 @@
         "durham"
       ],
       "repository": "https://github.com/Allura-Ecosystem/team-durham.git",
-      "commit": "daca3b3ed4ace1937ab5e6947f19b68f2d0389d9",
+      "commit": "f36b6553bcdc3187f40a1c379c7bdaacacf31634",
       "manifest": "export-manifest.json",
       "exporter": "scripts/export_catalog.py",
       "destination": "team-durham",
@@ -43,8 +43,8 @@
       "marketplaceAlias": "team-durham",
       "sourceManifestName": "team-durham",
       "sourcePackageName": "team-durham",
-      "packageVersion": "0.4.3",
-      "runtimeVersion": "0.4.3"
+      "packageVersion": "0.4.4",
+      "runtimeVersion": "0.4.4"
     },
     {
       "id": "mortagate-cowork",

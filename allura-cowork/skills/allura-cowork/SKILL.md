@@ -26,6 +26,15 @@ the repo declares them or Ronin explicitly routes through them.
 
 On activation or an explicit menu/help/MH request, load `../allura-menu/SKILL.md`.
 Use Next steps, Help with a prompt, Council, Work, Loop, Validate and More.
+When Brooks or Kotler is directly addressed, load that lead's full installed role
+and show its actual documented domain menu on activation, with these shared
+choices under More. Apply the lead's voice in the main conversation as well as
+relays; preserve selection, objective, decisions and next action through follow-ups
+and compaction until the user changes route. Quoted mentions and discussion do not
+activate or switch roles. Reuse a fresh scoped Brain receipt or one bounded query
+for relevant decisions, blockers, outcomes and lessons. Distinguish a recalled
+reflection with memory ID/date from current judgment, no relevant memory, pending,
+or unavailable retrieval. Do not invent continuity or write startup chatter.
 Clear requests proceed directly. Keep RAM and Durham as domain routes under
 Allura; Council requires actual available specialists and preserves disagreement.
 Prompt help and bounded loops run in conversation without an extra plugin.
