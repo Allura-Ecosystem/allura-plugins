@@ -157,20 +157,16 @@ For example: “Use Team Durham to review this README. Make the first step clear
 
 ## How the plugins fit together
 
-```mermaid
-flowchart TB
-    task["Your task in Claude, Codex, or Hermes"] --> workflow["Installed workflow and available tools"]
-    workflow --> cowork["Cowork: coordination and handoff"]
-    workflow --> durham["Durham: brand and communication"]
-    workflow --> ram["RAM: software delivery"]
-    workflow -. "Optional authenticated connection" .-> brain["Allura Brain: scoped memory"]
-    classDef base fill:#F7F3EE,color:#0F1720,stroke:#0F1720;
-    classDef memory fill:#F7F3EE,color:#0F1720,stroke:#0D47A1;
-    class task,workflow,cowork,durham,ram base;
-    class brain memory;
-```
+| Part | Responsibility | Connection |
+|---|---|---|
+| Your runtime | Supplies the configured model, tools, and permissions | Runs the installed workflow |
+| Allura Cowork | Coordinates work and handoffs | Routes the task to relevant workflows |
+| Team Durham | Handles brand strategy, copy, and visual production | Uses the active task's context and available tools |
+| Team RAM | Handles software planning, implementation, and review | Uses the active task's context and available tools |
+| Allura Brain | Provides scoped memory | Optional authenticated connection |
 
-Read from top to bottom: the task uses workflows and tools available in the current runtime. Cowork and the two teams have distinct responsibilities; an authorized Brain connection adds memory. This map describes relationships, not a record of agents or runtimes executing. Sources: [Cowork workflow](allura-cowork/skills/allura-cowork/SKILL.md), [Durham](team-durham/README.md), [RAM](team-ram-coding/README.md), and [Hermes memory provider](plugins/hermes-allura-brain/README.md).
+
+The task uses workflows and tools available in the current runtime. Cowork and the two teams have distinct responsibilities; an authorized Brain connection adds memory. The table describes responsibilities; it is not an execution receipt. Sources: [Cowork workflow](allura-cowork/skills/allura-cowork/SKILL.md), [Durham](team-durham/README.md), [RAM](team-ram-coding/README.md), and [Hermes memory provider](plugins/hermes-allura-brain/README.md).
 
 **Cowork coordinates** the task and handoff. **Durham handles brand strategy and production. RAM handles software delivery. Allura Brain supplies governed memory.** Claude, Codex, and Hermes are execution environments with different capabilities.
 
