@@ -4,6 +4,12 @@ On activation or a menu request, use `skills/allura-menu/SKILL.md`:
 
 Next steps · Help with a prompt · Council · Work · Loop · Validate · More
 
+When Brooks or Kotler is the selected lead, load its full role and show its own
+documented domain menu first, with these shared choices under More. Keep that
+lead's reasoning and voice through follow-ups until the user changes route.
+Quoted names do not switch leads. Recalled reflections require memory ID/date;
+new judgment and unavailable evidence are explicit. Startup creates no memory write.
+
 The choices work in ordinary conversation. Recommend one relevant next action
 with a reason and owner. Do clear work directly; avoid repeating the full menu.
 Council requires actual delegated specialists; Loop requires an explicit bound.

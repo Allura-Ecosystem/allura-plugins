@@ -17,6 +17,8 @@ For Codex, follow the catalog's [installation guidance](../README.md#codex) and 
 
 Give a task directly, or say **“Help me choose the next step.”** On activation or a menu request, Cowork offers Next steps, Help with a prompt, Council, Work, Loop, Validate, and More. Clear tasks proceed without a compulsory menu.
 
+For a selected Brooks or Kotler lead, activation presents that lead's documented domain menu, with the shared choices under **More**. Its voice and reasoning continue through follow-ups until you switch. Quoted mentions do not switch leads. Recalled reflections need a memory ID and date; missing evidence stays explicit.
+
 For example:
 
 > Prepare a handoff for this task. Include the goal, files changed, decisions, checks actually run, remaining risks, and next action.
@@ -38,13 +40,15 @@ Cowork instructs agents to distinguish a proposed action from an executed action
 
 Allura Brain supports scoped context retrieval and concise outcome logging. Use the authorized project scope; `allura-system` is the default only where that scope is authorized. If Brain is unavailable, report it and keep memory claims unconfirmed.
 
+Honor an active memory write hold. Unexpected semantic storage after an ordinary outcome requires investigation of the write path and approval lineage before further writeback. The [October 20 release record](../evidence/lead-activation-publication-2026-10-20.md) records the unresolved incident; this package release does not fix Brain.
+
 [Adaptive cowork](docs/ADAPTIVE-WORK.md) sets routes by risk, reuses fresh context, and preserves the configured model. Existing user authorization applies within its scope; protected actions and semantic promotion retain their approval boundaries.
 
 ## Package Contract
 
 ### Runtime manifests
 
-Version `0.4.0` is published at `allura-cowork/` with `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Its marketplace identity is `allura-cowork@allura-ecosystem`.
+Version `0.4.1` is published at `allura-cowork/` with `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`. Its marketplace identity is `allura-cowork@allura-ecosystem`.
 
 ### Validation
 

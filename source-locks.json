@@ -34,7 +34,7 @@
         "durham"
       ],
       "repository": "https://github.com/Allura-Ecosystem/team-durham.git",
-      "commit": "f36b6553bcdc3187f40a1c379c7bdaacacf31634",
+      "commit": "ec023741721a9e1a164f4d4a969e9cb892af2501",
       "manifest": "export-manifest.json",
       "exporter": "scripts/export_catalog.py",
       "destination": "team-durham",
@@ -43,8 +43,8 @@
       "marketplaceAlias": "team-durham",
       "sourceManifestName": "team-durham",
       "sourcePackageName": "team-durham",
-      "packageVersion": "0.4.4",
-      "runtimeVersion": "0.4.4"
+      "packageVersion": "0.4.5",
+      "runtimeVersion": "0.4.5"
     },
     {
       "id": "mortagate-cowork",
