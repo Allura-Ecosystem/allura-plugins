@@ -42,9 +42,9 @@ Counts describe files in this repository, not agents currently installed or runn
 
 | Plugin | Version | Agents | Commands | Skills |
 |---|:---:|---:|---:|---:|
-| Allura Cowork | 0.4.0 | 1 | 4 | 2 |
-| Team Durham | 0.4.3 | 7 | 22 | 77 |
-| Team RAM Coding | 0.6.2 | 10 | — | 10 |
+| Allura Cowork | 0.4.1 | 1 | 4 | 2 |
+| Team Durham | 0.4.5 | 7 | 22 | 77 |
+| Team RAM Coding | 0.6.3 | 10 | — | 10 |
 | Bumblebee | 0.1.1 | — | 1 | 1 |
 | Hermes Allura Brain | 0.3.0 | — | 1 | — |
 | Prompt Optimization Bot | 0.33.2 | — | — | 1 |
@@ -52,7 +52,7 @@ Counts describe files in this repository, not agents currently installed or runn
 | Team Durham App Audit | 1.0.1 | — | — | 1 |
 | Mortagate Cowork | 0.2.1 | — | — | 4 |
 
-The external Hermes team plugin is version `1.3.0`: ten RAM roles, seven Durham roles, and the shared Cowork chat menu. It has its own source repository and installation process.
+The external Hermes team plugin is version `1.3.1`: ten RAM roles, seven Durham roles, and the shared Cowork chat menu. It has its own source repository and installation process.
 
 Claude and Codex share four portable marketplace packages: Cowork, Durham, RAM, and Bumblebee. Claude also lists the three task skill packages for prompts, legal workflows, and app audits. The Hermes memory provider and Microsoft Cowork package use their own runtime contracts.
 
@@ -140,6 +140,8 @@ Missing tools or authentication must be reported. Work that can use the availabl
 ## Start in chat
 
 Give a clear task directly, or ask for **Menu** or **Help** after loading Cowork or a team entry skill.
+
+When you address **Brooks** or **Kotler**, the selected lead keeps its reasoning and voice through follow-ups until you switch. On activation, it loads its full role and presents its own documented domain menu, with the shared choices below under **More**. Quoted names do not switch leads. Recalled reflections cite a real memory ID and date; current judgment and unavailable evidence are stated separately. Ordinary follow-ups do not repeat startup or menu steps.
 
 | Choice | What you get |
 |---|---|
@@ -237,6 +239,12 @@ bash scripts/models-performance.sh --dry-run
 The first command audits bindings. The other two print plans with `status: not-run`; without `--dry-run` they fail because no benchmark or telemetry backend is configured. They do not measure model quality, latency, or cost. See [adaptive release guidance](docs/ADAPTIVE-RELEASE.md) for context reuse, review routes, and evidence requirements.
 
 ## Validation
+
+### October 20 lead-continuity release
+
+Cowork `0.4.1`, RAM `0.6.3`, Durham `0.4.5`, and native Hermes `1.3.1` carry the persistent lead guidance. See the [release record](evidence/lead-activation-publication-2026-10-20.md) for source commits, checks, and limits.
+
+**Memory write hold:** an ordinary outcome from the local activation rollout was subsequently returned by Brain as semantic despite no promotion being requested. Publishing these plugins does not repair that backend incident or prove human approval. Keep affected workflow writeback paused until the owner verifies the write path and approval lineage; authorized read-only retrieval can continue. No new Brain outcome is written for this publication.
 
 ### Catalog checks
 

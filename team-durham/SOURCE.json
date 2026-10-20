@@ -15,7 +15,7 @@
   "exportManifest": "export-manifest.json",
   "exportScript": "scripts/export_catalog.py",
   "name": "team-durham",
-  "revision": "daca3b3ed4ace1937ab5e6947f19b68f2d0389d9",
+  "revision": "ec023741721a9e1a164f4d4a969e9cb892af2501",
   "revisionMode": "injected-at-export",
   "roleCount": {
     "canonical": 7,
