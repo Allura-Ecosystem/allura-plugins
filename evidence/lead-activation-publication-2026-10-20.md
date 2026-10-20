@@ -7,7 +7,7 @@ Date: 2026-10-20. Scope: publish the prepared Brooks/Kotler guidance and align t
 | Package | Version | Immutable source |
 |---|---|---|
 | Allura Cowork | 0.4.1 | [Prepared guidance](https://github.com/Allura-Ecosystem/allura-plugins/commit/4715fd390fb3ce26b8e3c4b6618805a6b198d246) |
-| Team RAM | 0.6.3 | [b0340dfa](https://github.com/Allura-Ecosystem/allura-team-ram/commit/b0340dfa040e852df4e056a944ad673c5db65270) |
+| Team RAM | 0.6.3 | [5dc3ea81](https://github.com/Allura-Ecosystem/allura-team-ram/commit/5dc3ea8160e856957a8bc66c8ee95cc22e02bb3f) |
 | Team Durham | 0.4.5 | [ec023741](https://github.com/Allura-Ecosystem/team-durham/commit/ec023741721a9e1a164f4d4a969e9cb892af2501) |
 | Native Hermes team bundle | 1.3.1 | [Source repository](https://github.com/Allura-Ecosystem/hermes-team-ram-durham), with the three pins above in its source lock |
 
@@ -35,7 +35,9 @@ RAM and Durham content is generated from their owning repositories. Catalog docu
 
 No tests were added or manually rerun during this publication task. The earlier local activation report recorded package tests, 16/16 installed-file parity and bounded activation/follow-up probes; those remain historical evidence for that earlier revision. They do not establish live Hermes execution, long-session fidelity or installation of these new releases. GitHub checks on each PR provide separate CI evidence.
 
-RAM's [owning PR](https://github.com/Allura-Ecosystem/allura-team-ram/pull/10) must satisfy its clean lint/typecheck merge gate. A published immutable source pin is not proof that the owning PR is merged. Durham's [owning PR](https://github.com/Allura-Ecosystem/team-durham/pull/3) contains the menu correction. Check each PR for current merge and CI state.
+RAM's [owning PR](https://github.com/Allura-Ecosystem/allura-team-ram/pull/10) is merged. Initial CI found six formatting errors; formatting-only corrections were independently reviewed, and [CI passed](https://github.com/Allura-Ecosystem/allura-team-ram/actions/runs/39413276640), including lint, typecheck and the repository's existing automatic tests. No test behavior was added or changed for this correction.
+
+Durham's [owning PR](https://github.com/Allura-Ecosystem/team-durham/pull/3) is merged with both CI checks passing. Native Hermes [release PR](https://github.com/Allura-Ecosystem/hermes-team-ram-durham/pull/4) is merged; it has no configured GitHub checks, so its evidence is the local package checks and independent review. Its subsequent provenance refresh selects the checked RAM revision without changing bundled role/skill bytes. The [catalog PR](https://github.com/Allura-Ecosystem/allura-plugins/pull/10) records the final distribution CI and merge state.
 
 ## Memory write hold
 

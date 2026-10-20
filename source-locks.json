@@ -15,7 +15,7 @@
         "team-ram-harness"
       ],
       "repository": "https://github.com/Allura-Ecosystem/allura-team-ram.git",
-      "commit": "b0340dfa040e852df4e056a944ad673c5db65270",
+      "commit": "5dc3ea8160e856957a8bc66c8ee95cc22e02bb3f",
       "manifest": "PUBLIC_EXPORT.json",
       "exporter": "scripts/export-public.mjs",
       "destination": "team-ram-coding",
