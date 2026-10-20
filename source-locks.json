@@ -75,7 +75,7 @@
         "bumblebee"
       ],
       "repository": "https://github.com/Allura-Ecosystem/bumblebee.git",
-      "commit": "46e49720d0160e6d9f52d138a253c9e15c092b0c",
+      "commit": "c54c2f3ead84fa3c1c5b2bd0f9d017ea5ad148bc",
       "manifest": "package.json",
       "exporter": "package-files",
       "destination": "bumblebee",

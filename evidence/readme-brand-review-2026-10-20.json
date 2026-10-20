@@ -3,7 +3,7 @@
   "date": "2026-10-20",
   "project": "allura-plugins",
   "group_id": "allura-system",
-  "status": "copy-reviewed-render-review-pending",
+  "status": "documentation-reviewed-publication-tracked-separately",
   "user_priority": "Clarity and consistent Allura branding",
   "optimized_brief": "Have Team Durham audit the Allura plugin catalog READMEs and their infographics, then improve clarity, navigation, and consistent Allura branding. Use the approved brand identity and current repository evidence. Give each README a clear purpose, audience, install/use path and limits; make every visual explain one verified relationship with readable labels and alt text. Edit generated packages only through their owning source and exporter. Keep capability and runtime claims evidence-based. Have Munari independently review the result; return changed artifacts, checks, and remaining gaps.",
   "scope": {
@@ -115,7 +115,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/allura-team-ram",
       "source_path": "README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Six missing image references and universal audit/permission claims delay the setup path; clarify host-supplied execution and optional Brain continuity."
     },
     {
@@ -123,7 +123,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/allura-team-ram",
       "source_path": ".claude-plugin/README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Stale marketplace instructions point to Allura_Memory; replace ambiguous persona framing and quote with the current source/install contract."
     },
     {
@@ -131,7 +131,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/allura-team-ram",
       "source_path": "tooling/agent-sync/README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Placeholder model IDs and old needs-shell TODOs conflict with current configured-host inheritance; describe the existing generator accurately."
     },
     {
@@ -139,7 +139,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/team-durham",
       "source_path": "README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Six generic infrastructure panels obscure brand workflow; absolute enforcement and forever-history claims exceed optional integrations and observed evidence."
     },
     {
@@ -147,7 +147,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/team-durham",
       "source_path": "bmad-module/README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Clarify that the authorized project controls tenant scope; selecting Durham does not grant a tenant."
     },
     {
@@ -179,7 +179,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/bumblebee",
       "source_path": "README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Clarify the installed evidence-review skill versus separately deployed scanner/server implementation; remove six failing raster panels and label historical validation."
     },
     {
@@ -187,7 +187,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/mortagate",
       "source_path": "microsoft-cowork/README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Published catalog described as unpublished; source-root paths break in exported package; pitch/competitor language precedes the employee workflow."
     },
     {
@@ -195,7 +195,7 @@
       "source_owner": "https://github.com/Allura-Ecosystem/hermes-team-ram-durham",
       "source_path": "README.md",
       "review_status": "reviewed",
-      "change_status": "changed-at-source-awaiting-export",
+      "change_status": "changed-at-owning-source",
       "findings": "Apply the same purpose, installation, use and limits structure while preserving native routing semantics."
     }
   ],
@@ -206,14 +206,14 @@
     "original_infographics_production_approved": false,
     "asset_deletion_authorized_or_performed": false,
     "new_generated_artwork_required": false,
-    "recommendation": "Preserve existing files, remove failing raster panels from current README reading paths, and use compact source-linked editable diagrams with ordinary text explanations.",
+    "recommendation": "Final documentation preserves all historical raster assets, links the unmodified official wordmark, and uses native Markdown tables and ordinary text instead of inline raster panels or Mermaid.",
     "readability_observation": "At declared 900px width, headings remain readable but detailed labels and footers become small. Six consecutive panels occupy approximately 3400 vertical pixels before surrounding text.",
     "official_mark": {
       "path": "allura/assets/logo.png",
       "sha256": "37617ec2d15503a2d0bbe9b7bf8a9693813b468b0b850b2b97979ab08ce1a733",
       "comparison": "Byte-identical to the official allura-wordmark.png supplied by the approved brand skill",
-      "disposition": "keep-unmodified",
-      "finding": "Transparent margins reduce a 180px image element to an approximately 88px visible mark. Increase display width without modifying the asset."
+      "disposition": "preserved-unmodified-and-linked-from-brand-system",
+      "finding": "The exact official asset was preserved. Actual dark-theme review found insufficient inline legibility and excessive transparent padding; the final header uses a readable plain text title and links the original asset."
     },
     "infographics": [
       {
@@ -339,14 +339,75 @@
       "team-ram-coding/docs/images/persistent-agent-memory.png",
       "team-ram-coding/docs/images/ad50-canonical-graph-migration.png"
     ],
-    "missing_ram_assets_reviewed": false
+    "missing_ram_assets_reviewed": false,
+    "final_documentation_disposition": "accepted-for-observed-desktop-dark-github-rendering",
+    "new_infographic_certification_claimed": false,
+    "rendered_evidence": [
+      {
+        "path": "evidence/readme-review-2026-10-20/catalog-header-full.png",
+        "sha256": "3bdf7fc54cf0b895343a6b7c3e420b120bea0c23eb345ec6c191891eb4d167a7",
+        "disposition": "superseded-failed-draft",
+        "observation": "The inline official mark has poor dark-theme legibility and excessive transparent space."
+      },
+      {
+        "path": "evidence/readme-review-2026-10-20/catalog-header-fixed.png",
+        "sha256": "065671b835d5175dc258a7097957e40aecd56e50c833f2df61d7c3e6f1b2af1f",
+        "disposition": "accepted-final-header",
+        "observation": "Readable plain text title, introduction and navigation; original asset remains linked."
+      },
+      {
+        "path": "evidence/readme-review-2026-10-20/catalog-map.png",
+        "sha256": "f1b9ccd9910c32d499fc43fcd0eb3f4c50ea40121c3f2cd04da1b6c84ac7e893",
+        "disposition": "superseded-failed-draft",
+        "observation": "Mermaid relationships were clear, but actual host rendering added shadow-like borders and an off-palette label panel."
+      },
+      {
+        "path": "evidence/readme-review-2026-10-20/catalog-relationship-table.png",
+        "sha256": "9e772ef74a04919d71c1ae76301d09308e40f4876c93b9f005e419c18a106d9a",
+        "disposition": "accepted-final-relationship-reference",
+        "observation": "Native Markdown table provides readable responsibilities, explicit optional authenticated memory and source links."
+      },
+      {
+        "path": "evidence/readme-review-2026-10-20/durham-opening.png",
+        "sha256": "78e7b36c0140951cbe2aa4bb86e50b813e66536297e8abcda52eed8c69a7bbc3",
+        "disposition": "accepted-observed-opening",
+        "observation": "Readable purpose, specialist responsibilities, host execution boundary and task-led navigation."
+      },
+      {
+        "path": "evidence/readme-review-2026-10-20/bumblebee-opening.png",
+        "sha256": "c88ac1fbf8f997c52668e05257f731dc13e4df0686c37f8d0bb42ed7897f60da",
+        "disposition": "accepted-observed-opening-with-subsequent-minor-copy-correction",
+        "observation": "Readable evidence-review purpose and explicit scanner/server separation. A later narrow text correction removes a dangling historical-results clause; no layout change was required."
+      }
+    ],
+    "render_scope": {
+      "surface": "Actual GitHub README rendering",
+      "theme": "dark",
+      "viewport_pixels": {
+        "width": 1265,
+        "height": 712
+      },
+      "accepted_views": [
+        "catalog header",
+        "catalog responsibilities table",
+        "Durham opening",
+        "Bumblebee opening"
+      ],
+      "not_observed": [
+        "mobile rendering",
+        "light theme",
+        "every section of every README"
+      ],
+      "wcag_certification": false,
+      "human_usability_test": false
+    }
   },
   "actual_agent_invocations": [
     {
       "identity": "kotler",
       "task": "/root/durham_readme_owner",
       "responsibility": "Scoped strategy reuse, README inventory, specialist routing and evidence synthesis",
-      "status": "active"
+      "status": "review-coordination-complete"
     },
     {
       "identity": "ogilvy",
@@ -365,12 +426,12 @@
       "identity": "munari",
       "task": "/root/durham_readme_owner/munari_readme_review",
       "responsibility": "Independent read-only review of the 19 README entries and retained visual presentation",
-      "status": "copy-review-complete-awaiting-render"
+      "status": "complete"
     }
   ],
   "independent_qa": {
     "reviewer": "munari",
-    "status": "copy-complete-render-pending",
+    "status": "complete",
     "findings": [
       {
         "severity": "minor",
@@ -387,6 +448,39 @@
         "producer": "ogilvy",
         "fix": "Remove unsupported historical counts.",
         "status": "resolved-independently-verified"
+      },
+      {
+        "severity": "major",
+        "path": "README.md",
+        "finding": "The inline official mark lacked legibility against GitHub dark theme and introduced excessive transparent space.",
+        "producer": "root",
+        "fix": "Removed inline image; retained text title and a descriptive link to the unchanged official asset.",
+        "evidence": [
+          "evidence/readme-review-2026-10-20/catalog-header-full.png",
+          "evidence/readme-review-2026-10-20/catalog-header-fixed.png"
+        ],
+        "status": "resolved-independently-verified"
+      },
+      {
+        "severity": "major",
+        "path": "README.md",
+        "finding": "Actual GitHub Mermaid rendering added shadow-like offsets and an off-palette connection-label panel.",
+        "producer": "root",
+        "fix": "Replaced Mermaid with a native Markdown relationship table, keeping source-linked explanatory text.",
+        "evidence": [
+          "evidence/readme-review-2026-10-20/catalog-map.png",
+          "evidence/readme-review-2026-10-20/catalog-relationship-table.png"
+        ],
+        "status": "resolved-independently-verified"
+      },
+      {
+        "severity": "minor",
+        "path": "bumblebee/README.md",
+        "finding": "After unsupported historical metrics were removed, the disclosure still referred to historical results below.",
+        "producer": "root",
+        "fix": "Removed the dangling clause in the owning source README.",
+        "status": "resolved-independently-verified",
+        "new_screenshot_required": false
       }
     ],
     "full_new_brand_rubric_claimed": false,
@@ -395,17 +489,28 @@
     "agent_qa_is_human_publication_approval": false,
     "source_copy_verdict": "pass",
     "reviewed_readme_count": 19,
-    "render_verdict": "pending",
+    "render_verdict": "pass-for-observed-desktop-dark-documentation",
     "in_scope_open_copy_findings": 0,
-    "scope_note": "Scoped documentation review of 16 revised READMEs and three preserved indexes; not a new brand-kit score, runtime certification, WCAG certification or user study."
+    "scope_note": "Independent copy review covers 16 revised READMEs and three preserved indexes. Render review covers four actual desktop dark-theme GitHub views at 1265x712. It is not a new brand-kit score, runtime or WCAG certification, a user study, or approval of retained historical infographics.",
+    "verdict": "PASS",
+    "rubric_categories": {
+      "strategy": "Existing approved positioning, audience and voice applied; no new strategy assessment.",
+      "naming": "Not applicable: no naming deliverable or changes.",
+      "visual": "Scoped rendered documentation review passed; identity variants and full accessibility certification excluded.",
+      "brand_kit": "Not applicable: no new brand kit commissioned.",
+      "cross_reference": "README links, relevant package contracts, source ownership and evidence boundaries reviewed."
+    },
+    "numeric_brand_score": null,
+    "runtime_tests_executed_by_reviewer": false,
+    "files_edited_by_reviewer": []
   },
   "publication": {
-    "status": "source-branches-pushed-catalog-review-pending",
+    "status": "source-changes-merged-catalog-ready-for-final-ci-and-merge",
     "source_commits": {
       "allura-team-ram": "2f929bfe6ab6a6b469735e92c23db0e23af92515",
       "team-durham": "daca3b3ed4ace1937ab5e6947f19b68f2d0389d9",
       "hermes-team-ram-durham": "f75e7a388b5c0233078e2f71ead90d18780d3812",
-      "bumblebee": "46e49720d0160e6d9f52d138a253c9e15c092b0c",
+      "bumblebee": "c54c2f3ead84fa3c1c5b2bd0f9d017ea5ad148bc",
       "mortagate": "d8df8e809eef219c9e7d20e2069a56a096703653"
     },
     "export_receipts": [
@@ -466,10 +571,115 @@
       {
         "check": "Catalog and Durham gitleaks dir scans",
         "result": "pass; no leaks found"
+      },
+      {
+        "check": "Catalog PR CI",
+        "result": "pass at README-rendered revision8917297; final evidence revision will run CI again",
+        "url": "https://github.com/Allura-Ecosystem/allura-plugins/actions/runs/39406191559"
+      },
+      {
+        "check": "Durham source PR CI",
+        "result": "pass: validation and secrets",
+        "url": "https://github.com/Allura-Ecosystem/team-durham/actions/runs/39405824831"
+      },
+      {
+        "check": "RAM source PR CI",
+        "result": "failure: five unchanged formatting errors also present on main; documentation checks pass; normal GitHub merge permitted without admin bypass",
+        "url": "https://github.com/Allura-Ecosystem/allura-team-ram/actions/runs/39405820454",
+        "baseline_url": "https://github.com/Allura-Ecosystem/allura-team-ram/actions/runs/39313735235",
+        "unchanged_error_paths": [
+          ".claude-plugin/marketplace.json",
+          ".claude-plugin/plugin.json",
+          ".codex-plugin/plugin.json",
+          "plugin.json",
+          "tooling/agent-sync/ram-persona-contract.test.ts"
+        ]
+      },
+      {
+        "check": "Independent actual rendered review",
+        "result": "pass for documented desktop dark-theme views; five findings resolved",
+        "reviewer": "munari"
       }
     ],
-    "pull_requests": [],
-    "source_branch_policy": "Bumblebee and Mortagate documentation PRs target the existing codex/adaptive-team-workflows source branches already pinned by the catalog. Other source PRs target main."
+    "pull_requests": [
+      {
+        "repo": "allura-team-ram",
+        "baseRefName": "main",
+        "headRefOid": "2f929bfe6ab6a6b469735e92c23db0e23af92515",
+        "mergeCommit": {
+          "oid": "2b7676c0b386073723bb890ea7de52e3fa4bfeba"
+        },
+        "mergedAt": "2026-10-20T10:14:08Z",
+        "state": "MERGED",
+        "url": "https://github.com/Allura-Ecosystem/allura-team-ram/pull/9"
+      },
+      {
+        "repo": "team-durham",
+        "baseRefName": "main",
+        "headRefOid": "daca3b3ed4ace1937ab5e6947f19b68f2d0389d9",
+        "mergeCommit": {
+          "oid": "abdcdfe0005ac6e9b74dd03c013c6e2fa3264f0c"
+        },
+        "mergedAt": "2026-10-20T10:14:12Z",
+        "state": "MERGED",
+        "url": "https://github.com/Allura-Ecosystem/team-durham/pull/2"
+      },
+      {
+        "repo": "hermes-team-ram-durham",
+        "baseRefName": "main",
+        "headRefOid": "f75e7a388b5c0233078e2f71ead90d18780d3812",
+        "mergeCommit": {
+          "oid": "3c620376437252c1d89db3c6576fd8c68f46c977"
+        },
+        "mergedAt": "2026-10-20T10:14:16Z",
+        "state": "MERGED",
+        "url": "https://github.com/Allura-Ecosystem/hermes-team-ram-durham/pull/3"
+      },
+      {
+        "repo": "bumblebee",
+        "baseRefName": "codex/adaptive-team-workflows",
+        "headRefOid": "46e49720d0160e6d9f52d138a253c9e15c092b0c",
+        "mergeCommit": {
+          "oid": "ef7d24be1ae8d62c021281f1be8c8e4f8eb67576"
+        },
+        "mergedAt": "2026-10-20T10:14:19Z",
+        "state": "MERGED",
+        "url": "https://github.com/Allura-Ecosystem/bumblebee/pull/1"
+      },
+      {
+        "repo": "mortagate",
+        "baseRefName": "codex/adaptive-team-workflows",
+        "headRefOid": "d8df8e809eef219c9e7d20e2069a56a096703653",
+        "mergeCommit": {
+          "oid": "2e9a227d69cda341fb98a789d300d4f8d18ee5ca"
+        },
+        "mergedAt": "2026-10-20T10:14:23Z",
+        "state": "MERGED",
+        "url": "https://github.com/Allura-Ecosystem/mortagate/pull/8"
+      },
+      {
+        "repo": "allura-plugins",
+        "baseRefName": "main",
+        "headRefOid": "8917297be9516c68f8d890178a3bda0563f9a652",
+        "mergeCommit": null,
+        "mergedAt": null,
+        "state": "OPEN",
+        "url": "https://github.com/Allura-Ecosystem/allura-plugins/pull/9"
+      },
+      {
+        "repo": "bumblebee",
+        "baseRefName": "codex/adaptive-team-workflows",
+        "headRefOid": "c54c2f3ead84fa3c1c5b2bd0f9d017ea5ad148bc",
+        "mergeCommit": {
+          "oid": "6e84e3649a524b2fb9cc8ab4e0e8164d1b3eb9b5"
+        },
+        "mergedAt": "2026-10-20T10:15:50Z",
+        "state": "MERGED",
+        "url": "https://github.com/Allura-Ecosystem/bumblebee/pull/2"
+      }
+    ],
+    "source_branch_policy": "Bumblebee and Mortagate documentation PRs target the existing codex/adaptive-team-workflows source branches already pinned by the catalog. Other source PRs target main.",
+    "recorded_at_stage": "Before final catalog evidence commit; the linked GitHub PR records the subsequent merge and final CI state."
   },
   "known_out_of_scope_drift": [
     {

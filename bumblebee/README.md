@@ -6,7 +6,7 @@ The installable plugin provides one read-only review skill and command. Give it 
 
 The scanner and Allura server integration are separate components. Installing this package does not install a scanner binary, start a scan, connect to a server, or enable ingestion.
 
-> **AI-Assisted Documentation** — this guide was prepared with AI assistance. Source code and current runtime evidence remain authoritative; historical results are identified below.
+> **AI-Assisted Documentation** — this guide was prepared with AI assistance. Source code and current runtime evidence remain authoritative.
 
 ## Install and use
 
