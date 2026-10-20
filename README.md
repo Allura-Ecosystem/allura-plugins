@@ -1,192 +1,72 @@
-<p align="center">
-  <img src="allura/assets/logo.png" alt="Allura" width="180" />
-</p>
-
 <h1 align="center">Allura Plugins</h1>
 
 <p align="center">
-  <strong>Governed agent teams for coordination, brand production, and software delivery.</strong><br/>
-   One organization-owned catalog for Claude, Codex, and Hermes plugin packages, model policy, and validation tooling.
+  <strong>Choose a team. Give it a task. Keep the evidence.</strong><br/>
+  Plugins for AI collaboration, brand work, software delivery, and governed memory.
 </p>
 
 <p align="center">
-  <a href="#catalog">Catalog</a> ·
+  <a href="#catalog">Choose a plugin</a> ·
+  <a href="#installation">Install</a> ·
   <a href="#start-in-chat">Start in chat</a> ·
-  <a href="#installation">Installation</a> ·
-  <a href="#how-the-plugins-fit-together">Architecture</a> ·
-  <a href="#model-governance">Model governance</a> ·
-  <a href="#validation">Validation</a> ·
-  <a href="#repository-map">Repository map</a>
+  <a href="#how-the-plugins-fit-together">How it works</a> ·
+  <a href="#validation">Release evidence</a> ·
+  <a href="#updating-the-catalog">Maintain the catalog</a>
 </p>
 
----
-
-<p align="center">
-  <a href="docs/images/infographic-plugin-system-v3.png"><img src="docs/images/infographic-plugin-system-v3.png" alt="Allura plugin system with Allura Cowork, Team Durham, and Team RAM Coding above a single Allura Memory governance foundation, with Allura Brain identified as its functional alias and Claude and Codex shown as distinct execution surfaces" width="900" /></a><br/>
-  <sub><a href="docs/images/infographic-plugin-system-v3.png">Open the full-size infographic</a></sub>
-</p>
-
-## What this repository owns
-
-`allura-plugins` is the **distribution catalog and release-governance repository** for the Allura plugin layer. Standalone repositories own Team RAM, Team Durham, Mortagate, and Allura Memory source. This catalog has three jobs:
-
-1. **Generated plugin catalog** — publish pinned exports and preserve consumer-facing install aliases without becoming their source authority.
-2. **Model governance** — audit source-owned model bindings and configured-host inheritance without rewriting generated agents.
-3. **Release evidence** — prove source SHAs, export drift, manifests, commands, examples, hooks, evals, secret scans, and runtime-specific package checks before a plugin is treated as ready.
-
-Machine-readable pins live in [`source-locks.json`](source-locks.json). [`harness-sync.sh`](harness-sync.sh) only moves content from a public standalone repository at its locked full SHA into a generated catalog destination. Generated package files are not authoritative and must not be edited manually.
-
-Plugins add skills, commands, and operating roles. They do not replace Allura Brain or bypass its memory governance.
+Allura is the sovereign memory layer for AI. This catalog adds workflows and specialist roles around that foundation. Use it to choose the packages your task needs, install them in a compatible runtime, and understand what each release has actually verified.
 
 ## Catalog
 
-Install this catalog from `main`. The October 19 release includes the shared conversation menu, RAM–Durham Council guidance, scoped Hermes memory, Prompt Optimization Bot, and six CorpLawyer skills. [Release evidence](evidence/menu-corplawyer-2026-10-19.json) records the reviewed revisions and observed runtime checks. The [earlier native rollout receipt](evidence/native-rollout-2026-10-13.json) is historical and does not certify installation of these versions. The standalone [Allura Framework](https://github.com/Allura-Ecosystem/allura-framework) is a separate private repository; access requires repository permission.
+Start with **Allura Cowork** for coordination, then add a team or task skill. For Hermes, use the native team plugin and separate memory provider linked below. Install current packages from `main`.
 
-The Claude and Codex marketplaces share four versioned portable packages. Claude additionally lists three skill packages that also register natively in Hermes: Prompt Optimization Bot, CorpLawyer Bot, and Team Durham App Audit. The repository also ships one Hermes-native provider and one runtime-neutral Microsoft Cowork export. Counts below are generated/source definitions measured from the current repository tree; they are not counts of agents currently installed, loaded, or running.
-
-| Plugin | Release metadata | Agent definitions | Command definitions | Skill definitions | Purpose |
-|---|:---:|---:|---:|---:|---|
-| [Allura Cowork](allura-cowork/README.md) | 0.4.0 | 1 | 4 | 2 | Shared conversation menu, scoped coordination, validation, handoff, and closeout |
-| [Team Durham](team-durham/README.md) | 0.4.3 | 7 | 22 | 77 | Generated export for brand strategy, visual production, accessibility, and QA |
-| [Team RAM Coding](team-ram-coding/README.md) | 0.6.2 | 10 | — | 10 | Generated export for Brooks-led architecture, recon, implementation, review, and validation |
-| [Bumblebee](bumblebee/README.md) | 0.1.1 | — | 1 | 1 | Pinned read-only supply-chain evidence review; no scanner installation implied |
-| [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | 0.3.0 | — | 1 | — | Hermes-native governed recall and outcome persistence provider |
-| [Prompt Optimization Bot](plugins/prompt-optimization-bot/README.md) | 0.33.2 | — | — | 1 | Owner-supplied prompt refinement instructions for Hermes and Claude |
-| [CorpLawyer Bot](plugins/corplawyer-bot/README.md) | 0.9.0 | — | — | 6 | Business legal intake, sourced contract review, counsel briefs, and scoped Allura continuity |
-| [Team Durham App Audit](plugins/team-durham-app-audit/README.md) | 1.0.1 | — | — | 1 | Read-only STP-gated brand and UX audit for Hermes and Claude |
-| [Mortagate Cowork](packages/mortagate-cowork/README.md) | 0.2.1 | — | — | 4 | Pinned 23-file Microsoft Cowork package export; not a Claude/Codex marketplace plugin |
-
-Team Durham is pinned at `0.4.3`; Team RAM package and runtime versions are aligned at `0.6.2`. Codex requires the `team-ram-coding` manifest name to match the catalog alias; the standalone Claude manifest retains `team-ram-harness`. Source locks record both identities. CI validates pinned source identities and native Codex manifest compatibility. Team RAM exposes ten public skills rather than its retired internal command tree; Durham retains its command definitions. Codex discovers workflows through skills.
-
-Team Durham exports seven canonical roles. Source counts do not establish installation or execution.
-
-Mortagate Cowork targets Microsoft Cowork's app-package and Agent Skills contract. It is linked from this runtime-neutral catalog README but is intentionally absent from the Claude and Codex marketplaces.
-
-Hermes Allura Brain is a Hermes-native provider declared by `plugins/hermes-allura-brain/plugin.yaml`; it is intentionally not listed in the Claude marketplace because it does not implement the Claude/Codex package-manifest contract.
-
-[Team RAM + Team Durham for Hermes](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) is a separate native plugin, linked here rather than generated into this catalog or registered in its Claude/Codex marketplaces. Version `1.3.0` is available from its `main` branch. See [Hermes team usage](#hermes-team-ram--team-durham) below.
-
-The `allura/` directory is a local Codex README asset and guidance pack. It is not listed as a public Claude marketplace package and remains internal support material. Its manifest placeholders have been resolved; this upgrade does not publish it.
-
-### Allura Cowork
-
-Use Allura Cowork when a task crosses Claude and Codex or needs a durable runtime handoff.
-
-```text
-Hydrate project + Brain
-    ↓
-Name the active runtime
-    ↓
-Route work and define evidence
-    ↓
-Create/validate handoff
-    ↓
-Close with outcome + remaining risk
-```
-
-Its core promise is runtime honesty: adopting a named perspective is not the same as executing a real second runtime or subagent.
-
-### Team Durham
-
-Team Durham is the brand-production system. Its canonical route is:
-
-```text
-Brief → strategy → positioning → verbal identity
-      → visual direction → production → accessibility → QA
-```
-
-The agent roster covers orchestration, strategy, copy, visual direction, brand systems, evidence, QA, and operational trust. Optional integrations support Figma, Penpot, image generation, Notion, and document production.
-
-### Team RAM Coding
-
-Team RAM Coding is the governed software-delivery system. Brooks owns conceptual integrity and routing; Scout loads context; Woz implements; Pike and Fowler review interfaces and change safety.
-
-```text
-Brooks → Scout → Allura Brain → required skills
-       → build/review → validate → log
-```
-
-The plugin includes task management, code review, multi-source research, MCP orchestration, security policy, secret-handling, and multi-agent dispatch skills.
-
-## Start in chat
-
-After loading Allura Cowork or a team entry skill, ask for **Menu** or **Help**:
-
-| Choice | Result |
-|---|---|
-| Next steps | One to three useful actions, with a recommended next action and reason |
-| Help with a prompt | A ready-to-use prompt that preserves your intent and constraints |
-| Council | One bounded decision examined by relevant, actually invoked RAM and Durham specialists |
-| Work | Carry out the authorized task and check the result |
-| Loop | Work, check, and improve within an agreed goal and iteration bound |
-| Validate | Compare the result with acceptance criteria and actual evidence |
-| More | Available research, memory, skill creation, Party, Setup, and Doctor workflows |
-
-For an unclear idea, **Next steps** is the recommended starting point. A clear
-request can go directly to **Work**. The full menu appears on activation or
-request; ordinary work continues without repeating it. These are conversational
-choices, not a promise that every host registers matching slash commands.
-
-Council requires actual delegation support. If that capability is unavailable,
-the agent discloses the limitation and can prepare a council brief. Loading role
-guidance alone does not establish specialist execution or agreement.
-
-## How the plugins fit together
-
-<p align="center">
-  <a href="docs/images/allura-agent-runtime.png"><img src="docs/images/allura-agent-runtime.png" alt="Allura agent runtime connecting intent, workflow, tools and memory, response, and a connected result inside policy and checkpoint boundaries." width="900" /></a>
-</p>
-
-The runtime keeps intent, workflow, tools, memory, and response distinct so a
-plugin can coordinate work without pretending that every execution surface is
-the same system.
-
-### Source ownership
-
-| Capability | Standalone source authority | Catalog role |
+| You want to… | Choose | Runtime |
 |---|---|---|
-| Engineering agent harness | [Allura Team RAM](https://github.com/Allura-Ecosystem/allura-team-ram) | Generated `team-ram-coding/` distribution with a compatibility install alias |
-| Brand-production harness | [Team Durham](https://github.com/Allura-Ecosystem/team-durham) | Generated `team-durham/` distribution |
-| Mortgage evidence-review Cowork package | [Mortagate](https://github.com/Allura-Ecosystem/mortagate) | Generated runtime-neutral `packages/mortagate-cowork/` distribution |
-| Native Hermes team roles | [Hermes Team RAM + Durham](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) | External standalone link; no generated bundle or portable marketplace entry |
-| Governed memory | [Allura Memory](https://github.com/Allura-Ecosystem/Allura_Memory) | Linked dependency/provider surfaces; its source is not owned here |
+| Plan work, get next steps, or hand off a task | [Allura Cowork](allura-cowork/README.md) | Claude, Codex |
+| Develop a brand, write copy, or produce visual assets | [Team Durham](team-durham/README.md) | Claude, Codex |
+| Design, build, or review software | [Team RAM Coding](team-ram-coding/README.md) | Claude, Codex |
+| Review software supply-chain evidence | [Bumblebee](bumblebee/README.md) | Claude, Codex |
+| Use RAM and Durham in Hermes | [Native Hermes teams](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) | Hermes |
+| Connect Hermes to scoped Allura memory | [Hermes Allura Brain](plugins/hermes-allura-brain/README.md) | Hermes |
+| Turn a rough request into a clear prompt | [Prompt Optimization Bot](plugins/prompt-optimization-bot/README.md) | Claude, Hermes |
+| Review a business issue or contract and prepare a counsel brief | [CorpLawyer Bot](plugins/corplawyer-bot/README.md) | Claude, Hermes |
+| Check a live app against approved brand rules | [Team Durham App Audit](plugins/team-durham-app-audit/README.md) | Claude, Hermes |
+| Review mortgage-file evidence | [Mortagate Cowork](packages/mortagate-cowork/README.md) | Microsoft Cowork / Agent Skills |
 
-The standalone repositories own content, contracts, and release exporters. This repository owns source locks, generated distribution paths, marketplace compatibility identities, catalog-level policy, and release verification.
+Runtime listings describe package targets. Loading, authentication, and optional integrations must be checked in the runtime you use. Installing a plugin does not install every service it can work with.
 
-| Need | Lead plugin | Supporting plugin |
-|---|---|---|
-| Cross-runtime collaboration | Allura Cowork | Team RAM Coding or Team Durham executes the domain work |
-| Product or engineering work | Team RAM Coding | Cowork handles runtime handoff |
-| Brand strategy and production | Team Durham | Cowork handles runtime handoff |
-| Persistent project context | Allura Brain connection | Every plugin follows the same scoped memory rules |
+<details>
+<summary>Versions and package definitions</summary>
 
-The plugins are composable but keep distinct ownership:
+Counts describe files in this repository, not agents currently installed or running.
 
-- **Cowork coordinates.**
-- **Durham creates and protects brand intent.**
-- **Team RAM Coding builds and validates software.**
-- **Allura Brain remembers and governs.**
-- **Hermes Allura Brain connects Hermes to governed recall and outcome persistence.**
+| Plugin | Version | Agents | Commands | Skills |
+|---|:---:|---:|---:|---:|
+| Allura Cowork | 0.4.0 | 1 | 4 | 2 |
+| Team Durham | 0.4.3 | 7 | 22 | 77 |
+| Team RAM Coding | 0.6.2 | 10 | — | 10 |
+| Bumblebee | 0.1.1 | — | 1 | 1 |
+| Hermes Allura Brain | 0.3.0 | — | 1 | — |
+| Prompt Optimization Bot | 0.33.2 | — | — | 1 |
+| CorpLawyer Bot | 0.9.0 | — | — | 6 |
+| Team Durham App Audit | 1.0.1 | — | — | 1 |
+| Mortagate Cowork | 0.2.1 | — | — | 4 |
 
-## Shared operating contract
+The external Hermes team plugin is version `1.3.0`: ten RAM roles, seven Durham roles, and the shared Cowork chat menu. It has its own source repository and installation process.
 
-<p align="center">
-  <a href="docs/images/allura-governance-flow.png"><img src="docs/images/allura-governance-flow.png" alt="Allura governance flow from proposed action through policy enforcement and human approval to retained evidence." width="900" /></a>
-</p>
+Claude and Codex share four portable marketplace packages: Cowork, Durham, RAM, and Bumblebee. Claude also lists the three task skill packages for prompts, legal workflows, and app audits. The Hermes memory provider and Microsoft Cowork package use their own runtime contracts.
 
-All catalog plugins inherit the same Allura expectations:
+Team RAM uses the catalog alias `team-ram-coding`; its standalone Claude manifest retains `team-ram-harness`. Codex requires the manifest name to match the catalog alias. [Source locks](source-locks.json) record both identities. RAM exposes ten public skills; Durham retains its command definitions. Codex discovers workflows through skills.
 
-- search relevant project context before substantive work;
-- use `group_id: allura-system` unless the project declares another valid `allura-*` tenant;
-- treat raw episodic traces as evidence, not canonical truth;
-- identify the actual runtime and never claim an agent or tool executed when it did not;
-- preserve approval boundaries for secrets, production, scheduling, promotion, and destructive actions;
-- validate the result before calling work done;
-- write a factual outcome receipt after substantive work when Allura Brain is available.
+The [`allura/`](allura/README.md) directory is internal support material, not a public marketplace package. The [Allura Framework](https://github.com/Allura-Ecosystem/allura-framework) is a separate private repository requiring its own access.
+
+</details>
 
 ## Installation
 
 ### Claude marketplace
+
+Add the marketplace and install the packages you want:
 
 ```text
 /plugin marketplace add Allura-Ecosystem/allura-plugins
@@ -195,7 +75,7 @@ All catalog plugins inherit the same Allura expectations:
 /plugin install team-ram-coding@allura-ecosystem
 ```
 
-Optional Claude skill packages:
+Optional task packages:
 
 ```text
 /plugin install prompt-optimization-bot@allura-ecosystem
@@ -203,8 +83,7 @@ Optional Claude skill packages:
 /plugin install team-durham-app-audit@allura-ecosystem
 ```
 
-For an existing Claude installation, refresh the marketplace and update the
-packages you use:
+For an existing installation, refresh the marketplace and update the packages you use:
 
 ```text
 /plugin marketplace update allura-ecosystem
@@ -213,30 +92,15 @@ packages you use:
 /plugin update team-durham@allura-ecosystem
 ```
 
-Update optional packages the same way, then reload plugins or restart the session
-as supported by your Claude version. Marketplace updates and source merges do
-not themselves refresh every installed runtime cache.
-
-The Claude catalog is defined in [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json). Each package also owns its own `.claude-plugin/plugin.json`. Hermes uses its native provider manifest instead; follow [its package README](plugins/hermes-allura-brain/README.md).
-
-The CorpLawyer and Prompt Bot entries are Git-owned compatibility packages for
-Claude and Hermes. Installing them does not update the owner's separate account
-GPTs. CorpLawyer `0.9.0` supplies intake, official-source research, contract review,
-counsel briefs, scoped Allura continuity, and an entry skill. Follow its
-[package instructions](plugins/corplawyer-bot/README.md) for direct skill loading.
+Update optional packages the same way, then reload plugins or restart the session as supported by your Claude version. A source merge or marketplace refresh does not refresh every installed cache. The [Claude marketplace manifest](.claude-plugin/marketplace.json) lists available packages.
 
 ### Codex
 
-Each catalog package contains a `.codex-plugin/plugin.json` manifest. The repository does not itself prove that a given Codex build accepts, installs, or loads every declared surface. For a compatible Codex environment, clone this repository into your plugin source location, register the package through that environment's supported local-plugin flow, and verify it appears after restart.
-
-The root [`.agents/plugins/marketplace.json`](.agents/plugins/marketplace.json) lists the portable catalog packages. Catalog membership does not establish installation or loading in a particular Codex session.
+The [Codex marketplace manifest](.agents/plugins/marketplace.json) lists the four portable packages. Each has a `.codex-plugin/plugin.json` manifest. In a compatible Codex environment, clone this repository into your plugin source location, register the package through the supported local-plugin flow, then verify it is available after restart. Catalog membership alone does not establish loading in your session.
 
 ### Hermes: Team RAM + Team Durham
 
-The external [native team plugin](https://github.com/Allura-Ecosystem/hermes-team-ram-durham)
-uses the Hermes identity `team-ram-durham`. Install its `main` branch using the
-owning repository's [installation instructions](https://github.com/Allura-Ecosystem/hermes-team-ram-durham#install).
-Version `1.3.0` exports ten RAM roles, seven Durham roles, and the shared Cowork conversation menu. The following describes the native conversation-routing implementation:
+Install the [native team plugin](https://github.com/Allura-Ecosystem/hermes-team-ram-durham#install) from its `main` branch. Its Hermes identity is `team-ram-durham`.
 
 ```text
 /ram activate
@@ -246,87 +110,123 @@ Version `1.3.0` exports ten RAM roles, seven Durham roles, and the shared Cowork
 /durham-copywriter <task>
 ```
 
-On RAM activation or an explicit menu request, the adapter loads the canonical
-chat menu described under [Start in chat](#start-in-chat) and recommends a next
-action suited to the task. Setup and Doctor remain available under More.
-Ordinary work does not repeat the menu.
+These commands load role and workflow guidance, then route the task into the current conversation. The active agent uses the configured model and existing permissions. Loading a role does not itself execute the task or launch another agent.
 
-The native `allura_team` tool loads role and workflow guidance for the current
-conversation. The active agent then carries out the task with the configured model
-and existing permissions. Loading guidance does not start a subprocess, override the
-model, or prove that work has been executed.
+The [Allura Brain provider](plugins/hermes-allura-brain/README.md) is installed and configured separately. [Prompt Bot](plugins/prompt-optimization-bot/README.md), [CorpLawyer](plugins/corplawyer-bot/README.md), and [App Audit](plugins/team-durham-app-audit/README.md) each document their native skill installation and use.
 
-Slash commands queue work through the installed Hermes CLI's message-injection
-support. Gateway surfaces without that support return a fallback instruction;
-send a normal prompt such as: “Use `allura_team` with team `ram`, role `woz`, and
-task `<task>`, then continue here.” Use team `durham` and role `copywriter` for
-brand copy work.
+<details>
+<summary>Hermes routing and scope reference</summary>
 
-Bundled skills register actual `SKILL.md` files under
-`team-ram-durham:ram-<name>` and `team-ram-durham:durham-<name>`, keeping the two
-teams' names separate. Entry workflows are `team-ram-durham:ram` and
-`team-ram-durham:durham`.
+Slash commands use the installed Hermes CLI's message-injection support. A gateway without that support returns a fallback instruction. Send a normal prompt such as: “Use `allura_team` with team `ram`, role `woz`, and task `<task>`, then continue here.” For copy work use team `durham` and role `copywriter`.
 
-[Hermes Allura Brain](plugins/hermes-allura-brain/README.md) remains the separate
-memory provider. The team plugin does not install or reconfigure it. Brain calls
-use the authenticated project/task scope. RAM's `allura-system` and Durham's
-`allura-team-durham` are default hints requiring authorization, not permission to
-switch tenants. A Council specialist inherits the validated task scope; the
-adapter reports `scope_status: inherit_authenticated_task`. Unavailable or denied
-memory is disclosed, with no tenant or credential fallback.
+Skills register actual `SKILL.md` files under `team-ram-durham:ram-<name>` and `team-ram-durham:durham-<name>`. Entry workflows are `team-ram-durham:ram` and `team-ram-durham:durham`.
+
+The team plugin does not configure the memory provider. Brain calls inherit the authenticated project/task scope. Team defaults (`allura-system` for RAM and `allura-team-durham` for Durham) are hints requiring authorization. A Council specialist inherits the validated task scope; the adapter reports `scope_status: inherit_authenticated_task`. Denied memory does not trigger a tenant or credential fallback.
+
+</details>
 
 ### Requirements
 
-| Requirement | Applies to |
+| Requirement | When you need it |
 |---|---|
-| A compatible Claude Code or Codex plugin environment | Targeted by the package manifests; verify loading in the actual runtime |
-| Allura Brain MCP connection | Expected for governed hydration and outcome logging |
-| Python 3 | Allura Cowork hooks and validation scripts |
-| Docker | Optional MCP Docker, secret, and infrastructure workflows |
-| Figma, Penpot, Notion, fal.ai, LibreOffice | Optional Team Durham integrations only |
+| A compatible target runtime | To install and load the selected package |
+| Authorized Allura Brain connection | For scoped recall and outcome logging |
+| Python 3 | For Cowork's context hook and validation scripts |
+| Docker | For workflows that explicitly use MCP Docker or infrastructure tools |
+| Figma, Penpot, Notion, fal.ai, or LibreOffice | Only for Durham work using those optional integrations |
 
-Missing optional integrations should degrade visibly and leave the core plugin loadable.
+Missing tools or authentication must be reported. Work that can use the available inputs may continue with its limits stated.
+
+## Start in chat
+
+Give a clear task directly, or ask for **Menu** or **Help** after loading Cowork or a team entry skill.
+
+| Choice | What you get |
+|---|---|
+| Next steps | One to three actions, with a recommendation and reason |
+| Help with a prompt | A ready-to-use prompt preserving your intent and constraints |
+| Council | One decision examined by relevant RAM and Durham specialists, when delegation is available |
+| Work | The authorized task carried out and checked |
+| Loop | Work, check, and improve within an agreed goal and iteration limit |
+| Validate | A comparison with your acceptance criteria and actual evidence |
+| More | Available research, memory, skill creation, Party, Setup, and Doctor workflows |
+
+For example: “Use Team Durham to review this README. Make the first step clear, preserve the installation commands, and flag unsupported claims.”
+
+**Next steps** is useful when the idea is still forming. Clear requests proceed directly to **Work**. The menu appears on activation or request; these conversational choices do not imply matching slash commands on every host. Council requires actual delegation. Without it, the agent can prepare a council brief and state that specialists have not run.
+
+## How the plugins fit together
+
+| Part | Responsibility | Connection |
+|---|---|---|
+| Your runtime | Supplies the configured model, tools, and permissions | Runs the installed workflow |
+| Allura Cowork | Coordinates work and handoffs | Routes the task to relevant workflows |
+| Team Durham | Handles brand strategy, copy, and visual production | Uses the active task's context and available tools |
+| Team RAM | Handles software planning, implementation, and review | Uses the active task's context and available tools |
+| Allura Brain | Provides scoped memory | Optional authenticated connection |
+
+
+The task uses workflows and tools available in the current runtime. Cowork and the two teams have distinct responsibilities; an authorized Brain connection adds memory. The table describes responsibilities; it is not an execution receipt. Sources: [Cowork workflow](allura-cowork/skills/allura-cowork/SKILL.md), [Durham](team-durham/README.md), [RAM](team-ram-coding/README.md), and [Hermes memory provider](plugins/hermes-allura-brain/README.md).
+
+**Cowork coordinates** the task and handoff. **Durham handles brand strategy and production. RAM handles software delivery. Allura Brain supplies governed memory.** Claude, Codex, and Hermes are execution environments with different capabilities.
+
+| Team | Typical workflow |
+|---|---|
+| Durham | Brief → strategy → positioning → copy and visual direction → production → accessibility and QA |
+| RAM | Brooks routes → Scout retrieves context → required skills → implementation and review → validation → outcome |
+| Cowork | Project context → route and owner → work and evidence → validated handoff or closeout |
+
+### Source ownership
+
+| Capability | Source authority | Catalog role |
+|---|---|---|
+| Engineering harness | [Allura Team RAM](https://github.com/Allura-Ecosystem/allura-team-ram) | Generated `team-ram-coding/` export |
+| Brand harness | [Team Durham](https://github.com/Allura-Ecosystem/team-durham) | Generated `team-durham/` export |
+| Supply-chain evidence review | [Bumblebee](https://github.com/Allura-Ecosystem/bumblebee) | Generated `bumblebee/` export |
+| Mortgage evidence review | [Mortagate](https://github.com/Allura-Ecosystem/mortagate) | Generated `packages/mortagate-cowork/` export |
+| Native Hermes teams | [Hermes Team RAM + Durham](https://github.com/Allura-Ecosystem/hermes-team-ram-durham) | Link to a separate native plugin |
+| Governed memory | [Allura Memory](https://github.com/Allura-Ecosystem/Allura_Memory) | Linked service and Hermes provider integration |
+
+## Shared operating contract
+
+Allura workflows require scoped context, truthful execution claims, validation evidence, and respect for human authority. Memory operations use the authorized project's `group_id`; a valid tenant name alone grants no access. Episodic traces remain evidence, and semantic promotion requires human review. A plugin definition is not proof that a runtime, tool, or memory write ran successfully.
+
+The task packages document their own dependencies and limits. Prompt Bot and CorpLawyer here are Git-owned compatibility packages; publishing or installing them does not update the owner's separate account GPTs.
+
+## What this repository owns
+
+This repository owns distribution metadata, source locks, catalog checks, and release evidence. Standalone repositories own their generated package content and exporters. Cowork and the packages under `plugins/` have source in this catalog.
+
+[`source-locks.json`](source-locks.json) pins generated exports to full commits. [`harness-sync.sh`](harness-sync.sh) imports only the locked public source. Make changes in the owning repository before regenerating its catalog directory.
 
 ## Updating the catalog
 
-The default command and `--dry-run` both run read-only local metadata, manifest,
-and model audits. They do not install plugins or modify runtime caches or user settings.
+The default command and `--dry-run` audit local metadata, manifests, and model policy without changing installed plugins:
 
 ```bash
 bash scripts/plugins-update-all.sh
 bash scripts/plugins-update-all.sh --dry-run
 ```
 
-To also verify a pinned export against committed local source, supply its source ID
-and checkout. Audit mode requires a local binding for every selected export:
+Check a pinned export against a committed local source checkout:
 
 ```bash
 bash scripts/plugins-update-all.sh --dry-run --package team-ram \
   --source team-ram=/path/to/allura-team-ram
 ```
 
-Explicit `--sync` regenerates selected repository exports from the locked commits,
-synchronizes repository marketplace metadata, and reruns validation:
+Explicit sync regenerates the selected export from its locked commit, updates marketplace metadata, and runs validation:
 
 ```bash
 bash scripts/plugins-update-all.sh --sync --package team-ram \
   --source team-ram=/path/to/allura-team-ram
 ```
 
-Repeat `--package` and `--source` to select additional source exports. Without a
-local binding, explicit sync may fetch the locked source repository. Source pins
-must be published separately before remote consumers can fetch them. The updater
-never installs the external Hermes team plugin, pulls installed marketplaces, clears
-caches, restarts runtimes, or rewrites user configuration. Runtime installation
-flags such as `--runtime` are rejected; use `--help` for the supported options.
+Repeat `--package` and `--source` for other exports. Audit mode needs a local source binding for each selected export; explicit sync may fetch locked public sources when no binding is supplied. Publish source pins before remote consumers need them. These scripts update the repository, not installed marketplaces, caches, runtimes, or user configuration. Runtime installation flags such as `--runtime` are rejected; see `--help`.
 
 ## Model governance
 
-[`docs/models.yaml`](docs/models.yaml) defines catalog policy and points to the
-owning source registries. Agents inherit the configured host model by default.
-Explicit supported overrides belong in canonical source, followed by validation,
-a new commit pin, and export regeneration. The catalog never rewrites generated
-agent bindings or installed copies.
+Agents inherit the configured host model by default. [`docs/models.yaml`](docs/models.yaml) points to source-owned policy. Supported overrides belong in canonical source, followed by validation, a new commit pin, and regeneration.
 
 ```bash
 bash scripts/models-update-all.sh --dry-run
@@ -334,12 +234,7 @@ bash scripts/models-eval.sh --dry-run
 bash scripts/models-performance.sh --dry-run
 ```
 
-The first command audits inheritance. The other two print benchmark plans with
-`status: not-run`; without `--dry-run` they return an error because no benchmark
-execution or telemetry backend is configured by these scripts. They do not produce
-simulated success, token costs, or performance measurements. Compare candidate models
-using actual accepted outcomes, retries, latency, cost, and review evidence under
-matching task conditions.
+The first command audits bindings. The other two print plans with `status: not-run`; without `--dry-run` they fail because no benchmark or telemetry backend is configured. They do not measure model quality, latency, or cost. See [adaptive release guidance](docs/ADAPTIVE-RELEASE.md) for context reuse, review routes, and evidence requirements.
 
 ## Validation
 
@@ -347,145 +242,61 @@ matching task conditions.
 
 | Command | What it checks |
 |---|---|
-| `bash scripts/commands-audit.sh` | Orphan commands, manifest format, frontmatter, and cross-plugin collisions |
-| `bash scripts/models-update-all.sh --dry-run` | Model assignment drift without mutation |
-| `bash scripts/models-eval.sh --dry-run` | Benchmark plan only; no evaluation is executed |
-| `bash scripts/plugins-update-all.sh --dry-run` | Read-only local metadata, manifest, and model audits |
-| `./harness-sync.sh --check` | Public source commit availability, deterministic regeneration, provenance, versions, aliases, forbidden files, and byte/hash drift |
-| `gitleaks detect --no-git --source . --config .gitleaks.toml` | Generated-output and catalog secret scan |
+| `python3 scripts/validate_manifests.py` | Manifests, runtime identities, versions, and package contracts |
+| `bash scripts/commands-audit.sh` | Commands, frontmatter, and cross-plugin collisions |
+| `bash scripts/plugins-update-all.sh --dry-run` | Local metadata, manifests, and model policy |
+| `./harness-sync.sh --check` | Locked source availability, deterministic exports, provenance, allowlists, and drift |
+| `gitleaks detect --no-git --source . --config .gitleaks.toml` | Secrets in catalog and generated output |
 
-CI runs the source-export verifier, manifest validator, command audit, JSON/YAML/shell parsing, gitleaks, and package smoke checks. Model benchmark plans are not execution evidence. Native runtime installation and behavioral checks remain separate from catalog audits.
-
-### Current CI coverage
-
-The [`.github/workflows/ci.yml`](.github/workflows/ci.yml) checks:
-
-- every locked public source commit can be cloned and regenerated through its canonical exporter/contract with no catalog drift;
-- provenance, allowlists, per-file hashes, generated-file inventories, runtime distinctions, compatibility aliases, and applicable version parity;
-- the Claude marketplace parses and each listed source resolves inside the repository;
-- the Hermes-native `plugins/hermes-allura-brain/plugin.yaml` declares a valid `allura-brain` provider identity, version, and description;
-- Claude marketplace versions match the corresponding Claude `plugin.json` versions;
-- explicitly listed Claude agent paths and all declared Claude command paths exist; list-valued agent manifests and top-level command directories have no on-disk orphans, and nested command definitions are rejected;
-- shipped marketplace plugin directories do not contain the workflow's machine-path patterns or prohibited embedded runtime-config directories;
-- repository JSON parses, YAML loads, and shell scripts pass `bash -n`;
-- the root README and LICENSE exist; and
-- gitleaks reports no unallowlisted findings across the entire checked-out catalog;
-- command audits and package-specific Allura Cowork/Mortagate smoke checks pass.
-
-CI cannot prove optional external integrations, native installation into every locally available runtime, or live cross-runtime behavioral parity. Those require release-environment evidence; CI does not turn a structural package check into a runtime-execution claim.
+[CI](.github/workflows/ci.yml) also checks JSON, YAML, shell syntax, declared paths, runtime exclusions, prohibited embedded configuration, and package smoke checks. It cannot establish live integration access or behavior in every runtime.
 
 ### October 19 runtime evidence
 
-The [dated release receipt](evidence/menu-corplawyer-2026-10-19.json) records five
-actual Hermes conversation checks: menu, direct work, stopping on a simulated scope denial,
-honest Council unavailability, and a fictional supplied-contract review. Native
-Claude package validation passed, while a Claude conversation check was blocked
-by expired OAuth authentication. Live legal research, real matter continuity,
-human usability, and native live multi-agent Council execution remain unverified.
-These observations describe those runs; a GitHub merge does not install a plugin
-or establish a new runtime result.
+The [October 19 release receipt](evidence/menu-corplawyer-2026-10-19.json) records five actual Hermes conversation checks: menu, direct work, a simulated scope denial, honest Council unavailability, and a fictional contract review. Native Claude package validation passed; its conversation check was blocked by expired OAuth. Live legal research, real matter continuity, human usability, and native live multi-agent Council execution remain unverified. The [October 13 receipt](evidence/native-rollout-2026-10-13.json) is historical. Neither receipt proves installation of a later revision.
 
 ### Package checks
 
-Allura Cowork:
+From the catalog root, check Cowork with:
 
 ```bash
 python3 allura-cowork/scripts/validate_plugin.py allura-cowork
 python3 allura-cowork/scripts/run_evals.py allura-cowork
 ```
 
-Team Durham's validation skills and Team RAM Coding's review gates are documented in their package READMEs and skill folders. These are available validation definitions, not evidence that CI ran them. A manifest parsing successfully is necessary, but it is not sufficient evidence that every command, hook, dependency, runtime, or external integration works.
+Other package READMEs document their checks. Offline fixtures check instruction and package contracts; actual runtime claims need observed runtime results.
 
 ### Definition of ready
 
-A generated plugin release is ready for catalog review only when:
-
-1. the standalone source repository and exact public full SHA are locked;
-2. its canonical manifest/contract and exporter regenerate the destination with zero drift or unexpected files;
-3. generated provenance and per-file inventories required by the source contract validate;
-4. Claude/Codex manifests and marketplace aliases resolve without modifying generated source identities;
-5. applicable marketplace/runtime/package versions match the machine-readable lock;
-6. commands, JSON, YAML, shell, package smoke, and gitleaks checks pass;
-7. optional dependencies, degraded behavior, exclusions, and runtime distinctions are documented; and
-8. runtime-ready claims beyond CI are backed by evidence from the actual target runtime.
+A generated release is ready for catalog review when its published source commit and contract are locked; regeneration produces no unexpected files or drift; provenance, versions, aliases, and manifests agree; applicable parsing, package, and secret checks pass; and dependencies and limits are documented. Runtime-ready claims additionally require evidence from the target runtime.
 
 ## Plugin anatomy
 
-```text
-<plugin>/
-├── .claude-plugin/plugin.json   Claude package manifest
-├── .codex-plugin/plugin.json    Codex package manifest
-├── agents/                      specialist role definitions
-├── commands/                    user-invoked workflows
-├── skills/                      reusable operating instructions
-├── hooks/                       optional lifecycle hooks
-├── scripts/                     validation and package tooling
-├── evals/                       behavior fixtures
-└── README.md                    package-specific contract
-```
-
-Not every package needs every directory. Keep the manifest surface as small as the product requires.
+A portable package may contain manifests in `.claude-plugin/` and `.codex-plugin/`, with `agents/`, `commands/`, `skills/`, and optional `hooks/`. Validation tools and fixtures live in `scripts/`, `examples/`, or `evals/`. Each package README explains its contract. Native Hermes and Microsoft packages use their own layouts.
 
 ## Repository map
 
-```text
-allura-plugins/
-├── .claude-plugin/marketplace.json   Claude marketplace catalog
-├── .agents/plugins/marketplace.json  Codex portable marketplace catalog
-├── allura-cowork/                    coordination and handoff plugin
-├── team-durham/                      generated Team Durham distribution
-├── team-ram-coding/                  generated Team RAM distribution (compatibility alias)
-├── packages/mortagate-cowork/        generated Microsoft Cowork distribution (not Claude marketplace)
-├── plugins/hermes-allura-brain/       Hermes-native Allura Brain provider
-├── plugins/prompt-optimization-bot/   prompt refinement skills for Claude/Hermes
-├── plugins/corplawyer-bot/            six legal workflow skills for Claude/Hermes
-├── plugins/team-durham-app-audit/     read-only brand and UX audit skill
-├── evidence/                         dated source and runtime verification receipts
-├── source-locks.json                  public repo/SHA/export/runtime/alias locks
-├── harness-sync.sh                    pinned source -> catalog check/sync entrypoint
-├── _bmad/bmm/                         catalog-local epics and stories
-├── allura/                           internal README asset/guidance pack
-├── docs/models.yaml                  source-owned model policy
-├── docs/images/                      README brand assets
-├── scripts/                          update, audit, and eval tooling
-└── evals/fixtures/                   shared evaluation fixtures
-```
+| Path | Contents |
+|---|---|
+| `.claude-plugin/marketplace.json` | Claude catalog |
+| `.agents/plugins/marketplace.json` | Codex portable catalog |
+| `allura-cowork/` | Coordination plugin source |
+| `team-durham/`, `team-ram-coding/`, `bumblebee/` | Generated portable packages |
+| `packages/mortagate-cowork/` | Generated Microsoft Cowork package |
+| `plugins/` | Hermes memory provider and Claude/Hermes task skills |
+| `source-locks.json`, `harness-sync.sh` | Pinned export contracts and synchronization |
+| `evidence/` | Dated source and runtime receipts |
+| `docs/`, `scripts/`, `evals/fixtures/` | Guidance, catalog tooling, and fixtures |
+| `allura/` | Internal README assets and guidance |
+| `_bmad/bmm/` | Catalog-local epics and stories |
 
 ## Contributing
 
-- Make Team RAM, Team Durham, Mortagate, and Allura Memory content changes in their standalone owning repositories, never in generated catalog exports.
-- Update both Claude and Codex manifests in the standalone source when that public surface changes, then regenerate.
-- Add commands explicitly rather than relying on broad globs.
-- Keep secrets and credentials out of manifests, prompts, examples, and test output.
-- Preserve user changes in dirty worktrees.
-- Run the narrowest relevant validation first, then the catalog checks.
-- Document external dependencies as optional unless the plugin cannot function without them.
+Edit generated package content in its standalone source repository, then update the pin and regenerate. Preserve source identities and existing user changes. Declare commands explicitly, keep secrets out of all package content and output, and run checks appropriate to the change. Document integrations as optional unless the package requires them.
 
 ## Brand system
 
-The plugin catalog uses the canonical Allura visual language:
-
-- Allura Blue `#0D47A1` — intelligence and coordination
-- Allura Orange `#FF4D1F` — clarity and creative decision
-- Allura Green `#14BA4B` — connection and delivery
-- Allura Ink `#0F1720` — technical structure
-- Allura Cream `#F7F3EE` — readable editorial space
-- Aeonik — display, heading, and body typography
-- IBM Plex Mono — code and technical identifiers
+Use the [official Allura wordmark](allura/assets/logo.png) and a flat, legible layout. The unmodified asset is linked here so readers can inspect it independently of GitHub's page theme. The palette is Blue `#0D47A1` for memory and intelligence, Orange `#FF4D1F` for clarity and review, Green `#148A4B` for connection and approved knowledge, Ink `#0F1720` for structure, and Cream `#F7F3EE` for ground. Use Aeonik where available, a neutral sans-serif fallback otherwise, and IBM Plex Mono for technical labels. Label meaning in text as well as color.
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
----
-
-<p align="center">
-  <strong>Coordinate clearly. Create deliberately. Build with evidence.</strong>
-</p>
-
-## Adaptive workflow upgrade
-
-See [release evidence and rollout boundaries](docs/ADAPTIVE-RELEASE.md) for risk-based
-routes, context reuse, model inheritance, source pins, and validation limits.
-The catalog model scripts audit source-owned bindings; they never rewrite generated
-agents or report simulated benchmarks as successful model evaluations.

@@ -15,7 +15,7 @@
         "team-ram-harness"
       ],
       "repository": "https://github.com/Allura-Ecosystem/allura-team-ram.git",
-      "commit": "3d806a0a08b91986d5040a12d2981f1906793201",
+      "commit": "2f929bfe6ab6a6b469735e92c23db0e23af92515",
       "manifest": "PUBLIC_EXPORT.json",
       "exporter": "scripts/export-public.mjs",
       "destination": "team-ram-coding",
@@ -34,7 +34,7 @@
         "durham"
       ],
       "repository": "https://github.com/Allura-Ecosystem/team-durham.git",
-      "commit": "d3b86da46c1a65eebcb797b0d6fef51a0723407c",
+      "commit": "daca3b3ed4ace1937ab5e6947f19b68f2d0389d9",
       "manifest": "export-manifest.json",
       "exporter": "scripts/export_catalog.py",
       "destination": "team-durham",
@@ -55,7 +55,7 @@
         "mortgate-cowork"
       ],
       "repository": "https://github.com/Allura-Ecosystem/mortagate.git",
-      "commit": "22342172beb6286207617bbfa5e67bd4ab913fb5",
+      "commit": "d8df8e809eef219c9e7d20e2069a56a096703653",
       "manifest": "catalog-export.json",
       "exporter": "contract-allowlist",
       "sourceRoot": "microsoft-cowork",
@@ -75,7 +75,7 @@
         "bumblebee"
       ],
       "repository": "https://github.com/Allura-Ecosystem/bumblebee.git",
-      "commit": "207496c24cec4f1199a02f236605b626db567a2e",
+      "commit": "c54c2f3ead84fa3c1c5b2bd0f9d017ea5ad148bc",
       "manifest": "package.json",
       "exporter": "package-files",
       "destination": "bumblebee",
