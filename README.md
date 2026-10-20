@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="allura/assets/logo.png" alt="Allura" width="360" />
-</p>
-
 <h1 align="center">Allura Plugins</h1>
 
 <p align="center">
@@ -303,7 +299,7 @@ Edit generated package content in its standalone source repository, then update 
 
 ## Brand system
 
-Use the official Allura mark and a flat, legible layout. The palette is Blue `#0D47A1` for memory and intelligence, Orange `#FF4D1F` for clarity and review, Green `#148A4B` for connection and approved knowledge, Ink `#0F1720` for structure, and Cream `#F7F3EE` for ground. Use Aeonik where available, a neutral sans-serif fallback otherwise, and IBM Plex Mono for technical labels. Label meaning in text as well as color.
+Use the [official Allura wordmark](allura/assets/logo.png) and a flat, legible layout. The unmodified asset is linked here so readers can inspect it independently of GitHub's page theme. The palette is Blue `#0D47A1` for memory and intelligence, Orange `#FF4D1F` for clarity and review, Green `#148A4B` for connection and approved knowledge, Ink `#0F1720` for structure, and Cream `#F7F3EE` for ground. Use Aeonik where available, a neutral sans-serif fallback otherwise, and IBM Plex Mono for technical labels. Label meaning in text as well as color.
 
 ## License
 
