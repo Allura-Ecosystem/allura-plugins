@@ -23,13 +23,13 @@
     {
       "kind": "file",
       "path": "README.md",
-      "sha256": "db52c499d9633bc332287911e423c001901773c77a20cb2e1766ce1eee1df36f",
-      "size": 13360
+      "sha256": "8207798fb5a9ebc577248525184539e8c6f60d225b1763fce3f98e7ad4f0176e",
+      "size": 6271
     },
     {
       "kind": "file",
       "path": "SOURCE.json",
-      "sha256": "187669c4688a8a19272f8ac818d54b2823112ba01abceb8be8c9cd475b17d053",
+      "sha256": "8a3c7f833f66fec2b90fb0861b10eb5bcdddeb576586d2eea9df38042269a5c6",
       "size": 199
     },
     {
@@ -130,6 +130,6 @@
     }
   ],
   "generated": true,
-  "sourceCommit": "207496c24cec4f1199a02f236605b626db567a2e",
+  "sourceCommit": "46e49720d0160e6d9f52d138a253c9e15c092b0c",
   "sourceRepository": "https://github.com/Allura-Ecosystem/bumblebee.git"
 }

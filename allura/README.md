@@ -1,10 +1,11 @@
 # Allura Internal Support Pack
 
+README assets and bounded writing/context guidance used inside the Allura plugin catalog.
+
 ## Internal support status
 
-`allura/` is internal Codex support material for the Allura catalog. It is **not marketplace-releasable** and is excluded from public package validation until it has a complete runtime manifest, package contract, and release evidence.
+This directory is **not marketplace-releasable**. It is internal Codex support material and is excluded from public package validation. Version `0.1.1` resolves manifest placeholders; that change does not publish a plugin.
 
-It must not be installed or described as a public Claude/Codex plugin. Public portable packages are limited to `allura-cowork/`, `team-durham/`, `team-ram-coding/`, and `bumblebee/`; the Hermes provider uses its separate native-provider contract.
+Use the [public catalog](../README.md#catalog) to choose an installable package. Claude and Codex share Cowork, Durham, RAM, and Bumblebee. The catalog also documents separate Claude/Hermes task skills and native runtime packages.
 
-Version 0.1.1 removes manifest placeholders and adds bounded writer/context guidance.
-This remains an internal support pack; no public marketplace promotion is implied.
+The support pack needs a complete public runtime contract and release evidence before it can be offered for installation.

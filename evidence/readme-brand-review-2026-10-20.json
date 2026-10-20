@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-20",
+  "project": "allura-plugins",
+  "group_id": "allura-system",
+  "status": "copy-reviewed-render-review-pending",
+  "user_priority": "Clarity and consistent Allura branding",
+  "optimized_brief": "Have Team Durham audit the Allura plugin catalog READMEs and their infographics, then improve clarity, navigation, and consistent Allura branding. Use the approved brand identity and current repository evidence. Give each README a clear purpose, audience, install/use path and limits; make every visual explain one verified relationship with readable labels and alt text. Edit generated packages only through their owning source and exporter. Keep capability and runtime claims evidence-based. Have Munari independently review the result; return changed artifacts, checks, and remaining gaps.",
+  "scope": {
+    "catalog_markdown_readmes": 18,
+    "linked_native_hermes_readmes": 1,
+    "infographics_actually_viewed": 19,
+    "logo_files_actually_viewed": 2,
+    "excluded": [
+      "An organization-wide repository audit",
+      "Historical evaluation input changes",
+      "New positioning, naming or logo design",
+      "Runtime installation or account GPT updates",
+      "New runtime, agent, provider or permission behavior"
+    ]
+  },
+  "approved_brand_inputs": {
+    "source": "User-supplied Allura Brand Guidelines, dated 2026-08-15, as recorded by the installed allura-brand skill and its brand-guidelines, production-gate and approved-layout-exemplars references",
+    "positioning": "Allura is the sovereign memory layer for AI. Memory is the foundation and intelligence is the outcome.",
+    "audience_for_this_documentation": "AI workspace users choosing and installing workflow plugins, and maintainers checking source ownership and release evidence",
+    "audience_basis": "Existing catalog purpose and package contracts; this documentation interpretation is not a new market segmentation study",
+    "strategy_changed": false,
+    "voice": "Intelligent, clear, confident, human and technically credible; short specific copy with human accountability",
+    "palette": {
+      "blue": "#0D47A1",
+      "orange": "#FF4D1F",
+      "green": "#148A4B",
+      "ink": "#0F1720",
+      "cream": "#F7F3EE"
+    },
+    "visual_constraints": [
+      "Use the official unmodified wordmark",
+      "Flat modular forms with deliberate whitespace",
+      "No gradients, shadows, glow, isometric blocks or fake UI",
+      "Editable factual labels with adjacent source context",
+      "Do not communicate meaning through color alone"
+    ]
+  },
+  "shared_memory_hydration": {
+    "group_id": "allura-system",
+    "query": "Allura brand README infographics approved palette positioning decisions blockers outcomes",
+    "status_filter": "all",
+    "result_count": 5,
+    "relevant_recent_brand_records_found": 0,
+    "finding": "The search returned unrelated historical graph results. Production uses the approved local brand source and fresh repository evidence.",
+    "reused_by_specialists": true,
+    "outcome_write_owner": "root",
+    "outcome_status": "pending",
+    "semantic_promotion_requested": false
+  },
+  "readme_inventory": [
+    {
+      "path": "README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Maintainer detail precedes plugin choice and installation; repeated capability explanations; incorrect Green token; three failing raster embeds."
+    },
+    {
+      "path": "allura-cowork/README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Clarify purpose, first use and runtime limits; correct validation examples that incorrectly prefix the package with plugins/."
+    },
+    {
+      "path": "allura/README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Keep internal support status explicit and distinguish retained historical artwork from approved documentation assets."
+    },
+    {
+      "path": "packages/README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Correct stale 19-file Mortagate inventory to the 23-file source contract and clarify runtime-neutral distribution."
+    },
+    {
+      "path": "plugins/hermes-allura-brain/README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Add an installation prerequisite before configuration; use --no-enable before deliberate provider selection and retain explicit tenant and credential requirements."
+    },
+    {
+      "path": "plugins/prompt-optimization-bot/README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Lead with prompt refinement and a usable example; retain account GPT and native runtime distinctions."
+    },
+    {
+      "path": "plugins/corplawyer-bot/README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Make intake, review and counsel handoff easy to choose; preserve research, legal, memory and separate account GPT limits."
+    },
+    {
+      "path": "plugins/team-durham-app-audit/README.md",
+      "source_owner": "allura-plugins",
+      "review_status": "reviewed",
+      "change_status": "changed",
+      "findings": "Explain authorized read-only audit inputs and outputs; do not imply that installing the skill supplies browser or memory tools."
+    },
+    {
+      "path": "team-ram-coding/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/allura-team-ram",
+      "source_path": "README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Six missing image references and universal audit/permission claims delay the setup path; clarify host-supplied execution and optional Brain continuity."
+    },
+    {
+      "path": "team-ram-coding/.claude-plugin/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/allura-team-ram",
+      "source_path": ".claude-plugin/README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Stale marketplace instructions point to Allura_Memory; replace ambiguous persona framing and quote with the current source/install contract."
+    },
+    {
+      "path": "team-ram-coding/tooling/agent-sync/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/allura-team-ram",
+      "source_path": "tooling/agent-sync/README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Placeholder model IDs and old needs-shell TODOs conflict with current configured-host inheritance; describe the existing generator accurately."
+    },
+    {
+      "path": "team-durham/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/team-durham",
+      "source_path": "README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Six generic infrastructure panels obscure brand workflow; absolute enforcement and forever-history claims exceed optional integrations and observed evidence."
+    },
+    {
+      "path": "team-durham/bmad-module/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/team-durham",
+      "source_path": "bmad-module/README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Clarify that the authorized project controls tenant scope; selecting Durham does not grant a tenant."
+    },
+    {
+      "path": "team-durham/governance/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/team-durham",
+      "source_path": "governance/README.md",
+      "review_status": "reviewed",
+      "change_status": "unchanged",
+      "findings": "Concise authority, precedence and adaptive workflow references are suitable for this technical index."
+    },
+    {
+      "path": "team-durham/evals/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/team-durham",
+      "source_path": "evals/README.md",
+      "review_status": "reviewed",
+      "change_status": "unchanged",
+      "findings": "Clearly distinguishes historical snapshots, structural prompt checks and unmeasured live behavior."
+    },
+    {
+      "path": "team-durham/evals/archive/persona-20261016/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/team-durham",
+      "source_path": "evals/archive/persona-20261016/README.md",
+      "review_status": "reviewed",
+      "change_status": "historical-preserved",
+      "findings": "Byte-pinned historical input; explicitly states it is not the current roster or behavioral validation."
+    },
+    {
+      "path": "bumblebee/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/bumblebee",
+      "source_path": "README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Clarify the installed evidence-review skill versus separately deployed scanner/server implementation; remove six failing raster panels and label historical validation."
+    },
+    {
+      "path": "packages/mortagate-cowork/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/mortagate",
+      "source_path": "microsoft-cowork/README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Published catalog described as unpublished; source-root paths break in exported package; pitch/competitor language precedes the employee workflow."
+    },
+    {
+      "path": "https://github.com/Allura-Ecosystem/hermes-team-ram-durham/blob/main/README.md",
+      "source_owner": "https://github.com/Allura-Ecosystem/hermes-team-ram-durham",
+      "source_path": "README.md",
+      "review_status": "reviewed",
+      "change_status": "changed-at-source-awaiting-export",
+      "findings": "Apply the same purpose, installation, use and limits structure while preserving native routing semantics."
+    }
+  ],
+  "visual_review": {
+    "reviewer": "/root/durham_readme_owner/glaser_readme_visuals",
+    "method": "Actual image files opened through the image-view tool; text claims compared with the approved brand gate and relevant README context.",
+    "overall_verdict": "revise",
+    "original_infographics_production_approved": false,
+    "asset_deletion_authorized_or_performed": false,
+    "new_generated_artwork_required": false,
+    "recommendation": "Preserve existing files, remove failing raster panels from current README reading paths, and use compact source-linked editable diagrams with ordinary text explanations.",
+    "readability_observation": "At declared 900px width, headings remain readable but detailed labels and footers become small. Six consecutive panels occupy approximately 3400 vertical pixels before surrounding text.",
+    "official_mark": {
+      "path": "allura/assets/logo.png",
+      "sha256": "37617ec2d15503a2d0bbe9b7bf8a9693813b468b0b850b2b97979ab08ce1a733",
+      "comparison": "Byte-identical to the official allura-wordmark.png supplied by the approved brand skill",
+      "disposition": "keep-unmodified",
+      "finding": "Transparent margins reduce a 180px image element to an approximately 88px visible mark. Increase display width without modifying the asset."
+    },
+    "infographics": [
+      {
+        "path": "docs/images/infographic-plugin-system-v3.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Useful three-package relationship, but raster labels, gradient fills and Claude/Codex-only runtime coverage need a current editable package map."
+      },
+      {
+        "path": "docs/images/allura-agent-runtime.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "IMAGE X OF 6 placeholder, IMPLEMENTED badge, repetitive loop/sequence and small explanation strip."
+      },
+      {
+        "path": "docs/images/allura-governance-flow.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Rules-to-every-action and immutable-lineage claims overstate what a plugin installation establishes."
+      },
+      {
+        "path": "team-durham/docs/images/framework-and-harness.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Perspective pedestal and gradients fail the visual gate; four infrastructure quadrants contradict the README's five-pillar brand workflow description."
+      },
+      {
+        "path": "team-durham/docs/images/agent-runtime-request-flow.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Generic runtime illustration does not show the brief, discovery, strategy and production stages claimed in its alt text."
+      },
+      {
+        "path": "team-durham/docs/images/test-before-release.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Arrow goes directly from Run to Release, bypassing Evidence/Review; gradients and implementation markers are also present."
+      },
+      {
+        "path": "team-durham/docs/images/people-review-important-changes.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Canonical-memory approval is presented as the brand workflow; flattened labels and badges cannot be maintained independently."
+      },
+      {
+        "path": "team-durham/docs/images/memory-keeps-its-history.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Presents version lineage as implemented without distinguishing the required contract from currently available update behavior."
+      },
+      {
+        "path": "team-durham/docs/images/an-answer-can-show-its-work.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Approved-memory labels, attached decisions and implementation markers imply evidence exists for every answer."
+      },
+      {
+        "path": "bumblebee/docs/images/allura-bumblebee-scan-to-trusted-exposure-v1.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Eight narrow stages and raster labels crowd README width; the platform pipeline needs qualification separate from the installed skill."
+      },
+      {
+        "path": "bumblebee/docs/images/allura-bumblebee-zero-trust-by-design-v1.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Repeats adjacent controls without clarifying that the skill package supplies no scanner or server."
+      },
+      {
+        "path": "bumblebee/docs/images/allura-bumblebee-role-based-access-v1.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Small credential details and unlabeled fictional tenant/workspace examples make server controls appear to be package guarantees."
+      },
+      {
+        "path": "bumblebee/docs/images/allura-bumblebee-vulnerability-proves-itself-v1.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Useful verified-versus-unverified distinction, but all-evidence-verified language requires qualification and a precise source."
+      },
+      {
+        "path": "bumblebee/docs/images/allura-bumblebee-trusted-inventory-v1.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Dense branching, tiny footer, absolute never claim and redundant inventory boxes."
+      },
+      {
+        "path": "bumblebee/docs/images/allura-bumblebee-governance-layer-v1.png",
+        "usage_at_review": "referenced",
+        "disposition": "remove-current-embed-preserve-file",
+        "finding": "Observe-everything, immutable-proof and trusted-identities-across-every-layer wording gives unsupported universal assurances."
+      },
+      {
+        "path": "allura/assets/infographic.png",
+        "usage_at_review": "dormant",
+        "disposition": "keep-unpublished-preserve-file",
+        "finding": "Unapproved gold, shadows, no official mark and unsupported trust-by-default, rollback and audit-ready claims."
+      },
+      {
+        "path": "allura/assets/readme-hero.png",
+        "usage_at_review": "dormant",
+        "disposition": "keep-unpublished-preserve-file",
+        "finding": "Fake approval interface states HUMAN REVIEW / Approved by brooks-agent and depicts illustrative receipts, model selection and success states without execution evidence."
+      },
+      {
+        "path": "allura/assets/readme-allura-brain.png",
+        "usage_at_review": "dormant",
+        "disposition": "keep-unpublished-preserve-file",
+        "finding": "Obsolete Neo4j semantic-graph label, unapproved gold and small raster explanation strips."
+      },
+      {
+        "path": "allura/assets/readme-memory-flow.png",
+        "usage_at_review": "dormant",
+        "disposition": "keep-unpublished-preserve-file",
+        "finding": "Useful human-review branch, but unapproved gold, gradients and unsupported universal integrity/receipt claims prevent reuse unchanged."
+      }
+    ],
+    "missing_ram_references": [
+      "team-ram-coding/docs/images/specialists-move-as-one-team.png",
+      "team-ram-coding/docs/images/every-action-leaves-proof.png",
+      "team-ram-coding/docs/images/access-has-boundaries.png",
+      "team-ram-coding/docs/images/enterprise-governance-safety.png",
+      "team-ram-coding/docs/images/persistent-agent-memory.png",
+      "team-ram-coding/docs/images/ad50-canonical-graph-migration.png"
+    ],
+    "missing_ram_assets_reviewed": false
+  },
+  "actual_agent_invocations": [
+    {
+      "identity": "kotler",
+      "task": "/root/durham_readme_owner",
+      "responsibility": "Scoped strategy reuse, README inventory, specialist routing and evidence synthesis",
+      "status": "active"
+    },
+    {
+      "identity": "ogilvy",
+      "task": "/root/durham_readme_owner/ogilvy_readme_copy",
+      "responsibility": "Catalog-authored and owning-source README copy",
+      "status": "complete"
+    },
+    {
+      "identity": "glaser",
+      "task": "/root/durham_readme_owner/glaser_readme_visuals",
+      "responsibility": "Actual inspection and disposition of 19 infographic files and two logo files",
+      "status": "complete",
+      "artifact_changes": []
+    },
+    {
+      "identity": "munari",
+      "task": "/root/durham_readme_owner/munari_readme_review",
+      "responsibility": "Independent read-only review of the 19 README entries and retained visual presentation",
+      "status": "copy-review-complete-awaiting-render"
+    }
+  ],
+  "independent_qa": {
+    "reviewer": "munari",
+    "status": "copy-complete-render-pending",
+    "findings": [
+      {
+        "severity": "minor",
+        "path": "team-ram-coding/README.md",
+        "finding": "Relative links to ARCHITECTURE.md and CONTRIBUTING.md did not survive the source export allowlist.",
+        "producer": "ogilvy",
+        "fix": "Changed to canonical source repository URLs.",
+        "status": "resolved-independently-verified"
+      },
+      {
+        "severity": "minor",
+        "path": "bumblebee/README.md",
+        "finding": "Historical PostgreSQL, unit-test and acceptance-criteria counts lack a specific linked receipt.",
+        "producer": "ogilvy",
+        "fix": "Remove unsupported historical counts.",
+        "status": "resolved-independently-verified"
+      }
+    ],
+    "full_new_brand_rubric_claimed": false,
+    "automated_wcag_certification_claimed": false,
+    "human_usability_test_claimed": false,
+    "agent_qa_is_human_publication_approval": false,
+    "source_copy_verdict": "pass",
+    "reviewed_readme_count": 19,
+    "render_verdict": "pending",
+    "in_scope_open_copy_findings": 0,
+    "scope_note": "Scoped documentation review of 16 revised READMEs and three preserved indexes; not a new brand-kit score, runtime certification, WCAG certification or user study."
+  },
+  "publication": {
+    "status": "source-branches-pushed-catalog-review-pending",
+    "source_commits": {
+      "allura-team-ram": "2f929bfe6ab6a6b469735e92c23db0e23af92515",
+      "team-durham": "daca3b3ed4ace1937ab5e6947f19b68f2d0389d9",
+      "hermes-team-ram-durham": "f75e7a388b5c0233078e2f71ead90d18780d3812",
+      "bumblebee": "46e49720d0160e6d9f52d138a253c9e15c092b0c",
+      "mortagate": "d8df8e809eef219c9e7d20e2069a56a096703653"
+    },
+    "export_receipts": [
+      {
+        "source": "team-ram",
+        "entries": 156,
+        "status": "no-drift"
+      },
+      {
+        "source": "team-durham",
+        "entries": 311,
+        "status": "no-drift"
+      },
+      {
+        "source": "mortagate-cowork",
+        "entries": 24,
+        "status": "no-drift"
+      },
+      {
+        "source": "bumblebee",
+        "entries": 22,
+        "status": "no-drift"
+      }
+    ],
+    "checks": [
+      {
+        "check": "Catalog README relative paths and image alt text",
+        "result": "pass",
+        "readmes": 18,
+        "relative_links": 95,
+        "scope_limit": "Does not verify remote URLs, fragment anchors, or rendered layout."
+      },
+      {
+        "check": "Source README relative paths and image alt text",
+        "result": "pass",
+        "readmes": 8
+      },
+      {
+        "check": "Catalog and source git diff --check",
+        "result": "pass"
+      },
+      {
+        "check": "Catalog metadata and manifests",
+        "result": "pass after export regeneration"
+      },
+      {
+        "check": "Durham repository and committed export validators",
+        "result": "pass"
+      },
+      {
+        "check": "RAM public export validator",
+        "result": "pass"
+      },
+      {
+        "check": "Mortagate catalog export, Cowork package, and markdown links",
+        "result": "pass"
+      },
+      {
+        "check": "Catalog and Durham gitleaks dir scans",
+        "result": "pass; no leaks found"
+      }
+    ],
+    "pull_requests": [],
+    "source_branch_policy": "Bumblebee and Mortagate documentation PRs target the existing codex/adaptive-team-workflows source branches already pinned by the catalog. Other source PRs target main."
+  },
+  "known_out_of_scope_drift": [
+    {
+      "source_owner": "https://github.com/Allura-Ecosystem/mortagate",
+      "path": "catalog-export.json",
+      "finding": "The owning source's validator still requires destination.status to be future-generated-export although the package is present in the published catalog.",
+      "disposition": "Correct the README's publication description using current catalog evidence; preserve the export contract and validator in this documentation-only task."
+    },
+    {
+      "path": "plugins/team-durham-app-audit/skills/app-audit/SKILL.md",
+      "finding": "Retained skill text describes Neo4j as a fallback, contrary to current project invariants.",
+      "disposition": "Reported to root for separate triage; not repeated in README copy. No skill behavior change included in this documentation slice."
+    },
+    {
+      "paths": [
+        "allura-cowork/docs/INSTALL.md",
+        "allura-cowork/skills/allura-cowork/SKILL.md"
+      ],
+      "finding": "Installation and handoff-validator examples still use the old plugins/allura-cowork/ catalog path.",
+      "disposition": "The refreshed README gives self-contained working install and validation paths. Supporting documents and skill behavior were not modified in this README task."
+    },
+    {
+      "source_owner": "https://github.com/Allura-Ecosystem/bumblebee",
+      "paths": [
+        ".claude-plugin/plugin.json",
+        ".codex-plugin/plugin.json"
+      ],
+      "finding": "Manifest descriptions present a scanner integration and downstream server capabilities while the shipped review skill supplies read-only review of provided evidence.",
+      "disposition": "The refreshed README explicitly separates the installed skill from the separately deployed scanner and server. No manifest or behavior changes are included."
+    }
+  ]
+}

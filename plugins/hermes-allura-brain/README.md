@@ -1,34 +1,38 @@
-# Allura Brain Memory Provider for Hermes
+# Allura Brain for Hermes
 
-Native Hermes memory-provider integration for Allura Brain. It complements the
-full native MCP server connection with lifecycle behavior:
+Connect Hermes to authorized project memory: recall relevant context before work and save concise outcomes after substantive turns.
 
-- recalls relevant explicitly configured tenant context before planning;
-- writes concise, sanitized outcomes after substantive primary-agent turns;
-- exposes `allura_recall`, `allura_remember`, and `allura_governance_check`;
-- refuses legacy tenants and non-canonical endpoints;
-- uses only `https://mcp.faithmeats.org/mcp`.
+This native provider complements a full Allura MCP connection. It exposes `allura_recall`, `allura_remember`, and `allura_governance_check`, using the configured tenant and authenticated identity. It connects only to `https://mcp.faithmeats.org/mcp`.
 
-## Required secret-scope values
+## Install
 
-Configure these through Hermes Secrets/Bitwarden or the active profile's
-`.env`; never put their values in `config.yaml` or this repository:
+Select the intended Hermes profile, then install from a committed catalog checkout:
+
+```bash
+git clone --branch main --single-branch https://github.com/Allura-Ecosystem/allura-plugins.git allura-plugin-release
+cd allura-plugin-release
+hermes plugins install "file://$(pwd)#plugins/hermes-allura-brain" --no-enable
+```
+
+`--no-enable` leaves activation for the configuration step below. Selecting this provider changes the profile's memory provider, so review the existing setting before activation.
+
+## Configure access
+
+### Required secret-scope values
+
+Store these in Hermes Secrets/Bitwarden or the active profile's `.env`. Keep their values out of `config.yaml` and this repository.
 
 - `ALLURA_MCP_TOKEN`
 - `ALLURA_CF_ACCESS_CLIENT_ID`
 - `ALLURA_CF_ACCESS_CLIENT_SECRET`
 
-The generic token has priority. For compatibility, only an explicit
-`allura-system` profile can use `ALLURA_MCP_TROY_DESKTOP_TOKEN`, and only an
-explicit `allura-faithmeats` profile can use `ALLURA_MCP_TROY_ADMIN_TOKEN`.
-There is no desktop-to-admin fallback and no fallback for other tenants.
+The generic token has priority. For compatibility, an explicitly configured `allura-system` profile can use `ALLURA_MCP_TROY_DESKTOP_TOKEN`; an explicitly configured `allura-faithmeats` profile can use `ALLURA_MCP_TROY_ADMIN_TOKEN`. There is no desktop-to-admin fallback or fallback for other tenants.
 
-## Non-secret profile config
+### Non-secret profile config
 
-`$HERMES_HOME/allura-brain.json` must contain an explicit authorized `group_id`
-matching `^allura-[a-z0-9-]+$`. There is no tenant default. Set the active profile
-path deliberately; existing explicit tenants remain unchanged. This example is
-only for a profile authorized for `allura-faithmeats`:
+Create `$HERMES_HOME/allura-brain.json` in the intended active profile. `group_id` must name an authorized tenant and match `^allura-[a-z0-9-]+$`. The provider has no tenant default.
+
+This example applies only to a profile authorized for `allura-faithmeats`:
 
 ```json
 {
@@ -39,12 +43,11 @@ only for a profile authorized for `allura-faithmeats`:
 }
 ```
 
-Missing/malformed configuration makes the provider unavailable. A different
-per-call tenant is rejected locally. Historical `agent_id` settings are ignored;
-authenticated transport owns identity. Writes send only `source` and
-`conversation_id` metadata; semantic promotion remains human governed.
+A valid tenant name alone grants no access. Missing or malformed configuration makes the provider unavailable; a different per-call tenant is rejected locally. Authenticated transport supplies identity, and historical `agent_id` settings are ignored.
 
-Activate with:
+## Activate and check
+
+Once the profile's tenant and secrets are configured, deliberately select Allura Brain as its memory provider:
 
 ```bash
 hermes plugins enable allura-brain
@@ -53,34 +56,24 @@ hermes allura-brain status
 hermes allura-brain test
 ```
 
-The test command performs an authenticated read-only search. It never prints
-credential values and does not create test memories.
+The test performs an authenticated read-only search. It does not create a test memory or print credential values. A successful search establishes that operation's result; it does not prove a later write succeeded.
+
+## Memory behavior
+
+The provider attempts relevant recall before planning and concise, sanitized outcome persistence after substantive primary-agent turns. The default `outcomes_only` mode retains a bounded summary rather than a full transcript. Supported modes are `off`, `outcomes_only`, and `full`; choose retention deliberately. Writes send `source` and `conversation_id` metadata. Semantic promotion remains subject to human review.
+
+Workers on the same authorized task can reuse a fresh recall receipt containing the query, retrieval time, source IDs, and scope. Refresh changed or contradictory facts. This is coordination guidance; the provider does not implement a cross-session cache or choose models.
 
 ## Package Contract
 
 ### Native provider manifest
 
-This is a Hermes-native provider, declared by `plugin.yaml` as
-`allura-brain` version `0.3.0`. It is not a Claude marketplace package and does
-not implement the Claude/Codex package-manifest contract.
+`plugin.yaml` declares the Hermes identity `allura-brain`, version `0.3.0`. This is a native Hermes provider, not a Claude or Codex marketplace package.
 
 ### Validation
 
-Run `python3 scripts/validate_manifests.py` from the catalog root for native
-manifest and package-contract validation. In a Hermes runtime, use
-`hermes allura-brain test` for the authenticated, read-only provider check.
+From the catalog root, run `python3 scripts/validate_manifests.py` for manifest and package-contract checks. In a configured Hermes profile, run `hermes allura-brain test` for the authenticated read-only check.
 
 ### Dependencies and degraded behavior
 
-The provider requires the three secret-scope values listed above and the
-canonical public MCP tunnel. Without them it remains unavailable; it does not
-fall back to a local endpoint or report ambient recall/persistence as complete.
-
-## Context reuse across team work
-
-Pass a compact recall receipt to authorized workers in the same project and tenant
-instead of asking every persona to repeat the same retrieval. Record query,
-retrieval time, source IDs and task scope; refresh changed or contradictory facts.
-Authorization and live governance checks still run at the protected operation.
-This is orchestration guidance; this provider does not implement a cross-session
-cache or choose models. No model or runtime configuration changes are performed by this source release.
+The provider needs an explicit authorized tenant, the required secrets, and access to the canonical public MCP tunnel. Missing access leaves it unavailable; failures do not authorize another tenant, identity, credential, or local endpoint. Report recall and persistence only when their actual results support those claims.

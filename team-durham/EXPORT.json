@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "da46b30fc4ead7210b8c7b31fd56b2e7c3e6f734bc8ff327fecb84b857a48fd1",
-      "size": 9899
+      "sha256": "6b4fb7bf4872d370db84951eb140b9452f450cea2137bf8344a079649cc23fc4",
+      "size": 8217
     },
     {
       "path": "SECURITY.md",
@@ -42,7 +42,7 @@
     },
     {
       "path": "SOURCE.json",
-      "sha256": "810cb74c4de16b9414c30075742f0d6a8d1ab0209944e1bdb27ad5b699ce2c33",
+      "sha256": "1e078d2da87f64d0afaf775a9b9c6804c343162a83a5e4d59376d7aa4ada9267",
       "size": 749
     },
     {
@@ -87,8 +87,8 @@
     },
     {
       "path": "bmad-module/README.md",
-      "sha256": "df349e11f5cc50b494e4e0d2b02d21091e2c82a261f35c0b4c00dea701bbc67a",
-      "size": 1065
+      "sha256": "8c566f34b54da25533acff4de6b61c6e673b6b2160c3d9adce9edb055c9c12c0",
+      "size": 1226
     },
     {
       "path": "bmad-module/skills/dur-agent-kotler/SKILL.md",
@@ -1555,5 +1555,5 @@
   "schemaVersion": 1,
   "sourceDirty": false,
   "sourceRepository": "https://github.com/Allura-Ecosystem/team-durham",
-  "sourceRevision": "d3b86da46c1a65eebcb797b0d6fef51a0723407c"
+  "sourceRevision": "daca3b3ed4ace1937ab5e6947f19b68f2d0389d9"
 }

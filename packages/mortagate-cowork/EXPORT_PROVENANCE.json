@@ -10,8 +10,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "8541451ef569df5c38d85d7f34d4fdffbaba51ea46c8ebc222f0561335fa99a3",
-      "size": 6664
+      "sha256": "68043ca1c4307e6840bf46bb9442463393068fd104ab99c92357c689e8fbd70b",
+      "size": 5548
     },
     {
       "path": "TERMS.md",
@@ -125,7 +125,7 @@
   "packageId": "mortagate-cowork",
   "runtime": "microsoft-cowork",
   "schemaVersion": 1,
-  "sourceCommit": "22342172beb6286207617bbfa5e67bd4ab913fb5",
+  "sourceCommit": "d8df8e809eef219c9e7d20e2069a56a096703653",
   "sourceRepository": "https://github.com/Allura-Ecosystem/mortagate.git",
   "version": "0.2.1"
 }
