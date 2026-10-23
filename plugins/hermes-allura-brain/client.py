@@ -3,13 +3,33 @@
 from __future__ import annotations
 
 import asyncio
+from contextlib import asynccontextmanager
+from importlib import import_module
 import json
 import re
 import threading
 from typing import Any, Callable, Dict
 
 from mcp import ClientSession
-from mcp.client.streamable_http import streamablehttp_client
+
+_transport = import_module("mcp.client.streamable_http")
+
+
+@asynccontextmanager
+async def _connect(url: str, headers: Dict[str, str], timeout: float):
+    """Support both MCP SDK transport generations with owned HTTP lifecycle."""
+    modern = getattr(_transport, "streamable_http_client", None)
+    if modern is not None:
+        async with _transport.create_mcp_http_client(
+            headers=headers, timeout=timeout
+        ) as http_client:
+            async with modern(url, http_client=http_client) as streams:
+                yield streams[0], streams[1]
+    else:
+        async with _transport.streamablehttp_client(
+            url, headers=headers, timeout=timeout, sse_read_timeout=timeout
+        ) as streams:
+            yield streams[0], streams[1]
 
 
 def _safe_error(text: str) -> str:
@@ -49,16 +69,19 @@ class AlluraBrainClient:
     @staticmethod
     def _run_sync(factory: Callable[[], Any], timeout: float) -> Any:
         """Run an async factory from sync code, including inside a live event loop."""
+        async def bounded() -> Any:
+            return await asyncio.wait_for(factory(), timeout=timeout)
+
         try:
             asyncio.get_running_loop()
         except RuntimeError:
-            return asyncio.run(factory())
+            return asyncio.run(bounded())
 
         box: Dict[str, Any] = {}
 
         def _thread() -> None:
             try:
-                box["result"] = asyncio.run(factory())
+                box["result"] = asyncio.run(bounded())
             except BaseException as exc:  # preserve the original exception
                 box["error"] = exc
 
@@ -72,12 +95,9 @@ class AlluraBrainClient:
         return box.get("result")
 
     async def _with_session(self, operation: Callable[[ClientSession], Any]) -> Any:
-        async with streamablehttp_client(
-            self.url,
-            headers=self.headers,
-            timeout=self.timeout,
-            sse_read_timeout=self.timeout,
-        ) as (read, write, _get_session_id):
+        async with _connect(
+            self.url, self.headers, self.timeout
+        ) as (read, write):
             async with ClientSession(read, write) as session:
                 await session.initialize()
                 return await operation(session)
@@ -109,7 +129,9 @@ class AlluraBrainClient:
                 raise RuntimeError(
                     f"Allura Brain tool '{tool_name}' failed: {_safe_error(raw)}"
                 )
-            structured = getattr(result, "structuredContent", None)
+            structured = getattr(result, "structured_content", None)
+            if structured is None:
+                structured = getattr(result, "structuredContent", None)
             if isinstance(structured, dict):
                 return checked_result(structured)
             try:
